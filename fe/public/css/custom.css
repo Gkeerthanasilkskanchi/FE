@@ -2,3 +2,27 @@
     margin:0;
     padding: 0;
 }
+/* Ensure submenu positioning */
+.dropdown-submenu {
+    position: relative;
+  }
+  
+  .dropdown-submenu > .dropdown-menu {
+    top: 0;
+    right: 100%;
+    margin-top: -0.5rem;
+    display: none;
+    min-width: 250px;
+  }
+  
+  .dropdown-submenu:hover > .dropdown-menu {
+    display: block;
+    cursor: pointer;
+    
+  }
+  
+  /* Optional: Pointer icon */
+  .dropdown-toggle::after {
+    margin-left: 0.4em;
+  }
+  
