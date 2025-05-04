@@ -7,11 +7,11 @@ export const Header = ({ children }:any) => {
     { name: "Home", icon: "bi-house-door-fill", path: "/" },
     { name: "About", icon: "bi-info-circle-fill", path: "/about" },
     { name: "Products", icon: "bi-box-seam", path: "/products" },
-    { name: "Contact Us", icon: "bi-envelope-fill", path: "/contact" },
+    { name: "Contact Us", icon: "bi-envelope-fill", path: "/contact-us" },
   ];
 
   return (
-    <div className="d-flex" style={{ height: "100%" }}>
+    <div className="d-flex" style={{ height: "100vh" }}>
       <div className="bg-dark text-white p-3" style={{ width: "120px" }}>
         {/* Sidebar logo, slogan, nav */}
         <div className="d-flex justify-content-center align-items-center bg-danger" style={{ height: "10%" }}>
