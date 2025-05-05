@@ -15,6 +15,16 @@ export const Contact = () => {
     const [loading, setLoading] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
 
+    const [email, setEmail] = useState('');
+    const [subscribed, setSubscribed] = useState(false);
+
+    const handleEmailSubscribe = (e: React.FormEvent) => {
+        e.preventDefault();
+        // You can integrate with backend or Mailchimp API
+        setSubscribed(true);
+        setEmail('');
+    };
+
     const validate = () => {
         let newErrors: any = {};
         if (!formData.name.trim()) newErrors.name = "Please fill this field";
@@ -58,48 +68,23 @@ export const Contact = () => {
 
     return (
         <>
-            <div className="container">
-                <div className="d-flex justify-content-between align-items-center mt-4">
-                    <h4>Contact US</h4>
+            <div className="container my-5">
+                {/* Contact Us Title */}
+                <div className="d-flex justify-content-between align-items-center mt-4 mb-5">
+                    <h2 className="fw-bold text-dark">Contact Us</h2>
                 </div>
 
-                <div className="container my-5">
-                    <div className="row">
-                        {/* Left Column - Contact Info */}
-                        <div className="col-md-6 mb-4 bg-primary">
-                            <h2>Our Location</h2>
+                {/* Contact Info + Form */}
+                <div className="row g-4">
+                    {/* Left Column - Placeholder or Add Info */}
+                    <div className="col-md-6">
 
-                            <div className="mb-3">
-                                <p><i className="fas fa-envelope me-2 text-primary"></i>jeromedj@madrasacoustics.com</p>
-                                <p><i className="fas fa-phone-alt me-2 text-success"></i>+91-82483 65067</p>
-                                <p><i className="fas fa-map-marker-alt me-2 text-danger"></i>9/10, Perumal Kovil Street, Kotturpuram, Chennai -600 085</p>
-                            </div>
+                    </div>
 
-                            <div className="d-flex gap-3">
-                                <a href="tel:+918248365067" target="_blank" rel="noopener noreferrer">
-                                    <i className="fas fa-phone fs-5 text-dark"></i>
-                                </a>
-                                <a href="https://wa.me/918248365067" target="_blank" rel="noopener noreferrer">
-                                    <i className="fab fa-whatsapp fs-5 text-success"></i>
-                                </a>
-                                <a href="mailto:jeromedj@madrasacoustics.com" target="_blank" rel="noopener noreferrer">
-                                    <i className="fas fa-envelope fs-5 text-danger"></i>
-                                </a>
-                                <a href="https://www.facebook.com/share/18kVHF8oaP/" target="_blank" rel="noopener noreferrer">
-                                    <i className="fab fa-facebook-f fs-5 text-primary"></i>
-                                </a>
-                                <a href="https://instagram.com/madras_acoustics/" target="_blank" rel="noopener noreferrer">
-                                    <i className="fab fa-instagram fs-5 text-danger"></i>
-                                </a>
-                                <a href="https://x.com/madrasacoustics?t=L0Mh48j0u6tjYhUAw00f_g&s=08" target="_blank" rel="noopener noreferrer">
-                                    <i className="fab fa-x-twitter fs-5 text-dark"></i>
-                                </a>
-                            </div>
-                        </div>
-
-                        {/* Right Column - Query Form */}
-                        <div className="col-md-6 bg-secondary">
-                            <h2 className="text-center mb-4">Submit Your Query</h2>
+                    {/* Right Column - Form */}
+                    <div className="col-md-6">
+                        <div className="p-4 bg-white rounded shadow-sm h-100">
+                            <h4 className="text-center text-dark mb-4">Submit Your Query</h4>
 
                             {isSubmitted && Object.values(formData).some((value) => typeof value === "string" && value.trim() === "") && (
                                 <p className="text-danger text-center">Please fill in all fields.</p>
@@ -112,7 +97,9 @@ export const Contact = () => {
                                             type={field === "email" ? "email" : field === "mobileNumber" ? "tel" : "text"}
                                             className="form-control"
                                             id={field}
-                                            placeholder={`Enter ${field.replace(/([A-Z])/g, " $1")}`}
+                                            name={field}
+                                            required
+                                            placeholder={`Enter your ${field.replace(/([A-Z])/g, " $1")}`}
                                             value={formData[field as keyof typeof formData] || ""}
                                             onChange={handleChange}
                                         />
@@ -126,7 +113,93 @@ export const Contact = () => {
                     </div>
                 </div>
 
+                {/* Client Reviews Carousel */}
+                <div className="mt-5">
+                    <h3 className="text-center mb-4">What Our Clients Say</h3>
+                    <div id="clientCarousel" className="carousel slide" data-bs-ride="carousel">
+                        <div className="carousel-inner">
+                            {[1, 2, 3].map((review, idx) => (
+                                <div className={`carousel-item ${idx === 0 ? "active" : ""}`} key={idx}>
+                                    <div className="d-flex justify-content-center">
+                                        <div className="card p-3" style={{ maxWidth: "1000px" }}>
+                                            <div className="card-body">
+                                                <h5 className="card-title">Client {idx + 1}</h5>
+                                                <p className="card-text">"Amazing service and support from Madras Acoustics!"</p>
+                                                <p className="text-muted">– Happy Customer</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        <button className="carousel-control-prev" type="button" data-bs-target="#clientCarousel" data-bs-slide="prev">
+                            <span className="carousel-control-prev-icon bg-primary"></span>
+                        </button>
+                        <button className="carousel-control-next" type="button" data-bs-target="#clientCarousel" data-bs-slide="next">
+                            <span className="carousel-control-next-icon bg-primary"></span>
+                        </button>
+                    </div>
+                </div>
+
+                {/* Contact Ways - Cards in Grid */}
+                <div className="mt-5">
+                    <h3 className="text-center mb-4">Connect With Us</h3>
+                    <div className="row g-4">
+                        {[
+                            { icon: "fab fa-whatsapp", title: "WhatsApp", link: "https://wa.me/918248365067", color: "text-success" },
+                            { icon: "fab fa-facebook-f", title: "Facebook", link: "https://www.facebook.com/share/18kVHF8oaP/", color: "text-primary" },
+                            { icon: "fab fa-instagram", title: "Instagram", link: "https://instagram.com/madras_acoustics/", color: "text-danger" },
+                            { icon: "fas fa-envelope", title: "Email", link: "mailto:jeromedj@madrasacoustics.com", color: "text-warning" },
+                            { icon: "fas fa-phone", title: "Phone", link: "tel:+918248365067", color: "text-dark" },
+                            { icon: "fas fa-whatsapp", title: "Quick Call for Selection", link: "https://wa.me/918248365067", color: "text-dark" },
+                        ].map((item, idx) => (
+                            <div className="col-md-3 col-sm-6" key={idx}>
+                                <a href={item.link} target="_blank" rel="noopener noreferrer" className="text-decoration-none">
+                                    <div className="card text-center shadow-sm h-100">
+                                        <div className="card-body">
+                                            <i className={`${item.icon} fs-2 ${item.color}`}></i>
+                                            <h5 className="card-title mt-3">{item.title}</h5>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <div className="container my-5 mt-5">
+                    <div className="d-flex justify-content-center">
+                        <div className="card p-4 shadow-lg border-0 rounded-4" style={{ width: "1200px", background: "linear-gradient(135deg, #1e3c72, #2a5298)", color: "#fff" }}>
+                            <div className="card-body text-center">
+                                <h3 className="mb-3 fw-bold">Stay in the Loop!</h3>
+                                <p className="mb-4">Subscribe to get updates on our latest collections and exclusive offers.</p>
+
+                                <form onSubmit={handleEmailSubscribe}>
+                                    <div className="input-group">
+                                        <span className="input-group-text bg-white border-0">
+                                            <i className="fas fa-envelope text-primary"></i>
+                                        </span>
+                                        <input
+                                            type="email"
+                                            className="form-control border-0"
+                                            placeholder="Enter your email"
+                                            required
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                        />
+                                        <button type="submit" className="btn btn-warning fw-bold">
+                                            Subscribe
+                                        </button>
+                                    </div>
+                                </form>
+
+                                {subscribed && <p className="mt-3 text-success">Thanks for subscribing!</p>}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+
         </>
     )
 }

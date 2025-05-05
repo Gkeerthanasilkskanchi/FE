@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
 
 // Header.js
-export const Header = ({ children }:any) => {
+export const Header = ({ children }: any) => {
   const navigate = useNavigate();
   const navItems = [
-    { name: "Home", icon: "bi-house-door-fill", path: "/" },
+    { name: "Home", icon: "bi-house-door-fill", path: "/home" },
     { name: "About", icon: "bi-info-circle-fill", path: "/about" },
-    { name: "Products", icon: "bi-box-seam", path: "/products" },
+    { name: "Products", icon: "bi-box-seam", path: "/" },
     { name: "Contact Us", icon: "bi-envelope-fill", path: "/contact-us" },
   ];
 
@@ -42,23 +42,25 @@ export const Header = ({ children }:any) => {
           <h3>GKEERTHANA SILKS</h3>
           <p className="mb-0">slogan</p>
         </div>
-        <div className="position-absolute top-0 end-0 mt-4 me-4" style={{ maxWidth: "300px" }}>
-          <div className="input-group">
-            <span className="input-group-text bg-white border-end-0">
-              <i className="bi bi-search"></i>
-            </span>
-            <input
-              type="text"
-              className="form-control border-start-0"
-              placeholder="Search"
-            />
-          </div>
+
+        {/* Location Icon with Link */}
+        <div className="position-absolute top-0 end-0 mt-4 me-4">
+          <a
+            href="https://www.google.com/maps/place/Kanchipuram"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="d-flex align-items-center text-decoration-none text-dark"
+          >
+            <i className="bi bi-geo-alt-fill fs-5 me-2 text-danger"></i>
+            <span className="fw-semibold">Kanchipuram</span>
+          </a>
         </div>
 
         <div className="mt-5">
           {children}
         </div>
       </div>
+
     </div>
   );
 };
