@@ -26,3 +26,95 @@
     margin-left: 0.4em;
   }
   
+
+  .card {
+    border: none;
+    border-radius: 15px;
+    background: #f0f4f8;
+    box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.05), -8px -8px 20px rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease-in-out;
+    overflow: hidden;
+    height: 350px; /* Fixed height for all cards */
+  }
+  
+  .card-body {
+    padding: 30px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.1), inset -2px -2px 6px rgba(255, 255, 255, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* To distribute content evenly */
+  }
+  
+  .card-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    transition: color 0.3s ease;
+  }
+  
+  .card-title:hover {
+    color: #FF5C8D;
+  }
+  
+  .card-body p {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.8;
+    font-weight: 500;
+    margin-bottom: 15px;
+    transition: color 0.3s ease;
+  }
+  
+  .card-body p:hover {
+    color: #FF5C8D;
+  }
+  
+  .card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 8px 8px 30px rgba(0, 0, 0, 0.1), -8px -8px 30px rgba(255, 255, 255, 0.4);
+  }
+  
+  .card-body .icon {
+    font-size: 2.5rem;
+    color: #FF5C8D;
+    margin-bottom: 20px;
+    transition: color 0.3s ease;
+  }
+  
+  .card-body .icon:hover {
+    color: #FF5C8D;
+  }
+  
+  .card .btn {
+    background-color: #FF5C8D;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: bold;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .card .btn:hover {
+    background-color: #FF5C8D;
+    transform: translateY(-4px);
+  }
+  
+  .card-body .text-center p {
+    font-size: 1rem;
+    color: #777;
+    transition: color 0.3s ease;
+  }
+  
+  .card-body .text-center p:hover {
+    color: #FF5C8D;
+  }
+  

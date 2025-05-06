@@ -4,6 +4,8 @@ import { Products } from './Component/Products';
 import { Layout } from './Component/Layout';
 import { Contact } from './Component/Contact';
 import { Home } from './Component/Home';
+import { About } from './Component/About'; 
+
 
 function App() {
   return (
@@ -13,6 +15,7 @@ function App() {
         <Route path="" element={<Products />} />
         <Route path="contact-us" element={<Contact />} />
         <Route path="home" element={<Home />} />
+        <Route path="about" element={<About />} />
       </Route>
     </Routes>
   </BrowserRouter>
