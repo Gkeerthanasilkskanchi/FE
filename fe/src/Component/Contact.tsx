@@ -197,6 +197,67 @@ export const Contact = () => {
                         </div>
                     </div>
                 </div>
+
+                {/* Instagram Video Carousel Section */}
+                <div className="container my-5">
+                    <h3 className="text-center mb-4">Follow us on Instagram for the updates</h3>
+
+                    <div id="instagramCarousel" className="carousel slide" data-bs-ride="carousel">
+                        <div className="carousel-inner">
+                            {[
+                                [
+                                    {
+                                        thumbnail: "https://img.youtube.com/vi/VIDEO_ID_1/0.jpg",
+                                        link: "https://www.instagram.com/reel/INSTAGRAM_VIDEO_1/"
+                                    },
+                                    {
+                                        thumbnail: "https://img.youtube.com/vi/VIDEO_ID_2/0.jpg",
+                                        link: "https://www.instagram.com/reel/INSTAGRAM_VIDEO_2/"
+                                    },
+                                    {
+                                        thumbnail: "https://img.youtube.com/vi/VIDEO_ID_3/0.jpg",
+                                        link: "https://www.instagram.com/reel/INSTAGRAM_VIDEO_3/"
+                                    }
+                                ],
+                                [
+                                    {
+                                        thumbnail: "https://img.youtube.com/vi/VIDEO_ID_4/0.jpg",
+                                        link: "https://www.instagram.com/reel/INSTAGRAM_VIDEO_4/"
+                                    },
+                                    {
+                                        thumbnail: "https://img.youtube.com/vi/VIDEO_ID_5/0.jpg",
+                                        link: "https://www.instagram.com/reel/INSTAGRAM_VIDEO_5/"
+                                    },
+                                    {
+                                        thumbnail: "https://img.youtube.com/vi/VIDEO_ID_6/0.jpg",
+                                        link: "https://www.instagram.com/reel/INSTAGRAM_VIDEO_6/"
+                                    }
+                                ]
+                            ].map((group, idx) => (
+                                <div className={`carousel-item ${idx === 0 ? 'active' : ''}`} key={idx}>
+                                    <div className="row justify-content-center">
+                                        {group.map((video, index) => (
+                                            <div className="col-md-4" key={index}>
+                                                <div className="card mb-3 shadow-sm border-0">
+                                                    <a href={video.link} target="_blank" rel="noopener noreferrer">
+                                                        <img src={video.thumbnail} className="card-img-top" alt={`Instagram Video ${index + 1}`} />
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                        <button className="carousel-control-prev" type="button" data-bs-target="#instagramCarousel" data-bs-slide="prev">
+                            <span className="carousel-control-prev-icon bg-primary"></span>
+                        </button>
+                        <button className="carousel-control-next" type="button" data-bs-target="#instagramCarousel" data-bs-slide="next">
+                            <span className="carousel-control-next-icon bg-primary"></span>
+                        </button>
+                    </div>
+                </div>
+
             </div>
 
 
