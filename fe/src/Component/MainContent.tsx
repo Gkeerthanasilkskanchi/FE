@@ -1,0 +1,33 @@
+export const MainContent = ({ children }: any) => {
+  return (
+    <div
+      className="flex-grow-1 d-flex flex-column"
+      style={{ height: "100vh", overflow: "hidden" }}
+    >
+      {/* Header section */}
+      <div className="p-4 position-relative" style={{ flexShrink: 0 }}>
+        <div className="text-center">
+          <h3>GKEERTHANA SILKS</h3>
+          <p className="mb-0">slogan</p>
+        </div>
+
+        <div className="position-absolute top-0 end-0 mt-4 me-4">
+          <a
+            href="https://www.google.com/maps/place/Kanchipuram"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="d-flex align-items-center text-decoration-none text-dark"
+          >
+            <i className="bi bi-geo-alt-fill fs-5 me-2 text-danger"></i>
+            <span className="fw-semibold">Kanchipuram</span>
+          </a>
+        </div>
+      </div>
+
+      {/* Scrollable content */}
+      <div className="p-4" style={{ flexGrow: 1, overflowY: "auto" }}>
+        {children}
+      </div>
+    </div>
+  );
+};

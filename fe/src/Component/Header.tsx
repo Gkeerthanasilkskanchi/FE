@@ -1,66 +1,11 @@
-import { useNavigate } from "react-router-dom";
+import { MainContent } from "./MainContent";
+import { Sidebar } from "./SideBar";
 
-// Header.js
 export const Header = ({ children }: any) => {
-  const navigate = useNavigate();
-  const navItems = [
-    { name: "Home", icon: "bi-house-door-fill", path: "/home" },
-    { name: "About", icon: "bi-info-circle-fill", path: "/about" },
-    { name: "Products", icon: "bi-box-seam", path: "/" },
-    { name: "Contact Us", icon: "bi-envelope-fill", path: "/contact-us" },
-  ];
-
   return (
-    <div className="d-flex" style={{ height: "100vh" }}>
-      <div className="bg-dark text-white p-3" style={{ width: "120px" }}>
-        {/* Sidebar logo, slogan, nav */}
-        <div className="d-flex justify-content-center align-items-center bg-danger" style={{ height: "10%" }}>
-          <img src="/images/logo.png" alt="logo" className="img-fluid" style={{ maxHeight: "40px" }} />
-        </div>
-        <div className="bg-danger text-center mt-2 mb-4 py-2">
-          <p className="text-white fst-italic mb-0">slogan</p>
-        </div>
-        <ul className="nav flex-column align-items-center">
-          {navItems.map((item, index) => (
-            <li
-              key={index}
-              className="nav-item text-center mb-4"
-              style={{ cursor: "pointer" }}
-              onClick={() => navigate(item.path)}
-            >
-              <div className="d-flex flex-column align-items-center">
-                <i className={`bi ${item.icon}`} style={{ fontSize: "1.5rem", marginBottom: "5px" }}></i>
-                <span className="text-white">{item.name}</span>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div className="flex-grow-1 p-4 position-relative">
-        <div className="text-center">
-          <h3>GKEERTHANA SILKS</h3>
-          <p className="mb-0">slogan</p>
-        </div>
-
-        {/* Location Icon with Link */}
-        <div className="position-absolute top-0 end-0 mt-4 me-4">
-          <a
-            href="https://www.google.com/maps/place/Kanchipuram"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="d-flex align-items-center text-decoration-none text-dark"
-          >
-            <i className="bi bi-geo-alt-fill fs-5 me-2 text-danger"></i>
-            <span className="fw-semibold">Kanchipuram</span>
-          </a>
-        </div>
-
-        <div className="mt-5">
-          {children}
-        </div>
-      </div>
-
+    <div className="d-flex" style={{ height: "100vh", overflow: "hidden" }}>
+      <Sidebar />
+      <MainContent>{children}</MainContent>
     </div>
   );
 };

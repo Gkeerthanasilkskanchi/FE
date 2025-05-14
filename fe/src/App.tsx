@@ -5,11 +5,13 @@ import { Layout } from './Component/Layout';
 import { Contact } from './Component/Contact';
 import { Home } from './Component/Home';
 import { About } from './Component/About'; 
+import { ToastContainer } from "react-toastify";
 
 
 function App() {
   return (
     <BrowserRouter>
+    <ToastContainer />
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route path="" element={<Products />} />

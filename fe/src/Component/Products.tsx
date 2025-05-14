@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { addCartProducts, addLikedProducts, getProducts } from "../API/API";
+import { toast } from "react-toastify";
 
 const filterCategories = [
     {
@@ -35,29 +37,67 @@ const filterCategories = [
     },
 ];
 
-const products = [
-    { id: 1, title: 'Card title', imgSrc: '/images/saree.jfif' },
-    { id: 2, title: 'Card title', imgSrc: '/images/saree.jfif' },
-    { id: 3, title: 'Card title', imgSrc: '/images/saree.jfif' },
-    { id: 4, title: 'Card title', imgSrc: '/images/saree.jfif' },
-    { id: 5, title: 'Card title', imgSrc: '/images/saree.jfif' },
-    { id: 6, title: 'Card title', imgSrc: '/images/saree.jfif' },
-    { id: 7, title: 'Card title', imgSrc: '/images/saree.jfif' },
-    { id: 8, title: 'Card title', imgSrc: '/images/saree.jfif' },
-    { id: 9, title: 'Card title', imgSrc: '/images/saree.jfif' },
-    { id: 10, title: 'Card title', imgSrc: '/images/saree.jfif' },
-];
-
 export const Products = () => {
-    const [selectedImages, setSelectedImages] = useState([]);
+    const [products, setProducts] = useState<any[]>([]);
+    const [selectedImages, setSelectedImages] = useState<string[]>([]);
     const [showModal, setShowModal] = useState(false);
+    const [selectedProduct, setSelectedProduct] = useState<any | null>(null);
 
-    const handleImageClick = (images: any) => {
-        setSelectedImages(images);
+
+    useEffect(() => {
+        fetchProducts();
+    }, []);
+    const email=sessionStorage.getItem("userEmail");
+    const addToCart = async (productId:any) => {
+        try {
+            const payload = {
+                email,
+                productId,
+                quantity: 1,
+            }
+            const response = await addCartProducts(payload);
+            if(response)  toast.success(response.data.message);
+        } catch (err:any) {
+            console.error(err);
+            toast.error(err.response?.data?.message);
+        }
+    };
+
+    const likeProduct = async (productId:any) => {
+        try {
+            const payload ={
+                email,
+                productId,
+            }
+            const response =await addLikedProducts(payload);
+            if(response)  toast.success(response.data.message);
+        } catch (err:any) {
+            console.error(err);
+            toast.error(err.response?.data?.message);
+        }
+    };
+    const fetchProducts = async () => {
+        try {
+            const response = await getProducts();
+            console.log(response)
+            if (Array.isArray(response.data)) {
+                setProducts(response.data);
+            }
+        } catch (error) {
+            console.error("Failed to fetch products:", error);
+        }
+    };
+
+    const handleImageClick = (product: any) => {
+        setSelectedProduct(product);
+        setSelectedImages(product.image);
         setShowModal(true);
     };
+
+
     return (
         <div className="container">
+            {/* Header & Filter */}
             <div className="d-flex justify-content-between align-items-center mt-4">
                 <h4>Our Collections</h4>
 
@@ -90,45 +130,52 @@ export const Products = () => {
                     </ul>
                 </div>
             </div>
+
+            {/* Product Grid */}
             <div
                 className="mt-4 overflow-auto"
                 style={{ height: "calc(100vh - 80px)", width: "100%" }}
             >
                 <div className="row">
-                    {products.map((product) => (
+                    {products.map((product:any) => (
                         <div key={product.id} className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
                             <div className="card">
                                 <img
-                                    src={product.imgSrc}
+                                    src={product.image?.[0] || '/images/default.jpg'}
                                     className="card-img-top"
                                     style={{ height: '200px', cursor: 'pointer' }}
-                                    alt="saree"
-                                    onClick={() => handleImageClick([product.imgSrc])}
+                                    alt={product.title}
+                                    onClick={() => handleImageClick(product.image)}
                                     data-bs-toggle="modal"
                                     data-bs-target="#imageModal"
                                 />
                                 <div className="card-body">
-                                    <a
-                                        onClick={() => {
-                                            handleImageClick([product.imgSrc]);
-                                        }}
+                                    <span
+                                        style={{ cursor: "pointer", fontWeight: "bold" }}
+                                        onClick={() => handleImageClick(product)}
                                         data-bs-toggle="modal"
                                         data-bs-target="#productDetailModal"
                                     >
-                                        <span className="card-title">{product.title}</span>
-                                    </a>
-
-                                    <div className="d-flex justify-content-between align-items-center">
-                                        <a className="btn btn-primary">Buy Now</a>
-                                        <a className="btn btn-secondary"><i className="bi bi-cart-plus"></i></a>
+                                        {product.title}
+                                    </span>
+                                    <div className="d-flex justify-content-between align-items-center gap-2">
+                                        <button className="btn btn-primary">
+                                            <i className="bi bi-bag-fill me-1"></i> Buy Now
+                                        </button>
+                                        <button className="btn btn-secondary"  title="Add to Cart">
+                                            <i className="bi bi-cart-plus-fill" onClick={()=>addToCart(product.id)}></i>
+                                        </button>
+                                        <button className="btn btn-secondary" title="Like Product">
+                                            <i className="bi bi-hand-thumbs-up-fill" onClick={()=>likeProduct(product.id)}></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     ))}
                 </div>
-
             </div>
+
 
             <div
                 className="modal fade"
@@ -166,18 +213,14 @@ export const Products = () => {
                                 data-bs-ride="carousel"
                             >
                                 <div className="carousel-inner">
-                                    {[...Array(5)].map((_, idx) => (
+                                    {selectedImages.map((img, idx) => (
                                         <div
                                             className={`carousel-item ${idx === 0 ? "active" : ""}`}
                                             key={idx}
-                                            style={{
-                                                display: "flex",
-                                                justifyContent: "center",
-                                                alignItems: "center",
-                                            }}
+                                            style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
                                         >
                                             <img
-                                                src={selectedImages[0]} // Repeat the same image
+                                                src={img}
                                                 alt={`slide-${idx}`}
                                                 className="img-fluid"
                                                 style={{
@@ -188,6 +231,7 @@ export const Products = () => {
                                             />
                                         </div>
                                     ))}
+
                                 </div>
 
                                 <button
@@ -232,20 +276,25 @@ export const Products = () => {
                         {/* Image carousel */}
                         <div id="productCarousel" className="carousel slide">
                             <div className="carousel-inner">
-                                {[...Array(5)].map((_, idx) => (
+                                {selectedImages.map((img, idx) => (
                                     <div
                                         className={`carousel-item ${idx === 0 ? "active" : ""}`}
                                         key={idx}
-                                        style={{ display: 'flex', justifyContent: 'center' }}
+                                        style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
                                     >
                                         <img
-                                            src={selectedImages[0]}
+                                            src={img}
                                             alt={`slide-${idx}`}
-                                            className="d-block"
-                                            style={{ maxHeight: '250px', objectFit: 'contain', padding: '10px' }}
+                                            className="img-fluid"
+                                            style={{
+                                                maxHeight: "80vh",
+                                                objectFit: "contain",
+                                                padding: "10px",
+                                            }}
                                         />
                                     </div>
                                 ))}
+
                             </div>
                             <button className="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
                                 <span className="carousel-control-prev-icon bg-primary" aria-hidden="true"></span>
@@ -270,11 +319,12 @@ export const Products = () => {
 
                             {/* Right: Brief info */}
                             <div className="w-30 border-start ps-3" style={{ width: "30%" }}>
-                                <p><strong>Name:</strong> Elegant Saree</p>
-                                <p><strong>Price:</strong> ₹1499</p>
-                                <p><strong>Cloth:</strong> Silk</p>
-                                <p><strong>Category:</strong> Traditional</p>
-                                <p><strong>Bought By:</strong> 1523 customers</p>
+                                <p><strong>Name:</strong> {selectedProduct?.productName}</p>
+                                <p><strong>Price:</strong> ₹{selectedProduct?.price}</p>
+                                <p><strong>Cloth:</strong> {selectedProduct?.material || "N/A"}</p>
+                                <p><strong>Category:</strong> {selectedProduct?.category || "Traditional"}</p>
+                                <p><strong>Bought By:</strong> {selectedProduct?.buyers || "N/A"} customers</p>
+
                             </div>
                         </div>
 
