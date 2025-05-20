@@ -6,6 +6,7 @@ import { Contact } from './Component/Contact';
 import { Home } from './Component/Home';
 import { About } from './Component/About'; 
 import { ToastContainer } from "react-toastify";
+import { ProductList } from './Component/ProductList';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="contact-us" element={<Contact />} />
         <Route path="home" element={<Home />} />
         <Route path="about" element={<About />} />
+        <Route path="products/:type" element={<ProductList />} />
       </Route>
     </Routes>
   </BrowserRouter>

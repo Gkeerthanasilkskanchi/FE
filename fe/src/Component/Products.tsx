@@ -102,7 +102,7 @@ export const Products = () => {
                 <h4>Our Collections</h4>
 
                 <div className="dropdown">
-                    <button
+                    {/* <button
                         className="btn btn-secondary dropdown-toggle"
                         type="button"
                         id="dropdownMenuButton"
@@ -110,7 +110,7 @@ export const Products = () => {
                         aria-expanded="false"
                     >
                         Filter Collections
-                    </button>
+                    </button> */}
 
                     <ul className="dropdown-menu dropdown-menu-end nested-dropdown">
                         {filterCategories.map((category, idx) => (
@@ -319,11 +319,12 @@ export const Products = () => {
 
                             {/* Right: Brief info */}
                             <div className="w-30 border-start ps-3" style={{ width: "30%" }}>
-                                <p><strong>Name:</strong> {selectedProduct?.productName}</p>
+                                <p><strong>Name:</strong> {selectedProduct?.title}</p>
                                 <p><strong>Price:</strong> ₹{selectedProduct?.price}</p>
-                                <p><strong>Cloth:</strong> {selectedProduct?.material || "N/A"}</p>
+                                <p><strong>Cloth:</strong> {selectedProduct?.cloth || "N/A"}</p>
                                 <p><strong>Category:</strong> {selectedProduct?.category || "Traditional"}</p>
-                                <p><strong>Bought By:</strong> {selectedProduct?.buyers || "N/A"} customers</p>
+                                <p><strong>Bought By:</strong> {selectedProduct?.bought_by || "N/A"} customers</p>
+                                <p><strong>Saree Type:</strong> {selectedProduct?.saree_type}</p>
 
                             </div>
                         </div>

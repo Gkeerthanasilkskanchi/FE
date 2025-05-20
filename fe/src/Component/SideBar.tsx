@@ -26,7 +26,7 @@ export const Sidebar = () => {
   return (
     <div
       className="bg-dark text-white p-3 d-flex flex-column"
-      style={{ width: "120px", height: "100vh", overflowY: "auto" }}
+      style={{ width: "220px", height: "100vh", overflowY: "auto" }}
     >
       {/* Logo */}
       <div className="d-flex justify-content-center align-items-center bg-danger" style={{ height: "10%" }}>
@@ -62,9 +62,28 @@ export const Sidebar = () => {
         >
           <div className="d-flex flex-column align-items-center">
             <i className="bi bi-person-circle" style={{ fontSize: "1.5rem", marginBottom: "5px" }}></i>
-            <span className="text-white">{userEmail ? "Sign Out" : "Sign Up"}</span>
+            <span
+              className="text-white"
+              style={{
+                fontSize: "0.9rem",
+                maxWidth: "220px",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+              }}
+              title={userEmail || "Sign Up"} // Shows full email on hover
+            >
+              {userEmail ? userEmail : "Sign Up"}
+            </span>
+
+            {userEmail && (
+              <small className="text-danger mt-1" style={{ fontSize: "0.75rem" }}>
+                Sign Out
+              </small>
+            )}
           </div>
         </li>
+
       </ul>
 
       {showAuth && <AuthModal onClose={() => setShowAuth(false)} setUserEmail={setUserEmail} />}
