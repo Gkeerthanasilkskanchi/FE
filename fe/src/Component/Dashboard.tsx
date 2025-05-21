@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   PieChart, Pie, Cell, LineChart, Line, Legend,
 } from "recharts";
+import { getUserList } from "../API/API";
 
 const barData = [
   { name: "Mon", sales: 120 },
@@ -21,7 +22,7 @@ const pieData = [
   { name: "Western Wear", value: 100 },
 ];
 
-const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff8042"];
+const COLORS = ["#6366f1", "#10b981", "#f59e0b", "#ef4444"];
 
 const lineData = [
   { name: "Jan", revenue: 4000 },
@@ -32,95 +33,123 @@ const lineData = [
 ];
 
 const stats = [
-  { title: "Total Users", value: 1250 },
-  { title: "Products Sold (Today)", value: 75 },
-  { title: "Products Sold (This Week)", value: 420 },
-  { title: "Revenue (This Month)", value: "₹1.2L" },
+  { title: "Total Users", value: "1,250", icon: "👥",bgColor: "#0d6efd"  },
+  { title: "Products Sold (Today)", value: "75", icon: "🛍️",bgColor: "#0d6efd"  },
+  { title: "Products Sold (This Week)", value: "420", icon: "📦",bgColor: "#0d6efd"  },
+  { title: "Revenue (This Month)", value: "₹1.2L", icon: "💰" ,bgColor: "#0d6efd" },
 ];
 
 export const Dashboard: React.FC = () => {
+  const [users,setUsers] = useState<any>([]);
+  useEffect(()=>{
+   getUser();
+  },[])
+  const getUser = async()=>{
+    const response :any= await getUserList();
+    if(response?.status>200) setUsers(response?.data?.data);
+    console.log(response)
+  }
   return (
-    <div className="p-6 space-y-6 bg-gray-100 min-h-screen">
-      {/* Stats */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {stats.map((stat, index) => (
-          <div
-            key={index}
-            className="bg-white p-4 rounded-2xl shadow hover:shadow-md transition"
-          >
-            <h3 className="text-gray-500 text-sm">{stat.title}</h3>
-            <p className="text-2xl font-semibold text-indigo-600 mt-2">
-              {stat.value}
-            </p>
-          </div>
-        ))}
+    <div className="bg-gradient-to-br from-indigo-50 to-white min-h-screen p-8 space-y-8">
+    <div className="row mb-4">
+  {stats.map((stat, index) => (
+    <div
+      className="col-lg-4 mb-3"
+      key={index}
+    >
+      <div
+        className="d-flex p-3 rounded text-white"
+        style={{ backgroundColor: stat.bgColor || '#4f46e5',minHeight:"120px" }} // fallback to indigo if no color
+      >
+        <div className="me-3 d-flex align-items-center fs-4">
+          {stat.icon}
+        </div>
+        <div>
+          <h4 className="text-sm text-light">{stat.title}</h4>
+          <p className="text-xl fw-bold text-white mt-1 mb-0">{stat.value}</p>
+        </div>
       </div>
+    </div>
+  ))}
+</div>
 
-      {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Bar Chart - Weekly Sales */}
-        <div className="bg-white p-4 rounded-2xl shadow">
-          <h2 className="text-xl font-semibold mb-4">Weekly Product Sales</h2>
+
+      {/* Charts Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* Bar Chart */}
+        <div className=" p-6 rounded-2xl">
+          <h2 className="text-lg font-semibold text-gray-700 mb-4">
+            Weekly Product Sales
+          </h2>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={barData}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="name" />
               <YAxis />
               <Tooltip />
-              <Bar dataKey="sales" fill="#8884d8" radius={[6, 6, 0, 0]} />
+              <Bar dataKey="sales" fill="#6366f1" radius={[6, 6, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
 
-        {/* Pie Chart - Category Share */}
-        <div className="bg-white p-4 rounded-2xl shadow">
-          <h2 className="text-xl font-semibold mb-4">Sales by Category</h2>
-          <ResponsiveContainer width="100%" height={300}>
-            <PieChart>
-              <Pie
-                data={pieData}
-                cx="50%"
-                cy="50%"
-                labelLine={false}
-                label={({ name, percent }) =>
-                  `${name} ${(percent * 100).toFixed(0)}%`
-                }
-                outerRadius={100}
-                fill="#8884d8"
-                dataKey="value"
-              >
-                {pieData.map((entry, index) => (
-                  <Cell key={index} fill={COLORS[index % COLORS.length]} />
-                ))}
-              </Pie>
-              <Tooltip />
-            </PieChart>
-          </ResponsiveContainer>
-        </div>
+        {/* Pie Chart */}
+        
       </div>
 
-      {/* Line Chart - Revenue Trend */}
-      <div className="bg-white p-4 rounded-2xl shadow">
-        <h2 className="text-xl font-semibold mb-4">Monthly Revenue Trend</h2>
-        <ResponsiveContainer width="100%" height={300}>
-          <LineChart data={lineData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line
-              type="monotone"
-              dataKey="revenue"
-              stroke="#82ca9d"
-              strokeWidth={3}
-              dot={{ r: 6 }}
-            />
-          </LineChart>
-        </ResponsiveContainer>
-      </div>
+      <div className="row mt-5 mb-5">
+ 
+  <div className="col-lg-6 w-full rounded-2xl p-6">
+    <h2 className="text-lg font-semibold text-gray-700 mb-4">
+      Sales by Category
+    </h2>
+    <ResponsiveContainer width="100%" height={300}>
+      <PieChart>
+        <Pie
+          data={pieData}
+          cx="50%"
+          cy="50%"
+          labelLine={false}
+          outerRadius={100}
+          dataKey="value"
+          label={({ name, percent }) =>
+            `${name} ${(percent * 100).toFixed(0)}%`
+          }
+        >
+          {pieData.map((entry, index) => (
+            <Cell key={index} fill={COLORS[index % COLORS.length]} />
+          ))}
+        </Pie>
+        <Tooltip />
+      </PieChart>
+    </ResponsiveContainer>
+  </div>
+
+  {/* Table Section */}
+  <div className="col-lg-6 w-full rounded-2xl p-6">
+    <h2 className="text-lg font-semibold text-gray-700 mb-4">
+      User Email List
+    </h2>
+    <div className="overflow-x-auto">
+      <table className="min-w-full table-auto border border-gray-200">
+        <thead className="bg-gray-100">
+          <tr>
+            <th className="px-4 py-2 border-b text-left text-sm text-gray-600">S.No</th>
+            <th className="px-4 py-2 border-b text-left text-sm text-gray-600">Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map((user:any, index:any) => (
+            <tr key={user.id || index} className="hover:bg-gray-50">
+              <td className="px-4 py-2 border-b text-sm text-gray-700">{index + 1}</td>
+              <td className="px-4 py-2 border-b text-sm text-gray-800">{user.email}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
     </div>
   );
 };
-
-

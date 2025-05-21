@@ -36,6 +36,7 @@ export const AuthModal = ({ onClose, setUserEmail }: { onClose: () => void, setU
 
   const login = async() => {
     const getResponse = await loginUser({email, password});
+    sessionStorage.setItem("role",getResponse.data.role)
     return getResponse;
   }
 

@@ -56,3 +56,8 @@ export const sendSubscribtion = async (payload: any) => {
     const review = await Client("POST", `${baseURL}/users/send-subscribtion`, payload);
     return { status: review?.status, data: review?.data }
 }
+
+export const getUserList = async()=>{
+    const response = await Client("GET",`${baseURL}/users/get-user-list`)
+    return{status:response?.status,data:response?.data}
+}

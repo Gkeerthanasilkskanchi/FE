@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { addProduct } from "../API/API";
+// import { FaPlus, FaTimes, FaSpinner } from "react-icons/fa";
 
 export const AddProduct = () => {
   const [formData, setFormData] = useState({
@@ -15,22 +16,24 @@ export const AddProduct = () => {
 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const [showForm, setShowForm] = useState(false);
 
-  // Update form inputs
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Submit form
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setMessage("");
 
     try {
-      // Adjust your backend URL here
       const response = await addProduct(formData);
-      setMessage(response.data.message || "Product added successfully!");
+      setMessage(response.data.message || "✅ Product added successfully!");
       setFormData({
         image: "",
         title: "",
@@ -41,81 +44,171 @@ export const AddProduct = () => {
         bought_by: "",
         saree_type: "",
       });
+      setShowForm(false);
     } catch (error: any) {
-      setMessage(error.response?.data?.message || "Error adding product");
+      setMessage(error.response?.data?.message || "❌ Error adding product");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="add-product-container" style={{ maxWidth: 600, margin: "auto" }}>
-      <h2>Add New Product</h2>
-      {message && <div style={{ marginBottom: 10 }}>{message}</div>}
-      <form onSubmit={handleSubmit}>
-        <input
-          name="image"
-          placeholder="Image URL"
-          value={formData.image}
-          onChange={handleChange}
-          required
-        />
-        <input
-          name="title"
-          placeholder="Title"
-          value={formData.title}
-          onChange={handleChange}
-          required
-        />
-        <input
-          name="price"
-          type="number"
-          placeholder="Price"
-          value={formData.price}
-          onChange={handleChange}
-          required
-        />
-        <textarea
-          name="about"
-          placeholder="About Product"
-          value={formData.about}
-          onChange={handleChange}
-          required
-        />
-        <input
-          name="cloth"
-          placeholder="Cloth"
-          value={formData.cloth}
-          onChange={handleChange}
-          required
-        />
-        <input
-          name="category"
-          placeholder="Category"
-          value={formData.category}
-          onChange={handleChange}
-          required
-        />
-        <input
-          name="bought_by"
-          placeholder="Bought By"
-          value={formData.bought_by}
-          onChange={handleChange}
-          required
-        />
-        <input
-          name="saree_type"
-          placeholder="Saree Type"
-          value={formData.saree_type}
-          onChange={handleChange}
-          required
-        />
-        <button type="submit" disabled={loading}>
-          {loading ? "Adding..." : "Add Product"}
-        </button>
-      </form>
+    <div className="container py-5">
+      <div className="text-center mb-4">
+        {!showForm && (
+          <button
+            className="btn btn-outline-primary btn-lg d-flex align-items-center mx-auto gap-2"
+            onClick={() => setShowForm(true)}
+          >
+            <i className="bi bi-plus"></i> Add Product
+          </button>
+        )}
+      </div>
+
+      {showForm && (
+        <div className="card mx-auto" style={{ maxWidth: "700px" }}>
+          <div className="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h5 className="mb-0">New Product Form</h5>
+            <button
+              className="btn btn-sm btn-light"
+              onClick={() => setShowForm(false)}
+            >
+              <i className="bi bi-x-lg"></i>
+            </button>
+          </div>
+
+          <div className="card-body p-4">
+            {message && (
+              <div className="alert alert-info text-center">{message}</div>
+            )}
+            <form onSubmit={handleSubmit}>
+              <div className="mb-3">
+                <label className="form-label">Image URL</label>
+                <input
+                  name="image"
+                  className="form-control"
+                  placeholder="e.g. https://image.com/product.jpg"
+                  value={formData.image}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              <div className="row">
+                <div className="mb-3 col-md-6">
+                  <label className="form-label">Title</label>
+                  <input
+                    name="title"
+                    className="form-control"
+                    value={formData.title}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+
+                <div className="mb-3 col-md-6">
+                  <label className="form-label">Price</label>
+                  <input
+                    name="price"
+                    type="number"
+                    className="form-control"
+                    value={formData.price}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label">About Product</label>
+                <textarea
+                  name="about"
+                  className="form-control"
+                  rows={3}
+                  value={formData.about}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              <div className="row">
+                <div className="mb-3 col-md-6">
+                  <label className="form-label">Cloth Type</label>
+                  <input
+                    name="cloth"
+                    className="form-control"
+                    value={formData.cloth}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+
+                <div className="mb-3 col-md-6">
+                  <label className="form-label">Category</label>
+                  <input
+                    name="category"
+                    className="form-control"
+                    value={formData.category}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="mb-3 col-md-6">
+                  <label className="form-label">Bought By</label>
+                  <input
+                    name="bought_by"
+                    className="form-control"
+                    value={formData.bought_by}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+
+                <div className="mb-3 col-md-6">
+                  <label className="form-label">Saree Type</label>
+                  <input
+                    name="saree_type"
+                    className="form-control"
+                    value={formData.saree_type}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="d-flex justify-content-between">
+                <button
+                  type="submit"
+                  className="btn btn-success px-4"
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <>
+                      {/* <FaSpinner className="me-2 spin" /> */}
+                      Adding...
+                    </>
+                  ) : (
+                    <>
+                      {/* <FaPlus className="me-2" /> */}
+                      Add Product
+                    </>
+                  )}
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-outline-secondary"
+                  onClick={() => setShowForm(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
-
-
