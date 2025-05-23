@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { addCartProducts, addLikedProducts, getProducts } from "../API/API";
+import { addCartProducts, addLikedProducts, addOrderService, getProducts } from "../API/API";
 import { toast } from "react-toastify";
 
 const filterCategories = [
@@ -87,7 +87,19 @@ export const Products = () => {
             console.error("Failed to fetch products:", error);
         }
     };
-
+    //  const addOrder = async (product:any) => {
+    //     try {
+    //         const email = sessionStorage.getItem("userEmail");
+    //         const payload : any = {email,product.id,product?.quantity,product?.price}
+    //         const response = await addOrderService(payload);
+            
+    //         if (Array.isArray(response.data)) {
+    //             setProducts(response.data);
+    //         }
+    //     } catch (error) {
+    //         console.error("Failed to fetch products:", error);
+    //     }
+    // };
     const handleImageClick = (product: any) => {
         setSelectedProduct(product);
         setSelectedImages(product.image);

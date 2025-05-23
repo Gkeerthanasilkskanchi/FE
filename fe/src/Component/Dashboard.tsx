@@ -24,13 +24,6 @@ const pieData = [
 
 const COLORS = ["#6366f1", "#10b981", "#f59e0b", "#ef4444"];
 
-const lineData = [
-  { name: "Jan", revenue: 4000 },
-  { name: "Feb", revenue: 3000 },
-  { name: "Mar", revenue: 5000 },
-  { name: "Apr", revenue: 7000 },
-  { name: "May", revenue: 6000 },
-];
 
 const stats = [
   { title: "Total Users", value: "1,250", icon: "👥",bgColor: "#0d6efd"  },
@@ -41,6 +34,8 @@ const stats = [
 
 export const Dashboard: React.FC = () => {
   const [users,setUsers] = useState<any>([]);
+  const [barChat,setBarChat]=useState<any>([]);
+  const [pieChat,setPieChat]=useState<any>([]);
   useEffect(()=>{
    getUser();
   },[])

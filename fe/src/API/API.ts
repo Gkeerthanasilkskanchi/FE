@@ -61,3 +61,31 @@ export const getUserList = async()=>{
     const response = await Client("GET",`${baseURL}/users/get-user-list`)
     return{status:response?.status,data:response?.data}
 }
+
+export const getProductsSoldTodayService = async (payload: any) => {
+    const review = await Client("GET", `${baseURL}/users/getProductsSoldTodayService`);
+    return { status: review?.status, data: review?.data }
+}
+
+export const getProductsSoldThisWeekService = async()=>{
+    const response = await Client("GET",`${baseURL}/users/getProductsSoldThisWeekService`)
+    return{status:response?.status,data:response?.data}
+}
+export const getRevenueThisMonthService = async (payload: any) => {
+    const review = await Client("GET", `${baseURL}/users/getRevenueThisMonthService`);
+    return { status: review?.status, data: review?.data }
+}
+
+export const getWeeklySalesDataService = async()=>{
+    const response = await Client("GET",`${baseURL}/users/getWeeklySalesDataService`)
+    return{status:response?.status,data:response?.data}
+}
+export const getSalesByCategoryService = async (payload: any) => {
+    const review = await Client("GET", `${baseURL}/users/getSalesByCategoryService`);
+    return { status: review?.status, data: review?.data }
+}
+
+export const addOrderService = async (payload: any) => {
+    const review = await Client("POST", `${baseURL}/users/create-order`, payload);
+    return { status: review?.status, data: review?.data }
+}
