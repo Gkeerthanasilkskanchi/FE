@@ -10,6 +10,52 @@ export const Contact = () => {
         address: "",
     };
 
+    const platforms = [
+        {
+            icon: "fab fa-whatsapp",
+            title: "WhatsApp",
+            desc: "Chat with us instantly",
+            link: "https://wa.me/918248365067",
+            color: "#25D366",
+        },
+        {
+            icon: "fab fa-facebook-f",
+            title: "Facebook",
+            desc: "Follow for latest updates",
+            link: "https://www.facebook.com/share/18kVHF8oaP/",
+            color: "#1877F2",
+        },
+        {
+            icon: "fab fa-instagram",
+            title: "Instagram",
+            desc: "Catch our latest reels & posts",
+            link: "https://instagram.com/madras_acoustics/",
+            color: "linear-gradient(45deg, #F58529, #DD2A7B, #8134AF, #515BD4)",
+            gradient: true, // Add this flag
+        },
+
+        {
+            icon: "fas fa-envelope",
+            title: "Email",
+            desc: "Drop us a message",
+            link: "mailto:jeromedj@madrasacoustics.com",
+            color: "#FF9F00",
+        },
+        {
+            icon: "fas fa-phone",
+            title: "Phone",
+            desc: "Call our support team",
+            link: "tel:+918248365067",
+            color: "#4CAF50",
+        },
+        {
+            icon: "fab fa-youtube",
+            title: "YouTube",
+            desc: "Watch our product demos",
+            link: "https://youtube.com/@madrasacoustics",
+            color: "#FF0000",
+        },
+    ];
     const [formData, setFormData] = useState<any>(userData);
     const [errors, setErrors] = useState<any>({});
     const [loading, setLoading] = useState(false);
@@ -70,14 +116,69 @@ export const Contact = () => {
         <>
             <div className="container my-5">
                 {/* Contact Us Title */}
-                <div className="d-flex justify-content-between align-items-center mt-4 mb-5">
-                    <h2 className="fw-bold text-dark">Contact Us</h2>
+                <div className="row align-items-center my-5">
+                    {/* Left side - Image */}
+                    <h2 className="fw-bold text-dark mb-5 text-center">Contact Us</h2>
+
+                    <div className="col-md-6 text-center">
+                        {/* <img
+                            src="/images/wp_2.png"
+                            alt="Connect to wp"
+                            className="img-fluid"
+                            style={{ maxHeight: '250px', objectFit: 'cover' }}
+                        /> */}
+                        <div className="whatsapp-icon-glow">
+                            <i className="fab fa-whatsapp fa-10x"></i>
+                        </div>
+
+                    </div>
+
+                    {/* Right side - WhatsApp section */}
+                    <div className="col-md-6 text-center">
+                        <h3 className="mb-1 blockquote fst-italic">
+                            Connect with Keerthana Silks <br /> on WhatsApp
+                        </h3>
+
+                        <img
+                            src="/images/wp_connect.jpg"
+                            alt="Connect with Keerthana Silks on WhatsApp"
+                            className="img-fluid mb-3 neon-border"
+                        // style={{
+                        //     maxHeight: '250px',
+                        //     objectFit: 'cover',
+                        //     border: '4px solid #25D366', // WhatsApp green
+                        //     borderRadius: '12px',
+                        //     boxShadow: '0 0 15px #25D366, 0 0 30px #25D366, 0 0 45px #25D366',
+                        // }}
+                        />
+
+
+                        <h6 className="mb-2">Scan this QR code and opt-in to WhatsApp to:</h6>
+
+                        <ul className="list-unstyled">
+                            <li>✔ Receive exclusive offers and sale alerts</li>
+                            <li>✔ Chat with Keerthana Silks customer support</li>
+                            <li>✔ Stay updated on new arrivals and festive collections</li>
+                        </ul>
+
+                        <p className="text-muted" style={{ fontSize: '0.9rem' }}>
+                            <em>Android users may need to enable Google Lens to scan the QR code.</em>
+                        </p>
+                    </div>
                 </div>
+
 
                 {/* Contact Info + Form */}
                 <div className="row g-4">
                     {/* Left Column - Placeholder or Add Info */}
                     <div className="col-md-6">
+                        <img
+                            src="/images/submit_your_query.png"
+                            alt="Connect with Keerthana Silks on WhatsApp"
+                            className="img-fluid"
+                            style={{ maxHeight: '500px', objectFit: 'cover', marginBottom: '-100px' }}
+                        />
+
 
                     </div>
 
@@ -99,10 +200,13 @@ export const Contact = () => {
                                             id={field}
                                             name={field}
                                             required
-                                            placeholder={`Enter your ${field.replace(/([A-Z])/g, " $1")}`}
+                                            placeholder={`${field
+                                                .replace(/([A-Z])/g, " $1")       // Add space before capital letters
+                                                .replace(/^./, (c) => c.toUpperCase())}`}  // Capitalize first letter
                                             value={formData[field as keyof typeof formData] || ""}
                                             onChange={handleChange}
                                         />
+
                                     </div>
                                 ))}
                                 <div className="d-grid">
@@ -115,94 +219,173 @@ export const Contact = () => {
 
                 {/* Client Reviews Carousel */}
                 <div className="mt-5">
-                    <h3 className="text-center mb-4">What Our Clients Say</h3>
+                    <h3 className="text-center mb-5 fw-bold text-dark">What Our Clients Say</h3>
+
                     <div id="clientCarousel" className="carousel slide" data-bs-ride="carousel">
                         <div className="carousel-inner">
                             {[1, 2, 3].map((review, idx) => (
                                 <div className={`carousel-item ${idx === 0 ? "active" : ""}`} key={idx}>
                                     <div className="d-flex justify-content-center">
-                                        <div className="card p-3" style={{ maxWidth: "1000px" }}>
-                                            <div className="card-body">
-                                                <h5 className="card-title">Client {idx + 1}</h5>
-                                                <p className="card-text">"Amazing service and support from Madras Acoustics!"</p>
-                                                <p className="text-muted">– Happy Customer</p>
+                                        <div
+                                            className="card border-0 shadow-lg p-4"
+                                            style={{
+                                                maxWidth: "400px",
+                                                width: "50%",
+                                                backgroundColor: "#ffffff",
+                                                borderRadius: "1rem",
+                                            }}
+                                        >
+                                            <div className="card-body text-center">
+                                                <img
+                                                    src={`https://i.pravatar.cc/100?img=${idx + 20}`}
+                                                    alt="Client"
+                                                    className="rounded-circle mb-3"
+                                                    style={{ width: "80px", height: "80px", objectFit: "cover" }}
+                                                />
+                                                <h5 className="fw-bold mb-1">Client {idx + 1}</h5>
+                                                <p className="text-muted mb-3">– Verified Customer</p>
+                                                <p className="fst-italic px-2" style={{ fontSize: "1.1rem" }}>
+                                                    “Madras Acoustics offered us outstanding quality and support. Truly exceptional
+                                                    experience!”
+                                                </p>
+                                                <div>
+                                                    <span className="text-warning">★ ★ ★ ★ ★</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             ))}
                         </div>
-                        <button className="carousel-control-prev" type="button" data-bs-target="#clientCarousel" data-bs-slide="prev">
-                            <span className="carousel-control-prev-icon bg-primary"></span>
+
+                        {/* Prev Button */}
+                        <button
+                            className="carousel-control-prev"
+                            type="button"
+                            data-bs-target="#clientCarousel"
+                            data-bs-slide="prev"
+                        >
+                            <span
+                                className="carousel-control-prev-icon"
+                                aria-hidden="true"
+                                style={{
+                                    backgroundColor: "#0d6efd",
+                                    borderRadius: "50%",
+                                    padding: "1rem",
+                                }}
+                            ></span>
+                            <span className="visually-hidden">Previous</span>
                         </button>
-                        <button className="carousel-control-next" type="button" data-bs-target="#clientCarousel" data-bs-slide="next">
-                            <span className="carousel-control-next-icon bg-primary"></span>
+
+                        {/* Next Button */}
+                        <button
+                            className="carousel-control-next"
+                            type="button"
+                            data-bs-target="#clientCarousel"
+                            data-bs-slide="next"
+                        >
+                            <span
+                                className="carousel-control-next-icon"
+                                aria-hidden="true"
+                                style={{
+                                    backgroundColor: "#0d6efd",
+                                    borderRadius: "50%",
+                                    padding: "1rem",
+                                }}
+                            ></span>
+                            <span className="visually-hidden">Next</span>
                         </button>
                     </div>
                 </div>
 
                 {/* Contact Ways - Cards in Grid */}
-                <div className="mt-5">
-                    <h3 className="text-center mb-4">Connect With Us</h3>
-                    <div className="row g-4">
-                        {[
-                            { icon: "fab fa-whatsapp", title: "WhatsApp", link: "https://wa.me/918248365067", color: "text-success" },
-                            { icon: "fab fa-facebook-f", title: "Facebook", link: "https://www.facebook.com/share/18kVHF8oaP/", color: "text-primary" },
-                            { icon: "fab fa-instagram", title: "Instagram", link: "https://instagram.com/madras_acoustics/", color: "text-danger" },
-                            { icon: "fas fa-envelope", title: "Email", link: "mailto:jeromedj@madrasacoustics.com", color: "text-warning" },
-                            { icon: "fas fa-phone", title: "Phone", link: "tel:+918248365067", color: "text-dark" },
-                            { icon: "fas fa-whatsapp", title: "Quick Call for Selection", link: "https://wa.me/918248365067", color: "text-dark" },
-                        ].map((item, idx) => (
-                            <div className="col-md-3 col-sm-6" key={idx}>
-                                <a href={item.link} target="_blank" rel="noopener noreferrer" className="text-decoration-none">
-                                    <div className="card text-center shadow-sm h-100">
-                                        <div className="card-body">
-                                            <i className={`${item.icon} fs-2 ${item.color}`}></i>
-                                            <h5 className="card-title mt-3">{item.title}</h5>
+                <div className="connect-section mt-5">
+                    <h3 className="text-center mb-5 fw-bold text-dark">Connect With Us</h3>
+                    <div className="row g-4 justify-content-center">
+                        {platforms.map((item, idx) => {
+                            // console.log(item.title); // ✅ Correct usage
+
+                            return (
+                                <div className="col-md-4 col-sm-6" key={idx}>
+                                    <div className="flip-card">
+                                        <div className="flip-card-inner">
+                                            <div
+                                                className="flip-card-front d-flex flex-column justify-content-center align-items-center text-white"
+                                                style={{ backgroundColor: item.color }}
+                                            >
+                                                <i className={`${item.icon} fa-3x mb-3`}></i>
+                                                <h5>{item.title}</h5>
+                                                <p className="text-center px-3">{item.desc}</p>
+                                            </div>
+                                            <div className="flip-card-back d-flex flex-column justify-content-center align-items-center bg-light text-dark">
+                                                <p className="text-center px-3">{item.desc}</p>
+                                                <a
+                                                    href={item.link}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="btn btn-dark mt-2"
+                                                >
+                                                    Connect
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
-                                </a>
-                            </div>
-                        ))}
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
-                <div className="container my-5 mt-5">
-                    <div className="d-flex justify-content-center">
-                        <div className="card p-4 shadow-lg border-0 rounded-4" style={{ width: "1200px", background: "linear-gradient(135deg, #1e3c72, #2a5298)", color: "#fff" }}>
-                            <div className="card-body text-center">
-                                <h3 className="mb-3 fw-bold">Stay in the Loop!</h3>
-                                <p className="mb-4">Subscribe to get updates on our latest collections and exclusive offers.</p>
 
-                                <form onSubmit={handleEmailSubscribe}>
-                                    <div className="input-group">
-                                        <span className="input-group-text bg-white border-0">
-                                            <i className="fas fa-envelope text-primary"></i>
-                                        </span>
-                                        <input
-                                            type="email"
-                                            className="form-control border-0"
-                                            placeholder="Enter your email"
-                                            required
-                                            value={email}
-                                            onChange={(e) => setEmail(e.target.value)}
-                                        />
-                                        <button type="submit" className="btn btn-warning fw-bold">
-                                            Subscribe
-                                        </button>
+
+
+
+
+
+                <div className="container my-5 d-flex justify-content-center">
+                    <div className="glass-card w-100 p-4 text-center">
+                        <h3 className="mb-3 fw-bold">Stay in the Loop!</h3>
+                        <p className="mb-4">
+                            Subscribe to get updates on our latest collections and exclusive offers.
+                        </p>
+
+                        {subscribed ? (
+                            <div className="mt-4">
+                                <h5 className="text-warning">🎉 Here's your exclusive insight!</h5>
+                                <p>"Innovation distinguishes between a leader and a follower." – Steve Jobs</p>
+                            </div>
+                        ) : (
+                            <form onSubmit={handleEmailSubscribe}>
+                                <div className="input-group shadow-sm">
+                                    <span className="input-group-text bg-white border-0">
+                                        <i className="fas fa-envelope text-primary"></i>
+                                    </span>
+                                    <div className="email-input-wrapper">
+                                        <div className="email-input-icon">
+                                            <span className="icon">@</span>
+                                            <input
+                                                id="email"
+                                                type="email"
+                                                placeholder="Enter your email"
+                                                value={email}
+                                                required
+                                                onChange={(e) => setEmail(e.target.value)}
+                                            />
+                                        </div>
                                     </div>
-                                </form>
 
-                                {subscribed && <p className="mt-3 text-success">Thanks for subscribing!</p>}
-                            </div>
-                        </div>
+                                    <button type="submit" className="btn btn-warning fw-bold" disabled={loading}>
+                                        {loading ? "Subscribing..." : "Subscribe"}
+                                    </button>
+                                </div>
+                            </form>
+                        )}
                     </div>
                 </div>
-
                 {/* Instagram Video Carousel Section */}
                 <div className="container my-5">
                     <h3 className="text-center mb-4">Follow us on Instagram for the updates</h3>
 
-                    <div id="instagramCarousel" className="carousel slide" data-bs-ride="carousel">
+                    <div id="instagramCarousel" className="carousel slide instagram-carousel" data-bs-ride="carousel">
                         <div className="carousel-inner">
                             {[
                                 [
@@ -234,13 +417,13 @@ export const Contact = () => {
                                     }
                                 ]
                             ].map((group, idx) => (
-                                <div className={`carousel-item ${idx === 0 ? 'active' : ''}`} key={idx}>
+                                <div className={`carousel-item ${idx === 0 ? "active" : ""}`} key={idx}>
                                     <div className="row justify-content-center">
                                         {group.map((video, index) => (
                                             <div className="col-md-4" key={index}>
-                                                <div className="card mb-3 shadow-sm border-0">
+                                                <div className="card reel-card">
                                                     <a href={video.link} target="_blank" rel="noopener noreferrer">
-                                                        <img src={video.thumbnail} className="card-img-top" alt={`Instagram Video ${index + 1}`} />
+                                                        <img src={video.thumbnail} className="card-img-top reel-img" alt={`Instagram Video ${index + 1}`} />
                                                     </a>
                                                 </div>
                                             </div>
@@ -250,12 +433,13 @@ export const Contact = () => {
                             ))}
                         </div>
                         <button className="carousel-control-prev" type="button" data-bs-target="#instagramCarousel" data-bs-slide="prev">
-                            <span className="carousel-control-prev-icon bg-primary"></span>
+                            <span className="carousel-control-prev-icon rounded-pill custom-nav"></span>
                         </button>
                         <button className="carousel-control-next" type="button" data-bs-target="#instagramCarousel" data-bs-slide="next">
-                            <span className="carousel-control-next-icon bg-primary"></span>
+                            <span className="carousel-control-next-icon rounded-pill custom-nav"></span>
                         </button>
                     </div>
+
                 </div>
 
             </div>

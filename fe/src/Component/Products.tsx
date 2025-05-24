@@ -47,8 +47,8 @@ export const Products = () => {
     useEffect(() => {
         fetchProducts();
     }, []);
-    const email=sessionStorage.getItem("userEmail");
-    const addToCart = async (productId:any) => {
+    const email = sessionStorage.getItem("userEmail");
+    const addToCart = async (productId: any) => {
         try {
             const payload = {
                 email,
@@ -56,22 +56,22 @@ export const Products = () => {
                 quantity: 1,
             }
             const response = await addCartProducts(payload);
-            if(response)  toast.success(response.data.message);
-        } catch (err:any) {
+            if (response) toast.success(response.data.message);
+        } catch (err: any) {
             console.error(err);
             toast.error(err.response?.data?.message);
         }
     };
 
-    const likeProduct = async (productId:any) => {
+    const likeProduct = async (productId: any) => {
         try {
-            const payload ={
+            const payload = {
                 email,
                 productId,
             }
-            const response =await addLikedProducts(payload);
-            if(response)  toast.success(response.data.message);
-        } catch (err:any) {
+            const response = await addLikedProducts(payload);
+            if (response) toast.success(response.data.message);
+        } catch (err: any) {
             console.error(err);
             toast.error(err.response?.data?.message);
         }
@@ -92,7 +92,7 @@ export const Products = () => {
     //         const email = sessionStorage.getItem("userEmail");
     //         const payload : any = {email,product.id,product?.quantity,product?.price}
     //         const response = await addOrderService(payload);
-            
+
     //         if (Array.isArray(response.data)) {
     //             setProducts(response.data);
     //         }
@@ -111,7 +111,9 @@ export const Products = () => {
         <div className="container">
             {/* Header & Filter */}
             <div className="d-flex justify-content-between align-items-center mt-4">
-                <h4>Our Collections</h4>
+                <div className="w-100">
+                    <h4 className="text-center">Our Collections</h4>
+                </div>
 
                 <div className="dropdown">
                     {/* <button
@@ -149,7 +151,7 @@ export const Products = () => {
                 style={{ height: "calc(100vh - 80px)", width: "100%" }}
             >
                 <div className="row">
-                    {products.map((product:any) => (
+                    {products.map((product: any) => (
                         <div key={product.id} className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
                             <div className="card">
                                 <img
@@ -174,11 +176,11 @@ export const Products = () => {
                                         <button className="btn btn-primary">
                                             <i className="bi bi-bag-fill me-1"></i> Buy Now
                                         </button>
-                                        <button className="btn btn-secondary"  title="Add to Cart">
-                                            <i className="bi bi-cart-plus-fill" onClick={()=>addToCart(product.id)}></i>
+                                        <button className="btn btn-secondary" title="Add to Cart">
+                                            <i className="bi bi-cart-plus-fill" onClick={() => addToCart(product.id)}></i>
                                         </button>
                                         <button className="btn btn-secondary" title="Like Product">
-                                            <i className="bi bi-hand-thumbs-up-fill" onClick={()=>likeProduct(product.id)}></i>
+                                            <i className="bi bi-hand-thumbs-up-fill" onClick={() => likeProduct(product.id)}></i>
                                         </button>
                                     </div>
                                 </div>
