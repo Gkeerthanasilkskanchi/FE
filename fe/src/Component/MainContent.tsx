@@ -23,28 +23,41 @@ export const MainContent = ({ children }: any) => {
           </a>
         </div>
 
-        {/* Title Center */}
-        <div className="text-center">
-          <h3>GKEERTHANA SILKS</h3>
-          <p className="mb-0">slogan</p>
+        <div className="hero-text-wrapper position-relative text-center">
+          <h3 className="text-clip-gradient position-relative z-1">
+            KEERTHANA SILKS
+          </h3>
+          <p className="text-clip-gradient-sm position-relative z-1 ">
+            Elegance In Every Drape
+          </p>
+          <img
+            src="/images/logo-flower.png"
+            alt="Flower behind text"
+            className="flower-behind"
+          />
         </div>
+
+
+
 
         {/* Cart & Liked Icons Right */}
         <div className="position-absolute top-0 end-0 mt-4 me-4 d-flex gap-3">
-          <i
-            className="bi bi-heart fs-5 text-danger"
-            style={{ cursor: "pointer" }}
-            onClick={() => navigate("/products/liked")}
+          <div
+            className="icon-wrapper bg-danger text-white"
             title="Liked Products"
-          />
-          <i
-            className="bi bi-cart fs-5 text-primary"
-            style={{ cursor: "pointer" }}
-            onClick={() => navigate("/products/cart")}
+            onClick={() => navigate("/products/liked")}
+          >
+            <i className="bi bi-heart fs-5" />
+          </div>
+          <div
+            className="icon-wrapper bg-primary text-white"
             title="Cart"
-          />
-
+            onClick={() => navigate("/products/cart")}
+          >
+            <i className="bi bi-cart fs-5" />
+          </div>
         </div>
+
       </div>
 
       {/* Scrollable content */}

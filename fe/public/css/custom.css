@@ -141,3 +141,115 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+
+.background-color {
+  background: linear-gradient(135deg, #d4c9b5 0%, #ccbfa7 50%, #d2c2a8 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.1); /* slight white tint */
+  /* border-radius: 16px; */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.text-clip-gradient {
+ background: linear-gradient(to bottom, #c98b8b 50%, #d4c9b5 50%, #6d6454 0%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+}
+
+.text-clip-gradient-sm {
+  background: linear-gradient(135deg, #c98b8b, #80786e, #6f5957);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-style: italic;
+}
+
+.hero-text-wrapper {
+  position: relative;
+  display: inline-block;
+  left: 30%;
+  
+}
+
+.flower-behind {
+  position: absolute;
+  top: -20px;
+  right: 0;
+  left:60%;
+  width: 70%;
+  height: 140%; /* adjust for perfect fit */
+  opacity: 1;
+  filter: blur(0.5px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.text-clip-gradient {
+  font-size: 2rem;
+  font-weight: bold;
+  background: linear-gradient(to right, #c98b8b, #aa9b83, #6d6454);
+  -webkit-background-clip: text;
+  color: transparent;
+  position: relative;
+  z-index: 1;
+}
+
+.text-clip-gradient-sm {
+  font-size: 1.2rem;
+  background: linear-gradient(to right, #c98b8b, #aa9b83);
+  -webkit-background-clip: text;
+  color: transparent;
+  position: relative;
+  z-index: 1;
+ 
+}
+.icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 8px;
+  border-radius: 10%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.icon-wrapper:hover {
+  opacity: 0.85;
+}
+
+.text-para{
+  font-size: 2rem;
+  font-weight: bold;
+  background: linear-gradient(to right, #c98b8b, #6f5957, #6d6454);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+
+.about-us-section {
+  position: relative;
+  z-index: 1;
+}
+
+.about-us-section .about-bg-image {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -20%);
+  width: 80%;
+  max-width: 400px;
+  opacity: 0.5;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.black-text{color: #100d0c}
+.pink-flower{color: #c98b8b}
+.muted-green-leaves{color: #64645a}
+.flower-plates{color:#aa9b83}
+.cornor-image{color:#80786e}
+.cornor-flower{color:#6f5957}
+.logo-second-layer{color:#6d6454}

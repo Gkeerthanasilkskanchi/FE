@@ -25,17 +25,17 @@ export const Sidebar = () => {
 
   return (
     <div
-      className="bg-dark text-white p-3 d-flex flex-column"
-      style={{ width: "220px", height: "100vh", overflowY: "auto" }}
+      className="text-white p-3 d-flex flex-column background-color"
+      style={{ width: "220px", height: "100vh", overflowY: "auto"}}
     >
       {/* Logo */}
-      <div className="d-flex justify-content-center align-items-center bg-danger" style={{ height: "10%" }}>
-        <img src="/images/logo.png" alt="logo" className="img-fluid" style={{ maxHeight: "40px" }} />
+      <div className="d-flex justify-content-center align-items-center" style={{ height: "10%" }}>
+        <img src="/images/logo.jpg" alt="logo" className="img-fluid" style={{ maxHeight: "100px" }} />
       </div>
 
       {/* Slogan */}
-      <div className="bg-danger text-center mt-2 mb-4 py-2">
-        <p className="text-white fst-italic mb-0">slogan</p>
+      <div className=" text-center mt-2 mb-4 py-2">
+        <p className="pink-flower fst-italic mb-0 fw-semibold" style={{fontSize:'14px'}}>Elegance In Every Drape</p>
       </div>
 
       {/* Navigation Items */}
@@ -48,25 +48,26 @@ export const Sidebar = () => {
             onClick={() => navigate(item.path)}
           >
             <div className="d-flex flex-column align-items-center">
-              <i className={`bi ${item.icon}`} style={{ fontSize: "1.5rem", marginBottom: "5px" }}></i>
-              <span className="text-white">{item.name}</span>
+              <i className={`bi ${item.icon} cornor-flower`} style={{ fontSize: "1.5rem", marginBottom: "5px" }}></i>
+              <span className="black-text fw-semibold">{item.name}</span>
             </div>
           </li>
         ))}
 
         {/* Sign Up / Login or Sign Out */}
         <li
-          className="nav-item text-center mt-auto"
+          className="nav-item text-center mt-auto cornor-flower"
           style={{ cursor: "pointer" }}
           onClick={() => (userEmail ? handleSignOut() : setShowAuth(true))}
         >
           <div className="d-flex flex-column align-items-center">
             <i className="bi bi-person-circle" style={{ fontSize: "1.5rem", marginBottom: "5px" }}></i>
             <span
-              className="text-white"
+              className="black-text"
               style={{
                 fontSize: "0.9rem",
-                maxWidth: "220px",
+                maxWidth: "100px",
+                fontWeight:"bold",
                 overflow: "hidden",
                 textOverflow: "ellipsis",
                 whiteSpace: "nowrap",

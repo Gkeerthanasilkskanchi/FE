@@ -16,9 +16,9 @@ function App() {
       <ToastContainer />
       <Routes>
         <Route path="/" element={<Layout />}>
-          {role === "admin" ? (
+          {/* {role === "admin" ? (
             <Route path="" element={<AdminDashboard />} />
-          ) : (
+          ) : ( */}
             <>
               <Route index element={<Products />} />
               <Route path="home" element={<Home />} />
@@ -26,7 +26,7 @@ function App() {
               <Route path="about" element={<About />} />
               <Route path="products/:type" element={<ProductList />} />
             </>
-          )}
+          {/* )} */}
         </Route>
       </Routes>
     </BrowserRouter>

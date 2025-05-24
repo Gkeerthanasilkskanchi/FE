@@ -32,7 +32,7 @@ export const ProductList = () => {
 
     if (email) fetchData();
   }, [type, email]);
-
+ 
   return (
     <div className="container mt-4">
       <h4>{type === "liked" ? "Liked Products" : "Your Cart"}</h4>

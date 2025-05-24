@@ -15,37 +15,48 @@ export const Home = () => {
     <div>
       {/* Hero Banner */}
       <div className="w-100">
-        <img src={'/images/saree.jfif'} alt="Saree Banner" className="img-fluid w-100" style={{ maxHeight: '400px', objectFit: 'cover' }} />
+        <img src={'/images/home.jpg'} alt="Saree Banner" className="img-fluid w-100" style={{ maxHeight: '400px', objectFit: 'cover' }} />
       </div>
 
       {/* Quotes */}
       <div className="container text-center my-5">
-        <blockquote className="fs-4 fw-semibold text-muted">
+        <blockquote className="fs-4 fw-semibold text-para" style={{ fontStyle: 'italic' }}>
           “A saree isn’t just attire; it’s a legacy woven in threads.”
         </blockquote>
-        <p className="text-secondary">Embrace the elegance of tradition with every drape.</p>
+        <p className="text-clip-gradient-sm" style={{ fontStyle: 'italic' }}>Embrace the elegance of tradition with every drape.</p>
       </div>
 
       {/* About Us */}
       <div className="container my-5">
         <div className="row align-items-center">
-          <div className="col-md-6">
-            <h2 className="fw-bold mb-3">About Us</h2>
+          <div className="col-md-6 position-relative about-us-section">
+            <img
+              src="/images/logo-flower.png"
+              alt="background flower"
+              className="about-bg-image"
+            />
+            <h2 className="fw-bold mb-3 text-para">About Us</h2>
             <p>
-              We are a heritage saree brand committed to bringing timeless tradition with a modern touch. With decades of experience,
-              we specialize in Kanjivaram, Banarasi, and designer sarees tailored for every occasion. Explore our world of rich colors,
-              intricate designs, and heartfelt stories behind every weave.
+              We are a heritage saree brand committed to bringing timeless tradition with a modern touch. With decades of experience, we specialize in Kanjivaram, Banarasi, and designer sarees tailored for every occasion. Explore our world of rich colors, intricate designs, and heartfelt stories behind every weave.
             </p>
+            <p>
+              At Keerthana Silks, each saree is more than just attire — it is a celebration of culture, artistry, and emotion. We collaborate with skilled weavers from across India to preserve age-old techniques while infusing them with contemporary elegance. From festive collections to bridal exclusives, every piece is handpicked to reflect grace and individuality.
+            </p>
+            <p>
+              Step into our store or explore online to discover collections that blend luxury, comfort, and craftsmanship — sarees that not only drape beautifully, but speak of legacy, love, and lasting memories.
+            </p>
+
           </div>
+
           <div className="col-md-6">
-            <img src={'/images/saree.jfif'} alt="About Us" style={{ width: "100%", height: "300px" }} className="img-fluid rounded" />
+            <img src={'/images/about.jpg'} alt="About Us" style={{ width: "600px", height: "400px" }} className="img-fluid rounded" />
           </div>
         </div>
       </div>
 
       {/* Stats Cards */}
       <div className="container my-5">
-        <h3 className="text-center mb-4 fw-bold" style={{ marginTop: "70px" }}>Client Satisfaction</h3>
+        <h3 className="text-center mb-4 fw-bold text-para" style={{ marginTop: "70px" }}>Client Satisfaction</h3>
 
         <div className="row text-center g-4">
           {[
@@ -67,7 +78,7 @@ export const Home = () => {
 
       {/* FAQs */}
       <div className="container my-5">
-        <h3 className="text-center mb-4 fw-bold">Frequently Asked Questions</h3>
+        <h3 className="text-center mb-4 fw-bold text-para">Frequently Asked Questions</h3>
         <Accordion defaultActiveKey="0">
           <Accordion.Item eventKey="0">
             <Accordion.Header>What types of sarees do you sell?</Accordion.Header>
@@ -162,7 +173,7 @@ export const Home = () => {
           ))}
         </div>
       </div>
-        
+
       <h3 className="text-center fw-bold my-5">SareeStyle Inspirations</h3>
       <div className="row g-3">
         {[1, 2, 3, 4, 5, 6].map((num) => (
