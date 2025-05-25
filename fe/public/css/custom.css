@@ -559,3 +559,110 @@ a.text-decoration-none:hover {
     0 0 12px #39ff14,
     0 0 16px #39ff14;
 }
+
+.gold-tick {
+  color: gold !important;
+  margin-right: 8px;
+  font-weight: bold;
+}
+
+
+
+.neon-hover {
+  position: relative;
+  z-index: 1;
+  background: #fff; /* Card background */
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+.neon-hover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 16px;
+  padding: 2px;
+  background: linear-gradient(to bottom, #c98b8b 50%, #d4c9b5 50%, #6d6454 0%);
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.neon-hover:hover::before {
+  opacity: 1;
+}
+
+
+/* .text-clip-gradient {
+  background: linear-gradient(90deg, #b8860b, #ffcc00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+} */
+
+.testimonial-box {
+  background-color: #fffdf5;
+  border: 1px solid #f2e9d8;
+  border-radius: 12px;
+  max-width: 600px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.testimonial-box:hover {
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.12);
+}
+
+.text-gold {
+  color: #b8860b;
+}
+
+.carousel-control-prev span,
+.carousel-control-next span {
+  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent background */
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+/* .carousel-control-prev:hover span,
+.carousel-control-next:hover span {
+  background-color: gold;
+  color: black;
+} */
+
+
+
+
+.custom-accordion {
+  background: linear-gradient(to bottom, #efdcdc 50%, #f4f0e9 50%, #efe8da 0%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  color: #fff;
+}
+
+.custom-accordion .accordion-header {
+  background: transparent !important;
+  color: #fff !important;
+}
+
+.custom-accordion .accordion-button {
+  background: transparent !important;
+  color: #fff !important;
+  font-weight: 600;
+  box-shadow: none;
+}
+
+.custom-accordion .accordion-button:not(.collapsed) {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #fff !important;
+}
+
+.custom-accordion .accordion-body {
+  background: rgba(0, 0, 0, 0.05);
+  color: #fff;
+}

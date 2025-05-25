@@ -118,7 +118,7 @@ export const Contact = () => {
                 {/* Contact Us Title */}
                 <div className="row align-items-center my-5">
                     {/* Left side - Image */}
-                    <h2 className="fw-bold text-dark mb-5 text-center">Contact Us</h2>
+                    <h2 className="fw-bold text-dark mb-5 text-center text-clip-gradient ">Contact Us</h2>
 
                     <div className="col-md-6 text-center">
                         {/* <img
@@ -155,11 +155,13 @@ export const Contact = () => {
 
                         <h6 className="mb-2">Scan this QR code and opt-in to WhatsApp to:</h6>
 
-                        <ul className="list-unstyled">
-                            <li>✔ Receive exclusive offers and sale alerts</li>
-                            <li>✔ Chat with Keerthana Silks customer support</li>
-                            <li>✔ Stay updated on new arrivals and festive collections</li>
+                        <ul className="list-unstyled ">
+                            <li><span className="gold-tick">✔</span> Receive exclusive offers and sale alerts</li>
+                            <li><span className="gold-tick">✔</span> Chat with Keerthana Silks customer support</li>
+                            <li><span className="gold-tick">✔</span> Stay updated on new arrivals and festive collections</li>
                         </ul>
+
+
 
                         <p className="text-muted" style={{ fontSize: '0.9rem' }}>
                             <em>Android users may need to enable Google Lens to scan the QR code.</em>
@@ -219,7 +221,7 @@ export const Contact = () => {
 
                 {/* Client Reviews Carousel */}
                 <div className="mt-5">
-                    <h3 className="text-center mb-5 fw-bold text-dark">What Our Clients Say</h3>
+                    <h3 className="text-center mb-5 fw-bold text-dark text-clip-gradient ">What Our Clients Say</h3>
 
                     <div id="clientCarousel" className="carousel slide" data-bs-ride="carousel">
                         <div className="carousel-inner">
@@ -300,7 +302,7 @@ export const Contact = () => {
 
                 {/* Contact Ways - Cards in Grid */}
                 <div className="connect-section mt-5">
-                    <h3 className="text-center mb-5 fw-bold text-dark">Connect With Us</h3>
+                    <h3 className="text-center mb-5 fw-bold text-dark text-clip-gradient">Connect With Us</h3>
                     <div className="row g-4 justify-content-center">
                         {platforms.map((item, idx) => {
                             // console.log(item.title); // ✅ Correct usage
@@ -343,7 +345,7 @@ export const Contact = () => {
 
                 <div className="container my-5 d-flex justify-content-center">
                     <div className="glass-card w-100 p-4 text-center">
-                        <h3 className="mb-3 fw-bold">Stay in the Loop!</h3>
+                        <h3 className="mb-3 fw-bold text-clip-gradient " >Stay in the Loop!</h3>
                         <p className="mb-4">
                             Subscribe to get updates on our latest collections and exclusive offers.
                         </p>
@@ -383,7 +385,7 @@ export const Contact = () => {
                 </div>
                 {/* Instagram Video Carousel Section */}
                 <div className="container my-5">
-                    <h3 className="text-center mb-4">Follow us on Instagram for the updates</h3>
+                    <h3 className="text-center mb-4 text-clip-gradient ">Follow us on Instagram for the updates</h3>
 
                     <div id="instagramCarousel" className="carousel slide instagram-carousel" data-bs-ride="carousel">
                         <div className="carousel-inner">
