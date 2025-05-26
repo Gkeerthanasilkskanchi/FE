@@ -1,15 +1,21 @@
 import { useState } from "react";
 import { Accordion } from "react-bootstrap";
+import { sendSubscribtion } from "../API/API";
+import { toast } from "react-toastify";
 
 export const Home = () => {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
 
-  const handleEmailSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    // You can integrate with backend or Mailchimp API
+  const handleEmailSubscribe =async () => {
     setSubscribed(true);
-    setEmail('');
+    const value =await sendSubscribtion({email:email});
+    if(value){
+       setMessage("Subscribed successfully!");
+       toast.success("Subscribed successfully!");
+    }
   };
   return (
     <div>
@@ -110,54 +116,100 @@ export const Home = () => {
         </Accordion>
       </div>
 
-      <div className="container my-5 mt-5">
-        <div className="d-flex justify-content-center">
-          <div className="card p-4 shadow-lg border-0 rounded-4" style={{ width: "1200px", background: "linear-gradient(135deg, #1e3c72, #2a5298)", color: "#fff" }}>
-            <div className="card-body text-center">
-              <h3 className="mb-3 fw-bold">Stay in the Loop!</h3>
-              <p className="mb-4">Subscribe to get updates on our latest collections and exclusive offers.</p>
+      <div className="container my-5 d-flex justify-content-center">
+        <div className="glass-card w-100 p-4 text-center">
+          <h3 className="mb-3 fw-bold text-clip-gradient " >Stay in the Loop!</h3>
+          <p className="mb-4">
+            Subscribe to get updates on our latest collections and exclusive offers.
+          </p>
 
-              <form onSubmit={handleEmailSubscribe}>
-                <div className="input-group">
-                  <span className="input-group-text bg-white border-0">
-                    <i className="fas fa-envelope text-primary"></i>
-                  </span>
-                  <input
-                    type="email"
-                    className="form-control border-0"
-                    placeholder="Enter your email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                  <button type="submit" className="btn btn-warning fw-bold">
-                    Subscribe
-                  </button>
-                </div>
-              </form>
-
-              {subscribed && <p className="mt-3 text-success">Thanks for subscribing!</p>}
+          {subscribed ? (
+            <div className="mt-4">
+              <h5 className="text-warning">🎉 Here's your exclusive insight!</h5>
+              <p>"Innovation distinguishes between a leader and a follower." – Steve Jobs</p>
             </div>
-          </div>
+          ) : (
+            <form onSubmit={handleEmailSubscribe}>
+              <div className="input-group shadow-sm">
+                <span className="input-group-text bg-white border-0">
+                  <i className="fas fa-envelope text-primary" style={{ fontSize: '50px' }}></i>
+                </span>
+                <div className="email-input-wrapper">
+                  <div className="email-input-icon">
+                    <span className="icon">@</span>
+                    <input
+                      id="email"
+                      type="email"
+                      placeholder="Enter your email"
+                      value={email}
+                      required
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                <button type="submit" className="btn btn-warning fw-bold" disabled={loading}>
+                  {loading ? "Subscribing..." : "Subscribe"}
+                </button>
+              </div>
+            </form>
+          )}
         </div>
       </div>
 
 
       <h3 className="text-center fw-bold my-5 text-clip-gradient">Featured Collections</h3>
-      <div className="row g-4">
-        {['Kanjivaram', 'Banarasi', 'Silk Cotton'].map((type, idx) => (
-          <div className="col-md-4" key={idx}>
-            <div className="card border-0 shadow-sm rounded-4 h-100">
-              <img src={`/images/saree${idx + 1}.jpg`} className="card-img-top" alt={type} />
-              <div className="card-body text-center">
-                <h5 className="card-title fw-bold">{type}</h5>
-                <p className="text-muted small">Elegant {type} sarees crafted with love and heritage.</p>
-                <button className="btn btn-outline-primary">Explore</button>
+
+      <div id="featuredCarousel" className="carousel slide" data-bs-ride="carousel">
+        <div className="carousel-inner">
+
+          {[
+            ['Kanjivaram', 'Banarasi'],
+            ['Silk Cotton','Banarasi'] // you can add more items to even this out if needed
+          ].map((pair, slideIdx) => (
+            <div className={`carousel-item ${slideIdx === 0 ? 'active' : ''}`} key={slideIdx}>
+              <div className="row g-4 justify-content-center">
+                {pair.map((type, idx) => {
+                  const imgIndex = slideIdx * 2 + idx + 1; // For image path like saree-1.png, saree-2.png...
+                  return (
+                    <div className="col-md-6" key={type}>
+                      <div className="card border-0 shadow-sm rounded-4 h-100">
+                        <img src={`/images/saree-${imgIndex}.png`} className="card-img-top" alt={type} />
+                        <div className="card-body text-center">
+                          <h5 className="card-title fw-bold text-clip-gradient">{type}</h5>
+                          <p className="text-muted small">Elegant {type} sarees crafted with love and heritage.</p>
+                          {/* <button className="btn primary">Explore</button> */}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+
+        </div>
+
+        {/* Carousel Controls */}
+        <button
+          className="carousel-control-prev"
+          type="button"
+          data-bs-target="#featuredCarousel"
+          data-bs-slide="prev"
+        >
+          <span className="carousel-control-prev-icon bg-primary" aria-hidden="true"></span>
+        </button>
+        <button
+          className="carousel-control-next"
+          type="button"
+          data-bs-target="#featuredCarousel"
+          data-bs-slide="next"
+        >
+          <span className="carousel-control-next-icon bg-primary" aria-hidden="true"></span>
+        </button>
       </div>
+
+
 
       <h3 className="text-center fw-bold my-5 text-clip-gradient ">
         What Our Customers Say
@@ -180,7 +232,7 @@ export const Home = () => {
             },
           ].map((item, index) => (
             <div className={`carousel-item ${index === 0 ? "active" : ""}`} key={index}>
-              <div className="testimonial-box mx-auto text-center px-4 py-5">
+              <div className="testimonial-box mx-auto text-center px-4 py-5 ">
                 <blockquote className="blockquote fst-italic mb-3">
                   “{item.quote}”
                 </blockquote>
@@ -197,7 +249,7 @@ export const Home = () => {
           data-bs-target="#testimonialCarousel"
           data-bs-slide="prev"
         >
-          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span className="carousel-control-prev-icon bg-primary" aria-hidden="true"></span>
           {/* <span style={{ color: 'gold', fontWeight: 'bold', marginLeft: '8px' }}>Previous</span> */}
         </button>
 
@@ -207,23 +259,11 @@ export const Home = () => {
           data-bs-target="#testimonialCarousel"
           data-bs-slide="next"
         >
-          <span className="carousel-control-next-icon" aria-hidden="true"></span>
+          <span className="carousel-control-next-icon bg-primary" aria-hidden="true"></span>
           {/* <span style={{ color: 'gold', fontWeight: 'bold', marginLeft: '8px' }}>Next</span> */}
         </button>
 
 
-      </div>
-
-
-
-
-      <h3 className="text-center fw-bold my-5">SareeStyle Inspirations</h3>
-      <div className="row g-3">
-        {[1, 2, 3, 4, 5, 6].map((num) => (
-          <div className="col-4 col-md-2" key={num}>
-            <img src={'/images/saree.jfif'} alt={`Insta ${num}`} className="img-fluid rounded-3 shadow-sm" />
-          </div>
-        ))}
       </div>
 
 
