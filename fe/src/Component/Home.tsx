@@ -35,7 +35,7 @@ export const Home = () => {
               alt="background flower"
               className="about-bg-image"
             />
-            <h2 className="mb-3 text-para fw-semibold">About Us</h2>
+            <h2 className="fw-bold mb-3 text-para">About Us</h2>
             <p>
               We are a heritage saree brand committed to bringing timeless tradition with a modern touch. With decades of experience, we specialize in Kanjivaram, Banarasi, and designer sarees tailored for every occasion. Explore our world of rich colors, intricate designs, and heartfelt stories behind every weave.
             </p>
@@ -56,7 +56,8 @@ export const Home = () => {
 
       {/* Stats Cards */}
       <div className="container my-5">
-        <h2 className="text-center mb-3 text-para fw-semibold">Client Satisfaction</h2>
+        <h3 className="text-center mb-4 fw-bold text-para " style={{ marginTop: "70px" }}>Client Satisfaction</h3>
+
         <div className="row text-center g-4">
           {[
             { title: "Customer Satisfaction", count: "99.5%" },
@@ -66,43 +67,46 @@ export const Home = () => {
             { title: "Years in Business", count: "20+" },
           ].map((item, idx) => (
             <div className="col-md-2 col-6" style={{ width: "200px", marginRight: "20px" }} key={idx}>
-              <div className="card shadow-sm p-3 rounded-4 border-0">
+              <div className="card shadow-sm p-3 rounded-4 border-0 neon-hover">
                 <h4 className="fw-bold text-primary">{item.count}</h4>
                 <p className="text-muted small">{item.title}</p>
               </div>
             </div>
           ))}
         </div>
+
+
       </div>
 
       {/* FAQs */}
       <div className="container my-5">
-        <h3 className="text-center mb-4 text-para fw-semibold">Frequently Asked Questions</h3>
-        <Accordion defaultActiveKey="0">
-          <Accordion.Item eventKey="0">
-            <Accordion.Header>What types of sarees do you sell?</Accordion.Header>
-            <Accordion.Body>
-              We specialize in Kanjivaram, Banarasi, Silk Cotton, and Designer sarees suited for all occasions.
-            </Accordion.Body>
-          </Accordion.Item>
-          <Accordion.Item eventKey="1">
-            <Accordion.Header>Do you offer shipping across India?</Accordion.Header>
-            <Accordion.Body>
-              Yes, we offer fast and secure delivery all over India.
-            </Accordion.Body>
-          </Accordion.Item>
-          <Accordion.Item eventKey="2">
-            <Accordion.Header>Can I return or exchange a saree?</Accordion.Header>
-            <Accordion.Body>
-              Yes, we accept returns within 7 days of delivery for unworn sarees with tags intact.
-            </Accordion.Body>
-          </Accordion.Item>
-          <Accordion.Item eventKey="3">
-            <Accordion.Header>Do you have a physical store?</Accordion.Header>
-            <Accordion.Body>
-              Yes, visit us at our flagship showroom in Chennai for an in-person experience.
-            </Accordion.Body>
-          </Accordion.Item>
+        <h3 className="text-center mb-4 fw-bold text-para">Frequently Asked Questions</h3>
+        <Accordion defaultActiveKey="0" className="gradient-accordion">
+          {[
+            {
+              question: "What types of sarees do you sell?",
+              answer: "We specialize in Kanjivaram, Banarasi, Silk Cotton, and Designer sarees suited for all occasions.",
+            },
+            {
+              question: "Do you offer shipping across India?",
+              answer: "Yes, we offer fast and secure delivery all over India.",
+            },
+            {
+              question: "Can I return or exchange a saree?",
+              answer: "Yes, we accept returns within 7 days of delivery for unworn sarees with tags intact.",
+            },
+            {
+              question: "Do you have a physical store?",
+              answer: "Yes, visit us at our flagship showroom in Chennai for an in-person experience.",
+            },
+          ].map((item, idx) => (
+            <Accordion.Item eventKey={idx.toString()} key={idx} className="custom-accordion">
+              <Accordion.Header>{item.question}</Accordion.Header>
+              <Accordion.Body>{item.answer}</Accordion.Body>
+            </Accordion.Item>
+
+
+          ))}
         </Accordion>
       </div>
 
@@ -139,7 +143,7 @@ export const Home = () => {
       </div>
 
 
-      <h3 className="text-center fw-bold my-5">Featured Collections</h3>
+      <h3 className="text-center fw-bold my-5 text-clip-gradient">Featured Collections</h3>
       <div className="row g-4">
         {['Kanjivaram', 'Banarasi', 'Silk Cotton'].map((type, idx) => (
           <div className="col-md-4" key={idx}>
@@ -155,24 +159,72 @@ export const Home = () => {
         ))}
       </div>
 
-      <h3 className="text-center fw-bold my-5">What Our Customers Say</h3>
+      <h3 className="text-center fw-bold my-5 text-clip-gradient ">
+        What Our Customers Say
+      </h3>
+
       <div id="testimonialCarousel" className="carousel slide" data-bs-ride="carousel">
         <div className="carousel-inner">
           {[
-            { name: "Anjali S.", quote: "The Banarasi saree was beyond beautiful. Perfect for my wedding!" },
-            { name: "Preeti R.", quote: "Great customer service and lovely packaging. Felt like a gift!" },
-            { name: "Meena K.", quote: "Authentic silk, vibrant colors. I’m in love with every purchase." }
+            {
+              name: "Anjali S.",
+              quote: "The Banarasi saree was beyond beautiful. Perfect for my wedding!",
+            },
+            {
+              name: "Preeti R.",
+              quote: "Great customer service and lovely packaging. Felt like a gift!",
+            },
+            {
+              name: "Meena K.",
+              quote: "Authentic silk, vibrant colors. I’m in love with every purchase.",
+            },
           ].map((item, index) => (
             <div className={`carousel-item ${index === 0 ? "active" : ""}`} key={index}>
-              <div className="text-center px-5">
-                <blockquote className="blockquote fst-italic">{`“${item.quote}”`}</blockquote>
-                <footer className="blockquote-footer mt-2">{item.name}</footer>
+              <div className="testimonial-box mx-auto text-center px-4 py-5">
+                <blockquote className="blockquote fst-italic mb-3">
+                  “{item.quote}”
+                </blockquote>
+                <footer className="blockquote-footer mt-2 text-gold">
+                  {item.name}
+                </footer>
               </div>
             </div>
           ))}
         </div>
+        <button
+          className="carousel-control-prev"
+          type="button"
+          data-bs-target="#testimonialCarousel"
+          data-bs-slide="prev"
+        >
+          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+          {/* <span style={{ color: 'gold', fontWeight: 'bold', marginLeft: '8px' }}>Previous</span> */}
+        </button>
+
+        <button
+          className="carousel-control-next"
+          type="button"
+          data-bs-target="#testimonialCarousel"
+          data-bs-slide="next"
+        >
+          <span className="carousel-control-next-icon" aria-hidden="true"></span>
+          {/* <span style={{ color: 'gold', fontWeight: 'bold', marginLeft: '8px' }}>Next</span> */}
+        </button>
+
+
       </div>
 
+
+
+
+      <h3 className="text-center fw-bold my-5">SareeStyle Inspirations</h3>
+      <div className="row g-3">
+        {[1, 2, 3, 4, 5, 6].map((num) => (
+          <div className="col-4 col-md-2" key={num}>
+            <img src={'/images/saree.jfif'} alt={`Insta ${num}`} className="img-fluid rounded-3 shadow-sm" />
+          </div>
+        ))}
+      </div>
 
 
     </div>
