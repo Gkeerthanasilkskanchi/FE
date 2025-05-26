@@ -35,7 +35,7 @@ export const Home = () => {
               alt="background flower"
               className="about-bg-image"
             />
-            <h2 className="fw-bold mb-3 text-para">About Us</h2>
+            <h2 className="mb-3 text-para fw-semibold">About Us</h2>
             <p>
               We are a heritage saree brand committed to bringing timeless tradition with a modern touch. With decades of experience, we specialize in Kanjivaram, Banarasi, and designer sarees tailored for every occasion. Explore our world of rich colors, intricate designs, and heartfelt stories behind every weave.
             </p>
@@ -56,8 +56,7 @@ export const Home = () => {
 
       {/* Stats Cards */}
       <div className="container my-5">
-        <h3 className="text-center mb-4 fw-bold text-para" style={{ marginTop: "70px" }}>Client Satisfaction</h3>
-
+        <h2 className="text-center mb-3 text-para fw-semibold">Client Satisfaction</h2>
         <div className="row text-center g-4">
           {[
             { title: "Customer Satisfaction", count: "99.5%" },
@@ -78,7 +77,7 @@ export const Home = () => {
 
       {/* FAQs */}
       <div className="container my-5">
-        <h3 className="text-center mb-4 fw-bold text-para">Frequently Asked Questions</h3>
+        <h3 className="text-center mb-4 text-para fw-semibold">Frequently Asked Questions</h3>
         <Accordion defaultActiveKey="0">
           <Accordion.Item eventKey="0">
             <Accordion.Header>What types of sarees do you sell?</Accordion.Header>
@@ -174,14 +173,6 @@ export const Home = () => {
         </div>
       </div>
 
-      <h3 className="text-center fw-bold my-5">SareeStyle Inspirations</h3>
-      <div className="row g-3">
-        {[1, 2, 3, 4, 5, 6].map((num) => (
-          <div className="col-4 col-md-2" key={num}>
-            <img src={'/images/saree.jfif'} alt={`Insta ${num}`} className="img-fluid rounded-3 shadow-sm" />
-          </div>
-        ))}
-      </div>
 
 
     </div>

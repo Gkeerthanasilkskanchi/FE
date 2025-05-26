@@ -222,8 +222,8 @@
 
 .text-para{
   font-size: 2rem;
-  font-weight: bold;
-  background: linear-gradient(to right, #c98b8b, #6f5957, #6d6454);
+  /* font-weight: semibold; */
+  background: linear-gradient(to right, #c98b8b, #aa9b83);
   -webkit-background-clip: text;
   color: transparent;
 }
