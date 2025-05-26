@@ -2,51 +2,51 @@ import { useEffect, useState } from "react";
 import { addCartProducts, addLikedProducts, addOrderService, getProducts } from "../API/API";
 import { toast } from "react-toastify";
 
-const filterCategories = [
-    {
-        title: "By Fabric",
-        options: [
-            "Silk Sarees",
-            "Cotton Sarees",
-            "Chiffon/Georgette Sarees",
-            "Linen Sarees",
-            "Crepe & Satin Sarees",
-        ],
-    },
-    {
-        title: "By Region / Tradition",
-        options: [
-            "Kanchipuram (Tamil Nadu)",
-            "Banarasi (Uttar Pradesh)",
-            "Paithani (Maharashtra)",
-            "Bandhani (Rajasthan/Gujarat)",
-            "Patola (Gujarat)",
-            "Sambalpuri (Odisha)",
-            "Chikankari Sarees (Lucknow)",
-            "Assam Silk (Muga)",
-            "Kasavu (Kerala)",
-        ],
-    },
-    {
-        title: "By Style",
-        options: [
-            "Lehenga Saree",
-            "Half-and-Half Saree",
-            "Ready-to-Wear Saree",
-        ],
-    },
-];
+// const filterCategories = [
+//     {
+//         title: "By Fabric",
+//         options: [
+//             "Silk Sarees",
+//             "Cotton Sarees",
+//             "Chiffon/Georgette Sarees",
+//             "Linen Sarees",
+//             "Crepe & Satin Sarees",
+//         ],
+//     },
+//     {
+//         title: "By Region / Tradition",
+//         options: [
+//             "Kanchipuram (Tamil Nadu)",
+//             "Banarasi (Uttar Pradesh)",
+//             "Paithani (Maharashtra)",
+//             "Bandhani (Rajasthan/Gujarat)",
+//             "Patola (Gujarat)",
+//             "Sambalpuri (Odisha)",
+//             "Chikankari Sarees (Lucknow)",
+//             "Assam Silk (Muga)",
+//             "Kasavu (Kerala)",
+//         ],
+//     },
+//     {
+//         title: "By Style",
+//         options: [
+//             "Lehenga Saree",
+//             "Half-and-Half Saree",
+//             "Ready-to-Wear Saree",
+//         ],
+//     },
+// ];
 
 export const Products = () => {
-    const [products, setProducts] = useState<any[]>([]);
-    const [selectedImages, setSelectedImages] = useState<string[]>([]);
+    const [products, setProducts] = useState<any>([]);
+    const [selectedImages, setSelectedImages] = useState<any>([]);
     const [showModal, setShowModal] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState<any | null>(null);
 
 
     useEffect(() => {
         fetchProducts();
-    }, []);
+    }, [selectedProduct]);
     const email = sessionStorage.getItem("userEmail");
     const addToCart = async (productId: any) => {
         try {
@@ -78,8 +78,7 @@ export const Products = () => {
     };
     const fetchProducts = async () => {
         try {
-            const response = await getProducts();
-            console.log(response)
+            const response :any= await getProducts();
             if (Array.isArray(response.data)) {
                 setProducts(response.data);
             }
@@ -102,7 +101,8 @@ export const Products = () => {
     // };
     const handleImageClick = (product: any) => {
         setSelectedProduct(product);
-        setSelectedImages(product.image);
+        console.log(product)
+        // setSelectedImages(product);
         setShowModal(true);
     };
 
@@ -115,17 +115,7 @@ export const Products = () => {
                     <h4 className="text-center">Our Collections</h4>
                 </div>
 
-                <div className="dropdown">
-                    {/* <button
-                        className="btn btn-secondary dropdown-toggle"
-                        type="button"
-                        id="dropdownMenuButton"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                    >
-                        Filter Collections
-                    </button> */}
-
+                {/* <div className="dropdown">
                     <ul className="dropdown-menu dropdown-menu-end nested-dropdown">
                         {filterCategories.map((category, idx) => (
                             <li className="dropdown-submenu" key={idx}>
@@ -142,7 +132,7 @@ export const Products = () => {
                             </li>
                         ))}
                     </ul>
-                </div>
+                </div> */}
             </div>
 
             {/* Product Grid */}
@@ -150,37 +140,42 @@ export const Products = () => {
                 className="mt-4 overflow-auto"
                 style={{ height: "calc(100vh - 80px)", width: "100%" }}
             >
-                <div className="row">
-                    {products.map((product: any) => (
-                        <div key={product.id} className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                            <div className="card">
+                <div className="row g-4">
+                    {products?.map((product: any) => (
+                        <div
+                            key={product.id}
+                            className="col-12 col-sm-6 col-lg-4"
+                        >
+                            <div className="card h-100 shadow-sm border-0">
                                 <img
                                     src={product.image?.[0] || '/images/default.jpg'}
                                     className="card-img-top"
-                                    style={{ height: '200px', cursor: 'pointer' }}
+                                    style={{ height: '200px', objectFit: 'cover', cursor: 'pointer' }}
                                     alt={product.title}
-                                    onClick={() => handleImageClick(product.image)}
+                                    // onClick={() => handleImageClick(product)}
                                     data-bs-toggle="modal"
                                     data-bs-target="#imageModal"
                                 />
-                                <div className="card-body">
+                                <div className="card-body d-flex flex-column justify-content-between">
                                     <span
-                                        style={{ cursor: "pointer", fontWeight: "bold" }}
+                                        className="fw-bold d-block mb-2 text-truncate"
+                                        style={{ cursor: "pointer" }}
                                         onClick={() => handleImageClick(product)}
                                         data-bs-toggle="modal"
                                         data-bs-target="#productDetailModal"
+                                        title={product.title}
                                     >
                                         {product.title}
                                     </span>
-                                    <div className="d-flex justify-content-between align-items-center gap-2">
-                                        <button className="btn btn-primary">
-                                            <i className="bi bi-bag-fill me-1"></i> Buy Now
+                                    <div className="d-flex justify-content-between align-items-center gap-2 mt-auto ps-4 pe-4">
+                                        <button style={{outline:'none',border:'none',borderRadius:'5px'}} className="primary">
+                                            <i className="bi bi-bag-fill me-1"  style={{fontSize:"30px"}}></i> 
                                         </button>
-                                        <button className="btn btn-secondary" title="Add to Cart">
-                                            <i className="bi bi-cart-plus-fill" onClick={() => addToCart(product.id)}></i>
+                                        <button  style={{outline:'none',border:'none',borderRadius:'5px'}} className="primary" title="Add to Cart" onClick={() => addToCart(product.id)}>
+                                            <i className="bi bi-cart-plus-fill" style={{fontSize:"30px"}}></i>
                                         </button>
-                                        <button className="btn btn-secondary" title="Like Product">
-                                            <i className="bi bi-hand-thumbs-up-fill" onClick={() => likeProduct(product.id)}></i>
+                                        <button style={{outline:'none',border:'none',borderRadius:'5px'}} className="primary" title="Like Product" onClick={() => likeProduct(product.id)}>
+                                            <i className="bi bi-hand-thumbs-up-fill" style={{fontSize:"30px"}}></i>
                                         </button>
                                     </div>
                                 </div>
@@ -191,7 +186,8 @@ export const Products = () => {
             </div>
 
 
-            <div
+
+            {/* <div
                 className="modal fade"
                 id="imageModal"
                 tabIndex={-1}
@@ -203,7 +199,7 @@ export const Products = () => {
                 >
                     <div className="modal-content position-relative">
 
-                        {/* Close Icon */}
+                
                         <button
                             type="button"
                             className="btn-close position-absolute top-0 end-0 m-2"
@@ -227,7 +223,7 @@ export const Products = () => {
                                 data-bs-ride="carousel"
                             >
                                 <div className="carousel-inner">
-                                    {selectedImages.map((img, idx) => (
+                                    {selectedImages.map((img:any, idx:any) => (
                                         <div
                                             className={`carousel-item ${idx === 0 ? "active" : ""}`}
                                             key={idx}
@@ -270,7 +266,7 @@ export const Products = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
 
 
@@ -279,18 +275,18 @@ export const Products = () => {
                 <div className="modal-dialog modal-dialog-centered" style={{ maxWidth: "600px" }}>
                     <div className="modal-content position-relative">
 
-                        {/* Close icon */}
-                        <button
+                       
+                        {/* <button
                             type="button"
                             className="btn-close position-absolute top-0 end-0 m-2"
                             data-bs-dismiss="modal"
                             aria-label="Close"
                         ></button>
 
-                        {/* Image carousel */}
+                       
                         <div id="productCarousel" className="carousel slide">
                             <div className="carousel-inner">
-                                {selectedImages.map((img, idx) => (
+                                {selectedImages.map((img:any, idx:any) => (
                                     <div
                                         className={`carousel-item ${idx === 0 ? "active" : ""}`}
                                         key={idx}
@@ -318,7 +314,7 @@ export const Products = () => {
                                 <span className="carousel-control-next-icon bg-primary" aria-hidden="true"></span>
                                 <span className="visually-hidden">Next</span>
                             </button>
-                        </div>
+                        </div> */}
 
                         {/* Product Info */}
                         <div className="d-flex p-3" style={{ maxHeight: "300px" }}>
@@ -337,7 +333,7 @@ export const Products = () => {
                                 <p><strong>Price:</strong> ₹{selectedProduct?.price}</p>
                                 <p><strong>Cloth:</strong> {selectedProduct?.cloth || "N/A"}</p>
                                 <p><strong>Category:</strong> {selectedProduct?.category || "Traditional"}</p>
-                                <p><strong>Bought By:</strong> {selectedProduct?.bought_by || "N/A"} customers</p>
+                                {/* <p><strong>Bought By:</strong> {selectedProduct?.bought_by || "N/A"} customers</p> */}
                                 <p><strong>Saree Type:</strong> {selectedProduct?.saree_type}</p>
 
                             </div>
@@ -400,8 +396,8 @@ export const Products = () => {
                         {/* Footer */}
                         <div className="border-top p-3 d-flex justify-content-between">
                             <button className="btn btn-success w-100 me-2">Buy</button>
-                            <button className="btn btn-secondary me-2"><i className="bi bi-cart-plus"></i></button>
-                            <button className="btn btn-outline-danger"><i className="bi bi-heart"></i></button>
+                            <button className="btn btn-secondary me-2" onClick={() => addToCart(selectedProduct.id)}><i className="bi bi-cart-plus"></i></button>
+                            <button className="btn btn-outline-danger"  onClick={() => likeProduct(selectedProduct.id)}><i className="bi bi-heart"></i></button>
                         </div>
 
                     </div>

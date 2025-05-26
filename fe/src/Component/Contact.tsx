@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { sendQuery, sendSubscribtion } from "../API/API";
+import { toast } from "react-toastify";
 
 export const Contact = () => {
     const userData = {
@@ -64,12 +66,14 @@ export const Contact = () => {
     const [email, setEmail] = useState('');
     const [subscribed, setSubscribed] = useState(false);
 
-    const handleEmailSubscribe = (e: React.FormEvent) => {
-        e.preventDefault();
-        // You can integrate with backend or Mailchimp API
-        setSubscribed(true);
-        setEmail('');
-    };
+    const handleEmailSubscribe = async() => {
+         setSubscribed(true);
+            const value =await sendSubscribtion({email:email});
+            if(value){
+               toast.success("Subscribed successfully!");
+            }
+          };
+          
 
     const validate = () => {
         let newErrors: any = {};
@@ -99,14 +103,14 @@ export const Contact = () => {
 
         setLoading(true);
         try {
-            //   const send = await sendQuery(formData);
-            //   if (send?.status === 200) {
-            //     toast.success("Review submitted successfully!", { autoClose: 2000 });
-            //     setFormData(userData);
-            //     setIsSubmitted(false); 
-            //   }
+              const send = await sendQuery(formData);
+              if (send?.status === 200) {
+                toast.success("Review submitted successfully!", { autoClose: 2000 });
+                setFormData(userData);
+                setIsSubmitted(false); 
+              }
         } catch (error) {
-            //   toast.error("Failed to submit review. Please try again.", { autoClose: 2000 });
+              toast.error("Failed to submit review. Please try again.", { autoClose: 2000 });
         } finally {
             setLoading(false);
         }
@@ -359,7 +363,7 @@ export const Contact = () => {
                             <form onSubmit={handleEmailSubscribe}>
                                 <div className="input-group shadow-sm">
                                     <span className="input-group-text bg-white border-0">
-                                        <i className="fas fa-envelope text-primary"></i>
+                                        <i className="fas fa-envelope text-primary" style={{fontSize:'50px'}}></i>
                                     </span>
                                     <div className="email-input-wrapper">
                                         <div className="email-input-icon">
