@@ -27,7 +27,7 @@ export const addLikedProducts = async (payload: any) => {
 }
 
 export const getLikedProducts = async (userId:any) => {
-    const likedProducts = await Client("GET", `${baseURL}/users/like/${userId}`);
+    const likedProducts = await Client("GET", `${baseURL}/users/likes/${userId}`);
     return { status: likedProducts?.status, data: likedProducts?.data }
 }
 

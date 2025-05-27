@@ -5,28 +5,37 @@ import { AuthModal } from "./AuthModel";
 export const Sidebar = () => {
   const navigate = useNavigate();
   const [showAuth, setShowAuth] = useState(false);
-  const [userEmail, setUserEmail] = useState<string | null>(sessionStorage.getItem('userEmail'));
+  // const [userEmail, setUserEmail] = useState<string | null>(sessionStorage.getItem('userEmail'));
+const [navItems, setNavItems] :any= useState([]);
+const [userEmail, setUserEmail] :any= useState("");
 
-  const navItems = [
+useEffect(() => {
+  const role = sessionStorage.getItem("role");
+  setUserEmail(sessionStorage.getItem("userEmail")||"");
+  const baseNavItems :any= [
     { name: "Home", icon: "bi-house-door-fill", path: "/home" },
     { name: "About", icon: "bi-info-circle-fill", path: "/about" },
     { name: "Products", icon: "bi-box-seam", path: "/" },
     { name: "Contact Us", icon: "bi-envelope-fill", path: "/contact-us" },
   ];
 
-  useEffect(() => {
-    setUserEmail(sessionStorage.getItem('userEmail'));
-  }, []);
+  if (role === "admin") {
+    baseNavItems.push({ name: "Dashboard", icon: "bi-box-seam", path: "/dashboard" });
+  }
+
+  setNavItems(baseNavItems);
+}, []);
+
 
   const handleSignOut = () => {
     sessionStorage.removeItem('userEmail');
-    setUserEmail(null);
+    setUserEmail("");
   };
 
   return (
     <div
       className="text-white p-3 d-flex flex-column background-color"
-      style={{ width: "220px", height: "100vh", overflowY: "auto"}}
+      style={{ width: "220px", height: "100vh", overflowY: "auto" }}
     >
       {/* Logo */}
       <div className="d-flex justify-content-center align-items-center" style={{ height: "10%" }}>
@@ -35,12 +44,12 @@ export const Sidebar = () => {
 
       {/* Slogan */}
       <div className=" text-center mt-2 mb-4 py-2">
-        <p className="pink-flower fst-italic mb-0 fw-semibold" style={{fontSize:'14px'}}>Elegance In Every Drape</p>
+        <p className="pink-flower fst-italic mb-0 fw-semibold" style={{ fontSize: '14px' }}>Elegance In Every Drape</p>
       </div>
 
       {/* Navigation Items */}
       <ul className="nav flex-column align-items-center">
-        {navItems.map((item, index) => (
+        {navItems.map((item:any, index:any) => (
           <li
             key={index}
             className="nav-item text-center mb-4"
@@ -67,7 +76,7 @@ export const Sidebar = () => {
               style={{
                 fontSize: "0.9rem",
                 maxWidth: "100px",
-                fontWeight:"bold",
+                fontWeight: "bold",
                 overflow: "hidden",
                 textOverflow: "ellipsis",
                 whiteSpace: "nowrap",

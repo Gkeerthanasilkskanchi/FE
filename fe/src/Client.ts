@@ -1,11 +1,15 @@
 import axios from 'axios';
 
-export const Client = async (method: string, url: string, data?: any,) => {
+export const Client = async (method: string, url: string, data?: any) => {
+  const headers = url === "http://localhost:8080/users/products"
+    ? { "Content-Type": "multipart/form-data" }
+    : { "Content-Type": "application/json" };
+
   const config = {
     method: method,
     url: url,
     data: data,
-    headers: { 'Content-Type': 'application/json' },
+    headers: headers  
   };
 
   const response = await axios(config);
