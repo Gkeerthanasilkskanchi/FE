@@ -57,19 +57,30 @@ export const Products = () => {
             console.error("Failed to fetch products:", error);
         }
     };
-    //  const addOrder = async (product:any) => {
-    //     try {
-    //         const email = sessionStorage.getItem("userEmail");
-    //         const payload : any = {email,product.id,product?.quantity,product?.price}
-    //         const response = await addOrderService(payload);
+    const handleBuyClick = async (product: any) => {
+        try {
+            const email = sessionStorage.getItem("userEmail");
+            alert(email)
+            const payload = {
+                email,
+                id: product.id,
+                quantity: product.quantity || 1,
+                price: product.price,
+            };
+            await addOrderService(payload);
 
-    //         if (Array.isArray(response.data)) {
-    //             setProducts(response.data);
-    //         }
-    //     } catch (error) {
-    //         console.error("Failed to fetch products:", error);
-    //     }
-    // };
+            const message = encodeURIComponent(
+                `Hello, I'm interested in buying:\n\n` +
+                `🧵 *${product.title}*\n💰 Price: ₹${product.price}\n📦 Quantity: ${product.quantity || 1}\n\n` +
+                `Please provide further details.`
+            );
+            const whatsappNumber = "919843788261";
+            window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
+        } catch (error) {
+            console.error("Buy operation failed:", error);
+        }
+    };
+
     const handleImageClick = (product: any) => {
         setSelectedProduct(product);
         console.log(product)
@@ -128,9 +139,15 @@ export const Products = () => {
                                         {product.title}
                                     </span>
                                     <div className="d-flex justify-content-between align-items-center gap-2 mt-auto ps-4 pe-4">
-                                        <button style={{ outline: 'none', border: 'none', borderRadius: '5px' }} className="primary">
+                                        <button
+                                            style={{ outline: 'none', border: 'none', borderRadius: '5px' }}
+                                            className="primary"
+                                            title="Buy Now"
+                                            onClick={() => handleBuyClick(product)}
+                                        >
                                             <i className="bi bi-bag-fill me-1" style={{ fontSize: "30px" }}></i>
                                         </button>
+
                                         <button style={{ outline: 'none', border: 'none', borderRadius: '5px' }} className="primary" title="Add to Cart" onClick={() => addToCart(product.id)}>
                                             <i className="bi bi-cart-plus-fill" style={{ fontSize: "30px" }}></i>
                                         </button>
@@ -243,7 +260,7 @@ export const Products = () => {
                                     {selectedProduct?.about}
                                 </p>
                                 <img
-                                    src={selectedProduct?.image?.[0] || '/images/default.jpg'}
+                                    src={selectedProduct?.image || '/images/default.jpg'}
                                     className="card-img-top"
                                     style={{
                                         height: '200px',
@@ -329,7 +346,14 @@ export const Products = () => {
 
 
                         <div className="border-top p-3 d-flex justify-content-between">
-                            <button className="btn btn-success w-100 me-2">Buy</button>
+                            <button
+                                style={{ outline: 'none', border: 'none', borderRadius: '5px' }}
+                                className="primary"
+                                title="Buy Now"
+                                onClick={() => handleBuyClick(selectedProduct)}
+                            >
+                                <i className="bi bi-bag-fill me-1" style={{ fontSize: "30px" }}></i>
+                            </button>
                             <button className="btn btn-secondary me-2" onClick={() => addToCart(selectedProduct.id)}><i className="bi bi-cart-plus"></i></button>
                             <button className="btn btn-outline-danger" onClick={() => likeProduct(selectedProduct.id)}><i className="bi bi-heart"></i></button>
                         </div>
