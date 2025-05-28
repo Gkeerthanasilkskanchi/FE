@@ -2,44 +2,9 @@ import { useEffect, useState } from "react";
 import { addCartProducts, addLikedProducts, addOrderService, getProducts } from "../API/API";
 import { toast } from "react-toastify";
 
-// const filterCategories = [
-//     {
-//         title: "By Fabric",
-//         options: [
-//             "Silk Sarees",
-//             "Cotton Sarees",
-//             "Chiffon/Georgette Sarees",
-//             "Linen Sarees",
-//             "Crepe & Satin Sarees",
-//         ],
-//     },
-//     {
-//         title: "By Region / Tradition",
-//         options: [
-//             "Kanchipuram (Tamil Nadu)",
-//             "Banarasi (Uttar Pradesh)",
-//             "Paithani (Maharashtra)",
-//             "Bandhani (Rajasthan/Gujarat)",
-//             "Patola (Gujarat)",
-//             "Sambalpuri (Odisha)",
-//             "Chikankari Sarees (Lucknow)",
-//             "Assam Silk (Muga)",
-//             "Kasavu (Kerala)",
-//         ],
-//     },
-//     {
-//         title: "By Style",
-//         options: [
-//             "Lehenga Saree",
-//             "Half-and-Half Saree",
-//             "Ready-to-Wear Saree",
-//         ],
-//     },
-// ];
 
 export const Products = () => {
     const [products, setProducts] = useState<any>([]);
-    const [selectedImages, setSelectedImages] = useState<any>([]);
     const [showModal, setShowModal] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState<any | null>(null);
 
@@ -50,6 +15,8 @@ export const Products = () => {
     const email = sessionStorage.getItem("userEmail");
     const addToCart = async (productId: any) => {
         try {
+            if(!email) {toast.error("Login to add product");}
+            if(email){
             const payload = {
                 email,
                 productId,
@@ -57,6 +24,7 @@ export const Products = () => {
             }
             const response = await addCartProducts(payload);
             if (response) toast.success(response.data.message);
+        }
         } catch (err: any) {
             console.error(err);
             toast.error(err.response?.data?.message);
@@ -65,12 +33,15 @@ export const Products = () => {
 
     const likeProduct = async (productId: any) => {
         try {
+             if(!email) {toast.error("Login to like product");}
+            if(email){
             const payload = {
                 email,
                 productId,
             }
             const response = await addLikedProducts(payload);
             if (response) toast.success(response.data.message);
+        }
         } catch (err: any) {
             console.error(err);
             toast.error(err.response?.data?.message);
@@ -115,24 +86,6 @@ export const Products = () => {
                     <h4 className="text-center">Our Collections</h4>
                 </div>
 
-                {/* <div className="dropdown">
-                    <ul className="dropdown-menu dropdown-menu-end nested-dropdown">
-                        {filterCategories.map((category, idx) => (
-                            <li className="dropdown-submenu" key={idx}>
-                                <a className="dropdown-item dropdown-toggle" href="#">
-                                    {category.title}
-                                </a>
-                                <ul className="dropdown-menu">
-                                    {category.options.map((option, optIdx) => (
-                                        <li key={optIdx}>
-                                            <span className="dropdown-item-text">{option}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </li>
-                        ))}
-                    </ul>
-                </div> */}
             </div>
 
             {/* Product Grid */}
@@ -274,57 +227,24 @@ export const Products = () => {
             <div className="modal fade" id="productDetailModal" tabIndex={-1} aria-hidden="true">
                 <div className="modal-dialog modal-dialog-centered" style={{ maxWidth: "600px" }}>
                     <div className="modal-content position-relative">
-
-                       
-                        {/* <button
-                            type="button"
-                            className="btn-close position-absolute top-0 end-0 m-2"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                        ></button>
-
-                       
-                        <div id="productCarousel" className="carousel slide">
-                            <div className="carousel-inner">
-                                {selectedImages.map((img:any, idx:any) => (
-                                    <div
-                                        className={`carousel-item ${idx === 0 ? "active" : ""}`}
-                                        key={idx}
-                                        style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
-                                    >
-                                        <img
-                                            src={img}
-                                            alt={`slide-${idx}`}
-                                            className="img-fluid"
-                                            style={{
-                                                maxHeight: "80vh",
-                                                objectFit: "contain",
-                                                padding: "10px",
-                                            }}
-                                        />
-                                    </div>
-                                ))}
-
-                            </div>
-                            <button className="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
-                                <span className="carousel-control-prev-icon bg-primary" aria-hidden="true"></span>
-                                <span className="visually-hidden">Previous</span>
-                            </button>
-                            <button className="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
-                                <span className="carousel-control-next-icon bg-primary" aria-hidden="true"></span>
-                                <span className="visually-hidden">Next</span>
-                            </button>
-                        </div> */}
-
                         {/* Product Info */}
                         <div className="d-flex p-3" style={{ maxHeight: "300px" }}>
                             {/* Left: Description */}
                             <div className="w-70 pe-3" style={{ width: "70%" }}>
-                                <h5>About the Product</h5>
+                                <h5 className="text-clip-gradient">About the Product</h5>
                                 <p style={{ fontSize: "14px" }}>
                                     This saree is crafted with exquisite silk, perfect for festive and formal occasions. The intricate patterns
                                     and vibrant colors add elegance to your appearance.
                                 </p>
+                                 <img
+                                    src={selectedProduct?.image?.[0] || '/images/default.jpg'}
+                                    className="card-img-top"
+                                    style={{ height: '200px', objectFit: 'cover', cursor: 'pointer' }}
+                                    alt={selectedProduct?.title}
+                                    // onClick={() => handleImageClick(product)}
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#imageModal"
+                                />
                             </div>
 
                             {/* Right: Brief info */}
@@ -339,8 +259,8 @@ export const Products = () => {
                             </div>
                         </div>
 
-                        {/* Reviews Carousel */}
-                        <div className="px-3 pb-3">
+                       
+                        {/* <div className="px-3 pb-3">
                             <h6>Customer Reviews</h6>
                             <div id="reviewCarousel" className="carousel slide" data-bs-ride="carousel">
                                 <div className="carousel-inner">
@@ -348,8 +268,9 @@ export const Products = () => {
                                         <div
                                             className={`carousel-item ${groupIndex === 0 ? "active" : ""}`}
                                             key={groupIndex}
+                                            
                                         >
-                                            <div className="d-flex justify-content-between">
+                                            <div className="d-flex justify-content-between"  style={{maxHeight:'100px'}}>
                                                 {[0, 1, 2].map((i) => {
                                                     const idx = groupIndex * 3 + i;
                                                     return (
@@ -390,10 +311,10 @@ export const Products = () => {
                                     <span className="visually-hidden">Next</span>
                                 </button>
                             </div>
-                        </div>
+                        </div> */}
 
 
-                        {/* Footer */}
+                     
                         <div className="border-top p-3 d-flex justify-content-between">
                             <button className="btn btn-success w-100 me-2">Buy</button>
                             <button className="btn btn-secondary me-2" onClick={() => addToCart(selectedProduct.id)}><i className="bi bi-cart-plus"></i></button>

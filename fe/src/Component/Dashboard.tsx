@@ -53,8 +53,8 @@ export const Dashboard: React.FC = () => {
       key={index}
     >
       <div
-        className="d-flex p-3 rounded text-white"
-        style={{ backgroundColor: stat.bgColor || '#4f46e5',minHeight:"120px" }} // fallback to indigo if no color
+        className="d-flex p-3 rounded text-white dashboard-primary"
+        style={{minHeight:"120px" }} // fallback to indigo if no color
       >
         <div className="me-3 d-flex align-items-center fs-4">
           {stat.icon}
@@ -73,7 +73,7 @@ export const Dashboard: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Bar Chart */}
         <div className=" p-6 rounded-2xl">
-          <h2 className="text-lg font-semibold text-gray-700 mb-4">
+          <h2 className="text-clip-gradient mb-4">
             Weekly Product Sales
           </h2>
           <ResponsiveContainer width="100%" height={300}>
@@ -82,7 +82,7 @@ export const Dashboard: React.FC = () => {
               <XAxis dataKey="name" />
               <YAxis />
               <Tooltip />
-              <Bar dataKey="sales" fill="#6366f1" radius={[6, 6, 0, 0]} />
+              <Bar dataKey="sales" fill="#c98b8b" radius={[6, 6, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -94,7 +94,7 @@ export const Dashboard: React.FC = () => {
       <div className="row mt-5 mb-5">
  
   <div className="col-lg-6 w-full rounded-2xl p-6">
-    <h2 className="text-lg font-semibold text-gray-700 mb-4">
+    <h2 className="text-clip-gradient mb-4">
       Sales by Category
     </h2>
     <ResponsiveContainer width="100%" height={300}>
@@ -121,7 +121,7 @@ export const Dashboard: React.FC = () => {
 
   {/* Table Section */}
   <div className="col-lg-6 w-full rounded-2xl p-6">
-    <h2 className="text-lg font-semibold text-gray-700 mb-4">
+    <h2 className="text-clip-gradient mb-4">
       User Email List
     </h2>
     <div className="overflow-x-auto">

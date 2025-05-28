@@ -7,7 +7,7 @@ import { Home } from "./Component/Home";
 import { Layout } from "./Component/Layout";
 import { ProductList } from "./Component/ProductList";
 import { Products } from "./Component/Products";
-const role = localStorage.getItem("role"); 
+
 
 function AppRouter() {
   return (
@@ -15,17 +15,15 @@ function AppRouter() {
       <ToastContainer />
       <Routes>
         <Route path="/" element={<Layout />}>
-          {role === "admin" ? (
-            <Route index element={<AdminDashboard />} />
-          ) : (
-            <>
-              <Route index element={<Products />} />
+         
+            <Route path="dashboard" element={<AdminDashboard />} />
+              <Route index element={<Products />} /> 
               <Route path="home" element={<Home />} />
               <Route path="contact-us" element={<Contact />} />
               <Route path="about" element={<About />} />
               <Route path="products/:type" element={<ProductList />} />
-            </>
-          )}
+          
+         
         </Route>
       </Routes>
     </BrowserRouter>

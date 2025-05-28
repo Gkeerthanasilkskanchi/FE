@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getCartProducts, getLikedProducts } from "../API/API";
+import { toast } from "react-toastify";
 
 interface Product {
   id: number;
@@ -18,11 +19,17 @@ export const ProductList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        let res;
+        let res :any|null= null;
         if (type === "liked") {
-          res = await getLikedProducts(email);
+          if (!email) { toast.error("Login to add product"); }
+          if (email) {
+            res = await getLikedProducts(email);
+          }
         } else {
-          res = await getCartProducts(email);
+          if (!email) { toast.error("Login to add product"); }
+          if (email) {
+            res = await getCartProducts(email);
+          }
         }
         setItems(res.data);
       } catch (error) {
@@ -32,7 +39,7 @@ export const ProductList = () => {
 
     if (email) fetchData();
   }, [type, email]);
- 
+
   return (
     <div className="container mt-4">
       <h4>{type === "liked" ? "Liked Products" : "Your Cart"}</h4>

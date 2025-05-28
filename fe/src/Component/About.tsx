@@ -49,124 +49,88 @@ export const About = () => {
     return (
 
         <div className="container py-5">
-            <div className="row align-items-start">
-                {/* Left Column */}
-                <div className="col-md-6 mb-4">
-                    <h6 className=" fs-5" style={{ color: '#FF5C8D' }}>--------Woven with love. Worn with pride.</h6>
-                    <h2>Serving elegance and excellence for over three decades</h2>
-                </div>
+  <div className="row align-items-center">
+    <div className="col-md-6 text-center mb-4 mb-md-0">
 
-                {/* Right Column */}
-                <div className="col-md-6">
-                    <p>
-                        Since 2003, <strong>Keerthana Skills</strong> has been the heart of Kanchipuram’s rich
-                        saree tradition, offering a stunning collection of silks, handlooms, and exclusive
-                        designs. We pride ourselves on curating only the finest sarees, woven with precision and
-                        passion. Whether it’s the grandeur of a wedding or the elegance of a festival, our
-                        sarees are designed to make every moment unforgettable.
-                    </p>
-                    <p>
-                        At <strong>Keerthana Skills</strong>, we believe that a saree is more than just fabric;
-                        it’s an experience, a story, a legacy. With a focus on quality, tradition, and
-                        personalized service, we ensure each customer finds the perfect saree to match their
-                        style and occasion. Come, drape yourself in elegance and discover the saree that’s made
-                        just for you.
-                    </p>
-                </div>
-            </div>
-            <div className="row mt-4">
-                <h5 className="text-center">Our Signature Touch</h5>
+      <img 
+        src={'/images/aboutsaree.jpg'} 
+        alt="Keerthana Silks" 
+        className="img-fluid rounded shadow-sm mb-3"
+        style={{ maxHeight: '500px', objectFit: 'cover' }}
+      />
+      <p className="text-uppercase fw-semibold text-muted" style={{ letterSpacing: '1px' }}>
+        Woven with love. Worn with pride.
+      </p>
+    </div>
 
-                <div className="col-md-4 mb-4">
-                    <div className="card">
-                        <div className="card-body">
-                            <i className="bi bi-palette-fill icon"></i>
-                            <p className="card-title">Unique Designs</p>
-                            <p>Explore the diverse collection of sarees that tell their own story.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="col-md-4 mb-4">
-                    <div className="card">
-                        <div className="card-body">
-                            <i className="bi bi-stars icon"></i>
-                            <p className="card-title">Elegant & Exclusive Saree Collections</p>
-                            <p>Find the perfect saree for every occasion, from weddings to festivals.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="col-md-4 mb-4">
-                    <div className="card">
-                        <div className="card-body">
-                            <i className="bi bi-gem icon"></i>
-                            <p className="card-title">Premium Quality Fabrics</p>
-                            <p>Only the finest quality silk and handloom fabrics, woven with care.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="col-md-4 mb-4">
-                    <div className="card">
-                        <div className="card-body">
-                            <i className="bi bi-currency-dollar icon"></i>
-                            <p className="card-title">Affordable Luxury for Every Budget</p>
-                            <p>Offering premium quality at prices that suit your budget.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="col-md-4 mb-4">
-                    <div className="card">
-                        <div className="card-body">
-                            <i className="bi bi-handbag icon"></i>
-                            <p className="card-title">Authentic Handloom & Silk Sarees</p>
-                            <p>Woven by skilled artisans with precision and care.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="col-md-4 mb-4">
-                    <div className="card">
-                        <div className="card-body">
-                            <i className="bi bi-cart icon"></i>
-                            <p className="card-title">Easy & Comfortable Shopping Experience</p>
-                            <p>Shop online with ease and enjoy hassle-free delivery.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div>
+    <div className="col-md-6">
+      <p className="fs-5 text-justify mb-4">
+        <strong>Since 2003, Keerthana Silks</strong> has been the heart of Kanchipuram’s rich saree tradition, offering a stunning collection of silks, handlooms, and exclusive designs that capture the essence of elegance and tradition.
+      </p>
+      <p className="fs-5 text-justify">
+        At <strong>Keerthana Silks</strong>, we believe that a saree is more than just fabric it’s an experience, a story, a legacy. With a focus on quality, tradition, and personalized service, we ensure every customer finds the perfect saree to match their unique style and occasion.
+      </p>
+    </div>
+  </div>
 
 
-                <div className="row mt-4">
-                    <h5 className="text-center">Where Heritage Meets Heart</h5>
+  {/* Signature Section */}
+  <div className="text-center mb-4">
+    <h4 className="fw-bold">Our Signature Touch</h4>
+    <p className="text-muted">Crafted with tradition, served with passion</p>
+  </div>
 
-                    <div className="col-md-4 mb-4">
-                        <div className="card">
-                            <div className="card-body">
-                                <i className="bi bi-cart icon"></i>
-                                <p className="card-title">Mission</p>
-                                <p>To weave tradition with excellence by offering high-quality sarees at affordable prices, ensuring
-                                    every customer experiences unmatched value, trust, and satisfaction.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-4 mb-4">
-                        <div className="card">
-                            <div className="card-body">
-                                <i className="bi bi-cart icon"></i>
-                                <p className="card-title">Vision</p>
-                                <p>To become a cherished household name, where tradition meets  innovation — offering timeless sarees and
-                                    heartfelt service that inspire trust across generations..</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <div className="row g-4">
+    {[
+      { icon: 'bi-palette-fill', title: 'Unique Designs', desc: 'Explore the diverse collection of sarees that tell their own story.' },
+      { icon: 'bi-stars', title: 'Elegant & Exclusive', desc: 'Find the perfect saree for every occasion, from weddings to festivals.' },
+      { icon: 'bi-gem', title: 'Premium Quality Fabrics', desc: 'Only the finest quality silk and handloom fabrics, woven with care.' },
+      { icon: 'bi-currency-dollar', title: 'Affordable Luxury', desc: 'Offering premium quality at prices that suit your budget.' },
+      { icon: 'bi-handbag', title: 'Authentic Handloom', desc: 'Woven by skilled artisans with precision and care.' },
+      { icon: 'bi-cart', title: 'Seamless Shopping', desc: 'Shop online with ease and enjoy hassle-free delivery.' },
+    ].map((card, idx) => (
+      <div key={idx} className="col-md-4">
+        <div className="card h-100 shadow-sm border-0 text-center">
+          <div className="card-body">
+            <i className={`bi ${card.icon} fs-2 mb-3 text-primary`}></i>
+            <h6 className="fw-bold fs-4">{card.title}</h6>
+            <p className="text-muted fs-1000">{card.desc}</p>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
 
+  {/* Mission & Vision */}
+  <div className="text-center mt-5 mb-4">
+    <h4 className="fw-bold">Where Heritage Meets Heart</h4>
+  </div>
+
+  <div className="row g-4">
+    <div className="col-md-6">
+      <div className="card h-100 shadow-sm border-0">
+        <div className="card-body text-center">
+          <i className="bi bi-bullseye fs-2 mb-3 text-success"></i>
+          <h3 className="fw-bold">Mission</h3>
+          <p className="text-muted fs-1000" >
+            To weave tradition with excellence by offering high-quality sarees at affordable prices, ensuring unmatched value, trust, and satisfaction.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div className="col-md-6">
+      <div className="card h-100 shadow-sm border-0">
+        <div className="card-body text-center">
+          <i className="bi bi-eye fs-2 mb-3 text-info"></i>
+          <h3 className="fw-bold">Vision</h3>
+          <p className="text-muted">
+            To become a cherished household name where tradition meets innovation — offering timeless sarees and heartfelt service across generations.
+          </p>
+        </div>
+      </div>
+    </div>
+    </div>
             <div><h1>Quality of Our Product</h1></div>
 
             <div className="row mt-4">
@@ -231,34 +195,12 @@ export const About = () => {
                     <div className="container py-5">
                         <div className="row align-items-start">
                             {/* Left Column */}
-                            <div className="col-md-6 mb-4">
-                                <div className="p-3 border rounded ">
-                                    <ResponsiveContainer width="100%" height={300}>
-                                        <BarChart
-                                            data={data}
-                                            margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
-                                            barCategoryGap="20%"
-                                        >
-                                            <CartesianGrid strokeDasharray="3 3" />
-                                            <XAxis dataKey="year" />
-                                            <YAxis />
-                                            <Tooltip content={<CustomTooltip />} />
-                                            <Bar
-                                                dataKey="customers"
-                                                fill="#f06292"
-                                                radius={[10, 10, 0, 0]}
-                                                animationDuration={1500}
-                                                isAnimationActive={true}
-                                            />
-                                        </BarChart>
-                                    </ResponsiveContainer>
-                                </div>
-                            </div>
+                
 
                             {/* Right Column */}
-                            <div className="col-md-6 ">
+                            <div className="col-md-12 ">
                                 <div className="p-3 ">
-                                    <div className="row text-center g-4  ">
+                                    <div className="row text-center g-4">
                                         {[
                                             { title: "Customer Satisfaction", count: "99.5%" },
                                             { title: "Happy Customers", count: "12,000+" },
@@ -266,7 +208,7 @@ export const About = () => {
                                             { title: "States Covered", count: "18+" },
                                             { title: "Years in Business", count: "20+" },
                                         ].map((item, idx) => (
-                                            <div className="col-md-2 col-6  promise-item" style={{ width: "200px", marginRight: "20px" }} key={idx}>
+                                            <div className="col-md-2 col-6 gap-5  promise-item" style={{ width: "200px", marginRight: "20px" }} key={idx}>
                                                 <div className="card  promise-item p-3 rounded-4 border-0">
                                                     <h4 className="fw-bold   text-primary">{item.count}</h4>
                                                     <p className=" small">{item.title}</p>
@@ -284,10 +226,6 @@ export const About = () => {
 
 
             </div>
-
-            <div><h1>how we get the product </h1></div>
-            <div><h1>how wo sell the product </h1></div>
-            <div><h1>Quality of Product (vdo) </h1></div>
 
 
         </div>

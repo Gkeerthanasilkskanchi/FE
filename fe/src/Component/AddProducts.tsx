@@ -32,7 +32,17 @@ export const AddProduct = () => {
     setMessage("");
 
     try {
-      const response = await addProduct(formData);
+      const form = new FormData();
+    form.append("image", formData.image); 
+    form.append("title", formData.title);
+    form.append("price", formData.price);
+    form.append("about", formData.about);
+    form.append("cloth", formData.cloth);
+    form.append("category", formData.category);
+    form.append("bought_by", formData.bought_by);
+    form.append("saree_type", formData.saree_type);
+
+    const response = await addProduct(form);
       setMessage(response.data.message || "✅ Product added successfully!");
       setFormData({
         image: "",
@@ -51,6 +61,14 @@ export const AddProduct = () => {
       setLoading(false);
     }
   };
+
+  const handleImageChange = (e:any) => {
+  const file = e.target.files[0];
+  if (file) {
+    // Option 1: Store file for uploading to backend
+    setFormData({ ...formData, image: file });
+    };
+  }
 
   return (
     <div className="container py-5">
@@ -83,16 +101,17 @@ export const AddProduct = () => {
             )}
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
-                <label className="form-label">Image URL</label>
+                <label className="form-label">Select Image</label>
                 <input
+                  type="file"
                   name="image"
+                  accept="image/*"
                   className="form-control"
-                  placeholder="e.g. https://image.com/product.jpg"
-                  value={formData.image}
-                  onChange={handleChange}
+                  onChange={handleImageChange}
                   required
                 />
               </div>
+
 
               <div className="row">
                 <div className="mb-3 col-md-6">
