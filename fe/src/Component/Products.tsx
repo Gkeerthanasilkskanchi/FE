@@ -15,16 +15,16 @@ export const Products = () => {
     const email = sessionStorage.getItem("userEmail");
     const addToCart = async (productId: any) => {
         try {
-            if(!email) {toast.error("Login to add product");}
-            if(email){
-            const payload = {
-                email,
-                productId,
-                quantity: 1,
+            if (!email) { toast.error("Login to add product"); }
+            if (email) {
+                const payload = {
+                    email,
+                    productId,
+                    quantity: 1,
+                }
+                const response = await addCartProducts(payload);
+                if (response) toast.success(response.data.message);
             }
-            const response = await addCartProducts(payload);
-            if (response) toast.success(response.data.message);
-        }
         } catch (err: any) {
             console.error(err);
             toast.error(err.response?.data?.message);
@@ -33,15 +33,15 @@ export const Products = () => {
 
     const likeProduct = async (productId: any) => {
         try {
-             if(!email) {toast.error("Login to like product");}
-            if(email){
-            const payload = {
-                email,
-                productId,
+            if (!email) { toast.error("Login to like product"); }
+            if (email) {
+                const payload = {
+                    email,
+                    productId,
+                }
+                const response = await addLikedProducts(payload);
+                if (response) toast.success(response.data.message);
             }
-            const response = await addLikedProducts(payload);
-            if (response) toast.success(response.data.message);
-        }
         } catch (err: any) {
             console.error(err);
             toast.error(err.response?.data?.message);
@@ -49,7 +49,7 @@ export const Products = () => {
     };
     const fetchProducts = async () => {
         try {
-            const response :any= await getProducts();
+            const response: any = await getProducts();
             if (Array.isArray(response.data)) {
                 setProducts(response.data);
             }
@@ -101,14 +101,21 @@ export const Products = () => {
                         >
                             <div className="card h-100 shadow-sm border-0">
                                 <img
-                                    src={product.image?.[0] || '/images/default.jpg'}
+                                    src={product.image || '/images/default.jpg'}
                                     className="card-img-top"
-                                    style={{ height: '200px', objectFit: 'cover', cursor: 'pointer' }}
+                                    style={{
+                                        height: '300px',
+                                        width: '100%',
+                                        objectFit: 'fill',
+                                        objectPosition: 'center',
+                                        backgroundColor: '#f8f8f8',
+                                        cursor: 'pointer'
+                                    }}
                                     alt={product.title}
-                                    // onClick={() => handleImageClick(product)}
                                     data-bs-toggle="modal"
                                     data-bs-target="#imageModal"
                                 />
+
                                 <div className="card-body d-flex flex-column justify-content-between">
                                     <span
                                         className="fw-bold d-block mb-2 text-truncate"
@@ -121,14 +128,14 @@ export const Products = () => {
                                         {product.title}
                                     </span>
                                     <div className="d-flex justify-content-between align-items-center gap-2 mt-auto ps-4 pe-4">
-                                        <button style={{outline:'none',border:'none',borderRadius:'5px'}} className="primary">
-                                            <i className="bi bi-bag-fill me-1"  style={{fontSize:"30px"}}></i> 
+                                        <button style={{ outline: 'none', border: 'none', borderRadius: '5px' }} className="primary">
+                                            <i className="bi bi-bag-fill me-1" style={{ fontSize: "30px" }}></i>
                                         </button>
-                                        <button  style={{outline:'none',border:'none',borderRadius:'5px'}} className="primary" title="Add to Cart" onClick={() => addToCart(product.id)}>
-                                            <i className="bi bi-cart-plus-fill" style={{fontSize:"30px"}}></i>
+                                        <button style={{ outline: 'none', border: 'none', borderRadius: '5px' }} className="primary" title="Add to Cart" onClick={() => addToCart(product.id)}>
+                                            <i className="bi bi-cart-plus-fill" style={{ fontSize: "30px" }}></i>
                                         </button>
-                                        <button style={{outline:'none',border:'none',borderRadius:'5px'}} className="primary" title="Like Product" onClick={() => likeProduct(product.id)}>
-                                            <i className="bi bi-hand-thumbs-up-fill" style={{fontSize:"30px"}}></i>
+                                        <button style={{ outline: 'none', border: 'none', borderRadius: '5px' }} className="primary" title="Like Product" onClick={() => likeProduct(product.id)}>
+                                            <i className="bi bi-hand-thumbs-up-fill" style={{ fontSize: "30px" }}></i>
                                         </button>
                                     </div>
                                 </div>
@@ -233,18 +240,24 @@ export const Products = () => {
                             <div className="w-70 pe-3" style={{ width: "70%" }}>
                                 <h5 className="text-clip-gradient">About the Product</h5>
                                 <p style={{ fontSize: "14px" }}>
-                                    This saree is crafted with exquisite silk, perfect for festive and formal occasions. The intricate patterns
-                                    and vibrant colors add elegance to your appearance.
+                                    {selectedProduct?.about}
                                 </p>
-                                 <img
+                                <img
                                     src={selectedProduct?.image?.[0] || '/images/default.jpg'}
                                     className="card-img-top"
-                                    style={{ height: '200px', objectFit: 'cover', cursor: 'pointer' }}
+                                    style={{
+                                        height: '200px',
+                                        width: '100%',
+                                        objectFit: 'contain',
+                                        objectPosition: 'center',
+                                        backgroundColor: '#f8f8f8',
+                                        cursor: 'pointer'
+                                    }}
                                     alt={selectedProduct?.title}
-                                    // onClick={() => handleImageClick(product)}
                                     data-bs-toggle="modal"
                                     data-bs-target="#imageModal"
                                 />
+
                             </div>
 
                             {/* Right: Brief info */}
@@ -259,7 +272,7 @@ export const Products = () => {
                             </div>
                         </div>
 
-                       
+
                         {/* <div className="px-3 pb-3">
                             <h6>Customer Reviews</h6>
                             <div id="reviewCarousel" className="carousel slide" data-bs-ride="carousel">
@@ -314,11 +327,11 @@ export const Products = () => {
                         </div> */}
 
 
-                     
+
                         <div className="border-top p-3 d-flex justify-content-between">
                             <button className="btn btn-success w-100 me-2">Buy</button>
                             <button className="btn btn-secondary me-2" onClick={() => addToCart(selectedProduct.id)}><i className="bi bi-cart-plus"></i></button>
-                            <button className="btn btn-outline-danger"  onClick={() => likeProduct(selectedProduct.id)}><i className="bi bi-heart"></i></button>
+                            <button className="btn btn-outline-danger" onClick={() => likeProduct(selectedProduct.id)}><i className="bi bi-heart"></i></button>
                         </div>
 
                     </div>

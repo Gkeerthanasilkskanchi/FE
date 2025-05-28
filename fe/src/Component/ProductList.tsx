@@ -45,12 +45,12 @@ export const ProductList = () => {
       <h4>{type === "liked" ? "Liked Products" : "Your Cart"}</h4>
       <div className="row">
         {items.length === 0 && <p>No items found.</p>}
-        {items.map((item) => (
+        {items.map((item:any) => (
           <div key={item.id} className="col-md-3 mb-4">
             <div className="card h-100">
-              <img src={item.image} className="card-img-top" alt={item.name} />
+              <img src={item.image} className="card-img-top" alt={item.title} />
               <div className="card-body text-center">
-                <h6 className="card-title">{item.name}</h6>
+                <h6 className="card-title">{item.title}</h6>
                 {type === "cart" && <p>Qty: {item.quantity}</p>}
               </div>
             </div>
