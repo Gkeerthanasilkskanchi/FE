@@ -21,7 +21,7 @@ export const Home = () => {
     <div>
       {/* Hero Banner */}
       <div className="w-100">
-        <img src={'/images/home.jpg'} alt="Saree Banner" className="img-fluid w-100" style={{ maxHeight: '400px', objectFit: 'cover' }} />
+        <img src={'/images/home.jpg'} alt="Saree Banner" className="img-fluid w-100" style={{ maxHeight: '400px', objectFit: 'cover' ,borderRadius:'5px'}} />
       </div>
 
       {/* Quotes */}
@@ -72,7 +72,7 @@ export const Home = () => {
             { title: "States Covered", count: "18+" },
             { title: "Years in Business", count: "20+" },
           ].map((item, idx) => (
-            <div className="col-md-2 col-6" style={{ width: "200px", marginRight: "20px" }} key={idx}>
+            <div className="col-md-2 col-6" style={{ width: "200px" }} key={idx}>
               <div className="card shadow-sm p-3 rounded-4 border-0 neon-hover">
                 <h4 className="fw-bold text-primary">{item.count}</h4>
                 <p className="text-muted small">{item.title}</p>
@@ -132,7 +132,7 @@ export const Home = () => {
             <form onSubmit={handleEmailSubscribe}>
               <div className="input-group shadow-sm">
                 <span className="input-group-text bg-white border-0">
-                  <i className="fas fa-envelope text-primary" style={{ fontSize: '50px' }}></i>
+                  <i className="fas fa-envelope text-primary" style={{ fontSize: '40px' }}></i>
                 </span>
                 <div className="email-input-wrapper">
                   <div className="email-input-icon">
@@ -222,9 +222,9 @@ export const Home = () => {
       <h3 className="text-center fw-bold my-5 text-clip-gradient ">
         What Our Customers Say
       </h3>
-
-      <div id="testimonialCarousel" className="carousel slide" data-bs-ride="carousel">
-        <div className="carousel-inner">
+      <div className="container mb-5">
+         <div id="testimonialCarousel" className="carousel slide" data-bs-ride="carousel">
+        <div className="carousel-inner" style={{ width: '100%', overflow: 'hidden' }}>
           {[
             {
               name: "Anjali S.",
@@ -240,6 +240,7 @@ export const Home = () => {
             },
           ].map((item, index) => (
             <div className={`carousel-item ${index === 0 ? "active" : ""}`} key={index}>
+              <div className="container">
               <div className="testimonial-box mx-auto text-center px-4 py-5 ">
                 <blockquote className="blockquote fst-italic mb-3">
                   “{item.quote}”
@@ -247,6 +248,7 @@ export const Home = () => {
                 <footer className="blockquote-footer mt-2 text-gold">
                   {item.name}
                 </footer>
+              </div>
               </div>
             </div>
           ))}
@@ -273,6 +275,8 @@ export const Home = () => {
 
 
       </div>
+      </div>
+     
 
 
     </div>
