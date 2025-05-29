@@ -3,6 +3,7 @@ import { sendQuery, sendSubscribtion } from "../API/API";
 import { toast } from "react-toastify";
 
 export const Contact = () => {
+    const [focused, setFocused] = useState(false);
     const userData = {
         name: "",
         email: "",
@@ -32,8 +33,7 @@ export const Contact = () => {
             title: "Instagram",
             desc: "Catch our latest reels & posts",
             link: "https://instagram.com/madras_acoustics/",
-            color: "linear-gradient(45deg, #F58529, #DD2A7B, #8134AF, #515BD4)",
-            gradient: true,
+            color: "#E1306C",  // Instagram's pinkish-red official color
         },
 
         {
@@ -118,58 +118,93 @@ export const Contact = () => {
 
     return (
         <>
-            <div className="container my-5">
-                {/* Contact Us Title */}
+            <div className="container mt-5">
                 <div className="row align-items-center my-5">
-                    {/* Left side - Image */}
-                    <h2 className="fw-bold text-dark mb-5 text-center text-clip-gradient ">Contact Us</h2>
 
-                    <div className="col-md-6 text-center">
+                    {/* <div className="col-md-6 text-center">
                         <img
                             src="/images/wp_image.jpg"
                             alt="Connect to wp"
                             className="img-fluid"
                             style={{ maxHeight: '500px', objectFit: 'cover', marginTop: '30px' }}
                         />
-                        {/* <div className="whatsapp-icon-glow">
-                            <i className="fab fa-whatsapp fa-10x"></i>
-                        </div> */}
 
-                    </div>
+                    </div> */}
 
                     {/* Right side - WhatsApp section */}
-                    <div className="col-md-6 text-center">
-                        <h3 className="mb-1 blockquote fst-italic">
-                            Connect with Keerthana Silks <br /> on WhatsApp
-                        </h3>
+                    <div className="row align-items-center">
+                        {/* QR Code on the left */}
+                        <div className="col-md-5 text-center">
+                            <img
+                                src="/images/wp_connect.jpg"
+                                alt="Connect with Keerthana Silks on WhatsApp"
+                                className="img-fluid qr-image neon-border"
+                                style={{ maxWidth: '400px' }}
+                            />
+                        </div>
 
-                        <img
-                            src="/images/wp_connect.jpg"
-                            alt="Connect with Keerthana Silks on WhatsApp"
-                            className="img-fluid mb-3 neon-border"
+                        {/* Content on the right */}
+                        <div className="col-md-7">
+                            <h3 className="mb-3 ms-5 blockquote fst-italic">
+                                Connect with <span className="text-success">Keerthana Silks</span><br /> on WhatsApp
+                            </h3>
 
-                        />
+                            <h6 className="mb-3 ms-5 ">Scan this QR code and opt-in to WhatsApp to:</h6>
 
+                            <ul className="list-unstyled ms-5 ">
+                                <li><span className="gold-tick">✔</span> Receive exclusive offers and sale alerts</li>
+                                <li><span className="gold-tick">✔</span> Chat with Keerthana Silks customer support</li>
+                                <li><span className="gold-tick">✔</span> Stay updated on new arrivals and festive collections</li>
+                                <li><span className="gold-tick">✔</span> Get styling tips and saree care guidance</li>
+                                <li><span className="gold-tick">✔</span> Be the first to know about limited-edition collections</li>
 
-                        <h6 className="mb-2">Scan this QR code and opt-in to WhatsApp to:</h6>
+                            </ul>
 
-                        <ul className="list-unstyled ">
-                            <li><span className="gold-tick">✔</span> Receive exclusive offers and sale alerts</li>
-                            <li><span className="gold-tick">✔</span> Chat with Keerthana Silks customer support</li>
-                            <li><span className="gold-tick">✔</span> Stay updated on new arrivals and festive collections</li>
-                        </ul>
-
-
-
-                        <p className="text-muted" style={{ fontSize: '0.9rem' }}>
-                            <em>Android users may need to enable Google Lens to scan the QR code.</em>
-                        </p>
+                            <p className="text-muted mt-3 ms-5 " style={{ fontSize: '0.9rem' }}>
+                                <em>Android users may need to enable Google Lens to scan the QR code.</em>
+                            </p>
+                        </div>
                     </div>
                 </div>
 
 
                 {/* Contact Info + Form */}
                 <div className="row g-4">
+                    {/* Right Column - Form */}
+                    <div className="col-md-6">
+                        <div className="p-4 bg-white rounded shadow-sm h-100">
+                            <h4 className="text-center text-dark mb-4">Submit Your Query</h4>
+
+                            {isSubmitted && Object.values(formData).some((value) => typeof value === "string" && value.trim() === "") && (
+                                <p className="text-danger text-center">Please fill in all fields.</p>
+                            )}
+
+                            <form onSubmit={handleSubmit}>
+                                {Object.keys(formData).map((field) => (
+                                    <div className={`form-floating-wrapper ${formData[field] ? 'filled' : ''}`} key={field}>
+                                        <input
+                                            type={field === "email" ? "email" : field === "mobileNumber" ? "tel" : "text"}
+                                            className="form-control"
+                                            id={field}
+                                            name={field}
+                                            required
+                                            onChange={handleChange}
+                                            value={formData[field as keyof typeof formData] || ""}
+                                        />
+                                        <label htmlFor={field}>
+                                            {field
+                                                .replace(/([A-Z])/g, " $1")
+                                                .replace(/^./, (c) => c.toUpperCase())}
+                                        </label>
+                                    </div>
+
+                                ))}
+                                <div className="d-grid">
+                                    <button type="submit" className="btn btn-primary">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                     {/* Left Column - Placeholder or Add Info */}
                     <div className="col-md-6">
                         <img
@@ -182,40 +217,7 @@ export const Contact = () => {
 
                     </div>
 
-                    {/* Right Column - Form */}
-                    <div className="col-md-6">
-                        <div className="p-4 bg-white rounded shadow-sm h-100">
-                            <h4 className="text-center text-dark mb-4">Submit Your Query</h4>
 
-                            {isSubmitted && Object.values(formData).some((value) => typeof value === "string" && value.trim() === "") && (
-                                <p className="text-danger text-center">Please fill in all fields.</p>
-                            )}
-
-                            <form onSubmit={handleSubmit}>
-                                {Object.keys(formData).map((field) => (
-                                    <div className="mb-3" key={field}>
-                                        <input
-                                            type={field === "email" ? "email" : field === "mobileNumber" ? "tel" : "text"}
-                                            className="form-control outline-input"
-                                            id={field}
-                                            name={field}
-                                            required
-                                            placeholder={`${field
-                                                .replace(/([A-Z])/g, " $1")
-                                                .replace(/^./, (c) => c.toUpperCase())}`}
-                                            value={formData[field as keyof typeof formData] || ""}
-                                            onChange={handleChange}
-                                        />
-
-
-                                    </div>
-                                ))}
-                                <div className="d-grid">
-                                    <button type="submit" className="btn btn-primary">Submit</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
                 </div>
 
                 {/* Client Reviews Carousel */}
@@ -230,8 +232,8 @@ export const Contact = () => {
                                         <div
                                             className="card border-0 shadow-lg p-4"
                                             style={{
-                                                maxWidth: "400px",
-                                                width: "50%",
+                                                maxWidth: "600px",
+                                                width: "60%",
                                                 backgroundColor: "#ffffff",
                                                 borderRadius: "1rem",
                                             }}
@@ -313,9 +315,9 @@ export const Contact = () => {
                                                 className="flip-card-front d-flex flex-column justify-content-center align-items-center text-white"
                                                 style={{ backgroundColor: item.color }}
                                             >
-                                                <i className={`${item.icon} fa-3x mb-3`}></i>
-                                                <h5>{item.title}</h5>
-                                                <p className="text-center px-3">{item.desc}</p>
+                                                <i className={`${item.icon} fa-3x mb-3`} style={{color:'black'}}></i>
+                                                <h5 style={{color:'black'}}>{item.title}</h5>
+                                                <p className="text-center px-3" style={{color:'black'}}>{item.desc}</p>
                                             </div>
                                             <div className="flip-card-back d-flex flex-column justify-content-center align-items-center bg-light text-dark">
                                                 <p className="text-center px-3">{item.desc}</p>
@@ -357,20 +359,23 @@ export const Contact = () => {
                             <form onSubmit={handleEmailSubscribe}>
                                 <div className="input-group shadow-sm">
                                     <span className="input-group-text bg-white border-0">
-                                        <i className="fas fa-envelope text-primary" style={{ fontSize: '50px' }}></i>
+                                        <i className="fas fa-envelope text-primary" style={{ fontSize: '40px' }}></i>
                                     </span>
                                     <div className="email-input-wrapper">
-                                        <div className="email-input-icon">
-                                            <span className="icon">@</span>
+                                        <div className={`floating-group ${email ? 'filled' : ''}`}>
                                             <input
                                                 id="email"
                                                 type="email"
-                                                placeholder="Enter your email"
                                                 value={email}
                                                 required
                                                 onChange={(e) => setEmail(e.target.value)}
+                                                onFocus={() => setFocused(true)}
+                                                onBlur={() => setFocused(false)}
                                             />
+                                            <label htmlFor="email">Enter email</label>
+                                            <span className="icon">@</span>
                                         </div>
+
                                     </div>
 
                                     <button type="submit" className="btn btn-warning fw-bold" disabled={loading}>
@@ -381,6 +386,7 @@ export const Contact = () => {
                         )}
                     </div>
                 </div>
+
                 {/* Instagram Video Carousel Section */}
                 <div className="container my-5">
                     <h3 className="text-center mb-4 text-clip-gradient ">Follow us on Instagram for the updates</h3>
@@ -441,10 +447,7 @@ export const Contact = () => {
                     </div>
 
                 </div>
-
             </div>
-
-
         </>
     )
 }
