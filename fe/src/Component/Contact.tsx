@@ -33,7 +33,7 @@ export const Contact = () => {
             desc: "Catch our latest reels & posts",
             link: "https://instagram.com/madras_acoustics/",
             color: "linear-gradient(45deg, #F58529, #DD2A7B, #8134AF, #515BD4)",
-            gradient: true, // Add this flag
+            gradient: true,
         },
 
         {
@@ -66,14 +66,14 @@ export const Contact = () => {
     const [email, setEmail] = useState('');
     const [subscribed, setSubscribed] = useState(false);
 
-    const handleEmailSubscribe = async() => {
-         setSubscribed(true);
-            const value =await sendSubscribtion({email:email});
-            if(value){
-               toast.success("Subscribed successfully!");
-            }
-          };
-          
+    const handleEmailSubscribe = async () => {
+        setSubscribed(true);
+        const value = await sendSubscribtion({ email: email });
+        if (value) {
+            toast.success("Subscribed successfully!");
+        }
+    };
+
 
     const validate = () => {
         let newErrors: any = {};
@@ -103,14 +103,14 @@ export const Contact = () => {
 
         setLoading(true);
         try {
-              const send = await sendQuery(formData);
-              if (send?.status === 200) {
+            const send = await sendQuery(formData);
+            if (send?.status === 200) {
                 toast.success("Review submitted successfully!", { autoClose: 2000 });
                 setFormData(userData);
-                setIsSubmitted(false); 
-              }
+                setIsSubmitted(false);
+            }
         } catch (error) {
-              toast.error("Failed to submit review. Please try again.", { autoClose: 2000 });
+            toast.error("Failed to submit review. Please try again.", { autoClose: 2000 });
         } finally {
             setLoading(false);
         }
@@ -125,15 +125,15 @@ export const Contact = () => {
                     <h2 className="fw-bold text-dark mb-5 text-center text-clip-gradient ">Contact Us</h2>
 
                     <div className="col-md-6 text-center">
-                        {/* <img
-                            src="/images/wp_2.png"
+                        <img
+                            src="/images/wp_image.jpg"
                             alt="Connect to wp"
                             className="img-fluid"
-                            style={{ maxHeight: '250px', objectFit: 'cover' }}
-                        /> */}
-                        <div className="whatsapp-icon-glow">
+                            style={{ maxHeight: '500px', objectFit: 'cover', marginTop: '30px' }}
+                        />
+                        {/* <div className="whatsapp-icon-glow">
                             <i className="fab fa-whatsapp fa-10x"></i>
-                        </div>
+                        </div> */}
 
                     </div>
 
@@ -147,13 +147,7 @@ export const Contact = () => {
                             src="/images/wp_connect.jpg"
                             alt="Connect with Keerthana Silks on WhatsApp"
                             className="img-fluid mb-3 neon-border"
-                        // style={{
-                        //     maxHeight: '250px',
-                        //     objectFit: 'cover',
-                        //     border: '4px solid #25D366', // WhatsApp green
-                        //     borderRadius: '12px',
-                        //     boxShadow: '0 0 15px #25D366, 0 0 30px #25D366, 0 0 45px #25D366',
-                        // }}
+
                         />
 
 
@@ -202,16 +196,17 @@ export const Contact = () => {
                                     <div className="mb-3" key={field}>
                                         <input
                                             type={field === "email" ? "email" : field === "mobileNumber" ? "tel" : "text"}
-                                            className="form-control"
+                                            className="form-control outline-input"
                                             id={field}
                                             name={field}
                                             required
                                             placeholder={`${field
-                                                .replace(/([A-Z])/g, " $1")       // Add space before capital letters
-                                                .replace(/^./, (c) => c.toUpperCase())}`}  // Capitalize first letter
+                                                .replace(/([A-Z])/g, " $1")
+                                                .replace(/^./, (c) => c.toUpperCase())}`}
                                             value={formData[field as keyof typeof formData] || ""}
                                             onChange={handleChange}
                                         />
+
 
                                     </div>
                                 ))}
@@ -309,7 +304,6 @@ export const Contact = () => {
                     <h3 className="text-center mb-5 fw-bold text-dark text-clip-gradient">Connect With Us</h3>
                     <div className="row g-4 justify-content-center">
                         {platforms.map((item, idx) => {
-                            // console.log(item.title); // ✅ Correct usage
 
                             return (
                                 <div className="col-md-4 col-sm-6" key={idx}>
@@ -363,7 +357,7 @@ export const Contact = () => {
                             <form onSubmit={handleEmailSubscribe}>
                                 <div className="input-group shadow-sm">
                                     <span className="input-group-text bg-white border-0">
-                                        <i className="fas fa-envelope text-primary" style={{fontSize:'50px'}}></i>
+                                        <i className="fas fa-envelope text-primary" style={{ fontSize: '50px' }}></i>
                                     </span>
                                     <div className="email-input-wrapper">
                                         <div className="email-input-icon">

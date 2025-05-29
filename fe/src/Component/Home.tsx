@@ -106,7 +106,7 @@ export const Home = () => {
               answer: "Yes, visit us at our flagship showroom in Chennai for an in-person experience.",
             },
           ].map((item, idx) => (
-            <Accordion.Item eventKey={idx.toString()} key={idx} className="custom-accordion">
+            <Accordion.Item eventKey={idx.toString()} key={idx} className="accordion custom-accordion-border">
               <Accordion.Header>{item.question}</Accordion.Header>
               <Accordion.Body>{item.answer}</Accordion.Body>
             </Accordion.Item>
