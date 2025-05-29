@@ -706,6 +706,7 @@ a.text-decoration-none:hover {
   white-space: nowrap;
 }
 
+
 input.form-control.outline-input {
   border: 2px solid #ced4da;
   border-radius: 6px;
