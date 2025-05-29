@@ -40,7 +40,8 @@
 
 
 .custom-border {
-  border: 2px solid #28a745; /* Green border */
+  border: 2px solid #28a745;
+  /* Green border */
 }
 
 
@@ -72,9 +73,12 @@ input::placeholder {
   background-color: #fff;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
+
 .email-input-icon:hover {
-  border-color: #32a861; /* Hover border */
-  background-color: #faf0f5; /* Light hover background */
+  border-color: #32a861;
+  /* Hover border */
+  background-color: #faf0f5;
+  /* Light hover background */
 }
 
 
@@ -466,11 +470,11 @@ a.text-decoration-none:hover {
   transform: rotateY(180deg);
 }
 
-.primary{
+.primary {
   background: linear-gradient(to right, #c98b8b, #aa9b83, #6d6454);
 }
 
-.dashboard-primary{
+.dashboard-primary {
   background: linear-gradient(to right, #cdbda5, #918571);
 }
 
@@ -494,9 +498,51 @@ a.text-decoration-none:hover {
   color: #80786e
 }
 
-.cornor-flower {
-  color: #6f5957
+/* .cornor-flower {
+  color: #583e3c
 }
+ */
+
+
+
+
+.cornor-flower {
+  color: #583e3c;
+  border-radius: 12px;
+  padding: 10px 20px;
+  transition: all 0.3s ease;
+  user-select: none;
+  font-size: 1.5rem; 
+}
+
+.cornor-flower:hover {
+  box-shadow: inset 4px 4px 8px #d59797, inset -4px -4px 8px #5f2121;
+  cursor: pointer;
+  transform: scale(1.01);
+}
+
+.cornor-flower:active,
+.cornor-flower.active {
+  box-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff;
+  background: #e0dcdc;
+  transform: scale(0.98);
+  color: #2b1513;
+
+}
+
+.cornor-name {
+  color: #583e3c;
+  transition: color 0.3s ease;
+}
+
+.cornor-name.active {
+  color: #000000;
+  font-weight:900;
+  font-size: 1.1rem;
+  margin-top: 10px;
+}
+
+
 
 .logo-second-layer {
   color: #6d6454
@@ -549,8 +595,10 @@ a.text-decoration-none:hover {
 }
 
 .whatsapp-icon-glow i {
-  color: #39ff14; /* Neon green */
-  font-size: 20rem; /* Increased size */
+  color: #39ff14;
+  /* Neon green */
+  font-size: 20rem;
+  /* Increased size */
   text-shadow:
     0 0 2px #39ff14,
     0 0 4px #39ff14,
@@ -579,7 +627,8 @@ a.text-decoration-none:hover {
 .neon-hover {
   position: relative;
   z-index: 1;
-  background: #fff; /* Card background */
+  background: #fff;
+  /* Card background */
   border-radius: 16px;
   transition: all 0.3s ease;
 }
@@ -592,11 +641,11 @@ a.text-decoration-none:hover {
   border-radius: 16px;
   padding: 2px;
   background: linear-gradient(to bottom, #c98b8b 50%, #d4c9b5 50%, #6d6454 0%);
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
     linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
-          mask-composite: exclude;
+  mask-composite: exclude;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -606,11 +655,6 @@ a.text-decoration-none:hover {
 }
 
 
-/* .text-clip-gradient {
-  background: linear-gradient(90deg, #b8860b, #ffcc00);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-} */
 
 .testimonial-box {
   background-color: #fffdf5;
@@ -631,48 +675,47 @@ a.text-decoration-none:hover {
 
 .carousel-control-prev span,
 .carousel-control-next span {
-  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent background */
+  background-color: rgba(0, 0, 0, 0.5);
+  /* semi-transparent background */
   padding: 5px 10px;
   border-radius: 5px;
 }
 
-/* .carousel-control-prev:hover span,
-.carousel-control-next:hover span {
-  background-color: gold;
-  color: black;
-} */
 
+.custom-accordion-border {
+  background: linear-gradient(to right, #f3d5d5, #e5dac9, #ebe1d0);
+  border-radius: 12px;
+  padding: 2px;
+  margin-bottom: 15px;
+}
 
-
-
-
-.custom-accordion {
-  background: linear-gradient(to right, #c98b8b, #aa9b83, #6d6454) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+.custom-accordion-border-inner {
+  background: #0f0f0f;
   border-radius: 10px;
+  color: #fff;
+  padding: 1rem;
+}
+
+
+.user-email-display {
+  font-size: 0.9rem;
+  max-width: 100px;
+  font-weight: bold;
   overflow: hidden;
-  color: #fff;
-  margin-bottom:10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.custom-accordion .accordion-header {
-  background: transparent !important;
-  color: #fff !important;
+input.form-control.outline-input {
+  border: 2px solid #ced4da;
+  border-radius: 6px;
+  padding: 8px 12px;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  font-size: 1rem;
 }
 
-.custom-accordion .accordion-button {
-  background: transparent !important;
-  color: #fff !important;
-  font-weight: 600;
-  box-shadow: none;
-}
-
-.custom-accordion .accordion-button:not(.collapsed) {
-  background: rgba(255, 255, 255, 0.1) !important;
-  color: #fff !important;
-}
-
-.custom-accordion .accordion-body {
-    background: linear-gradient(to right, #e3b8b8, #e6d7bf, #a0998d) !important;
-  color: #fff;
+input.form-control.outline-input:focus {
+  border-color: #00ffe5;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
 }
