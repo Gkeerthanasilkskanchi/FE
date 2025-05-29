@@ -73,7 +73,7 @@ export const AuthModal = ({ onClose, setUserEmail }: { onClose: () => void, setU
                 {isLogin ? "Login" : "Sign Up"}
               </button>
               <button type="button" className="btn btn-link" onClick={() => setIsLogin(!isLogin)}>
-                {isLogin ? "New user? Sign up" : "Already registered? Login"}
+                {isLogin ? "New user / Sign up" : "Already have account / Login"}
               </button>
             </div>
           </form>

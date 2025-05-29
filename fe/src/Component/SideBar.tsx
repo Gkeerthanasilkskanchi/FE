@@ -94,7 +94,7 @@ export const Sidebar = () => {
       </ul>
 
       {/* Sign Up / Login or Sign Out */}
-      <li
+      {/* <li
         className="nav-item text-center mt-auto cornor-flower"
         style={{ cursor: "pointer" }}
         onClick={() => (userEmail ? handleSignOut() : setShowAuth(true))}
@@ -105,11 +105,11 @@ export const Sidebar = () => {
             style={{ fontSize: "1.5rem", marginBottom: "5px" }}
           ></i>
           <span
-  className="black-text user-email-display"
-  title={userEmail || "Sign Up"}
->
-  {userEmail ? userEmail : "Sign Up"}
-</span>
+            className="black-text user-email-display"
+            title={userEmail || "Sign Up"}
+          >
+            {userEmail ? userEmail : "Sign Up"}
+          </span>
 
           {userEmail && (
             <small className="text-danger mt-1" style={{ fontSize: "0.75rem" }}>
@@ -117,15 +117,15 @@ export const Sidebar = () => {
             </small>
           )}
         </div>
-      </li>
+      </li> */}
 
       {/* Auth Modal */}
-      {showAuth && (
+      {/* {showAuth && (
         <AuthModal
           onClose={() => setShowAuth(false)}
           setUserEmail={setUserEmail}
         />
-      )}
+      )} */}
     </div>
   );
 };

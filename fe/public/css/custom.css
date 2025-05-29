@@ -543,6 +543,17 @@ a.text-decoration-none:hover {
   transform: scale(1.01);
 }
 
+
+.bi-person-fill{
+  box-shadow: inset 4px 4px 8px #d59797, inset -4px -4px 8px #5f2121;
+  font-size: 2rem; 
+  transform: scale(1.01);
+  margin-top: -6px !important;
+  border-radius: 8px;
+  height: 36px;
+  width: 36px;
+}
+
 .cornor-flower:active,
 .cornor-flower.active {
   box-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff;
