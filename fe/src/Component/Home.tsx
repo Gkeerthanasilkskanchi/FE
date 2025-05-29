@@ -8,6 +8,8 @@ export const Home = () => {
   const [subscribed, setSubscribed] = useState(false);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const [focused, setFocused] = useState(false);
+
 
   const handleEmailSubscribe = async () => {
     setSubscribed(true);
@@ -21,7 +23,7 @@ export const Home = () => {
     <div>
       {/* Hero Banner */}
       <div className="w-100">
-        <img src={'/images/home.jpg'} alt="Saree Banner" className="img-fluid w-100" style={{ maxHeight: '400px', objectFit: 'cover' ,borderRadius:'5px'}} />
+        <img src={'/images/home.jpg'} alt="Saree Banner" className="img-fluid w-100" style={{ maxHeight: '400px', objectFit: 'cover', borderRadius: '5px' }} />
       </div>
 
       {/* Quotes */}
@@ -107,7 +109,7 @@ export const Home = () => {
             },
           ].map((item, idx) => (
             <Accordion.Item eventKey={idx.toString()} key={idx} className="accordion custom-accordion-border">
-              <Accordion.Header>{item.question}</Accordion.Header>
+              <Accordion.Header className="custom-header">{item.question}</Accordion.Header>
               <Accordion.Body>{item.answer}</Accordion.Body>
             </Accordion.Item>
 
@@ -135,17 +137,20 @@ export const Home = () => {
                   <i className="fas fa-envelope text-primary" style={{ fontSize: '40px' }}></i>
                 </span>
                 <div className="email-input-wrapper">
-                  <div className="email-input-icon">
-                    <span className="icon">@</span>
+                  <div className={`floating-group ${email ? 'filled' : ''}`}>
                     <input
                       id="email"
                       type="email"
-                      placeholder="Enter your email"
                       value={email}
                       required
                       onChange={(e) => setEmail(e.target.value)}
+                      onFocus={() => setFocused(true)}
+                      onBlur={() => setFocused(false)}
                     />
+                    <label htmlFor="email">Enter email</label>
+                    <span className="icon">@</span>
                   </div>
+
                 </div>
 
                 <button type="submit" className="btn btn-warning fw-bold" disabled={loading}>
@@ -169,29 +174,29 @@ export const Home = () => {
               ['Silk Cotton', 'Banarasi'] // you can add more items to even this out if needed
             ].map((pair, slideIdx) => (
               <div className={`carousel-item ${slideIdx === 0 ? 'active' : ''}`} key={slideIdx}>
-               <div className="container">
-                <div className="row justify-content-center">
-                  {pair.map((type, idx) => {
-                    const imgIndex = slideIdx * 2 + idx + 1; // For image path like saree-1.png, saree-2.png...
-                    return (
-                      <div className="col-md-6" key={type}>
-                        <div className="card border-0 shadow-sm rounded-4 h-60">
-                          <img
-                            src={`/images/saree-${imgIndex}.png`}
-                            alt={type}
-                            style={{ height: '400px', objectFit: 'fill', width: '100%' }}
-                          />
+                <div className="container">
+                  <div className="row justify-content-center">
+                    {pair.map((type, idx) => {
+                      const imgIndex = slideIdx * 2 + idx + 1; // For image path like saree-1.png, saree-2.png...
+                      return (
+                        <div className="col-md-6" key={type}>
+                          <div className="card border-0 shadow-sm rounded-4 h-60">
+                            <img
+                              src={`/images/saree-${imgIndex}.png`}
+                              alt={type}
+                              style={{ height: '400px', objectFit: 'fill', width: '100%' }}
+                            />
 
-                          <div className="card-body text-center">
-                            <h5 className="card-title fw-bold text-clip-gradient">{type}</h5>
-                            <p className="text-muted small">Elegant {type} sarees crafted with love and heritage.</p>
-                            {/* <button className="btn primary">Explore</button> */}
+                            <div className="card-body text-center">
+                              <h5 className="card-title fw-bold text-clip-gradient">{type}</h5>
+                              <p className="text-muted small">Elegant {type} sarees crafted with love and heritage.</p>
+                              {/* <button className="btn primary">Explore</button> */}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    );
-                  })}
-                </div>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             ))}
@@ -223,60 +228,60 @@ export const Home = () => {
         What Our Customers Say
       </h3>
       <div className="container mb-5">
-         <div id="testimonialCarousel" className="carousel slide" data-bs-ride="carousel">
-        <div className="carousel-inner" style={{ width: '100%', overflow: 'hidden' }}>
-          {[
-            {
-              name: "Anjali S.",
-              quote: "The Banarasi saree was beyond beautiful. Perfect for my wedding!",
-            },
-            {
-              name: "Preeti R.",
-              quote: "Great customer service and lovely packaging. Felt like a gift!",
-            },
-            {
-              name: "Meena K.",
-              quote: "Authentic silk, vibrant colors. I’m in love with every purchase.",
-            },
-          ].map((item, index) => (
-            <div className={`carousel-item ${index === 0 ? "active" : ""}`} key={index}>
-              <div className="container">
-              <div className="testimonial-box mx-auto text-center px-4 py-5 ">
-                <blockquote className="blockquote fst-italic mb-3">
-                  “{item.quote}”
-                </blockquote>
-                <footer className="blockquote-footer mt-2 text-gold">
-                  {item.name}
-                </footer>
+        <div id="testimonialCarousel" className="carousel slide" data-bs-ride="carousel">
+          <div className="carousel-inner" style={{ width: '100%', overflow: 'hidden' }}>
+            {[
+              {
+                name: "Anjali S.",
+                quote: "The Banarasi saree was beyond beautiful. Perfect for my wedding!",
+              },
+              {
+                name: "Preeti R.",
+                quote: "Great customer service and lovely packaging. Felt like a gift!",
+              },
+              {
+                name: "Meena K.",
+                quote: "Authentic silk, vibrant colors. I’m in love with every purchase.",
+              },
+            ].map((item, index) => (
+              <div className={`carousel-item ${index === 0 ? "active" : ""}`} key={index}>
+                <div className="container">
+                  <div className="testimonial-box mx-auto text-center px-4 py-5 ">
+                    <blockquote className="blockquote fst-italic mb-3">
+                      “{item.quote}”
+                    </blockquote>
+                    <footer className="blockquote-footer mt-2 text-gold">
+                      {item.name}
+                    </footer>
+                  </div>
+                </div>
               </div>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
+          <button
+            className="carousel-control-prev"
+            type="button"
+            data-bs-target="#testimonialCarousel"
+            data-bs-slide="prev"
+          >
+            <span className="carousel-control-prev-icon bg-primary" aria-hidden="true"></span>
+            {/* <span style={{ color: 'gold', fontWeight: 'bold', marginLeft: '8px' }}>Previous</span> */}
+          </button>
+
+          <button
+            className="carousel-control-next"
+            type="button"
+            data-bs-target="#testimonialCarousel"
+            data-bs-slide="next"
+          >
+            <span className="carousel-control-next-icon bg-primary" aria-hidden="true"></span>
+            {/* <span style={{ color: 'gold', fontWeight: 'bold', marginLeft: '8px' }}>Next</span> */}
+          </button>
+
+
         </div>
-        <button
-          className="carousel-control-prev"
-          type="button"
-          data-bs-target="#testimonialCarousel"
-          data-bs-slide="prev"
-        >
-          <span className="carousel-control-prev-icon bg-primary" aria-hidden="true"></span>
-          {/* <span style={{ color: 'gold', fontWeight: 'bold', marginLeft: '8px' }}>Previous</span> */}
-        </button>
-
-        <button
-          className="carousel-control-next"
-          type="button"
-          data-bs-target="#testimonialCarousel"
-          data-bs-slide="next"
-        >
-          <span className="carousel-control-next-icon bg-primary" aria-hidden="true"></span>
-          {/* <span style={{ color: 'gold', fontWeight: 'bold', marginLeft: '8px' }}>Next</span> */}
-        </button>
-
-
       </div>
-      </div>
-     
+
 
 
     </div>

@@ -711,6 +711,35 @@ a.text-decoration-none:hover {
   margin-bottom: 15px;
 }
 
+/* Make all accordion headers white */
+.accordion-button {
+  background-color: #ffffff !important;
+  color: #6e3b1f;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: none;
+  transition: none;
+}
+
+/* Even when accordion is active (expanded), keep it white */
+.accordion-button:not(.collapsed) {
+  background-color: #ffffff !important;
+  color: #6e3b1f;
+  box-shadow: none;
+  border: none !important;
+}
+
+/* Optional: remove default focus/hover effects */
+.accordion-button:focus {
+  box-shadow: none;
+  outline: none;
+  border: none !important;
+}
+
+
+
 .custom-accordion-border-inner {
   background: #0f0f0f;
   border-radius: 10px;
@@ -739,6 +768,111 @@ input.form-control.outline-input {
 }
 
 input.form-control.outline-input:focus {
-  border-color: #00ffe5;
+  outline:none !important;
+  border: 1px solid rgba(0, 123, 255, 0.25) !important;
   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
 }
+
+
+.floating-group {
+  position: relative;
+  /* margin-top: 1.5rem; */
+  left:10px;
+  width: 100%;
+}
+
+.floating-group input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  background: transparent;
+}
+
+.floating-group .icon {
+  position: absolute;
+  top: 50%;
+  left: 0.75rem;
+  transform: translateY(-50%);
+  color: #666;
+}
+
+.floating-group label {
+  position: absolute;
+  top: 50%;
+  left: 2.5rem;
+  transform: translateY(-50%);
+  color: #999;
+  pointer-events: none;
+  transition: all 0.2s ease;
+  background-color: white;
+  padding: 0 4px;
+}
+
+/* Float label up when input is focused or has value */
+.floating-group input:focus + label,
+.floating-group.filled label {
+  top: -8px;
+  left: 1rem;
+  font-size: 0.75rem;
+  color: #333;
+}
+.form-floating-wrapper {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.form-floating-wrapper input {
+  width: 100%;
+  padding: 1.2rem 0.75rem 0.5rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: transparent;
+  outline: none;
+}
+
+.form-floating-wrapper label {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  font-size: 1rem;
+  pointer-events: none;
+  background-color: white;
+  padding: 0 4px;
+  transition: all 0.2s ease;
+}
+
+/* On focus or when filled */
+.form-floating-wrapper input:focus + label,
+.form-floating-wrapper.filled label {
+  top: 0.15rem;
+  left: 0.5rem;
+  font-size: 1rem;
+  color: #333;
+}
+.neon-border {
+  border: 4px solid #f5e6c9;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+  padding: 8px;
+}
+
+.gold-tick {
+  color: #f5e6c9;
+  margin-right: 6px;
+  font-weight: bold;
+}
+
+.qr-image {
+  transition: transform 0.3s ease;
+}
+
+.qr-image:hover {
+  transform: scale(1.05);
+}
+
