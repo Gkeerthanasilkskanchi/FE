@@ -9,12 +9,12 @@ export const Home = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  const handleEmailSubscribe =async () => {
+  const handleEmailSubscribe = async () => {
     setSubscribed(true);
-    const value =await sendSubscribtion({email:email});
-    if(value){
-       setMessage("Subscribed successfully!");
-       toast.success("Subscribed successfully!");
+    const value = await sendSubscribtion({ email: email });
+    if (value) {
+      setMessage("Subscribed successfully!");
+      toast.success("Subscribed successfully!");
     }
   };
   return (
@@ -160,55 +160,63 @@ export const Home = () => {
 
       <h3 className="text-center fw-bold my-5 text-clip-gradient">Featured Collections</h3>
 
-      <div id="featuredCarousel" className="carousel slide" data-bs-ride="carousel">
-        <div className="carousel-inner">
+      <div className="container mb-5">
+        <div id="featuredCarousel" className="carousel slide" data-bs-ride="carousel">
+          <div className="carousel-inner" style={{ width: '100%', overflow: 'hidden' }}>
 
-          {[
-            ['Kanjivaram', 'Banarasi'],
-            ['Silk Cotton','Banarasi'] // you can add more items to even this out if needed
-          ].map((pair, slideIdx) => (
-            <div className={`carousel-item ${slideIdx === 0 ? 'active' : ''}`} key={slideIdx}>
-              <div className="row g-4 justify-content-center">
-                {pair.map((type, idx) => {
-                  const imgIndex = slideIdx * 2 + idx + 1; // For image path like saree-1.png, saree-2.png...
-                  return (
-                    <div className="col-md-6" key={type}>
-                      <div className="card border-0 shadow-sm rounded-4 h-100">
-                        <img src={`/images/saree-${imgIndex}.png`} className="card-img-top" alt={type} />
-                        <div className="card-body text-center">
-                          <h5 className="card-title fw-bold text-clip-gradient">{type}</h5>
-                          <p className="text-muted small">Elegant {type} sarees crafted with love and heritage.</p>
-                          {/* <button className="btn primary">Explore</button> */}
+            {[
+              ['Kanjivaram', 'Banarasi'],
+              ['Silk Cotton', 'Banarasi'] // you can add more items to even this out if needed
+            ].map((pair, slideIdx) => (
+              <div className={`carousel-item ${slideIdx === 0 ? 'active' : ''}`} key={slideIdx}>
+               <div className="container">
+                <div className="row justify-content-center">
+                  {pair.map((type, idx) => {
+                    const imgIndex = slideIdx * 2 + idx + 1; // For image path like saree-1.png, saree-2.png...
+                    return (
+                      <div className="col-md-6" key={type}>
+                        <div className="card border-0 shadow-sm rounded-4 h-60">
+                          <img
+                            src={`/images/saree-${imgIndex}.png`}
+                            alt={type}
+                            style={{ height: '400px', objectFit: 'fill', width: '100%' }}
+                          />
+
+                          <div className="card-body text-center">
+                            <h5 className="card-title fw-bold text-clip-gradient">{type}</h5>
+                            <p className="text-muted small">Elegant {type} sarees crafted with love and heritage.</p>
+                            {/* <button className="btn primary">Explore</button> */}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
 
+          </div>
+
+          {/* Carousel Controls */}
+          <button
+            className="carousel-control-prev"
+            type="button"
+            data-bs-target="#featuredCarousel"
+            data-bs-slide="prev"
+          >
+            <span className="carousel-control-prev-icon bg-primary" aria-hidden="true"></span>
+          </button>
+          <button
+            className="carousel-control-next"
+            type="button"
+            data-bs-target="#featuredCarousel"
+            data-bs-slide="next"
+          >
+            <span className="carousel-control-next-icon bg-primary" aria-hidden="true"></span>
+          </button>
         </div>
-
-        {/* Carousel Controls */}
-        <button
-          className="carousel-control-prev"
-          type="button"
-          data-bs-target="#featuredCarousel"
-          data-bs-slide="prev"
-        >
-          <span className="carousel-control-prev-icon bg-primary" aria-hidden="true"></span>
-        </button>
-        <button
-          className="carousel-control-next"
-          type="button"
-          data-bs-target="#featuredCarousel"
-          data-bs-slide="next"
-        >
-          <span className="carousel-control-next-icon bg-primary" aria-hidden="true"></span>
-        </button>
       </div>
-
 
 
       <h3 className="text-center fw-bold my-5 text-clip-gradient ">
