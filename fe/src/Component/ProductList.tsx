@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { addOrderService, getCartProducts, getLikedProducts } from "../API/API";
 import { toast } from "react-toastify";
+import { Loader } from "./Loader";
 
 interface Product {
   id: number;
@@ -15,25 +16,31 @@ export const ProductList = () => {
   const { type } = useParams(); // 'liked' or 'cart'
   const [items, setItems] = useState<Product[]>([]);
   const email = sessionStorage.getItem("userEmail");
+  const [loading,setLoading]= useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         let res: any | null = null;
         if (type === "liked") {
+          setLoading(true);
           if (!email) { toast.error("Login to add product"); }
           if (email) {
             res = await getLikedProducts(email);
+
           }
         } else {
           if (!email) { toast.error("Login to add product"); }
           if (email) {
+             setLoading(true);
             res = await getCartProducts(email);
           }
         }
         setItems(res.data);
       } catch (error) {
         console.error("Error fetching data", error);
+      }finally{
+        setLoading(false);
       }
     };
 
@@ -41,8 +48,8 @@ export const ProductList = () => {
   }, [type, email]);
  const handleBuyClick = async (product: any) => {
         try {
+           setLoading(true);
             const email = sessionStorage.getItem("userEmail");
-            alert(email)
             const payload = {
                 email,
                 id: product.id,
@@ -50,19 +57,23 @@ export const ProductList = () => {
                 price: product.price,
             };
             await addOrderService(payload);
-
+            setLoading(false);
             const message = encodeURIComponent(
                 `Hello, I'm interested in buying:\n\n` +
                 `🧵 *${product.title}*\n💰 Price: ₹${product.price}\n📦 Quantity: ${product.quantity || 1}\n\n` +
                 `Please provide further details.`
             );
-            const whatsappNumber = "919843788261";
+            const whatsappNumber = "917904999697";
             window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
         } catch (error) {
             console.error("Buy operation failed:", error);
+        }finally{
+           setLoading(false);
         }
     };
   return (
+    <>
+    <Loader loading={loading}></Loader>
     <div className="container mt-4">
       <h4>{type === "liked" ? "Liked Products" : "Your Cart"}</h4>
       <div className="row">
@@ -89,5 +100,7 @@ export const ProductList = () => {
         ))}
       </div>
     </div>
+    </>
+    
   );
 };

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { sendQuery, sendSubscribtion } from "../API/API";
 import { toast } from "react-toastify";
+import { Loader } from "./Loader";
 
 export const Contact = () => {
     const [focused, setFocused] = useState(false);
@@ -18,21 +19,21 @@ export const Contact = () => {
             icon: "fab fa-whatsapp",
             title: "WhatsApp",
             desc: "Chat with us instantly",
-            link: "https://wa.me/918248365067",
+            link: "https://wa.me/917904999697",
             color: "#25D366",
         },
         {
             icon: "fab fa-facebook-f",
             title: "Facebook",
             desc: "Follow for latest updates",
-            link: "https://www.facebook.com/share/18kVHF8oaP/",
+            link: "https://www.facebook.com/share/18hqSuYoCp//",
             color: "#1877F2",
         },
         {
             icon: "fab fa-instagram",
             title: "Instagram",
             desc: "Catch our latest reels & posts",
-            link: "https://instagram.com/madras_acoustics/",
+            link: "https://instagram.com/keerthanasilk_kanchipuram?igsh=aDZieG5uZnB4cmZi",
             color: "#E1306C",  // Instagram's pinkish-red official color
         },
 
@@ -40,21 +41,21 @@ export const Contact = () => {
             icon: "fas fa-envelope",
             title: "Email",
             desc: "Drop us a message",
-            link: "mailto:jeromedj@madrasacoustics.com",
+            link: "mailto:gkeerthanasilkskanchi@gmail.com",
             color: "#FF9F00",
         },
         {
             icon: "fas fa-phone",
             title: "Phone",
             desc: "Call our support team",
-            link: "tel:+918248365067",
+            link: "tel:+917904999697",
             color: "#4CAF50",
         },
         {
             icon: "fab fa-youtube",
             title: "YouTube",
             desc: "Watch our product demos",
-            link: "https://youtube.com/@madrasacoustics",
+            link: "https://youtube.com/@keerthanasilk_kanchipuram?si=zLTHLZ3zXOttTUYD",
             color: "#FF0000",
         },
     ];
@@ -68,8 +69,10 @@ export const Contact = () => {
 
     const handleEmailSubscribe = async () => {
         setSubscribed(true);
+        setLoading(true)
         const value = await sendSubscribtion({ email: email });
         if (value) {
+            setLoading(false);
             toast.success("Subscribed successfully!");
         }
     };
@@ -118,32 +121,14 @@ export const Contact = () => {
 
     return (
         <>
+        <Loader loading={loading}></Loader>
             <div className="container mt-5">
                 <div className="row align-items-center my-5">
-
-                    {/* <div className="col-md-6 text-center">
-                        <img
-                            src="/images/wp_image.jpg"
-                            alt="Connect to wp"
-                            className="img-fluid"
-                            style={{ maxHeight: '500px', objectFit: 'cover', marginTop: '30px' }}
-                        />
-
-                    </div> */}
 
                     {/* Right side - WhatsApp section */}
                     <div className="row align-items-center">
                         {/* QR Code on the left */}
-                        <div className="col-md-5 text-center">
-                            <img
-                                src="/images/wp_connect.jpg"
-                                alt="Connect with Keerthana Silks on WhatsApp"
-                                className="img-fluid qr-image neon-border"
-                                style={{ maxWidth: '400px' }}
-                            />
-                        </div>
-
-                        {/* Content on the right */}
+                         {/* Content on the right */}
                         <div className="col-md-7">
                             <h3 className="mb-3 ms-5 blockquote fst-italic">
                                 Connect with <span className="text-success">Keerthana Silks</span><br /> on WhatsApp
@@ -164,12 +149,33 @@ export const Contact = () => {
                                 <em>Android users may need to enable Google Lens to scan the QR code.</em>
                             </p>
                         </div>
+                        <div className="col-md-5 text-center">
+                            <img
+                                src="/images/wp_connect.jpg"
+                                alt="Connect with Keerthana Silks on WhatsApp"
+                                className="img-fluid qr-image neon-border"
+                                style={{ maxWidth: '400px' }}
+                            />
+                        </div>
+
+                       
                     </div>
                 </div>
 
 
                 {/* Contact Info + Form */}
                 <div className="row g-4">
+                      {/* Left Column - Placeholder or Add Info */}
+                    <div className="col-md-6">
+                        <img
+                            src="/images/submit_your_query.png"
+                            alt="Connect with Keerthana Silks on WhatsApp"
+                            className="img-fluid"
+                            style={{ maxHeight: '500px', objectFit: 'cover', marginBottom: '-100px' }}
+                        />
+
+
+                    </div>
                     {/* Right Column - Form */}
                     <div className="col-md-6">
                         <div className="p-4 bg-white rounded shadow-sm h-100">
@@ -205,17 +211,7 @@ export const Contact = () => {
                             </form>
                         </div>
                     </div>
-                    {/* Left Column - Placeholder or Add Info */}
-                    <div className="col-md-6">
-                        <img
-                            src="/images/submit_your_query.png"
-                            alt="Connect with Keerthana Silks on WhatsApp"
-                            className="img-fluid"
-                            style={{ maxHeight: '500px', objectFit: 'cover', marginBottom: '-100px' }}
-                        />
-
-
-                    </div>
+                  
 
 
                 </div>

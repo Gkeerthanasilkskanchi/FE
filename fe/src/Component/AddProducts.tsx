@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { addProduct } from "../API/API";
+import { Loader } from "./Loader";
 // import { FaPlus, FaTimes, FaSpinner } from "react-icons/fa";
 
 export const AddProduct = () => {
@@ -71,7 +72,9 @@ export const AddProduct = () => {
   }
 
   return (
-    <div className="container py-5">
+    <>
+    <Loader loading={loading}></Loader>
+      <div className="container py-5">
       <div className="text-center mb-4">
         {!showForm && (
           <button
@@ -229,5 +232,7 @@ export const AddProduct = () => {
         </div>
       )}
     </div>
+    </>
+  
   );
 };

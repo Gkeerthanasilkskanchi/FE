@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Accordion } from "react-bootstrap";
 import { sendSubscribtion } from "../API/API";
 import { toast } from "react-toastify";
+import { Loader } from "./Loader";
 
 export const Home = () => {
   const [email, setEmail] = useState('');
@@ -13,14 +14,18 @@ export const Home = () => {
 
   const handleEmailSubscribe = async () => {
     setSubscribed(true);
+    setLoading(true);
     const value = await sendSubscribtion({ email: email });
     if (value) {
+      setLoading(false);
       setMessage("Subscribed successfully!");
       toast.success("Subscribed successfully!");
     }
   };
   return (
-    <div>
+    <>
+    <Loader loading={loading}></Loader>
+     <div>
       {/* Hero Banner */}
       <div className="w-100">
         <img src={'/images/home.jpg'} alt="Saree Banner" className="img-fluid w-100" style={{ maxHeight: '400px', objectFit: 'cover', borderRadius: '5px' }} />
@@ -285,5 +290,7 @@ export const Home = () => {
 
 
     </div>
+    </>
+   
   );
 };

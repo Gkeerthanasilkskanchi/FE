@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { addCartProducts, addLikedProducts, addOrderService, getProducts } from "../API/API";
 import { toast } from "react-toastify";
+import { Loader } from "./Loader";
 
 
 export const Products = () => {
     const [products, setProducts] = useState<any>([]);
     const [showModal, setShowModal] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState<any | null>(null);
-
+    const [loading,setLoading]=useState(false);
 
     useEffect(() => {
         fetchProducts();
@@ -17,6 +18,7 @@ export const Products = () => {
         try {
             if (!email) { toast.error("Login to add product"); }
             if (email) {
+                setLoading(true);
                 const payload = {
                     email,
                     productId,
@@ -28,6 +30,8 @@ export const Products = () => {
         } catch (err: any) {
             console.error(err);
             toast.error(err.response?.data?.message);
+        }finally{
+            setLoading(false);
         }
     };
 
@@ -35,6 +39,7 @@ export const Products = () => {
         try {
             if (!email) { toast.error("Login to like product"); }
             if (email) {
+                setLoading(true);
                 const payload = {
                     email,
                     productId,
@@ -45,22 +50,27 @@ export const Products = () => {
         } catch (err: any) {
             console.error(err);
             toast.error(err.response?.data?.message);
+        }finally{
+            setLoading(false);
         }
     };
     const fetchProducts = async () => {
         try {
+            setLoading(true);
             const response: any = await getProducts();
             if (Array.isArray(response.data)) {
                 setProducts(response.data);
             }
         } catch (error) {
             console.error("Failed to fetch products:", error);
+        }finally{
+            setLoading(false);
         }
     };
     const handleBuyClick = async (product: any) => {
         try {
             const email = sessionStorage.getItem("userEmail");
-            alert(email)
+            setLoading(true);
             const payload = {
                 email,
                 id: product.id,
@@ -68,29 +78,32 @@ export const Products = () => {
                 price: product.price,
             };
             await addOrderService(payload);
-
+             setLoading(false);
             const message = encodeURIComponent(
                 `Hello, I'm interested in buying:\n\n` +
                 `🧵 *${product.title}*\n💰 Price: ₹${product.price}\n📦 Quantity: ${product.quantity || 1}\n\n` +
                 `Please provide further details.`
             );
-            const whatsappNumber = "919843788261";
+            const whatsappNumber = "917904999697";
             window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
         } catch (error) {
             console.error("Buy operation failed:", error);
+        }finally{
+            setLoading(false);
         }
     };
 
     const handleImageClick = (product: any) => {
         setSelectedProduct(product);
-        console.log(product)
         // setSelectedImages(product);
         setShowModal(true);
     };
 
 
     return (
-        <div className="container">
+        <>
+        <Loader loading={loading}></Loader>
+         <div className="container">
             {/* Header & Filter */}
             <div className="d-flex justify-content-between align-items-center mt-4">
                 <div className="w-100">
@@ -109,10 +122,11 @@ export const Products = () => {
                         <div
                             key={product.id}
                             className="col-12 col-sm-6 col-lg-4"
+                             
                         >
-                            <div className="card h-100 shadow-sm border-0">
+                            <div className="card h-100 shadow-sm border-0" >
                                 <img
-                                    src={product.image || '/images/default.jpg'}
+                                    src={product?.image || '/images/default.jpg'}
                                     className="card-img-top"
                                     style={{
                                         height: '300px',
@@ -122,15 +136,16 @@ export const Products = () => {
                                         backgroundColor: '#f8f8f8',
                                         cursor: 'pointer'
                                     }}
+                                   
                                     alt={product.title}
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#imageModal"
+                                   
+                                    
                                 />
 
                                 <div className="card-body d-flex flex-column justify-content-between">
                                     <span
                                         className="fw-bold d-block mb-2 text-truncate"
-                                        style={{ cursor: "pointer" }}
+                                        style={{ cursor: "pointer" ,textDecoration:'underline'}}
                                         onClick={() => handleImageClick(product)}
                                         data-bs-toggle="modal"
                                         data-bs-target="#productDetailModal"
@@ -365,5 +380,7 @@ export const Products = () => {
 
 
         </div>
+        </>
+       
     );
 };
