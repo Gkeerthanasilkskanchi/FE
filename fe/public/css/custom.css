@@ -481,11 +481,11 @@ a.text-decoration-none:hover {
 }
 
 .primary {
-  background: linear-gradient(to right, #c98b8b, #aa9b83, #6d6454);
+  /* background: linear-gradient(to right, #c98b8b, #aa9b83, #6d6454); */
 }
 
 .dashboard-primary {
-  background: linear-gradient(to right, #cdbda5, #918571);
+  /* background: linear-gradient(to right, #cdbda5, #918571); */
 }
 
 .black-text {
@@ -1080,7 +1080,7 @@ input.form-control.outline-input:focus {
 
 
 
-.glass-card , .chart-color {
+.chart-color {
   background: linear-gradient(135deg, #c98b8b, #b5aca2, #9f8886);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
