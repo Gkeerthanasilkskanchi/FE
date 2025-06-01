@@ -70,6 +70,8 @@ export const Products = () => {
     const handleBuyClick = async (product: any) => {
         try {
             const email = sessionStorage.getItem("userEmail");
+            if (!email) { toast.error("Login to buy a product"); }
+            if (email) {
             setLoading(true);
             const payload = {
                 email,
@@ -86,6 +88,7 @@ export const Products = () => {
             );
             const whatsappNumber = "917904999697";
             window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
+        }
         } catch (error) {
             console.error("Buy operation failed:", error);
         }finally{

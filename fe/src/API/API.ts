@@ -89,3 +89,28 @@ export const addOrderService = async (payload: any) => {
     const review = await Client("POST", `${baseURL}/users/create-order`, payload);
     return { status: review?.status, data: review?.data }
 }
+
+export const deleteProduct = async (payload: any) => {
+    const review = await Client("POST", `${baseURL}/users/deleteProduct`, payload);
+    return { status: review?.status, data: review?.data }
+}
+
+export const editProduct = async (payload: any) => {
+    const review = await Client("POST", `${baseURL}/users/editProduct`, payload);
+    return { status: review?.status, data: review?.data }
+}
+
+export const search = async (payload: any) => {
+    const review = await Client("POST", `${baseURL}/users/search`, payload);
+    return { status: review?.status, data: review?.data }
+}
+
+export const getFilteredProduct = async (payload: any) => {
+    const review = await Client("POST", `${baseURL}/users/getFilteredProduct`, payload);
+    return { status: review?.status, data: review?.data }
+}
+
+export const getProductDeatilsById = async (id: any) => {
+    const cartProducts = await Client("GET", `${baseURL}/users/getProductById/${id}`);
+    return { status: cartProducts?.status, data: cartProducts?.data }
+}
