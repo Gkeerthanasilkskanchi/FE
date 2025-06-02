@@ -1,6 +1,6 @@
 import { Client } from "../Client"
 
-export const baseURL = "http://localhost:8080"
+export const baseURL = "http://localhost:8081"
 export const registerUser = async (payload: any) => {
     const createUser = await Client("POST", `${baseURL}/users/register`, payload);
     return { status: createUser?.status, data: createUser?.data }
@@ -16,8 +16,9 @@ export const addProduct = async (payload: any) => {
     return { status: addProduct?.status, data: addProduct?.data }
 }
 
-export const getProducts = async () => {
-    const getProducts = await Client("GET", `${baseURL}/users/products`);
+export const getProducts = async (email:any) => {
+    const getProducts = await Client("GET", `${baseURL}/users/products/${email}`);
+    console.log(getProducts);  
     return { status: getProducts?.status, data: getProducts?.data }
 }
 

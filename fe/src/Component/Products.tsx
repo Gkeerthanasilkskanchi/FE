@@ -32,6 +32,7 @@ export const Products = () => {
             toast.error(err.response?.data?.message);
         } finally {
             setLoading(false);
+            window.location.reload();
         }
     };
 
@@ -52,12 +53,13 @@ export const Products = () => {
             toast.error(err.response?.data?.message);
         } finally {
             setLoading(false);
+            window.location.reload();
         }
     };
     const fetchProducts = async () => {
         try {
             setLoading(true);
-            const response: any = await getProducts();
+            const response: any = await getProducts(email);
             if (Array.isArray(response.data)) {
                 setProducts(response.data);
             }
@@ -131,6 +133,9 @@ export const Products = () => {
                                     <img
                                         src={product?.image || '/images/default.jpg'}
                                         className="card-img-top"
+                                        onClick={() => handleImageClick(product)}
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#productDetailModal"
                                         style={{
                                             height: '300px',
                                             width: '100%',
@@ -146,16 +151,23 @@ export const Products = () => {
                                     />
 
                                     <div className="card-body d-flex flex-column justify-content-between">
-                                        <span
-                                            className="fw-bold d-block mb-2 text-truncate"
-                                            style={{ cursor: "pointer", textDecoration: 'underline' }}
-                                            onClick={() => handleImageClick(product)}
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#productDetailModal"
-                                            title={product.title}
-                                        >
-                                            {product.title}
-                                        </span>
+                                        <div className="d-flex justify-content-between align-items-center">
+                                            <span
+                                                className="fw-bold text-truncate"
+                                                style={{ cursor: "pointer", textDecoration: "underline", maxWidth: "70%" }}
+                                                onClick={() => handleImageClick(product)}
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#productDetailModal"
+                                                title={product.title}
+                                            >
+                                                {product?.title}
+                                            </span>
+
+                                            <span className="fw-bold">
+                                                ₹{product?.price}
+                                            </span>
+                                        </div>
+
                                         <div className="d-flex justify-content-between align-items-center gap-2 mt-auto ps-4 pe-4">
                                             <button
                                                 style={{ outline: 'none', border: 'none', borderRadius: '5px' }}
@@ -167,13 +179,13 @@ export const Products = () => {
                                             </button>
 
                                             <button style={{ outline: 'none', border: 'none', borderRadius: '5px' }} className="primary" title="Add to Cart" onClick={() => addToCart(product.id)}>
-                                                <i className="bi bi-cart" style={{ fontSize: "30px" }}></i>
-                                                <i className="bi bi-cart-plus" style={{ fontSize: "30px" }}></i>
+                                                {product?.is_product_in_cart ? <i className="bi bi-cart-fill" style={{ fontSize: "30px" }}></i>
+                                                    : <i className="bi bi-cart-plus" style={{ fontSize: "30px" }}></i>}
 
                                             </button>
                                             <button style={{ outline: 'none', border: 'none', borderRadius: '5px' }} className="primary" title="Like Product" onClick={() => likeProduct(product.id)}>
-                                                <i className="bi bi-suit-heart text-danger" style={{ fontSize: '30px' }}></i>
-                                                <i className="bi bi-heart-fill text-danger" style={{ fontSize: '30px' }}></i>
+                                                {!(product?.is_product_liked) ? <i className="bi bi-suit-heart text-danger" style={{ fontSize: '30px' }}></i>
+                                                    : <i className="bi bi-heart-fill text-danger" style={{ fontSize: '30px' }}></i>}
 
                                             </button>
                                         </div>
@@ -183,90 +195,6 @@ export const Products = () => {
                         ))}
                     </div>
                 </div>
-
-
-
-                {/* <div
-                className="modal fade"
-                id="imageModal"
-                tabIndex={-1}
-                aria-hidden="true"
-            >
-                <div
-                    className="modal-dialog modal-dialog-centered"
-                    style={{ width: "100vw", maxWidth: "500px" }}
-                >
-                    <div className="modal-content position-relative">
-
-                
-                        <button
-                            type="button"
-                            className="btn-close position-absolute top-0 end-0 m-2"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                            style={{ zIndex: 1051 }}
-                        ></button>
-
-                        <div
-                            className="modal-body p-0"
-                            style={{
-                                maxHeight: "90vh",
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                            }}
-                        >
-                            <div
-                                id="carouselImages"
-                                className="carousel slide w-100"
-                                data-bs-ride="carousel"
-                            >
-                                <div className="carousel-inner">
-                                    {selectedImages.map((img:any, idx:any) => (
-                                        <div
-                                            className={`carousel-item ${idx === 0 ? "active" : ""}`}
-                                            key={idx}
-                                            style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
-                                        >
-                                            <img
-                                                src={img}
-                                                alt={`slide-${idx}`}
-                                                className="img-fluid"
-                                                style={{
-                                                    maxHeight: "80vh",
-                                                    objectFit: "contain",
-                                                    padding: "10px",
-                                                }}
-                                            />
-                                        </div>
-                                    ))}
-
-                                </div>
-
-                                <button
-                                    className="carousel-control-prev"
-                                    type="button"
-                                    data-bs-target="#carouselImages"
-                                    data-bs-slide="prev"
-                                >
-                                    <span className="carousel-control-prev-icon bg-primary" aria-hidden="true" />
-                                    <span className="visually-hidden">Previous</span>
-                                </button>
-                                <button
-                                    className="carousel-control-next"
-                                    type="button"
-                                    data-bs-target="#carouselImages"
-                                    data-bs-slide="next"
-                                >
-                                    <span className="carousel-control-next-icon bg-primary" aria-hidden="true" />
-                                    <span className="visually-hidden">Next</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
-
 
 
                 {/* PRODUCT DETAIL MODAL */}
@@ -312,72 +240,17 @@ export const Products = () => {
                             </div>
 
 
-                            {/* <div className="px-3 pb-3">
-                            <h6>Customer Reviews</h6>
-                            <div id="reviewCarousel" className="carousel slide" data-bs-ride="carousel">
-                                <div className="carousel-inner">
-                                    {[0, 1].map((groupIndex) => (
-                                        <div
-                                            className={`carousel-item ${groupIndex === 0 ? "active" : ""}`}
-                                            key={groupIndex}
-                                            
-                                        >
-                                            <div className="d-flex justify-content-between"  style={{maxHeight:'100px'}}>
-                                                {[0, 1, 2].map((i) => {
-                                                    const idx = groupIndex * 3 + i;
-                                                    return (
-                                                        <div className="card me-2 flex-fill" key={idx} style={{ minWidth: "0" }}>
-                                                            <div className="card-body">
-                                                                <h6 className="card-title mb-1">User {idx + 1}</h6>
-                                                                <div className="mb-2">
-                                                                    {"⭐".repeat(4)}{"☆".repeat(1)}
-                                                                </div>
-                                                                <p className="card-text" style={{ fontSize: "14px" }}>
-                                                                    Loved the fabric and design. Very comfortable and looked amazing!
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    );
-                                                })}
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-
-                                <button
-                                    className="carousel-control-prev"
-                                    type="button"
-                                    data-bs-target="#reviewCarousel"
-                                    data-bs-slide="prev"
-                                >
-                                    <span className="carousel-control-prev-icon bg-primary" />
-                                    <span className="visually-hidden">Previous</span>
-                                </button>
-                                <button
-                                    className="carousel-control-next"
-                                    type="button"
-                                    data-bs-target="#reviewCarousel"
-                                    data-bs-slide="next"
-                                >
-                                    <span className="carousel-control-next-icon bg-primary" />
-                                    <span className="visually-hidden">Next</span>
-                                </button>
-                            </div>
-                        </div> */}
-
-
-
-                            <div className="border-top p-3 d-flex justify-content-between">
+                            <div className="border-top p-3 d-flex justify-content-center">
                                 <button
                                     style={{ outline: 'none', border: 'none', borderRadius: '5px' }}
                                     className="primary"
                                     title="Buy Now"
                                     onClick={() => handleBuyClick(selectedProduct)}
                                 >
-                                    <i className="bi bi-bag-fill me-1" style={{ fontSize: "30px" }}></i>
+                                    <i className="bi bi-bag-fill me-3" style={{ fontSize: "30px" }}></i>
+                                    Buy Now
                                 </button>
-                                <button className="btn btn-secondary me-2" onClick={() => addToCart(selectedProduct.id)}><i className="bi bi-cart-plus"></i></button>
-                                <button className="btn btn-outline-danger" onClick={() => likeProduct(selectedProduct.id)}><i className="bi bi-heart"></i></button>
+                              
                             </div>
 
                         </div>
