@@ -110,17 +110,17 @@ export const Products = () => {
             <Loader loading={loading}></Loader>
             <div className="container">
                 {/* Header & Filter */}
-                <div className="d-flex justify-content-between align-items-center mt-4">
+                <div className="d-flex justify-content-between align-items-center">
                     <div className="w-100">
-                        <h4 className="text-center">Our Collections</h4>
+                        <h4 className="text-center fw-boldj text-clip-gradient">Our Collections</h4>
                     </div>
 
                 </div>
 
                 {/* Product Grid */}
                 <div
-                    className="mt-4 overflow-auto"
-                    style={{ height: "calc(100vh - 80px)", width: "100%" }}
+                    className="mt-4 h-100"
+                    style={{ width: "100%" }}
                 >
                     <div className="row g-4">
                         {products?.map((product: any) => (

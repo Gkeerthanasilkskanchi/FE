@@ -8,9 +8,9 @@ export const Contact = () => {
     const userData = {
         name: "",
         email: "",
+        subject: "",
         message: "",
         mobileNumber: "",
-        subject: "",
         address: "",
     };
 
@@ -121,14 +121,14 @@ export const Contact = () => {
 
     return (
         <>
-        <Loader loading={loading}></Loader>
+            <Loader loading={loading}></Loader>
             <div className="container mt-5">
                 <div className="row align-items-center my-5">
 
                     {/* Right side - WhatsApp section */}
                     <div className="row align-items-center">
                         {/* QR Code on the left */}
-                         {/* Content on the right */}
+                        {/* Content on the right */}
                         <div className="col-md-7">
                             <h3 className="mb-3 ms-5 blockquote fst-italic">
                                 Connect with <span className="text-success">Keerthana Silks</span><br /> on WhatsApp
@@ -158,14 +158,14 @@ export const Contact = () => {
                             />
                         </div>
 
-                       
+
                     </div>
                 </div>
 
 
                 {/* Contact Info + Form */}
                 <div className="row g-4">
-                      {/* Left Column - Placeholder or Add Info */}
+                    {/* Left Column - Placeholder or Add Info */}
                     <div className="col-md-6">
                         <img
                             src="/images/submit_your_query.png"
@@ -211,7 +211,7 @@ export const Contact = () => {
                             </form>
                         </div>
                     </div>
-                  
+
 
 
                 </div>
@@ -311,9 +311,9 @@ export const Contact = () => {
                                                 className="flip-card-front d-flex flex-column justify-content-center align-items-center text-white"
                                                 style={{ backgroundColor: item.color }}
                                             >
-                                                <i className={`${item.icon} fa-3x mb-3`} style={{color:'black'}}></i>
-                                                <h5 style={{color:'black'}}>{item.title}</h5>
-                                                <p className="text-center px-3" style={{color:'black'}}>{item.desc}</p>
+                                                <i className={`${item.icon} fa-3x mb-3`} style={{ color: 'black' }}></i>
+                                                <h5 style={{ color: 'black' }}>{item.title}</h5>
+                                                <p className="text-center px-3" style={{ color: 'black' }}>{item.desc}</p>
                                             </div>
                                             <div className="flip-card-back d-flex flex-column justify-content-center align-items-center bg-light text-dark">
                                                 <p className="text-center px-3">{item.desc}</p>
@@ -385,38 +385,41 @@ export const Contact = () => {
 
                 {/* Instagram Video Carousel Section */}
                 <div className="container my-5">
-                    <h3 className="text-center mb-4 text-clip-gradient ">Follow us on Instagram for the updates</h3>
+                    <h3 className="text-center mb-4 text-clip-gradient ">View Our Insights to Know More</h3>
 
                     <div id="instagramCarousel" className="carousel slide instagram-carousel" data-bs-ride="carousel">
                         <div className="carousel-inner">
                             {[
                                 [
                                     {
-                                        thumbnail: "https://img.youtube.com/vi/VIDEO_ID_1/0.jpg",
-                                        link: "https://www.instagram.com/reel/INSTAGRAM_VIDEO_1/"
+                                        video: "videos/video-1.mp4"
                                     },
                                     {
-                                        thumbnail: "https://img.youtube.com/vi/VIDEO_ID_2/0.jpg",
-                                        link: "https://www.instagram.com/reel/INSTAGRAM_VIDEO_2/"
+                                        video: "videos/video-2.mp4"
                                     },
                                     {
-                                        thumbnail: "https://img.youtube.com/vi/VIDEO_ID_3/0.jpg",
-                                        link: "https://www.instagram.com/reel/INSTAGRAM_VIDEO_3/"
+                                        video: "videos/video-3.mp4"
                                     }
                                 ],
                                 [
                                     {
-                                        thumbnail: "https://img.youtube.com/vi/VIDEO_ID_4/0.jpg",
-                                        link: "https://www.instagram.com/reel/INSTAGRAM_VIDEO_4/"
+                                        video: "videos/video-4.mp4"
                                     },
                                     {
-                                        thumbnail: "https://img.youtube.com/vi/VIDEO_ID_5/0.jpg",
-                                        link: "https://www.instagram.com/reel/INSTAGRAM_VIDEO_5/"
+                                        video: "videos/video-5.mp4"
                                     },
                                     {
-                                        thumbnail: "https://img.youtube.com/vi/VIDEO_ID_6/0.jpg",
-                                        link: "https://www.instagram.com/reel/INSTAGRAM_VIDEO_6/"
+                                        video: "videos/video-6.mp4"
                                     }
+                                ],
+                                [
+                                    {
+                                        video: "videos/video-7.mp4"
+                                    },
+                                    {
+                                        video: "videos/video-8.mp4"
+                                    }
+
                                 ]
                             ].map((group, idx) => (
                                 <div className={`carousel-item ${idx === 0 ? "active" : ""}`} key={idx}>
@@ -424,9 +427,21 @@ export const Contact = () => {
                                         {group.map((video, index) => (
                                             <div className="col-md-4" key={index}>
                                                 <div className="card reel-card">
-                                                    <a href={video.link} target="_blank" rel="noopener noreferrer">
-                                                        <img src={video.thumbnail} className="card-img-top reel-img" alt={`Instagram Video ${index + 1}`} />
-                                                    </a>
+                                                    <video
+                                                        className="card-img-top reel-img"
+                                                        src={video.video}
+                                                        controls
+                                                        preload="metadata"
+                                                        style={{
+                                                            width: "100%",
+                                                            height: "200px",
+                                                            objectFit: "cover",
+                                                            borderRadius: "10px"
+                                                        }}
+                                                    >
+                                                        Your browser does not support the video tag.
+                                                    </video>
+
                                                 </div>
                                             </div>
                                         ))}
@@ -434,6 +449,7 @@ export const Contact = () => {
                                 </div>
                             ))}
                         </div>
+
                         <button className="carousel-control-prev" type="button" data-bs-target="#instagramCarousel" data-bs-slide="prev">
                             <span className="carousel-control-prev-icon rounded-pill custom-nav"></span>
                         </button>
@@ -441,6 +457,7 @@ export const Contact = () => {
                             <span className="carousel-control-next-icon rounded-pill custom-nav"></span>
                         </button>
                     </div>
+
 
                 </div>
             </div>

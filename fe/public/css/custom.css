@@ -678,7 +678,7 @@ a.text-decoration-none:hover {
 
 
 .testimonial-box {
-  background-color: #fffdf5;
+  background: linear-gradient(135deg, #eac3c3, #ded5cb, #c9b2af);
   border: 1px solid #f2e9d8;
   border-radius: 12px;
   max-width: 600px;
