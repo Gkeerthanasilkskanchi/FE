@@ -89,7 +89,7 @@ export const AddProduct: React.FC<AddProductProps> = ({ product, onUpdateComplet
 
       let response;
       if (isEdit && editingId) {
-        form.append("id",formData.productId)
+        form.append("id",formData.id)
         response = await editProduct(form);
         setMessage("✅ Product updated successfully!");
       } else {
@@ -110,7 +110,6 @@ export const AddProduct: React.FC<AddProductProps> = ({ product, onUpdateComplet
   const handleEdit = async (id: string) => {
     try {
       const res = await getProductDeatilsById(id);
-      console.log(res)
       const product = res.data?.data;
       setFormData(product);
       setIsEdit(true);
@@ -121,7 +120,7 @@ export const AddProduct: React.FC<AddProductProps> = ({ product, onUpdateComplet
     }
   };
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (id: number) => {
     if (window.confirm("Are you sure to delete this product?")) {
       try {
         await deleteProduct(id);
@@ -303,7 +302,7 @@ export const AddProduct: React.FC<AddProductProps> = ({ product, onUpdateComplet
                     </button>
                     <button
                       className="btn btn-sm btn-danger"
-                      onClick={() => handleDelete(prod._id)}
+                      onClick={() => handleDelete(prod.id)}
                     >
                       <i className="bi bi-trash"></i>
                     </button>

@@ -115,6 +115,7 @@ export const ProductList = () => {
           productId,
         }
         const response = await addLikedProducts(payload);
+        
         if (response) toast.success(response.data.message);
       }
     } catch (err: any) {
@@ -160,7 +161,7 @@ export const ProductList = () => {
 
                   <div className="d-flex justify-content-between align-items-center gap-2 mt-auto ps-4 pe-4">
                     <button
-                      style={{ outline: 'none', border: 'none', borderRadius: '5px' }}
+                      style={{ outline: 'none', border: 'none', borderRadius: '5px',background:'none' }}
                       className="primary"
                       title="Buy Now"
                       onClick={() => handleBuyClick(item)}
@@ -168,12 +169,12 @@ export const ProductList = () => {
                       <i className="bi bi-bag " style={{ fontSize: "30px" }}></i>
                     </button>
 
-                    <button style={{ outline: 'none', border: 'none', borderRadius: '5px' }} className="primary" title="Add to Cart" onClick={() => addToCart(item.id)}>
+                    <button style={{ outline: 'none', border: 'none', borderRadius: '5px',background:'none' }} className="primary" title="Add to Cart" onClick={() => addToCart(item.id)}>
                       {item?.is_product_in_cart ? <i className="bi bi-cart-fill" style={{ fontSize: "30px" }}></i>
                         : <i className="bi bi-cart-plus" style={{ fontSize: "30px" }}></i>}
 
                     </button>
-                    <button style={{ outline: 'none', border: 'none', borderRadius: '5px' }} className="primary" title="Like Product" onClick={() => likeProduct(item.id)}>
+                    <button style={{ outline: 'none', border: 'none', borderRadius: '5px',background:'none' }} className="primary" title="Like Product" onClick={() => likeProduct(item.id)}>
                       {!(item?.is_product_liked) ? <i className="bi bi-suit-heart text-danger" style={{ fontSize: '30px' }}></i>
                         : <i className="bi bi-heart-fill text-danger" style={{ fontSize: '30px' }}></i>}
 
@@ -234,7 +235,7 @@ export const ProductList = () => {
 
             <div className="border-top p-3 d-flex justify-content-center">
               <button
-                style={{ outline: 'none', border: 'none', borderRadius: '5px' }}
+                style={{ outline: 'none', border: 'none', borderRadius: '5px',background:'none' }}
                 className="primary"
                 title="Buy Now"
                 onClick={() => handleBuyClick(selectedProduct)}

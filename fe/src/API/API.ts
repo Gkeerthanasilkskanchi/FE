@@ -91,8 +91,8 @@ export const addOrderService = async (payload: any) => {
     return { status: review?.status, data: review?.data }
 }
 
-export const deleteProduct = async (payload: any) => {
-    const review = await Client("POST", `${baseURL}/users/deleteProduct`, payload);
+export const deleteProduct = async (id: number) => {
+    const review = await Client("GET", `${baseURL}/users/deleteProduct/${id}`);
     return { status: review?.status, data: review?.data }
 }
 

@@ -170,7 +170,7 @@ export const Products = () => {
 
                                         <div className="d-flex justify-content-between align-items-center gap-2 mt-auto ps-4 pe-4">
                                             <button
-                                                style={{ outline: 'none', border: 'none', borderRadius: '5px' }}
+                                                style={{ outline: 'none', border: 'none', borderRadius: '5px',background:'none' }}
                                                 className="primary"
                                                 title="Buy Now"
                                                 onClick={() => handleBuyClick(product)}
@@ -178,12 +178,12 @@ export const Products = () => {
                                                 <i className="bi bi-bag " style={{ fontSize: "30px" }}></i>
                                             </button>
 
-                                            <button style={{ outline: 'none', border: 'none', borderRadius: '5px' }} className="primary" title="Add to Cart" onClick={() => addToCart(product.id)}>
+                                            <button style={{ outline: 'none', border: 'none', borderRadius: '5px',background:'none' }}  title="Add to Cart" onClick={() => addToCart(product.id)}>
                                                 {product?.is_product_in_cart ? <i className="bi bi-cart-fill" style={{ fontSize: "30px" }}></i>
                                                     : <i className="bi bi-cart-plus" style={{ fontSize: "30px" }}></i>}
 
                                             </button>
-                                            <button style={{ outline: 'none', border: 'none', borderRadius: '5px' }} className="primary" title="Like Product" onClick={() => likeProduct(product.id)}>
+                                            <button style={{ outline: 'none', border: 'none', borderRadius: '5px', background:'none'}} className="primary" title="Like Product" onClick={() => likeProduct(product.id)}>
                                                 {!(product?.is_product_liked) ? <i className="bi bi-suit-heart text-danger" style={{ fontSize: '30px' }}></i>
                                                     : <i className="bi bi-heart-fill text-danger" style={{ fontSize: '30px' }}></i>}
 
