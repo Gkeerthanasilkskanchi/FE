@@ -179,13 +179,13 @@ export const Products = () => {
                                             </button>
 
                                             <button style={{ outline: 'none', border: 'none', borderRadius: '5px',background:'none' }}  title="Add to Cart" onClick={() => addToCart(product.id)}>
-                                                {product?.is_product_in_cart ? <i className="bi bi-cart-fill" style={{ fontSize: "30px" }}></i>
-                                                    : <i className="bi bi-cart-plus" style={{ fontSize: "30px" }}></i>}
+                                                {product?.is_product_in_cart ? <i className="bi bi-cart-plus" style={{ fontSize: "30px" }}></i>
+                                                    : <i className="bi bi-cart" style={{ fontSize: "30px" }}></i>}
 
                                             </button>
                                             <button style={{ outline: 'none', border: 'none', borderRadius: '5px', background:'none'}} className="primary" title="Like Product" onClick={() => likeProduct(product.id)}>
-                                                {!(product?.is_product_liked) ? <i className="bi bi-suit-heart text-danger" style={{ fontSize: '30px' }}></i>
-                                                    : <i className="bi bi-heart-fill text-danger" style={{ fontSize: '30px' }}></i>}
+                                                {!(product?.is_product_liked) ? <i className="bi bi-suit-heart heart-style " style={{ fontSize: '30px' }}></i>
+                                                    : <i className="bi bi-heart-fill heart-style " style={{ fontSize: '30px' }}></i>}
 
                                             </button>
                                         </div>

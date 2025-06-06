@@ -18,21 +18,21 @@ export const Contact = () => {
         {
             icon: "fab fa-whatsapp",
             title: "WhatsApp",
-            desc: "Chat with us instantly",
+            desc: "+917904999697",
             link: "https://wa.me/917904999697",
             color: "#25D366",
         },
         {
             icon: "fab fa-facebook-f",
             title: "Facebook",
-            desc: "Follow for latest updates",
+            desc: "Keerthana Silks",
             link: "https://www.facebook.com/share/18hqSuYoCp//",
             color: "#1877F2",
         },
         {
             icon: "fab fa-instagram",
             title: "Instagram",
-            desc: "Catch our latest reels & posts",
+            desc: "@keerthanasilk_kanchipuram",
             link: "https://instagram.com/keerthanasilk_kanchipuram?igsh=aDZieG5uZnB4cmZi",
             color: "#E1306C",  // Instagram's pinkish-red official color
         },
@@ -40,21 +40,21 @@ export const Contact = () => {
         {
             icon: "fas fa-envelope",
             title: "Email",
-            desc: "Drop us a message",
+            desc: "gkeerthanasilkskanchi@gmail.com",
             link: "mailto:gkeerthanasilkskanchi@gmail.com",
             color: "#FF9F00",
         },
         {
             icon: "fas fa-phone",
             title: "Phone",
-            desc: "Call our support team",
+            desc: "+917904999697",
             link: "tel:+917904999697",
             color: "#4CAF50",
         },
         {
             icon: "fab fa-youtube",
             title: "YouTube",
-            desc: "Watch our product demos",
+            desc: "@keerthanasilk_kanchipuram",
             link: "https://youtube.com/@keerthanasilk_kanchipuram?si=zLTHLZ3zXOttTUYD",
             color: "#FF0000",
         },
@@ -151,7 +151,7 @@ export const Contact = () => {
                         </div>
                         <div className="col-md-5 text-center">
                             <img
-                                src="/images/wp_connect.jpg"
+                                src="/images/wp_connect_prasanth.jpg"
                                 alt="Connect with Keerthana Silks on WhatsApp"
                                 className="img-fluid qr-image neon-border"
                                 style={{ maxWidth: '400px' }}
@@ -168,10 +168,11 @@ export const Contact = () => {
                     {/* Left Column - Placeholder or Add Info */}
                     <div className="col-md-6">
                         <img
+                            // src="/images/wp_image-removebg.png"
                             src="/images/submit_your_query.png"
                             alt="Connect with Keerthana Silks on WhatsApp"
                             className="img-fluid"
-                            style={{ maxHeight: '500px', objectFit: 'cover', marginBottom: '-100px' }}
+                            style={{ maxHeight: '500px', objectFit: 'cover', marginBottom: '-100px'  , marginTop: '50px'}}
                         />
 
 
