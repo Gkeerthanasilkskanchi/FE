@@ -151,7 +151,7 @@ export const ProductList = () => {
                   <div className="d-flex justify-content-between align-items-center">
                     <span
                       className="fw-bold text-truncate"
-                      style={{ cursor: "pointer", textDecoration: "underline", maxWidth: "70%" }}
+                      style={{ cursor: "pointer", textDecoration: "underline", maxWidth: "70%" ,color:"#270206"}}
                       onClick={() => handleImageClick(item)}
                       data-bs-toggle="modal"
                       data-bs-target="#productDetailModal"

@@ -309,7 +309,7 @@ export const Contact = () => {
                 <div className="connect-section mt-5">
                     <h3 className="text-center mb-5 fw-bold text-dark text-clip-gradient">Connect With Us</h3>
                     <div className="row g-4 justify-content-center">
-                        {platforms.map((item, idx) => {
+                        {platforms?.map((item, idx) => {
 
                             return (
                                 <div className="col-md-4 col-sm-6" key={idx}>
@@ -317,7 +317,11 @@ export const Contact = () => {
                                         <div className="flip-card-inner">
                                             <div
                                                 className="flip-card-front d-flex flex-column justify-content-center align-items-center text-white"
-                                                style={{ backgroundColor: item.color }}
+                                                style={{
+                                                    background: `linear-gradient(to bottom, ${item.color},rgb(249, 231, 231))`,
+                                                    color: "#000", // optional: override text color if needed
+                                                    cursor: "pointer",
+                                                }}
                                             >
                                                 <i className={`${item.icon} fa-3x mb-3`} style={{ color: 'black' }}></i>
                                                 <h5 style={{ color: 'black' }}>{item.title}</h5>

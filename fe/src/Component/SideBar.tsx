@@ -54,8 +54,8 @@ export const Sidebar = () => {
           src="/images/logo.jpg"
           alt="logo"
           className="img-fluid"
-          style={{ maxHeight: "100px",cursor:"pointer" }}
-          onClick={()=>navigate('/home')}
+          style={{ maxHeight: "100px", cursor: "pointer" }}
+          onClick={() => navigate('/home')}
         />
       </div>
 
@@ -79,7 +79,13 @@ export const Sidebar = () => {
               key={idx}
               className="mb-3"
               style={{ cursor: "pointer" }}
-              onClick={() => navigate(item.path)}
+              onClick={() => {
+                navigate(item.path);
+                setTimeout(() => {
+                  window.dispatchEvent(new Event("scroll-main-content-top"));
+                }, 100);
+              }}
+
             >
               <div className="d-flex flex-column align-items-center">
                 <i className={`bi ${item.icon} cornor-flower ${isActive ? 'active' : ''}`} />

@@ -76,62 +76,62 @@ export const About = () => {
       <div className="text-center mt-5 mb-5">
         <h4 className="fw-bold mb-3 text-para">Our Signature Touch</h4>
         <p className="lower-text">Crafted with tradition, served with passion</p>
-      
 
-      <div className="row gy-4">
-        {[
-          { icon: 'bi-palette-fill', title: 'Unique Designs', desc: 'Explore the diverse collection of sarees that tell their own story.' },
-          { icon: 'bi-stars', title: 'Elegant & Exclusive', desc: 'Find the perfect saree for every occasion, from weddings to festivals.' },
-          { icon: 'bi-gem', title: 'Premium Quality Fabrics', desc: 'Only the finest quality silk and handloom fabrics, woven with care.' },
-          { icon: 'bi-currency-dollar', title: 'Affordable Luxury', desc: 'Offering premium quality at prices that suit your budget.' },
-          { icon: 'bi-handbag', title: 'Authentic Handloom', desc: 'Woven by skilled artisans with precision and care.' },
-          { icon: 'bi-cart', title: 'Seamless Shopping', desc: 'Shop online with ease and enjoy hassle-free delivery.' },
-        ].map((card, idx) => (
-          <div key={idx} className="col-md-6">
-            <div className="d-flex align-items-start p-3  rounded-4 promise-item  h-100 hover-shadow transition neon-hover">
-              <i className={`bi ${card.icon} fs-1 text-primary me-3`}></i>
-              <div>
-                <h5 className="fw-semibold mb-1">{card.title}</h5>
-                <p className="mb-0 text-muted">{card.desc}</p>
+
+        <div className="row gy-4">
+          {[
+            { icon: 'bi-brush', title: 'Unique Designs', desc: 'Explore the diverse collection of sarees that tell their own story.' },
+            { icon: 'bi-award', title: 'Elegant & Exclusive', desc: 'Find the perfect saree for every occasion, from weddings to festivals.' },
+            { icon: 'bi-patch-check', title: 'Premium Quality Fabrics', desc: 'Only the finest quality silk and handloom fabrics, woven with care.' },
+            { icon: 'bi-cash-coin', title: 'Affordable Luxury', desc: 'Offering premium quality at prices that suit your budget.' },
+            { icon: 'bi-flower1', title: 'Authentic Handloom', desc: 'Woven by skilled artisans with precision and care.' },
+            { icon: 'bi-bag-check', title: 'Seamless Shopping', desc: 'Shop online with ease and enjoy hassle-free delivery.' },
+          ].map((card, idx) => (
+              <div key={idx} className="col-md-6">
+                <div className="d-flex align-items-start p-3 shadow-sm rounded-4  h-100 hover-shadow transition neon-hover">
+                  <i className={`bi ${card.icon} fs-1  me-3`} style={{color:"#e1306c"}}></i>
+                  <div>
+                    <h5 className="fw-semibold mb-1">{card.title}</h5>
+                    <p className="mb-0 text-muted">{card.desc}</p>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        ))}
-      </div>
+            ))}
+        </div>
       </div>
 
       {/* Mission & Vision */}
-      <div className="text-center mb-5" style={{marginTop:'80px'}}>
+      <div className="text-center mb-5" style={{ marginTop: '80px' }}>
         <h4 className="fw-bold mb-3 text-para mb-5">Where Heritage Meets Heart</h4>
-      
 
-      <div className="row g-4">
-        <div className="col-md-6">
-          <div className="p-4 rounded-4 h-100 position-relative border-start border-4 border-success shadow-sm hover-up">
-            <i className="bi bi-bullseye fs-1 text-success position-absolute top-0 end-0 p-3 opacity-10"></i>
-            <h3 className="fw-bold text-success">Mission</h3>
-            <p className="text-muted mt-2 mb-0">
-              To weave tradition with excellence by offering high-quality sarees at affordable prices, ensuring unmatched value, trust, and satisfaction.
-            </p>
+
+        <div className="row g-4">
+          <div className="col-md-6">
+            <div className="p-4 rounded-4 h-100 position-relative border-start border-4 border-success shadow-sm hover-up">
+              <i className="bi bi-bullseye fs-1 text-success position-absolute top-0 end-0 p-3 opacity-10"></i>
+              <h3 className="fw-bold text-success">Mission</h3>
+              <p className="text-muted mt-2 mb-0">
+                To weave tradition with excellence by offering high-quality sarees at affordable prices, ensuring unmatched value, trust, and satisfaction.
+              </p>
+            </div>
           </div>
-        </div>
-        
 
-        <div className="col-md-6">
-          <div className="p-4 rounded-4 h-100 position-relative border-start border-4 border-info shadow-sm hover-up">
-            <i className="bi bi-eye fs-1 text-info position-absolute top-0 end-0 p-3 opacity-10"></i>
-            <h3 className="fw-bold text-info">Vision</h3>
-            <p className="text-muted mt-2 mb-0">
-              To become a cherished household name where tradition meets innovation — offering timeless sarees and heartfelt service across generations.
-            </p>
+
+          <div className="col-md-6">
+            <div className="p-4 rounded-4 h-100 position-relative border-start border-4 border-info shadow-sm hover-up">
+              <i className="bi bi-eye fs-1 text-info position-absolute top-0 end-0 p-3 opacity-10"></i>
+              <h3 className="fw-bold text-info">Vision</h3>
+              <p className="text-muted mt-2 mb-0">
+                To become a cherished household name where tradition meets innovation — offering timeless sarees and heartfelt service across generations.
+              </p>
+            </div>
           </div>
         </div>
       </div>
-      </div>
 
-      <div className="text-center mb-5" style={{marginTop:'80px'}}>
+      <div className="text-center mb-5" style={{ marginTop: '80px' }}>
         <h1 className="fw-bold text-para">Quality of Our Product</h1></div>
-         <h5 className="text-center lower-text mb-4">Our Promises</h5>
+      <h5 className="text-center lower-text mb-4">Our Promises</h5>
       <div className="row">
 
         <div className="col-md-2 text-center mb-4 promise-item neon-hover">
@@ -166,10 +166,10 @@ export const About = () => {
                   <div className="testimonial-box mx-auto text-center px-4 py-5">
                     {/* <div className="card p-3" style={{ maxWidth: "1000px" }}>
                       <div className="card-body"> */}
-                        <h5 className="card-title">Client {idx + 1}</h5>
-                        <p className="lower-text mt-2">"Amazing service and support from Madras Acoustics!"</p>
-                        <p className="text-muted text-end">– Happy Customer</p>
-                      {/* </div>
+                    <h5 className="card-title">Client {idx + 1}</h5>
+                    <p className="lower-text mt-2">"Amazing service and support from Madras Acoustics!"</p>
+                    <p className="text-muted text-end">– Happy Customer</p>
+                    {/* </div>
                     </div> */}
                   </div>
                 </div>
@@ -185,34 +185,34 @@ export const About = () => {
         </div>
       </div>
 
-      <div  className="mt-5">
+      <div className="mt-5">
         <h4 className="fw-bold text-para text-center">Customer Growth Over the Years</h4>
 
-          <div className="container">
-            <div className="row align-items-start">
-              <div className="col-md-12 ">
-                <div className="p-3 ">
-                  <div className="row text-center g-4">
-                    {[
-                      { title: "Customer Satisfaction", count: "99.5%" },
-                      { title: "Happy Customers", count: "12,000+" },
-                      { title: "Total Sarees Sold", count: "25,000+" },
-                      { title: "States Covered", count: "18+" },
-                      { title: "Years in Business", count: "20+" },
-                    ].map((item, idx) => (
-                      <div className="col-md-2 col-6" style={{ width: "200px" }} key={idx}>
-                        <div className="card promise-item p-3 rounded-4 border-0 neon-hover">
-                          <h4 className="fw-bold text-primary">{item.count}</h4>
-                          <p className="text-muted small">{item.title}</p>
-                        </div>
+        <div className="container">
+          <div className="row align-items-start">
+            <div className="col-md-12 ">
+              <div className="p-3 ">
+                <div className="row text-center g-4">
+                  {[
+                    { title: "Customer Satisfaction", count: "99.5%" },
+                    { title: "Happy Customers", count: "12,000+" },
+                    { title: "Total Sarees Sold", count: "25,000+" },
+                    { title: "States Covered", count: "18+" },
+                    { title: "Years in Business", count: "20+" },
+                  ].map((item, idx) => (
+                    <div className="col-md-2 col-6" style={{ width: "200px" }} key={idx}>
+                      <div className="card shadow-sm p-3 rounded-4 border-0 neon-hover">
+                        <h4 className="fw-bold text-primary">{item.count}</h4>
+                        <p className="text-muted small">{item.title}</p>
                       </div>
-                    ))}
-                  </div>
-
+                    </div>
+                  ))}
                 </div>
+
               </div>
             </div>
           </div>
+        </div>
 
 
       </div>

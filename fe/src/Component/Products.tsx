@@ -144,7 +144,8 @@ export const Products = () => {
                                             objectFit: 'fill',
                                             objectPosition: 'center',
                                             backgroundColor: '#f8f8f8',
-                                            cursor: 'pointer'
+                                            cursor: 'pointer',
+                                            
                                         }}
 
                                         alt={product.title}
@@ -156,11 +157,12 @@ export const Products = () => {
                                         <div className="d-flex justify-content-between align-items-center">
                                             <span
                                                 className="fw-bold text-truncate"
-                                                style={{ cursor: "pointer", textDecoration: "underline", maxWidth: "70%" }}
+                                                style={{ cursor: "pointer", textDecoration: "underline", maxWidth: "70%" ,color:"#270206"}}
                                                 onClick={() => handleImageClick(product)}
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#productDetailModal"
                                                 title={product.title}
+
                                             >
                                                 {product?.title}
                                             </span>
