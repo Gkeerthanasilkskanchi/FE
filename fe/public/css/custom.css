@@ -207,10 +207,16 @@ input::placeholder {
   border-radius: 8px;
   padding: 10px;
   background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   margin-left: 5%;
   /* Add space between each promise item */
 }
+
+.custom-narrow-container {
+  max-width: 200px;
+  margin: 3rem auto; /* equivalent to m-5 with auto-centering */
+}
+
 
 .spin {
   animation: spin 1s linear infinite;
@@ -1090,4 +1096,9 @@ input.form-control.outline-input:focus {
 
 .cross-icon:hover {
   border: 2px solid #000000 !important;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }

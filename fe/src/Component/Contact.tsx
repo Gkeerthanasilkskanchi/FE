@@ -172,7 +172,7 @@ export const Contact = () => {
                             src="/images/submit_your_query.png"
                             alt="Connect with Keerthana Silks on WhatsApp"
                             className="img-fluid"
-                            style={{ maxHeight: '500px', objectFit: 'cover', marginBottom: '-100px'  , marginTop: '50px'}}
+                            style={{ maxHeight: '500px', objectFit: 'cover', marginBottom: '-100px', marginTop: '50px' }}
                         />
 
 
@@ -225,22 +225,28 @@ export const Contact = () => {
                         <div className="carousel-inner">
                             {[1, 2, 3].map((review, idx) => (
                                 <div className={`carousel-item ${idx === 0 ? "active" : ""}`} key={idx}>
-                                    <div className="d-flex justify-content-center">
+                                    <div className="d-flex justify-content-center" >
                                         <div
-                                            className="card border-0 shadow-lg p-4"
+                                            className="card border-0 promise-item p-4 mx-auto"
                                             style={{
-                                                maxWidth: "600px",
-                                                width: "60%",
+                                                width: "80%",
+                                                maxWidth: "500px",
+                                                margin:"20px",
                                                 backgroundColor: "#ffffff",
                                                 borderRadius: "1rem",
+                                                transition: "transform 0.3s ease",
                                             }}
                                         >
                                             <div className="card-body text-center">
                                                 <img
                                                     src={`https://i.pravatar.cc/100?img=${idx + 20}`}
                                                     alt="Client"
-                                                    className="rounded-circle mb-3"
-                                                    style={{ width: "80px", height: "80px", objectFit: "cover" }}
+                                                    className="rounded-circle mb-3 shadow"
+                                                    style={{
+                                                        width: "80px",
+                                                        height: "80px",
+                                                        objectFit: "cover",
+                                                    }}
                                                 />
                                                 <h5 className="fw-bold mb-1">Client {idx + 1}</h5>
                                                 <p className="text-muted mb-3">– Verified Customer</p>
@@ -296,6 +302,7 @@ export const Contact = () => {
                             <span className="visually-hidden">Next</span>
                         </button>
                     </div>
+
                 </div>
 
                 {/* Contact Ways - Cards in Grid */}

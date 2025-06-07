@@ -172,7 +172,7 @@ export const Products = () => {
 
                                         <div className="d-flex justify-content-between align-items-center gap-2 mt-auto ps-4 pe-4">
                                             <button
-                                                style={{ outline: 'none', border: 'none', borderRadius: '5px',background:'none' }}
+                                                style={{ outline: 'none', border: 'none', borderRadius: '5px', background: 'none' }}
                                                 className="primary"
                                                 title="Buy Now"
                                                 onClick={() => handleBuyClick(product)}
@@ -180,12 +180,12 @@ export const Products = () => {
                                                 <i className="bi bi-bag " style={{ fontSize: "30px" }}></i>
                                             </button>
 
-                                            <button style={{ outline: 'none', border: 'none', borderRadius: '5px',background:'none' }}  title="Add to Cart" onClick={() => addToCart(product.id)}>
+                                            <button style={{ outline: 'none', border: 'none', borderRadius: '5px', background: 'none' }} title="Add to Cart" onClick={() => addToCart(product.id)}>
                                                 {product?.is_product_in_cart ? <i className="bi bi-cart-plus" style={{ fontSize: "30px" }}></i>
                                                     : <i className="bi bi-cart" style={{ fontSize: "30px" }}></i>}
 
                                             </button>
-                                            <button style={{ outline: 'none', border: 'none', borderRadius: '5px', background:'none'}} className="primary" title="Like Product" onClick={() => likeProduct(product.id)}>
+                                            <button style={{ outline: 'none', border: 'none', borderRadius: '5px', background: 'none' }} className="primary" title="Like Product" onClick={() => likeProduct(product.id)}>
                                                 {!(product?.is_product_liked) ? <i className="bi bi-suit-heart heart-style " style={{ fontSize: '30px' }}></i>
                                                     : <i className="bi bi-heart-fill heart-style " style={{ fontSize: '30px' }}></i>}
 
@@ -202,60 +202,135 @@ export const Products = () => {
                 {/* PRODUCT DETAIL MODAL */}
                 <div className="modal fade" id="productDetailModal" tabIndex={-1} aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered" style={{ maxWidth: "600px" }}>
-                        <div className="modal-content position-relative">
+                        <div className="modal-content position-relative" style={{ borderRadius: '12px', boxShadow: '0 8px 16px rgba(0,0,0,0.15)' }}>
                             {/* Product Info */}
-                            <div className="d-flex p-3" style={{ maxHeight: "300px" }}>
+                            <div className="d-flex p-3" style={{ maxHeight: "300px", backgroundColor: "#fff" }}>
                                 {/* Left: Description */}
-                                <div className="w-70 pe-3" style={{ width: "70%" }}>
-                                    <h5 className="text-clip-gradient">About the Product</h5>
-                                    <p style={{ fontSize: "14px" }}>
+                                <div
+                                    className="w-70 pe-3 position-relative"
+                                    style={{ width: "70%" }}
+                                >
+                                    {/* Close Icon (Top-Right Corner) */}
+                                    <i
+                                        className="bi bi-x cross-icon"
+                                        style={{
+                                            position: "absolute",
+                                            top: "-10px",
+                                            right: "-170px",
+                                            fontSize: "40px",
+                                            color: "black",
+                                            cursor: "pointer",
+                                            zIndex: "10",
+                                        }}
+                                        title="Close"
+                                        data-bs-dismiss="modal" // ← for Bootstrap modal close
+                                    // onClick={() => setShowCard(false)} ← use this if you're hiding via custom state
+                                    ></i>
+
+                                    {/* Title */}
+                                    <h5
+                                        style={{
+                                            textAlign: "center",
+                                            fontWeight: "700",
+                                            fontSize: "22px",
+                                            marginBottom: "10px",
+                                            marginLeft :"130px",
+                                            color: "#6C5CE7",
+                                            fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+                                            textTransform: "uppercase",
+                                            letterSpacing: "1px",
+                                        }}
+                                    >
+                                        About the Product
+                                    </h5>
+
+                                    {/* Description */}
+                                    <p
+                                        style={{
+                                            fontSize: "20px",
+                                            color: "black",
+                                            backgroundColor: "white",
+                                            lineHeight: "1.8",
+                                            textAlign: "justify",
+                                            
+                                            marginLeft:"30px",
+                                            fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+                                            letterSpacing: "0.3px",
+                                            fontWeight: "bold",
+                                        }}
+                                    >
                                         {selectedProduct?.about}
                                     </p>
+
+                                    {/* Image */}
                                     <img
-                                        src={selectedProduct?.image || '/images/default.jpg'}
+                                        src={selectedProduct?.image || "/images/default.jpg"}
                                         className="card-img-top"
                                         style={{
-                                            height: '200px',
-                                            width: '100%',
-                                            objectFit: 'contain',
-                                            objectPosition: 'center',
-                                            backgroundColor: '#f8f8f8',
-                                            cursor: 'pointer'
+                                            height: "200px",
+                                            width: "100%",
+                                            objectFit: "contain",
+                                            objectPosition: "center",
+                                            backgroundColor: "#f0f0f0",
+                                            cursor: "pointer",
+                                            borderRadius: "10px",
+                                            boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
+                                            transition: "transform 0.3s ease",
                                         }}
                                         alt={selectedProduct?.title}
                                         data-bs-toggle="modal"
                                         data-bs-target="#imageModal"
+                                        onMouseOver={(e) => (e.currentTarget.style.transform = "scale(1.02)")}
+                                        onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")}
                                     />
-
                                 </div>
 
                                 {/* Right: Brief info */}
-                                <div className="w-30 border-start ps-3" style={{ width: "30%" }}>
+                                <div
+                                    className="w-30 border-start ps-3"
+                                    style={{
+                                        width: "30%",
+                                        color: "#2c3e50",
+                                        fontSize: "14px",
+                                        marginTop: "70px",
+                                        lineHeight: "1.6",
+                                    }}
+                                >
                                     <p><strong>Name:</strong> {selectedProduct?.title}</p>
                                     <p><strong>Price:</strong> ₹{selectedProduct?.price}</p>
                                     <p><strong>Cloth:</strong> {selectedProduct?.cloth || "N/A"}</p>
                                     <p><strong>Category:</strong> {selectedProduct?.category || "Traditional"}</p>
-                                    {/* <p><strong>Bought By:</strong> {selectedProduct?.bought_by || "N/A"} customers</p> */}
                                     <p><strong>Saree Type:</strong> {selectedProduct?.saree_type}</p>
-
                                 </div>
                             </div>
 
-
+                            {/* Buy Now Button */}
                             <div className="border-top p-3 d-flex justify-content-center">
                                 <button
-                                    style={{ outline: 'none', border: 'none', borderRadius: '5px' }}
-                                    className="primary"
+                                    style={{
+                                        outline: 'none',
+                                        border: 'none',
+                                        borderRadius: '8px',
+                                        background: 'linear-gradient(to right, #fd79a8, #e84393)',
+                                        padding: '10px 20px',
+                                        color: '#fff',
+                                        fontFamily: "'Fantasy', cursive",
+                                        fontSize: '18px',
+                                        boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
+                                        transition: 'transform 0.2s ease-in-out',
+                                    }}
+                                    className="primary d-flex align-items-center"
                                     title="Buy Now"
                                     onClick={() => handleBuyClick(selectedProduct)}
+                                    onMouseOver={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
+                                    onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")}
                                 >
-                                    <i className="bi bi-bag-fill me-3" style={{ fontSize: "30px" }}></i>
+                                    <i className="bi bi-bag-fill me-3" style={{ fontSize: "22px" }}></i>
                                     Buy Now
                                 </button>
-                              
                             </div>
-
                         </div>
+
                     </div>
                 </div>
 

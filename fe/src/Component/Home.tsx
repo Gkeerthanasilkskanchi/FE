@@ -97,7 +97,7 @@ export const Home = () => {
               { title: "Years in Business", count: "20+" },
             ].map((item, idx) => (
               <div className="col-md-2 col-6" style={{ width: "200px" }} key={idx}>
-                <div className="card shadow-sm p-3 rounded-4 border-0 neon-hover">
+                <div className="card promise-item p-3 rounded-4 border-0 neon-hover">
                   <h4 className="fw-bold text-primary">{item.count}</h4>
                   <p className="text-muted small">{item.title}</p>
                 </div>
@@ -192,30 +192,35 @@ export const Home = () => {
             <div className="carousel-inner" style={{ width: '100%', overflow: 'hidden' }}>
 
               {[
-                ['Kanjivaram', 'Banarasi'],
-                ['Silk Cotton', 'Banarasi'],
-                ['Silk Cotton', 'Banarasi'],
-                ['Silk Cotton','Silk Cotton']
-               
+                ['Kanjivaram', 'Banarasi', 'Cotton'],
+                ['Silk Cotton', 'Chiffon', 'Organza'],
+                ['Tissue', 'Linen', 'Georgette'],
+                ['Satin', 'Silk Cotton', 'Net']
               ].map((pair, slideIdx) => (
                 <div className={`carousel-item ${slideIdx === 0 ? 'active' : ''}`} key={slideIdx}>
-                  <div className="container">
+                  <div className="container my-5">
                     <div className="row justify-content-center">
                       {pair.map((type, idx) => {
-                        const imgIndex = slideIdx * 2 + idx + 6; // For image path like saree-1.png, saree-2.png...
+                        const imgIndex = slideIdx * 3 + idx + 6; // For images like saree-6.png, saree-7.png...
                         return (
-                          <div className="col-md-6" key={type}>
-                            <div className="card border-0 shadow-sm rounded-4 h-60">
+                          <div className="col-md-4" key={`${type}-${idx}`}>
+                            <div className="card border-0 promise-item rounded-4 mx-auto" style={{ width: "90%" }}>
                               <img
                                 src={`/images/saree-${imgIndex}.png`}
                                 alt={type}
-                                style={{ height: '400px', objectFit: 'fill', width: '90%' }}
+                                style={{
+                                  height: '200px',
+                                  objectFit: 'fill',
+                                  width: '90%',
+                                  display: 'block',
+                                  margin: '0 auto'
+                                }}
                               />
-
                               <div className="card-body text-center">
                                 <h5 className="card-title fw-bold text-clip-gradient">{type}</h5>
-                                <p className="text-muted small">Elegant {type} sarees crafted with love and heritage.</p>
-                                {/* <button className="btn primary">Explore</button> */}
+                                <p className="text-muted small">
+                                  Elegant {type} sarees crafted with love and heritage.
+                                </p>
                               </div>
                             </div>
                           </div>
@@ -247,6 +252,7 @@ export const Home = () => {
             </button>
           </div>
         </div>
+
 
 
         <h3 className="text-center fw-bold my-5 text-clip-gradient ">

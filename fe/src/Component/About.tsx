@@ -88,7 +88,7 @@ export const About = () => {
           { icon: 'bi-cart', title: 'Seamless Shopping', desc: 'Shop online with ease and enjoy hassle-free delivery.' },
         ].map((card, idx) => (
           <div key={idx} className="col-md-6">
-            <div className="d-flex align-items-start p-3 shadow-sm rounded-4  h-100 hover-shadow transition neon-hover">
+            <div className="d-flex align-items-start p-3  rounded-4 promise-item  h-100 hover-shadow transition neon-hover">
               <i className={`bi ${card.icon} fs-1 text-primary me-3`}></i>
               <div>
                 <h5 className="fw-semibold mb-1">{card.title}</h5>
@@ -201,7 +201,7 @@ export const About = () => {
                       { title: "Years in Business", count: "20+" },
                     ].map((item, idx) => (
                       <div className="col-md-2 col-6" style={{ width: "200px" }} key={idx}>
-                        <div className="card shadow-sm p-3 rounded-4 border-0 neon-hover">
+                        <div className="card promise-item p-3 rounded-4 border-0 neon-hover">
                           <h4 className="fw-bold text-primary">{item.count}</h4>
                           <p className="text-muted small">{item.title}</p>
                         </div>
