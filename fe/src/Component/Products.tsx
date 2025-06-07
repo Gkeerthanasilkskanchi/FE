@@ -32,7 +32,8 @@ export const Products = () => {
             toast.error(err.response?.data?.message);
         } finally {
             setLoading(false);
-            window.location.reload();
+            fetchProducts();
+            // window.location.reload();
         }
     };
 
@@ -53,7 +54,8 @@ export const Products = () => {
             toast.error(err.response?.data?.message);
         } finally {
             setLoading(false);
-            window.location.reload();
+            fetchProducts();
+            // window.location.reload();
         }
     };
     const fetchProducts = async () => {

@@ -21,14 +21,20 @@ export const ProductList = () => {
   const [selectedProduct, setSelectedProduct] = useState<any | null>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+   
+    if (email) fetchData();
+  }, [type,email]);
+
+   const fetchData = async () => {
       try {
         let res: any | null = null;
+        
         if (type === "liked") {
           setLoading(true);
           if (!email) { toast.error("Login to add product"); }
           if (email) {
             res = await getLikedProducts(email);
+            
 
           }
         } else {
@@ -46,8 +52,6 @@ export const ProductList = () => {
       }
     };
 
-    if (email) fetchData();
-  }, [type, email]);
   const handleBuyClick = async (product: any) => {
     try {
 
@@ -101,7 +105,8 @@ export const ProductList = () => {
       toast.error(err.response?.data?.message);
     } finally {
       setLoading(false);
-      window.location.reload();
+      fetchData();
+      // window.location.reload();
     }
   };
 
@@ -122,8 +127,9 @@ export const ProductList = () => {
       console.error(err);
       toast.error(err.response?.data?.message);
     } finally {
-      window.location.reload();
+      // window.location.reload();
       setLoading(false);
+      fetchData();
     }
   };
 

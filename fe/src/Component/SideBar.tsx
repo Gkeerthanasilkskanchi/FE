@@ -54,7 +54,8 @@ export const Sidebar = () => {
           src="/images/logo.jpg"
           alt="logo"
           className="img-fluid"
-          style={{ maxHeight: "100px" }}
+          style={{ maxHeight: "100px",cursor:"pointer" }}
+          onClick={()=>navigate('/home')}
         />
       </div>
 

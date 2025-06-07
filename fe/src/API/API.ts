@@ -106,8 +106,8 @@ export const search = async (payload: any) => {
     return { status: review?.status, data: review?.data }
 }
 
-export const getFilteredProduct = async (payload: any) => {
-    const review = await Client("POST", `${baseURL}/users/getFilteredProduct`, payload);
+export const getFilteredProduct = async(page: number, keyword: string = "") => {
+    const review = await Client("GET", `${baseURL}/users/getFilteredProduct?page=${page}&keyword=${keyword}`);
     return { status: review?.status, data: review?.data }
 }
 

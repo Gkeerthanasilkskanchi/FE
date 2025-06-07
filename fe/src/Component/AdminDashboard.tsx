@@ -17,20 +17,6 @@ export const AdminDashboard: React.FC = () => {
     fetchProducts();
   }, []);
 
-  const handleEdit = async (id: number) => {
-    const res = await fetch(`/api/products/${id}`);
-    const data = await res.json();
-    setEditingProduct(data);
-  };
-
-  const handleDelete = async (id: number) => {
-   if (window.confirm("Are you sure you want to delete this product?")) {
-      await fetch(`/api/products/${id}`, {
-        method: "DELETE",
-      });
-      fetchProducts();
-    }
-  };
 
   const handleUpdateComplete = () => {
     setEditingProduct(null);
@@ -40,10 +26,10 @@ export const AdminDashboard: React.FC = () => {
   return (
     <div className="p-6 bg-gray-100 min-h-screen space-y-10">
       {/* Dashboard Analytics */}
-      <section>
+      {/* <section>
         <h1 className="text-clip-gradient mb-4">Admin Dashboard</h1>
         <Dashboard />
-      </section>
+      </section> */}
 
       {/* Add/Edit Product Form */}
       <section className="p-6 rounded-2xl">

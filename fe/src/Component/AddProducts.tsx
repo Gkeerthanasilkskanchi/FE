@@ -29,21 +29,33 @@ export const AddProduct: React.FC<AddProductProps> = ({ product, onUpdateComplet
   const [message, setMessage] = useState("");
   const [showForm, setShowForm] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
-  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editingId, setEditingId] = useState<number | null>(null);
 
-  const fetchProducts = async () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [searchKeyword, setSearchKeyword] = useState("");
+
+
+  const fetchProducts = async (page = 1, keyword = "") => {
     try {
-      const res = await getFilteredProduct({ page: 1 });
-
+      setLoading(true);
+      const res: any = await getFilteredProduct(page, keyword);
+      
       setProducts(res?.data?.data?.products);
+      setTotalPages(Math.ceil(res?.data?.data?.total / 10)); 
+      setCurrentPage(page);
     } catch (err) {
       console.error("Failed to fetch products", err);
+    } finally {
+      setLoading(false);
     }
   };
 
+
   useEffect(() => {
-    fetchProducts();
-  }, []);
+    fetchProducts(currentPage, searchKeyword);
+  }, [currentPage, searchKeyword]);
+
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -107,7 +119,7 @@ export const AddProduct: React.FC<AddProductProps> = ({ product, onUpdateComplet
     }
   };
 
-  const handleEdit = async (id: string) => {
+  const handleEdit = async (id: number) => {
     try {
       const res = await getProductDeatilsById(id);
       const product = res.data?.data;
@@ -150,6 +162,16 @@ export const AddProduct: React.FC<AddProductProps> = ({ product, onUpdateComplet
             </button>
           )}
         </div>
+        <div className="d-flex justify-content-between align-items-center mb-3">
+          <input
+            type="text"
+            className="form-control w-25"
+            placeholder="Search..."
+            value={searchKeyword}
+            onChange={(e) => setSearchKeyword(e.target.value)}
+          />
+        </div>
+
         {showForm && (
           <div className="product-form card border-0 rounded-4 mx-auto my-5" style={{ maxWidth: "600px" }}>
             <div className="card-header d-flex justify-content-between align-items-center bg-gradient text-white" style={{ backgroundColor: "#0d6efd" }}>
@@ -327,7 +349,7 @@ export const AddProduct: React.FC<AddProductProps> = ({ product, onUpdateComplet
                   </td>
                 </tr>
               ))}
-              {products.length === 0 && (
+              {products?.length === 0 && (
                 <tr>
                   <td colSpan={5} className="text-center">
                     No products found.
@@ -336,6 +358,24 @@ export const AddProduct: React.FC<AddProductProps> = ({ product, onUpdateComplet
               )}
             </tbody>
           </table>
+          {totalPages > 1 && (
+            <div className="d-flex justify-content-center my-3">
+              <nav>
+                <ul className="pagination">
+                  {[...Array(totalPages)].map((_, i) => (
+                    <li
+                      key={i}
+                      className={`page-item ${currentPage === i + 1 ? "active" : ""}`}
+                      onClick={() => fetchProducts(i + 1, searchKeyword)}
+                    >
+                      <button className="page-link">{i + 1}</button>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </div>
+          )}
+
         </div>
       </div>
     </>
