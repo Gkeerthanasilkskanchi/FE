@@ -2,7 +2,7 @@
 
 
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { AuthModal } from "./AuthModel";
 import { Loader } from "./Loader";
 
@@ -14,6 +14,22 @@ export const MainContent = ({ children }: any) => {
   const [showAuth, setShowAuth] = useState(false);
   // const [navItems, setNavItems]: any = useState([]);
   const [userEmail, setUserEmail] = useState<string | null>(null);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const handleScrollToTop = () => {
+      if (scrollRef.current) {
+        scrollRef.current.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    };
+
+    // Listen to the custom event
+    window.addEventListener("scroll-main-content-top", handleScrollToTop);
+
+    return () => {
+      window.removeEventListener("scroll-main-content-top", handleScrollToTop);
+    };
+  }, []);
 
   useEffect(() => {
     const role = sessionStorage.getItem("role");
@@ -37,10 +53,7 @@ export const MainContent = ({ children }: any) => {
   return (
     <>
       <Loader loading={loading}></Loader>
-      <div
-        className="flex-grow-1 d-flex flex-column"
-        style={{ height: "100vh", overflow: "hidden" }}
-      >
+      <div className="flex-grow-1 d-flex flex-column" style={{ height: "100vh", overflow: "hidden" }}>
         {/* Header section */}
         <div className="p-4 position-relative" style={{ flexShrink: 0 }}>
           {/* Location Left */}
@@ -161,7 +174,7 @@ export const MainContent = ({ children }: any) => {
         </div>
 
         {/* Scrollable Content Area */}
-        <div className="p-4" style={{ flexGrow: 1, overflowY: "auto" }}>
+        <div ref={scrollRef} className="p-4" style={{ flexGrow: 1, overflowY: "auto" }}>
           {children}
         </div>
       </div>
