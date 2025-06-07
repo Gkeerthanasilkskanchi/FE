@@ -7,6 +7,7 @@ import {
   getFilteredProduct,
   getProductDeatilsById,
 } from "../API/API";
+import { toast } from "react-toastify";
 import { Loader } from "./Loader";
 type AddProductProps = {
   product?: any;
@@ -103,17 +104,17 @@ export const AddProduct: React.FC<AddProductProps> = ({ product, onUpdateComplet
       if (isEdit && editingId) {
         form.append("id", formData.id)
         response = await editProduct(form);
-        setMessage("✅ Product updated successfully!");
+        toast.success(" Product updated successfully!", { autoClose: 1000 });
       } else {
         response = await addProduct(form);
-        setMessage("✅ Product added successfully!");
+         toast.success(" Product added successfully!", { autoClose: 1000 });
       }
 
       fetchProducts();
       resetForm();
       setShowForm(false);
     } catch (error: any) {
-      setMessage(error.response?.data?.message || "❌ Error occurred");
+       toast.error(error?.message, { autoClose: 1000 });
     } finally {
       setLoading(false);
     }
@@ -137,9 +138,10 @@ export const AddProduct: React.FC<AddProductProps> = ({ product, onUpdateComplet
       try {
         await deleteProduct(id);
         fetchProducts();
-        alert("Product deleted");
+       toast.success("Product Deleted!", { autoClose: 1000 });
       } catch (err) {
         console.error("Delete failed", err);
+        toast.error("Failed to delete the product",{ autoClose: 1000 })
       }
     }
   };

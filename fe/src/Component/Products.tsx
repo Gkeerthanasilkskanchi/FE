@@ -16,7 +16,7 @@ export const Products = () => {
     const email = sessionStorage.getItem("userEmail");
     const addToCart = async (productId: any) => {
         try {
-            if (!email) { toast.error("Login to add product"); }
+            if (!email) { toast.error("Login to add product", { autoClose: 1000 }); }
             if (email) {
                 setLoading(true);
                 const payload = {
@@ -25,7 +25,7 @@ export const Products = () => {
                     quantity: 1,
                 }
                 const response = await addCartProducts(payload);
-                if (response) toast.success(response.data.message);
+                if (response) toast.success(response.data.message, { autoClose: 1000 });
             }
         } catch (err: any) {
             console.error(err);
@@ -39,7 +39,7 @@ export const Products = () => {
 
     const likeProduct = async (productId: any) => {
         try {
-            if (!email) { toast.error("Login to like product"); }
+            if (!email) { toast.error("Login to like product", { autoClose: 1000 }); }
             if (email) {
                 setLoading(true);
                 const payload = {
@@ -47,11 +47,11 @@ export const Products = () => {
                     productId,
                 }
                 const response = await addLikedProducts(payload);
-                if (response) toast.success(response.data.message);
+                if (response) toast.success(response.data.message, { autoClose: 1000 });
             }
         } catch (err: any) {
             console.error(err);
-            toast.error(err.response?.data?.message);
+            toast.error(err.response?.data?.message, { autoClose: 1000 });
         } finally {
             setLoading(false);
             fetchProducts();
@@ -74,7 +74,7 @@ export const Products = () => {
     const handleBuyClick = async (product: any) => {
         try {
             const email = sessionStorage.getItem("userEmail");
-            if (!email) { toast.error("Login to buy a product"); }
+            if (!email) { toast.error("Login to buy a product", { autoClose: 1000 }); }
             if (email) {
                 setLoading(true);
                 const payload = {

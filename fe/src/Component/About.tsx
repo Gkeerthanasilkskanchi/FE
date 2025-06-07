@@ -1,14 +1,5 @@
 import { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
 export const About = () => {
 
 

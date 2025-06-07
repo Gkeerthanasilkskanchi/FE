@@ -31,14 +31,14 @@ export const ProductList = () => {
         
         if (type === "liked") {
           setLoading(true);
-          if (!email) { toast.error("Login to add product"); }
+          if (!email) { toast.error("Login to add product", { autoClose: 1000 }); }
           if (email) {
             res = await getLikedProducts(email);
             
 
           }
         } else {
-          if (!email) { toast.error("Login to add product"); }
+          if (!email) { toast.error("Login to add product", { autoClose: 1000 }); }
           if (email) {
             setLoading(true);
             res = await getCartProducts(email);
@@ -56,7 +56,7 @@ export const ProductList = () => {
     try {
 
       const email = sessionStorage.getItem("userEmail");
-      if (!email) { toast.error("Login to like product"); }
+      if (!email) { toast.error("Login to like product", { autoClose: 1000 }); }
       if (email) {
         setLoading(true);
         const payload = {
@@ -89,7 +89,7 @@ export const ProductList = () => {
 
   const addToCart = async (productId: any) => {
     try {
-      if (!email) { toast.error("Login to add product"); }
+      if (!email) { toast.error("Login to add product", { autoClose: 1000 }); }
       if (email) {
         setLoading(true);
         const payload = {
@@ -98,11 +98,11 @@ export const ProductList = () => {
           quantity: 1,
         }
         const response = await addCartProducts(payload);
-        if (response) toast.success(response.data.message);
+        if (response) toast.success(response.data.message, { autoClose: 1000 });
       }
     } catch (err: any) {
       console.error(err);
-      toast.error(err.response?.data?.message);
+      toast.error(err.response?.data?.message, { autoClose: 1000 });
     } finally {
       setLoading(false);
       fetchData();
@@ -112,7 +112,7 @@ export const ProductList = () => {
 
   const likeProduct = async (productId: any) => {
     try {
-      if (!email) { toast.error("Login to like product"); }
+      if (!email) { toast.error("Login to like product", { autoClose: 1000 }); }
       if (email) {
         setLoading(true);
         const payload = {
@@ -121,11 +121,11 @@ export const ProductList = () => {
         }
         const response = await addLikedProducts(payload);
         
-        if (response) toast.success(response.data.message);
+        if (response) toast.success(response.data.message, { autoClose: 1000 });
       }
     } catch (err: any) {
       console.error(err);
-      toast.error(err.response?.data?.message);
+      toast.error(err.response?.data?.message, { autoClose: 1000 });
     } finally {
       // window.location.reload();
       setLoading(false);
