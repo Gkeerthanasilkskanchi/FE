@@ -1,4 +1,64 @@
 
+
+/* Base Font Size for Scaling */
+html {
+  font-size: 16px;
+}
+
+/* Global Font Sizes for All Views */
+h1 {
+  font-size: clamp(22px, 5vw, 42px);
+  font-weight: bold;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+h2 {
+  font-size: clamp(20px, 4.5vw, 36px);
+  font-weight: bold;
+  line-height: 1.25;
+  margin-bottom: 0.5rem;
+}
+
+h3 {
+  font-size: clamp(18px, 4vw, 32px);
+  font-weight: bold;
+  line-height: 1.25;
+  margin-bottom: 0.5rem;
+}
+
+h4 {
+  font-size: clamp(16px, 3.5vw, 28px);
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+}
+
+h5 {
+  font-size: clamp(14px, 3vw, 24px);
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+}
+
+h6 {
+  font-size: clamp(12px, 2.5vw, 20px);
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  font-size: clamp(12px, 2.5vw, 18px);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+span,
+small {
+  font-size: clamp(10px, 2vw, 16px);
+}
+
 .body {
   margin: 0;
   padding: 0;
@@ -967,6 +1027,7 @@ input.form-control.outline-input:focus {
 
 
 
+
 .icon-wrapper-cart {
   display: flex;
   align-items: center;
@@ -1101,4 +1162,257 @@ input.form-control.outline-input:focus {
 .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+/* Tablet View: 768px to 991px */
+@media (min-width: 768px) and (max-width: 991px) {
+  .responsive-title {
+    font-size: 20px !important;
+  }
+  .responsive-slogan {
+    font-size: 14px !important;
+  }
+  .responsive-icon i,
+  .responsive-icon {
+    font-size: 18px !important;
+    width: 36px !important;
+    height: 36px !important;
+  }
+  .responsive-user-icon {
+    font-size: 14px !important;
+    width: 36px !important;
+    height: 36px !important;
+  }
+}
+
+/* Tablet View: 768px to 991px */
+@media (min-width: 768px) and (max-width: 991px) {
+  .responsive-title {
+    font-size: 10px !important;
+  }
+  .responsive-slogan {
+    font-size: 7px !important;
+  }
+  .responsive-icon i,
+  .responsive-icon {
+    font-size: 18px !important;
+    width: 36px !important;
+    height: 36px !important;
+  }
+  .responsive-user-icon {
+    font-size: 14px !important;
+    width: 36px !important;
+    height: 36px !important;
+  }
+}
+@media (max-width: 767px) {
+  .responsive-header {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    gap: 0.2rem !important;
+  }
+
+  .mobile-location {
+    display: flex !important;
+    align-items: center !important;
+  }
+
+ .mobile-title-wrap {
+    display: none !important;
+  }
+
+  .mobile-hamburger {
+    margin-left: auto !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .responsive-title {
+    font-size: 7px !important;
+    font-weight: bold;
+    margin: 0 !important;
+  }
+
+  .responsive-slogan {
+    font-size: 7px !important;
+    margin: 0 !important;
+  }
+
+  .responsive-icon,
+  .responsive-icon i,
+  .responsive-user-icon {
+    font-size: 8px !important;
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  .responsive-user-icon i {
+    font-size: 7px !important;
+  }
+
+  .responsive-text {
+    font-size: 7px !important;
+  }
+
+  .gap-3 {
+    gap: 0.2rem !important;
+  }
+
+  .bi {
+    font-size: 16px !important;
+  }
+}
+@media (max-width: 767px) {
+  .mobile-hide-text {
+    display: none !important;
+  }
+}
+
+
+
+.qr-image {
+  width: 100%;
+  height: auto;
+  max-width: 350px;
+}
+
+.gold-tick {
+  color: gold;
+  margin-right: 5px;
+}
+
+/* Form spacing for smaller devices */
+.form-floating-wrapper {
+  margin-bottom: 1.25rem;
+}
+
+/* Flip card responsiveness */
+.flip-card {
+  background-color: transparent;
+  width: 100%;
+  height: 250px;
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.flip-card-front {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+/* Reel card responsiveness */
+.reel-card {
+  margin-bottom: 20px;
+}
+
+/* Carousel arrows */
+.custom-nav {
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 40px;
+  height: 40px;
+}
+
+/* Glass card responsive */
+.glass-card {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  border-radius: 10px;
+  width: 100%;
+  max-width: 700px;
+}
+
+/* Email input floating effect */
+.floating-group {
+  position: relative;
+  flex-grow: 1;
+}
+
+.floating-group input {
+  width: 100%;
+  padding: 10px 10px 10px 35px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.floating-group label {
+  position: absolute;
+  left: 10px;
+  top: 8px;
+  font-size: 12px;
+  transition: all 0.2s;
+  pointer-events: none;
+}
+
+.floating-group.filled label,
+.floating-group input:focus + label {
+  top: -10px;
+  left: 8px;
+  font-size: 10px;
+  color: #007bff;
+}
+
+.floating-group .icon {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+/* Responsive override for smaller screens */
+@media (max-width: 768px) {
+  .qr-image {
+    max-width: 100%;
+    margin-top: 20px;
+  }
+
+  .form-floating-wrapper {
+    margin-bottom: 1rem;
+  }
+
+  .flip-card {
+    height: auto;
+  }
+
+  .flip-card-front,
+  .flip-card-back {
+    padding: 0.5rem;
+  }
+
+  .glass-card {
+    padding: 2rem 1rem;
+  }
+
+  .carousel-inner .row > div {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
 }
