@@ -120,18 +120,26 @@ export const AddProduct: React.FC<AddProductProps> = ({ product, onUpdateComplet
     }
   };
 
-  const handleEdit = async (id: number) => {
-    try {
-      const res = await getProductDeatilsById(id);
-      const product = res.data?.data;
-      setFormData(product);
-      setIsEdit(true);
-      setEditingId(id);
-      setShowForm(true);
-    } catch (err) {
-      console.error("Failed to load product", err);
+const handleEdit = async (id: number) => {
+  try {
+    const res = await getProductDeatilsById(id);
+    const product = res.data; // not res.data.data
+
+    // ✅ Add this check here
+    if (!product || !product.title) {
+      console.error("Product data is invalid:", product);
+      return;
     }
-  };
+
+    setFormData(product);
+    setIsEdit(true);
+    setEditingId(id);
+    setShowForm(true);
+  } catch (err) {
+    console.error("Failed to load product", err);
+  }
+};
+
 
   const handleDelete = async (id: number) => {
     if (window.confirm("Are you sure to delete this product?")) {
@@ -327,30 +335,32 @@ export const AddProduct: React.FC<AddProductProps> = ({ product, onUpdateComplet
               </tr>
             </thead>
             <tbody>
-              {products?.map((prod, index) => (
-                <tr key={prod?.id}>
-                  <td>
-                    {index + 1}
-                  </td>
-                  <td>{prod.title}</td>
-                  <td>{prod.price}</td>
-                  <td>{prod.category}</td>
-                  <td>
-                    <button
-                      className="btn btn-sm btn-primary me-2"
-                      onClick={() => handleEdit(prod.id)}
-                    >
-                      <i className="bi bi-pencil-square"></i>
-                    </button>
-                    <button
-                      className="btn btn-sm btn-danger"
-                      onClick={() => handleDelete(prod.id)}
-                    >
-                      <i className="bi bi-trash"></i>
-                    </button>
-                  </td>
-                </tr>
-              ))}
+              {products?.map((prod, index) => {
+  console.log("Rendering Product:", prod); // 👈 Add this
+  return (
+    <tr key={prod?.id}>
+      <td>{index + 1}</td>
+      <td>{prod.title}</td>
+      <td>{prod.price}</td>
+      <td>{prod.category}</td>
+      <td>
+        <button
+          className="btn btn-sm btn-primary me-2"
+          onClick={() => handleEdit(prod.id)}
+        >
+          <i className="bi bi-pencil-square"></i>
+        </button>
+        <button
+          className="btn btn-sm btn-danger"
+          onClick={() => handleDelete(prod.id)}
+        >
+          <i className="bi bi-trash"></i>
+        </button>
+      </td>
+    </tr>
+  );
+})}
+
               {products?.length === 0 && (
                 <tr>
                   <td colSpan={5} className="text-center">

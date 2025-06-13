@@ -80,7 +80,7 @@ export const Home = () => {
               </div>
 
               <div className="col-md-6">
-                <img src={'/images/about.jpg'} alt="About Us" style={{ width: "600px", height: "400px" }} className="img-fluid rounded" />
+                <img src={'/images/About-us.jpeg'} alt="About Us" style={{ width: "600px", height: "400px" }} className="img-fluid rounded" />
               </div>
             </div>
           </div>
@@ -207,7 +207,7 @@ export const Home = () => {
                             <div className="col-md-4" key={`${type}-${idx}`}>
                               <div className="card border-0 promise-item rounded-4 mx-auto" style={{ width: "90%" }}>
                                 <img
-                                  src={`/images/saree-${imgIndex}.png`}
+                                  src={`/images/saree-${imgIndex}.jpeg`}
                                   alt={type}
                                   style={{
                                     height: '200px',
