@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const Client = async (method: string, url: string, data?: any) => {
-  const headers = (url === "http://localhost:8081/users/products" ||  url === "http://localhost:8081/users/editProduct")
+  const headers = (url === "https://g-be.onrender.com/users/products" ||  url === "https://g-be.onrender.com/users/editProduct")
     ? { "Content-Type": "multipart/form-data" }
     : { "Content-Type": "application/json" };
 

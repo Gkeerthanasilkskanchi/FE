@@ -1,6 +1,6 @@
 import { Client } from "../Client"
 
-export const baseURL = "http://localhost:8081"
+export const baseURL = "https://g-be.onrender.com"
 export const registerUser = async (payload: any) => {
     const createUser = await Client("POST", `${baseURL}/users/register`, payload);
     return { status: createUser?.status, data: createUser?.data }
