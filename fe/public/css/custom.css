@@ -1,9 +1,5 @@
 
 
-/* Base Font Size for Scaling */
-html {
-  font-size: 16px;
-}
 
 /* Global Font Sizes for All Views */
 h1 {
@@ -14,7 +10,7 @@ h1 {
 }
 
 h2 {
-  font-size: clamp(20px, 4.5vw, 36px);
+  /* font-size: clamp(20px, 4.5vw, 36px); */
   font-weight: bold;
   line-height: 1.25;
   margin-bottom: 0.5rem;
@@ -49,19 +45,20 @@ h6 {
 }
 
 p {
-  font-size: clamp(12px, 2.5vw, 18px);
+  font-size: 15px;
   line-height: 1.6;
   margin-bottom: 1rem;
 }
 
 span,
-small {
-  font-size: clamp(10px, 2vw, 16px);
+.small {
+  font-size: 10px !important;
 }
 
-.body {
+body {
   margin: 0;
   padding: 0;
+  font-family: 'Libre Baskerville', serif !important;
 }
 
 /* Ensure submenu positioning */
@@ -114,7 +111,7 @@ input::placeholder {
   width: 100%;
   max-width: 400px;
   margin: 20px auto;
-  font-family: 'Segoe UI', sans-serif;
+  /* font-family: 'Segoe UI', sans-serif; */
 }
 
 .email-input-wrapper label {
@@ -1283,10 +1280,6 @@ input.form-control.outline-input:focus {
   margin-right: 5px;
 }
 
-/* Form spacing for smaller devices */
-.form-floating-wrapper {
-  margin-bottom: 1.25rem;
-}
 
 /* Flip card responsiveness */
 .flip-card {

@@ -187,8 +187,7 @@ export const AddProduct: React.FC<AddProductProps> = ({ product, onUpdateComplet
               {message && <div className="alert alert-info">{message}</div>}
 
               <form onSubmit={handleSubmit}>
-                {/* Image Upload */}
-                <div className="form-floating-wrapper">
+                <div className={`form-floating-wrapper`}>
                   <input
                     type="file"
                     name="image"
@@ -202,7 +201,7 @@ export const AddProduct: React.FC<AddProductProps> = ({ product, onUpdateComplet
                 {/* Title & Price */}
                 <div className="row">
                   <div className="col-md-6">
-                    <div className="form-floating-wrapper">
+                    <div className={`form-floating-wrapper ${formData["title"] ? 'filled' : ''}`} key={formData["title"]}>
                       <input
                         name="title"
                         value={formData.title}
@@ -214,8 +213,9 @@ export const AddProduct: React.FC<AddProductProps> = ({ product, onUpdateComplet
                     </div>
                   </div>
                   <div className="col-md-6">
-                    <div className="form-floating-wrapper">
+                    <div className={`form-floating-wrapper ${formData["price"] ? 'filled' : ''}`} key={formData["price"]}>
                       <input
+
                         name="price"
                         type="number"
                         value={formData.price}
@@ -229,7 +229,7 @@ export const AddProduct: React.FC<AddProductProps> = ({ product, onUpdateComplet
                 </div>
 
                 {/* About */}
-                <div className="form-floating-wrapper">
+               <div className={`form-floating-wrapper ${formData["about"] ? 'filled' : ''}`} key={formData["about"]}>
                   <textarea
                     name="about"
                     className="form-control"
@@ -245,7 +245,7 @@ export const AddProduct: React.FC<AddProductProps> = ({ product, onUpdateComplet
                 {/* Cloth & Category */}
                 <div className="row">
                   <div className="col-md-6">
-                    <div className="form-floating-wrapper">
+                    <div className={`form-floating-wrapper ${formData["cloth"] ? 'filled' : ''}`} key={formData["cloth"]}>
                       <input
                         name="cloth"
                         value={formData.cloth}
@@ -256,7 +256,7 @@ export const AddProduct: React.FC<AddProductProps> = ({ product, onUpdateComplet
                     </div>
                   </div>
                   <div className="col-md-6">
-                    <div className="form-floating-wrapper">
+                     <div className={`form-floating-wrapper ${formData["category"] ? 'filled' : ''}`} key={formData["category"]}>
                       <input
                         name="category"
                         value={formData.category}
@@ -271,7 +271,7 @@ export const AddProduct: React.FC<AddProductProps> = ({ product, onUpdateComplet
                 {/* Bought By & Saree Type */}
                 <div className="row">
                   <div className="col-md-6">
-                    <div className="form-floating-wrapper">
+                    <div className={`form-floating-wrapper ${formData["bought_by"] ? 'filled' : ''}`} key={formData["bought_by"]}>
                       <input
                         name="bought_by"
                         value={formData.bought_by}
@@ -282,7 +282,7 @@ export const AddProduct: React.FC<AddProductProps> = ({ product, onUpdateComplet
                     </div>
                   </div>
                   <div className="col-md-6">
-                    <div className="form-floating-wrapper">
+                  <div className={`form-floating-wrapper ${formData["saree_type"] ? 'filled' : ''}`} key={formData["saree_type"]}>
                       <input
                         name="saree_type"
                         value={formData.saree_type}

@@ -2,15 +2,11 @@
 
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { AuthModal } from "./AuthModel";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap-icons/font/bootstrap-icons.css";
 
 export const Sidebar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [showAuth, setShowAuth] = useState(false);
   const [navItems, setNavItems] = useState<any[]>([]);
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const [showSidebar, setShowSidebar] = useState(false); // For mobile toggle

@@ -100,7 +100,7 @@ export const Home = () => {
                 <div className="col-md-2 col-6" style={{ width: "200px" }} key={idx}>
                   <div className="card promise-item p-3 rounded-4 border-0 neon-hover">
                     <h4 className="fw-bold text-primary">{item.count}</h4>
-                    <p className="text-muted small">{item.title}</p>
+                    <p className="small">{item.title}</p>
                   </div>
                 </div>
               ))}
