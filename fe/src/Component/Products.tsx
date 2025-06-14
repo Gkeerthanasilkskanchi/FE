@@ -37,27 +37,38 @@ export const Products = () => {
         }
     };
 
-    const likeProduct = async (productId: any) => {
-        try {
-            if (!email) { toast.error("Login to like product", { autoClose: 1000 }); }
-            if (email) {
-                setLoading(true);
-                const payload = {
-                    email,
-                    productId,
-                }
-                const response = await addLikedProducts(payload);
-                if (response) toast.success(response.data.message, { autoClose: 1000 });
-            }
-        } catch (err: any) {
-            console.error(err);
-            toast.error(err.response?.data?.message, { autoClose: 1000 });
-        } finally {
-            setLoading(false);
-            fetchProducts();
-            // window.location.reload();
-        }
+const likeProduct = async (productId: number) => {
+  try {
+    if (!email) {
+      toast.error("Login to like product", { autoClose: 1000 });
+      return;
+    }
+
+    setLoading(true);
+
+    const payload = {
+      email,
+      productId,
     };
+
+    const response = await addLikedProducts(payload);
+
+    if (response) {
+      toast.success(response.data.message, { autoClose: 1000 });
+    }
+  } catch (err: any) {
+    console.error(err);
+    toast.error(err.response?.data?.message || "Something went wrong", {
+      autoClose: 1000,
+    });
+  } finally {
+    setLoading(false);
+    fetchProducts(); // or fetchProducts()
+  }
+};
+
+
+    
     const fetchProducts = async () => {
         try {
             setLoading(true);
