@@ -1,5 +1,4 @@
 {
-  "homepage": "https://Gkeerthanasilkskanchi.github.io/FE",
   "name": "fe",
   "version": "0.1.0",
   "private": true,
@@ -31,8 +30,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "gh-pages -d build --branch=gh-pages --clean --debug",
-    "predeploy": "npm run build"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -54,7 +53,6 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.21",
-    "gh-pages": "^6.3.0",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.1.7"
   }
