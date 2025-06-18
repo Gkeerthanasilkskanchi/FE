@@ -217,7 +217,7 @@ const likeProduct = async (productId: number) => {
                   {selectedProduct?.about}
                 </p>
                 <img
-                  src={selectedProduct?.image || '/images/default.jpg'}
+                  src={selectedProduct?.image || '/FE/images/default.jpg'}
                   className="card-img-top"
                   style={{
                     height: '200px',

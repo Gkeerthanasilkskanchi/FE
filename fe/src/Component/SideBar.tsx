@@ -58,7 +58,7 @@ export const Sidebar = () => {
         >
           <i className="bi bi-list fs-3"></i>
         </button>
-        <img src="/images/logo.jpg" alt="logo" style={{ height: "40px" }} />
+        <img src="/FE/images/logo-flower.png" alt="logo" style={{ height: "40px" }} />
       </div>
 
       {/* Sidebar */}
@@ -77,7 +77,7 @@ export const Sidebar = () => {
         {/* Desktop Logo */}
         <div className="d-none d-md-flex justify-content-center align-items-center mt-3">
           <img
-            src="/images/logo.jpg"
+            src="/FE/images/logo-flower.png"
             alt="logo"
             className="img-fluid"
             style={{ maxHeight: "100px" }}

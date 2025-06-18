@@ -144,7 +144,7 @@ const likeProduct = async (productId: number) => {
                             >
                                 <div className="card h-100 shadow-sm border-0" >
                                     <img
-                                        src={product?.image || '/images/default.jpg'}
+                                        src={product?.image || '/FE/images/default.jpg'}
                                         className="card-img-top"
                                         onClick={() => handleImageClick(product)}
                                         data-bs-toggle="modal"
@@ -277,7 +277,7 @@ const likeProduct = async (productId: number) => {
 
                                     {/* Image */}
                                     <img
-                                        src={selectedProduct?.image || "/images/default.jpg"}
+                                        src={selectedProduct?.image || "/FE/images/default.jpg"}
                                         className="card-img-top"
                                         style={{
                                             height: "200px",

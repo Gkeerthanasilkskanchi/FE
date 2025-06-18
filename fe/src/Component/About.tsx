@@ -44,7 +44,7 @@ export const About = () => {
         <div className="col-md-6 text-center mb-4 mb-md-0">
 
           <img
-            src={'/images/aboutsaree.jpg'}
+            src={'/FE/images/aboutsaree.jpg'}
             alt="Keerthana Silks"
             className="img-fluid shadow-sm mb-3"
             style={{ maxHeight: '500px', objectFit: 'cover', borderRadius: '5px' }}

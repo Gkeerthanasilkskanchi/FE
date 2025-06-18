@@ -30,7 +30,7 @@ export const Home = () => {
           {/* Hero Banner */}
           <div className="w-100">
             <img
-              src="/images/home.png"
+              src="/FE/images/home.png"
               alt="Saree Banner"
               className="img-fluid w-100"
               style={{
@@ -56,7 +56,7 @@ export const Home = () => {
             <div className="row align-items-center">
               <div className="col-md-6 position-relative about-us-section">
                 <img
-                  src="/images/logo-flower.png"
+                  src="/FE/images/logo-flower.png"
                   alt="background flower"
                   className="about-bg-image"
                   style={{
@@ -80,7 +80,7 @@ export const Home = () => {
               </div>
 
               <div className="col-md-6">
-                <img src={'/images/About-us.jpeg'} alt="About Us" style={{ width: "600px", height: "400px" }} className="img-fluid rounded" />
+                <img src={'/FE/images/About-us.jpeg'} alt="About Us" style={{ width: "600px", height: "400px" }} className="img-fluid rounded" />
               </div>
             </div>
           </div>
@@ -207,7 +207,7 @@ export const Home = () => {
                             <div className="col-md-4" key={`${type}-${idx}`}>
                               <div className="card border-0 promise-item rounded-4 mx-auto" style={{ width: "90%" }}>
                                 <img
-                                  src={`/images/saree-${imgIndex}.jpeg`}
+                                  src={`/FE/images/saree-${imgIndex}.jpeg`}
                                   alt={type}
                                   style={{
                                     height: '200px',

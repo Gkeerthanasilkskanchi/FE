@@ -90,7 +90,7 @@ export const MainContent = ({ children }: any) => {
                 Elegance In Every Drape
               </p>
 <img
-  src={`${process.env.PUBLIC_URL}/images/logo-flower.png`}
+  src="/FE/images/logo-flower.png"
   alt="Flower"
   className="position-absolute top-50 start-50 translate-middle"
   style={{
@@ -102,6 +102,7 @@ export const MainContent = ({ children }: any) => {
     pointerEvents: "none",
   }}
 />
+
 
             </div>
 

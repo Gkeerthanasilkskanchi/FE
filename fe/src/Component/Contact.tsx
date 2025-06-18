@@ -143,7 +143,7 @@ export const Contact = () => {
     </div>
     <div className="col-md-5 text-center">
       <img
-        src="/images/wp_connect_prasanth.jpg"
+        src="/FE/images/wp_connect_prasanth.jpg"
         alt="WhatsApp QR"
         className="img-fluid qr-image neon-border"
         style={{ maxWidth: '400px' }}
@@ -155,7 +155,7 @@ export const Contact = () => {
   <div className="row g-4">
     <div className="col-md-6">
       <img
-        src="/images/submit_your_query.png"
+        src="/FE/images/submit_your_query.png"
         alt="Submit your query"
         className="img-fluid"
         style={{ maxHeight: '500px', objectFit: 'cover', marginTop: '50px' }}
