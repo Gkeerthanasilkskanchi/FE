@@ -207,7 +207,7 @@ export const Home = () => {
                             <div className="col-md-4" key={`${type}-${idx}`}>
                               <div className="card border-0 promise-item rounded-4 mx-auto" style={{ width: "90%" }}>
                                 <img
-                                  src={`/FE/images/saree-${imgIndex}.jpeg`}
+                                  src={`/FE/images/saree-${imgIndex}.jpg`}
                                   alt={type}
                                   style={{
                                     height: '200px',
