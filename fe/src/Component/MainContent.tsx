@@ -89,19 +89,20 @@ export const MainContent = ({ children }: any) => {
               <p className="m-0 text-clip-gradient-sm" style={{ fontSize: 'clamp(12px, 1.2vw, 16px)' }}>
                 Elegance In Every Drape
               </p>
-              <img
-                src="/images/logo-flower.png"
-                alt="Flower"
-                className="position-absolute top-50 start-50 translate-middle"
-                style={{
-                  width: "100px",
-                  height: "100px",
-                  opacity: 0.2,
-                  objectFit: "contain",
-                  zIndex: 0,
-                  pointerEvents: "none",
-                }}
-              />
+<img
+  src={`${process.env.PUBLIC_URL}/images/logo-flower.png`}
+  alt="Flower"
+  className="position-absolute top-50 start-50 translate-middle"
+  style={{
+    width: "100px",
+    height: "100px",
+    opacity: 0.2,
+    objectFit: "contain",
+    zIndex: 0,
+    pointerEvents: "none",
+  }}
+/>
+
             </div>
 
             {/* Hamburger toggle button (Mobile Only) */}
