@@ -40,36 +40,39 @@ export const About = () => {
   return (
 
     <div className="container py-5">
-      <div className="row align-items-center">
-        <div className="col-md-6 text-center mb-4 mb-md-0">
+   <div className="row align-items-center flex-column-reverse flex-md-row">
+  {/* Text column */}
+   <div className="col-md-6">
+  <p className="mb-4 responsive-para">
+    <strong>Keerthana Silks</strong> has been Kanchipuram’s pride since 2003, offering timeless silk sarees rooted in tradition and elegance.<br/><br/>
+    We believe a saree is more than fabric — it's a story, a celebration, and a legacy.<br/><br/>
+    With decades of trust, <strong>Keerthana Silks</strong> remains the choice of those who value authenticity and artistry.<br/>
+  </p>
+</div>
 
-          <img
-            src={'/FE/images/aboutsaree.jpg'}
-            alt="Keerthana Silks"
-            className="img-fluid shadow-sm mb-3"
-            style={{ maxHeight: '500px', objectFit: 'cover', borderRadius: '5px' }}
-          />
-          <p className="text-uppercase text-muted lower-text" style={{ letterSpacing: '1px' }}>
-            Woven with love. Worn with pride.
-          </p>
-        </div>
+  {/* Image column */}
+  <div className="col-md-6 text-center mb-4 mb-md-0">
+    <img
+      src="/FE/images/aboutsaree.jpg"
+      alt="Keerthana Silks"
+      className="img-fluid shadow-sm mb-3 rounded"
+      style={{ maxHeight: '500px', objectFit: 'cover' }}
+    />
+  <p
+  className="text-uppercase text-muted lower-text"
+  style={{
+    letterSpacing: '1px',
+    fontSize: 'clamp(0.75rem, 1.5vw, 1rem)',
+    fontFamily: "'Cedarville Cursive', cursive"
+  }}
+>
+  Woven with love. Worn with pride.
+</p>
 
-        <div className="col-md-6">
-          <p className="text-justify mb-4">
-            <strong>Since 2003, Keerthana Silks</strong> has been the heart of Kanchipuram’s rich saree tradition, offering a stunning collection of silks, handlooms, and exclusive designs that capture the essence of elegance and heritage.
-          </p>
-          <p className="text-justify mb-4">
-            At <strong>Keerthana Silks</strong>, we believe that a saree is more than just fabric — it’s an experience, a story, a legacy. With a focus on quality, tradition, and personalized service, we ensure every customer finds the perfect saree to match their unique style and occasion.
-          </p>
-          <p className="text-justify mb-4">
-            Our collections are a blend of timeless craftsmanship and contemporary flair, carefully curated to meet the tastes of modern women while preserving the spirit of tradition. Whether it's for weddings, festivals, or everyday elegance, our sarees are crafted to make every moment memorable.
-          </p>
-          <p className="text-justify">
-            With decades of trust and excellence, <strong>Keerthana Silks</strong> continues to be a preferred destination for those who value authenticity and artistry. Step into our world and experience the legacy of Kanchipuram — woven into every thread.
-          </p>
-        </div>
+  </div>
+</div>
 
-      </div>
+
 
 
       {/* Signature Section */}
