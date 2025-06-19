@@ -52,44 +52,53 @@ export const Home = () => {
           </div>
 
           {/* About Us */}
-          <div className="container my-5">
-            <div className="row align-items-center">
-              <div className="col-md-6 position-relative about-us-section">
-                <img
-                  src="/FE/images/logo-flower.png"
-                  alt="background flower"
-                  className="about-bg-image"
-                  style={{
-                    height: '500px',
-                    objectFit: 'cover',
-                    objectPosition: 'center top', // shifts focus downward
-                    borderRadius: '5px'
-                  }}
-                />
-                <h2 className="fw-bold mb-3 text-para">About Us</h2>
-                <p>
-                  We are a heritage saree brand committed to bringing timeless tradition with a modern touch. With decades of experience, we specialize in Kanjivaram, Banarasi, and designer sarees tailored for every occasion. Explore our world of rich colors, intricate designs, and heartfelt stories behind every weave.
-                </p>
-                <p>
-                  At Keerthana Silks, each saree is more than just attire — it is a celebration of culture, artistry, and emotion. We collaborate with skilled weavers from across India to preserve age-old techniques while infusing them with contemporary elegance. From festive collections to bridal exclusives, every piece is handpicked to reflect grace and individuality.
-                </p>
-                <p>
-                  Step into our store or explore online to discover collections that blend luxury, comfort, and craftsmanship — sarees that not only drape beautifully, but speak of legacy, love, and lasting memories.
-                </p>
+       <div className="container my-5">
+  <div className="row align-items-center gy-4">
+    {/* Left Column: Text */}
+    <div className="col-lg-6 position-relative">
+      <img
+        src="/FE/images/logo-flower.png"
+        alt="background flower"
+        className="about-bg-image d-none d-md-block"
+      />
 
-              </div>
+      <h2 className="fw-bold mb-3 about-title">About Us</h2>
 
-              <div className="col-md-6">
-                <img src={'/FE/images/About-us.jpeg'} alt="About Us" style={{ width: "600px", height: "400px" }} className="img-fluid rounded" />
-              </div>
-            </div>
-          </div>
+      <p className="about-text">
+We are a heritage saree brand blending timeless tradition with modern elegance. Specializing in Kanjivaram, Banarasi, and designer sarees, we bring rich colors and intricate weaves to life.<br/><br/>
+
+At Keerthana Silks, every saree is a tribute to culture and craftsmanship. We partner with skilled weavers across India to preserve traditional artistry with a contemporary touch.<br/><br/>
+
+Visit our store or shop online to explore collections that reflect grace, legacy, and lasting memories.
+      </p>
+    </div>
+
+    {/* Right Column: Main Image */}
+    <div className="col-lg-6 text-center">
+      <img
+        src="/FE/images/About-us.jpeg"
+        alt="About Us"
+        className="img-fluid rounded"
+        style={{ maxHeight: '400px', objectFit: 'cover' }}
+      />
+    </div>
+  </div>
+</div>
+
 
           {/* Stats Cards */}
           <div className="container my-5">
-            <h3 className="text-center mb-4 fw-bold text-para " style={{ marginTop: "70px" }}>Client Satisfaction</h3>
+            <h3
+              className="text-center mb-4 fw-bold text-para"
+              style={{
+                marginTop: "70px",
+                fontSize: "clamp(1.2rem, 4vw, 2rem)" // 👈 Responsive font size
+              }}
+            >
+              Client Satisfaction
+            </h3>
 
-            <div className="row text-center g-4">
+            <div className="row text-center g-4" style={{ marginLeft: "5px" }}>
               {[
                 { title: "Customer Satisfaction", count: "99.5%" },
                 { title: "Happy Customers", count: "12,000+" },
@@ -111,7 +120,12 @@ export const Home = () => {
 
           {/* FAQs */}
           <div className="container my-5">
-            <h3 className="text-center mb-4 fw-bold text-para">Frequently Asked Questions</h3>
+            <h3
+              className="text-center mb-4 fw-bold text-para"
+              style={{ fontSize: "clamp(1.2rem, 4vw, 2rem)" }}
+            >
+              Frequently Asked Questions
+            </h3>
             <Accordion defaultActiveKey="0" className="gradient-accordion">
               {[
                 {
@@ -143,50 +157,93 @@ export const Home = () => {
 
           <div className="container my-5 d-flex justify-content-center">
             <div className="glass-card w-100 p-4 text-center">
-              <h3 className="mb-3 fw-bold text-clip-gradient " >Stay in the Loop!</h3>
-              <p className="mb-4">
+              <h3
+                className="mb-3 fw-bold text-clip-gradient"
+                style={{ fontSize: "clamp(1.2rem, 4.5vw, 2.2rem)" }}
+              >
+                Stay in the Loop!
+              </h3>
+              <p
+                className="mb-4"
+                style={{ fontSize: "clamp(0.9rem, 2.5vw, 1.1rem)" }}
+              >
                 Subscribe to get updates on our latest collections and exclusive offers.
               </p>
 
-              {subscribed ? (
-                <div className="mt-4">
-                  <h5 className="text-warning">🎉 Here's your exclusive insight!</h5>
-                  <p>"Innovation distinguishes between a leader and a follower." – Steve Jobs</p>
-                </div>
-              ) : (
-                <form onSubmit={handleEmailSubscribe}>
-                  <div className="input-group shadow-sm">
-                    <span className="input-group-text bg-white border-0">
-                      <i className="fas fa-envelope text-primary" style={{ fontSize: '40px' }}></i>
-                    </span>
-                    <div className="email-input-wrapper">
-                      <div className={`floating-group ${email ? 'filled' : ''}`}>
-                        <input
-                          id="email"
-                          type="email"
-                          value={email}
-                          required
-                          onChange={(e) => setEmail(e.target.value)}
-                          onFocus={() => setFocused(true)}
-                          onBlur={() => setFocused(false)}
-                        />
-                        <label htmlFor="email">Enter email</label>
-                        <span className="icon">@</span>
-                      </div>
 
-                    </div>
+             <form onSubmit={handleEmailSubscribe}>
+  <div
+    className="d-flex align-items-center w-100 justify-content-between"
+    style={{
+      gap: "0.5rem",
+      flexWrap: "nowrap",
+    }}
+  >
+    {/* Icon */}
+    <span
+      className="input-group-text bg-white border-0 p-1"
+      style={{
+        flexShrink: 0,
+        padding: "0.25rem 0.5rem",
+      }}
+    >
+      <i
+        className="fas fa-envelope text-primary"
+        style={{
+          fontSize: "clamp(0.9rem, 2.5vw, 1.2rem)",
+        }}
+      ></i>
+    </span>
 
-                    <button type="submit" className="btn btn-warning fw-bold" disabled={loading}>
-                      {loading ? "Subscribing..." : "Subscribe"}
-                    </button>
-                  </div>
-                </form>
-              )}
+    {/* Input */}
+    <div className="flex-grow-1" style={{ minWidth: "100px" }}>
+      <div className={`floating-group ${email ? "filled" : ""}`}>
+        <input
+          id="email"
+          type="email"
+          value={email}
+          required
+          onChange={(e) => setEmail(e.target.value)}
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
+          className="form-control"
+          style={{
+            fontSize: "clamp(0.75rem, 2vw, 0.95rem)",
+            padding: "0.4rem 0.5rem 0.4rem 2rem",
+          }}
+        />
+        <label htmlFor="email">Enter email</label>
+        <span className="icon">@</span>
+      </div>
+    </div>
+
+    {/* ✅ Responsive Button */}
+    <button
+      type="submit"
+  className="btn btn-warning fw-bold subscribe-btn"
+      disabled={loading}
+      style={{
+        flexShrink: 0,
+        padding: "0.3rem 0.6rem",
+        fontSize: "clamp(0.7rem, 2vw, 0.9rem)",
+        minWidth: "80px",
+      }}
+    >
+      {loading ? "..." : "Subscribe"}
+    </button>
+  </div>
+</form>
+
             </div>
           </div>
 
 
-          <h3 className="text-center fw-bold my-5 text-clip-gradient">Featured Collections</h3>
+            <h3
+              className="text-center fw-bold my-5 text-clip-gradient"
+              style={{ fontSize: "clamp(1.5rem, 5vw, 2.5rem)" }} // 24px to 40px range
+            >
+              Featured Collections
+            </h3>
 
           <div className="container mb-5">
             <div id="featuredCarousel" className="carousel slide" data-bs-ride="carousel">
@@ -204,27 +261,22 @@ export const Home = () => {
                         {pair.map((type, idx) => {
                           const imgIndex = slideIdx * 3 + idx + 6; // For images like saree-6.png, saree-7.png...
                           return (
-                            <div className="col-md-4" key={`${type}-${idx}`}>
-                              <div className="card border-0 promise-item rounded-4 mx-auto" style={{ width: "90%" }}>
-                                <img
-                                  src={`/FE/images/saree-${imgIndex}.jpg`}
-                                  alt={type}
-                                  style={{
-                                    height: '200px',
-                                    objectFit: 'fill',
-                                    width: '90%',
-                                    display: 'block',
-                                    margin: '0 auto'
-                                  }}
-                                />
-                                <div className="card-body text-center">
-                                  <h5 className="card-title fw-bold text-clip-gradient">{type}</h5>
-                                  <p className="text-muted small">
-                                    Elegant {type} sarees crafted with love and heritage.
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
+                          <div className="col-md-4 col-sm-6 col-12 d-flex justify-content-center mb-4" key={`${type}-${idx}`}>
+  <div className="card border-0 promise-item rounded-4 featured-card">
+    <img
+      src={`/FE/images/saree-${imgIndex}.jpg`}
+      alt={type}
+      className="featured-card-img"
+    />
+    <div className="card-body text-center">
+      <h5 className="card-title fw-bold text-clip-gradient featured-title">{type}</h5>
+      <p className="text-muted featured-desc">
+        Elegant {type} sarees crafted with love and heritage.
+      </p>
+    </div>
+  </div>
+</div>
+
                           );
                         })}
                       </div>
@@ -256,63 +308,64 @@ export const Home = () => {
 
 
 
-          <h3 className="text-center fw-bold my-5 text-clip-gradient ">
+          <h3 className="text-center fw-bold my-5 text-clip-gradient "
+                        style={{ fontSize: "clamp(1.5rem, 5vw, 2.5rem)" }} // 24px to 40px range
+          >
             What Our Customers Say
           </h3>
-          <div className="container mb-5">
-            <div id="testimonialCarousel" className="carousel slide" data-bs-ride="carousel">
-              <div className="carousel-inner" style={{ width: '100%', overflow: 'hidden' }}>
-                {[
-                  {
-                    name: "Anjali S.",
-                    quote: "The Banarasi saree was beyond beautiful. Perfect for my wedding!",
-                  },
-                  {
-                    name: "Preeti R.",
-                    quote: "Great customer service and lovely packaging. Felt like a gift!",
-                  },
-                  {
-                    name: "Meena K.",
-                    quote: "Authentic silk, vibrant colors. I’m in love with every purchase.",
-                  },
-                ].map((item, index) => (
-                  <div className={`carousel-item ${index === 0 ? "active" : ""}`} key={index}>
-                    <div className="container">
-                      <div className="testimonial-box mx-auto text-center px-4 py-5 ">
-                        <blockquote className="blockquote fst-italic mb-3">
-                          “{item.quote}”
-                        </blockquote>
-                        <footer className="blockquote-footer mt-2 text-gold">
-                          {item.name}
-                        </footer>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <button
-                className="carousel-control-prev"
-                type="button"
-                data-bs-target="#testimonialCarousel"
-                data-bs-slide="prev"
-              >
-                <span className="carousel-control-prev-icon bg-primary" aria-hidden="true"></span>
-                {/* <span style={{ color: 'gold', fontWeight: 'bold', marginLeft: '8px' }}>Previous</span> */}
-              </button>
-
-              <button
-                className="carousel-control-next"
-                type="button"
-                data-bs-target="#testimonialCarousel"
-                data-bs-slide="next"
-              >
-                <span className="carousel-control-next-icon bg-primary" aria-hidden="true"></span>
-                {/* <span style={{ color: 'gold', fontWeight: 'bold', marginLeft: '8px' }}>Next</span> */}
-              </button>
+       <div className="container mb-5">
+  <div id="testimonialCarousel" className="carousel slide" data-bs-ride="carousel">
+    <div className="carousel-inner w-100">
+      {[
+        {
+          name: "Anjali S.",
+          quote: "The Banarasi saree was beyond beautiful. Perfect for my wedding!",
+        },
+        {
+          name: "Preeti R.",
+          quote: "Great customer service and lovely packaging. Felt like a gift!",
+        },
+        {
+          name: "Meena K.",
+          quote: "Authentic silk, vibrant colors. I’m in love with every purchase.",
+        },
+      ].map((item, index) => (
+        <div className={`carousel-item ${index === 0 ? "active" : ""}`} key={index}>
+          <div className="container d-flex justify-content-center">
+            <div className="testimonial-box text-center px-4 py-5">
+<blockquote className="blockquote responsive-quote">
+  “{item.quote}”
+</blockquote>
+<footer className="blockquote-footer responsive-name">
+  {item.name}
+</footer>
 
 
             </div>
           </div>
+        </div>
+      ))}
+    </div>
+
+    {/* Controls */}
+    <button
+      className="carousel-control-prev"
+      type="button"
+      data-bs-target="#testimonialCarousel"
+      data-bs-slide="prev"
+    >
+      <span className="carousel-control-prev-icon bg-primary rounded-circle" />
+    </button>
+    <button
+      className="carousel-control-next"
+      type="button"
+      data-bs-target="#testimonialCarousel"
+      data-bs-slide="next"
+    >
+      <span className="carousel-control-next-icon bg-primary rounded-circle" />
+    </button>
+  </div>
+</div>
 
 
 

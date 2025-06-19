@@ -183,8 +183,8 @@ export const MainContent = ({ children }: any) => {
                       ></i>
                     </div>
                   ) : (
-                    <div className="d-flex flex-column align-items-center">
-                      <i className="bi bi-person-fill" style={{ fontSize: 'clamp(16px, 2.5vw, 26px)' }}></i>
+                    <div className="d-flex flex-column align-items-center" style={{ fontSize: 'clamp(20px, 5.5vw, 36px)', marginTop: '10px'  }}>
+                      <i className="bi bi-person-fill" style={{ fontSize: 'clamp(20px, 5.5vw, 36px)', marginTop: '10px'  }}></i>
                       <span className="small">Sign Up</span>
                     </div>
                   )}
