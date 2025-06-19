@@ -41,9 +41,9 @@ export const AddProduct: React.FC<AddProductProps> = ({ product, onUpdateComplet
     try {
       setLoading(true);
       const res: any = await getFilteredProduct(page, keyword);
-      
+
       setProducts(res?.data?.data?.products);
-      setTotalPages(Math.ceil(res?.data?.data?.total / 10)); 
+      setTotalPages(Math.ceil(res?.data?.data?.total / 10));
       setCurrentPage(page);
     } catch (err) {
       console.error("Failed to fetch products", err);
@@ -100,45 +100,45 @@ export const AddProduct: React.FC<AddProductProps> = ({ product, onUpdateComplet
       form.append("bought_by", formData.bought_by);
       form.append("saree_type", formData.saree_type);
 
-      let response;
+
       if (isEdit && editingId) {
         form.append("id", formData.id)
-        response = await editProduct(form);
+        await editProduct(form);
         toast.success(" Product updated successfully!", { autoClose: 1000 });
       } else {
-        response = await addProduct(form);
-         toast.success(" Product added successfully!", { autoClose: 1000 });
+        await addProduct(form);
+        toast.success(" Product added successfully!", { autoClose: 1000 });
       }
 
       fetchProducts();
       resetForm();
       setShowForm(false);
     } catch (error: any) {
-       toast.error(error?.message, { autoClose: 1000 });
+      toast.error(error?.message, { autoClose: 1000 });
     } finally {
       setLoading(false);
     }
   };
 
-const handleEdit = async (id: number) => {
-  try {
-    const res = await getProductDeatilsById(id);
-    const product = res.data; // not res.data.data
+  const handleEdit = async (id: number) => {
+    try {
+      const res = await getProductDeatilsById(id);
+      const product = res.data; 
 
-    // ✅ Add this check here
-    if (!product || !product.title) {
-      console.error("Product data is invalid:", product);
-      return;
+     
+      if (!product || !product.title) {
+        console.error("Product data is invalid:", product);
+        return;
+      }
+
+      setFormData(product);
+      setIsEdit(true);
+      setEditingId(id);
+      setShowForm(true);
+    } catch (err) {
+      console.error("Failed to load product", err);
     }
-
-    setFormData(product);
-    setIsEdit(true);
-    setEditingId(id);
-    setShowForm(true);
-  } catch (err) {
-    console.error("Failed to load product", err);
-  }
-};
+  };
 
 
   const handleDelete = async (id: number) => {
@@ -146,10 +146,10 @@ const handleEdit = async (id: number) => {
       try {
         await deleteProduct(id);
         fetchProducts();
-       toast.success("Product Deleted!", { autoClose: 1000 });
+        toast.success("Product Deleted!", { autoClose: 1000 });
       } catch (err) {
         console.error("Delete failed", err);
-        toast.error("Failed to delete the product",{ autoClose: 1000 })
+        toast.error("Failed to delete the product", { autoClose: 1000 })
       }
     }
   };
@@ -195,10 +195,12 @@ const handleEdit = async (id: number) => {
               {message && <div className="alert alert-info">{message}</div>}
 
               <form onSubmit={handleSubmit}>
-                <div className={`form-floating-wrapper`}>
+                <div className="mb-3">
+                  <label htmlFor="image" className="form-label">Choose Image</label>
                   <input
                     type="file"
                     name="image"
+                    id="image"
                     className="form-control"
                     accept="image/*"
                     onChange={handleImageChange}
@@ -206,72 +208,86 @@ const handleEdit = async (id: number) => {
                   />
                 </div>
 
+
                 {/* Title & Price */}
                 <div className="row">
                   <div className="col-md-6">
-                    <div className={`form-floating-wrapper ${formData["title"] ? 'filled' : ''}`} key={formData["title"]}>
+                    <div className="form-floating mb-3">
                       <input
+                        type="text"
+                        className="form-control"
+                        id="title"
                         name="title"
+                        placeholder="Title"
                         value={formData.title}
                         onChange={handleChange}
-                        className="form-control"
                         required
                       />
-                      <label>Title</label>
+                      <label htmlFor="title">Title</label>
                     </div>
+
                   </div>
                   <div className="col-md-6">
-                    <div className={`form-floating-wrapper ${formData["price"] ? 'filled' : ''}`} key={formData["price"]}>
+                    <div className="form-floating mb-3" >
                       <input
-
+                        id="price"
                         name="price"
                         type="number"
                         value={formData.price}
                         onChange={handleChange}
                         className="form-control"
+                        placeholder="Price"
                         required
                       />
-                      <label>Price</label>
+                      <label htmlFor="price">Price</label>
                     </div>
                   </div>
                 </div>
 
                 {/* About */}
-               <div className={`form-floating-wrapper ${formData["about"] ? 'filled' : ''}`} key={formData["about"]}>
+                <div className="form-floating mb-3">
                   <textarea
-                    name="about"
                     className="form-control"
-                    rows={3}
+                    placeholder="About this product"
+                    id="about"
+                    name="about"
                     value={formData.about}
                     onChange={handleChange}
-
-                  />
+                    style={{ height: '100px' }}
+                  ></textarea>
                   <label htmlFor="about">About</label>
                 </div>
+
 
 
                 {/* Cloth & Category */}
                 <div className="row">
                   <div className="col-md-6">
-                    <div className={`form-floating-wrapper ${formData["cloth"] ? 'filled' : ''}`} key={formData["cloth"]}>
+                    <div className="form-floating mb-3">
                       <input
+                        id="cloth"
                         name="cloth"
+                        placeholder="Cloth"
+                        type="text"
                         value={formData.cloth}
                         onChange={handleChange}
                         className="form-control"
                       />
-                      <label>Cloth</label>
+                      <label htmlFor="cloth">Cloth</label>
                     </div>
                   </div>
                   <div className="col-md-6">
-                     <div className={`form-floating-wrapper ${formData["category"] ? 'filled' : ''}`} key={formData["category"]}>
+                    <div className="form-floating mb-3" >
                       <input
+                        id="category"
                         name="category"
+                        type="text"
                         value={formData.category}
                         onChange={handleChange}
                         className="form-control"
+                        placeholder="Category"
                       />
-                      <label>Category</label>
+                      <label htmlFor="category">Category</label>
                     </div>
                   </div>
                 </div>
@@ -279,25 +295,31 @@ const handleEdit = async (id: number) => {
                 {/* Bought By & Saree Type */}
                 <div className="row">
                   <div className="col-md-6">
-                    <div className={`form-floating-wrapper ${formData["bought_by"] ? 'filled' : ''}`} key={formData["bought_by"]}>
+                    <div className="form-floating mb-3">
                       <input
+                        id="bought_by"
+                        type="text"
                         name="bought_by"
                         value={formData.bought_by}
                         onChange={handleChange}
                         className="form-control"
+                        placeholder="Bought By"
                       />
-                      <label>Bought By</label>
+                      <label htmlFor="bought_by">Bought By</label>
                     </div>
                   </div>
                   <div className="col-md-6">
-                  <div className={`form-floating-wrapper ${formData["saree_type"] ? 'filled' : ''}`} key={formData["saree_type"]}>
+                    <div className="form-floating mb-3">
                       <input
+                        id="saree_type"
                         name="saree_type"
+                        type="text"
                         value={formData.saree_type}
                         onChange={handleChange}
                         className="form-control"
+                        placeholder="Saree Type"
                       />
-                      <label>Saree Type</label>
+                      <label htmlFor="saree_type">Saree Type</label>
                     </div>
                   </div>
                 </div>
@@ -336,30 +358,30 @@ const handleEdit = async (id: number) => {
             </thead>
             <tbody>
               {products?.map((prod, index) => {
-  console.log("Rendering Product:", prod); // 👈 Add this
-  return (
-    <tr key={prod?.id}>
-      <td>{index + 1}</td>
-      <td>{prod.title}</td>
-      <td>{prod.price}</td>
-      <td>{prod.category}</td>
-      <td>
-        <button
-          className="btn btn-sm btn-primary me-2"
-          onClick={() => handleEdit(prod.id)}
-        >
-          <i className="bi bi-pencil-square"></i>
-        </button>
-        <button
-          className="btn btn-sm btn-danger"
-          onClick={() => handleDelete(prod.id)}
-        >
-          <i className="bi bi-trash"></i>
-        </button>
-      </td>
-    </tr>
-  );
-})}
+                console.log("Rendering Product:", prod); // 👈 Add this
+                return (
+                  <tr key={prod?.id}>
+                    <td>{index + 1}</td>
+                    <td>{prod.title}</td>
+                    <td>{prod.price}</td>
+                    <td>{prod.category}</td>
+                    <td>
+                      <button
+                        className="btn btn-sm btn-primary me-2"
+                        onClick={() => handleEdit(prod.id)}
+                      >
+                        <i className="bi bi-pencil-square"></i>
+                      </button>
+                      <button
+                        className="btn btn-sm btn-danger"
+                        onClick={() => handleDelete(prod.id)}
+                      >
+                        <i className="bi bi-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
 
               {products?.length === 0 && (
                 <tr>
