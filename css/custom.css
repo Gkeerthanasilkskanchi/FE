@@ -1539,3 +1539,19 @@ input.form-control.outline-input:focus {
   background-color: #ddd;
   border-radius: 50%;
 }
+
+/* Paragraph responsiveness */
+.responsive-para {
+  font-size: clamp(0.9rem, 2.2vw, 1.1rem);
+  line-height: 1.7;
+  text-align: justify;
+  color: #444;
+}
+
+/* Prevent oversized image on small screens */
+@media (max-width: 576px) {
+  .img-fluid {
+    max-height: 300px !important;
+  }
+}
+
