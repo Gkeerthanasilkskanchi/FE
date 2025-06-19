@@ -839,8 +839,6 @@ input.form-control.outline-input:focus {
 
 .floating-group {
   position: relative;
-  /* margin-top: 1.5rem; */
-  left:10px;
   width: 100%;
 }
 
@@ -856,32 +854,33 @@ input.form-control.outline-input:focus {
 
 .floating-group .icon {
   position: absolute;
-  top: 50%;
-  left: 0.75rem;
+  top: 40% !important;
+  left: 0.2rem !important;
   transform: translateY(-50%);
   color: #666;
 }
 
 .floating-group label {
   position: absolute;
-  top: 50%;
+  top: 1rem;
   left: 2.5rem;
-  transform: translateY(-50%);
+  font-size: 1rem;
   color: #999;
   pointer-events: none;
-  transition: all 0.2s ease;
   background-color: white;
   padding: 0 4px;
+  transition: all 0.2s ease;
 }
 
-/* Float label up when input is focused or has value */
 .floating-group input:focus + label,
 .floating-group.filled label {
-  top: -8px;
+  top: -0.5rem;
   left: 1rem;
   font-size: 0.75rem;
   color: #333;
 }
+
+
 .form-floating-wrapper {
   position: relative;
   margin-bottom: 1rem;
