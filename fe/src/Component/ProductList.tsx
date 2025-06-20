@@ -207,17 +207,17 @@ export const ProductList = () => {
       <div className="modal fade" id="productDetailModal" tabIndex={-1} aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered" style={{ maxWidth: "600px", width: "95%" }}>
           <div className="modal-content position-relative">
-   <h5
-                  className="text-clip-gradient product-heading mb-2"
-                >
-                  About the Product
-                </h5>
+            <h5
+              className="text-clip-gradient product-heading mb-2"
+            >
+              About the Product
+            </h5>
             {/* Product Info */}
             <div className="d-flex flex-column flex-sm-row p-3" style={{ maxHeight: "90vh", overflowY: "auto" }}>
 
               {/* Left: Description */}
               <div className="w-100 w-sm-70 pe-sm-3 mb-3 mb-sm-0">
-             
+
                 <p style={{ fontSize: "clamp(0.85rem, 2.5vw, 1rem)" }}>{selectedProduct?.about}</p>
 
                 <img

@@ -37,38 +37,38 @@ export const Products = () => {
         }
     };
 
-const likeProduct = async (productId: number) => {
-  try {
-    if (!email) {
-      toast.error("Login to like product", { autoClose: 1000 });
-      return;
-    }
+    const likeProduct = async (productId: number) => {
+        try {
+            if (!email) {
+                toast.error("Login to like product", { autoClose: 1000 });
+                return;
+            }
 
-    setLoading(true);
+            setLoading(true);
 
-    const payload = {
-      email,
-      productId,
+            const payload = {
+                email,
+                productId,
+            };
+
+            const response = await addLikedProducts(payload);
+
+            if (response) {
+                toast.success(response.data.message, { autoClose: 1000 });
+            }
+        } catch (err: any) {
+            console.error(err);
+            toast.error(err.response?.data?.message || "Something went wrong", {
+                autoClose: 1000,
+            });
+        } finally {
+            setLoading(false);
+            fetchProducts(); // or fetchProducts()
+        }
     };
 
-    const response = await addLikedProducts(payload);
-
-    if (response) {
-      toast.success(response.data.message, { autoClose: 1000 });
-    }
-  } catch (err: any) {
-    console.error(err);
-    toast.error(err.response?.data?.message || "Something went wrong", {
-      autoClose: 1000,
-    });
-  } finally {
-    setLoading(false);
-    fetchProducts(); // or fetchProducts()
-  }
-};
 
 
-    
     const fetchProducts = async () => {
         try {
             setLoading(true);
@@ -156,7 +156,7 @@ const likeProduct = async (productId: number) => {
                                             objectPosition: 'center',
                                             backgroundColor: '#f8f8f8',
                                             cursor: 'pointer',
-                                            
+
                                         }}
 
                                         alt={product.title}
@@ -168,7 +168,7 @@ const likeProduct = async (productId: number) => {
                                         <div className="d-flex justify-content-between align-items-center">
                                             <span
                                                 className="fw-bold text-truncate"
-                                                style={{ cursor: "pointer", textDecoration: "underline", maxWidth: "70%" ,color:"#270206"}}
+                                                style={{ cursor: "pointer", textDecoration: "underline", maxWidth: "70%", color: "#270206" }}
                                                 onClick={() => handleImageClick(product)}
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#productDetailModal"
@@ -214,44 +214,43 @@ const likeProduct = async (productId: number) => {
 
                 {/* PRODUCT DETAIL MODAL */}
                 <div className="modal fade" id="productDetailModal" tabIndex={-1} aria-hidden="true">
-                    <div className="modal-dialog modal-dialog-centered" style={{ maxWidth: "600px" }}>
-                        <div className="modal-content position-relative" style={{ borderRadius: '12px', boxShadow: '0 8px 16px rgba(0,0,0,0.15)' }}>
+                    <div className="modal-dialog modal-dialog-centered" style={{ maxWidth: "550px", width: "92%" }}>
+                        <div
+                            className="modal-content position-relative"
+                            style={{
+                                borderRadius: '10px',
+                                boxShadow: '0 6px 12px rgba(0,0,0,0.12)'
+                            }}
+                        >
                             {/* Product Info */}
-                            <div className="d-flex p-3" style={{ maxHeight: "300px", backgroundColor: "#fff" }}>
+                            <div
+                                className="d-flex flex-column flex-md-row p-3"
+                                style={{
+                                    maxHeight: "80vh",
+                                    overflowY: "auto",
+                                    backgroundColor: "#fff"
+                                }}
+                            >
                                 {/* Left: Description */}
-                                <div
-                                    className="w-70 pe-3 position-relative"
-                                    style={{ width: "70%" }}
-                                >
-                                    {/* Close Icon (Top-Right Corner) */}
+                                <div className="w-100 w-md-70 pe-md-3 position-relative">
+                                    {/* Close Icon */}
                                     <i
                                         className="bi bi-x cross-icon"
-                                        style={{
-                                            position: "absolute",
-                                            top: "-10px",
-                                            right: "-170px",
-                                            fontSize: "40px",
-                                            color: "black",
-                                            cursor: "pointer",
-                                            zIndex: "10",
-                                        }}
                                         title="Close"
-                                        data-bs-dismiss="modal" // ← for Bootstrap modal close
-                                    // onClick={() => setShowCard(false)} ← use this if you're hiding via custom state
-                                    ></i>
+                                        data-bs-dismiss="modal"
+                                    />
+
 
                                     {/* Title */}
                                     <h5
+                                        className="text-center"
                                         style={{
-                                            textAlign: "center",
                                             fontWeight: "700",
-                                            fontSize: "22px",
-                                            marginBottom: "10px",
-                                            marginLeft :"130px",
+                                            fontSize: "clamp(0.95rem, 2vw, 1.2rem)",
+                                            marginBottom: "8px",
                                             color: "#6C5CE7",
-                                            fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
                                             textTransform: "uppercase",
-                                            letterSpacing: "1px",
+                                            fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
                                         }}
                                     >
                                         About the Product
@@ -260,16 +259,11 @@ const likeProduct = async (productId: number) => {
                                     {/* Description */}
                                     <p
                                         style={{
-                                            fontSize: "20px",
-                                            color: "black",
-                                            backgroundColor: "white",
-                                            lineHeight: "1.8",
+                                            fontSize: "clamp(0.8rem, 1.8vw, 1rem)",
+                                            color: "#000",
+                                            lineHeight: "1.5",
                                             textAlign: "justify",
-                                            
-                                            marginLeft:"30px",
-                                            fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-                                            letterSpacing: "0.3px",
-                                            fontWeight: "bold",
+                                            marginBottom: "0.8rem"
                                         }}
                                     >
                                         {selectedProduct?.about}
@@ -278,74 +272,72 @@ const likeProduct = async (productId: number) => {
                                     {/* Image */}
                                     <img
                                         src={selectedProduct?.image || "/FE/images/default.jpg"}
-                                        className="card-img-top"
+                                        className="img-fluid rounded"
                                         style={{
-                                            height: "200px",
+                                            height: "150px",
                                             width: "100%",
                                             objectFit: "contain",
-                                            objectPosition: "center",
                                             backgroundColor: "#f0f0f0",
                                             cursor: "pointer",
-                                            borderRadius: "10px",
-                                            boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
-                                            transition: "transform 0.3s ease",
+                                            transition: "transform 0.2s ease"
                                         }}
                                         alt={selectedProduct?.title}
                                         data-bs-toggle="modal"
                                         data-bs-target="#imageModal"
-                                        onMouseOver={(e) => (e.currentTarget.style.transform = "scale(1.02)")}
+                                        onMouseOver={(e) => (e.currentTarget.style.transform = "scale(1.01)")}
                                         onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")}
                                     />
                                 </div>
 
-                                {/* Right: Brief info */}
-                                <div
-                                    className="w-30 border-start ps-3"
-                                    style={{
-                                        width: "30%",
-                                        color: "#2c3e50",
-                                        fontSize: "14px",
-                                        marginTop: "70px",
-                                        lineHeight: "1.6",
-                                    }}
-                                >
-                                    <p><strong>Name:</strong> {selectedProduct?.title}</p>
-                                    <p><strong>Price:</strong> ₹{selectedProduct?.price}</p>
-                                    <p><strong>Cloth:</strong> {selectedProduct?.cloth || "N/A"}</p>
-                                    <p><strong>Category:</strong> {selectedProduct?.category || "Traditional"}</p>
-                                    <p><strong>Saree Type:</strong> {selectedProduct?.saree_type}</p>
+                                {/* Right: Info */}
+                                <div className="w-100 w-md-30 border-top border-md-start pt-3 pt-md-0 ps-md-3 mt-3 mt-md-0">
+                                    {[
+                                        { label: "Name", value: selectedProduct?.title },
+                                        { label: "Price", value: `₹${selectedProduct?.price}` },
+                                        { label: "Cloth", value: selectedProduct?.cloth || "N/A" },
+                                        { label: "Category", value: selectedProduct?.category || "Traditional" },
+                                        { label: "Saree Type", value: selectedProduct?.saree_type }
+                                    ].map((item, i) => (
+                                        <p key={i} style={{
+                                            fontSize: "clamp(0.75rem, 1.7vw, 0.9rem)",
+                                            marginBottom: "0.4rem",
+                                            color: "#2c3e50"
+                                        }}>
+                                            <strong>{item.label}:</strong> {item.value}
+                                        </p>
+                                    ))}
                                 </div>
                             </div>
 
-                            {/* Buy Now Button */}
-                            <div className="border-top p-3 d-flex justify-content-center">
+                            {/* Button */}
+                            <div className="border-top p-2 d-flex justify-content-center">
                                 <button
+                                    className="btn d-flex align-items-center"
                                     style={{
                                         outline: 'none',
                                         border: 'none',
-                                        borderRadius: '8px',
+                                        borderRadius: '6px',
                                         background: 'linear-gradient(to right, #fd79a8, #e84393)',
-                                        padding: '10px 20px',
+                                        padding: '8px 16px',
                                         color: '#fff',
-                                        fontFamily: "'Fantasy', cursive",
-                                        fontSize: '18px',
-                                        boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
-                                        transition: 'transform 0.2s ease-in-out',
+                                        fontFamily: "'Segoe UI', sans-serif",
+                                        fontSize: 'clamp(0.8rem, 2vw, 1rem)',
+                                        boxShadow: '0 3px 10px rgba(0,0,0,0.15)',
+                                        transition: 'transform 0.2s ease-in-out'
                                     }}
-                                    className="primary d-flex align-items-center"
-                                    title="Buy Now"
                                     onClick={() => handleBuyClick(selectedProduct)}
-                                    onMouseOver={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
+                                    onMouseOver={(e) => (e.currentTarget.style.transform = "scale(1.03)")}
                                     onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")}
                                 >
-                                    <i className="bi bi-bag-fill me-3" style={{ fontSize: "22px" }}></i>
+                                    <i className="bi bi-bag-fill me-2" style={{ fontSize: "clamp(1rem, 1.7vw, 1.2rem)" }}></i>
                                     Buy Now
                                 </button>
                             </div>
                         </div>
-
                     </div>
                 </div>
+
+
 
 
 
