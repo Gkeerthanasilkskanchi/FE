@@ -52,38 +52,48 @@ export const Home = () => {
           </div>
 
           {/* About Us */}
-       <div className="container my-5">
-  <div className="row align-items-center gy-4">
-    {/* Left Column: Text */}
-    <div className="col-lg-6 position-relative">
-      <img
-        src="/FE/images/logo-flower.png"
-        alt="background flower"
-        className="about-bg-image d-none d-md-block"
-      />
+          <div className="container my-5">
+            <div className="row align-items-center gy-4">
+               <h3
+                  className="text-center mb-5 fw-bold text-dark text-clip-gradient"
+                  style={{
+                    fontSize: "clamp(1.5rem, 4vw, 2rem)"
+                  }}
+                >
+                  About Us
+                </h3>
+              {/* Left Column: Text */}
+              <div className="col-lg-6 position-relative">
+                <img
+                  src="/FE/images/logo-flower.png"
+                  alt="background flower"
+                  className="about-bg-image d-none d-md-block"
+                />
+               
 
-      <h2 className="fw-bold mb-3 about-title">About Us</h2>
 
-      <p className="about-text">
-We are a heritage saree brand blending timeless tradition with modern elegance. Specializing in Kanjivaram, Banarasi, and designer sarees, we bring rich colors and intricate weaves to life.<br/><br/>
+                {/* <h2 className="fw-bold mb-3 about-title">About Us</h2> */}
 
-At Keerthana Silks, every saree is a tribute to culture and craftsmanship. We partner with skilled weavers across India to preserve traditional artistry with a contemporary touch.<br/><br/>
+                <p className="about-text">
+                  We are a heritage saree brand blending timeless tradition with modern elegance. Specializing in Kanjivaram, Banarasi, and designer sarees, we bring rich colors and intricate weaves to life.<br /><br />
 
-Visit our store or shop online to explore collections that reflect grace, legacy, and lasting memories.
-      </p>
-    </div>
+                  At Keerthana Silks, every saree is a tribute to culture and craftsmanship. We partner with skilled weavers across India to preserve traditional artistry with a contemporary touch.<br /><br />
 
-    {/* Right Column: Main Image */}
-    <div className="col-lg-6 text-center">
-      <img
-        src="/FE/images/About-us.jpeg"
-        alt="About Us"
-        className="img-fluid rounded"
-        style={{ maxHeight: '400px', objectFit: 'cover' }}
-      />
-    </div>
-  </div>
-</div>
+                  Visit our store or shop online to explore collections that reflect grace, legacy, and lasting memories.
+                </p>
+              </div>
+
+              {/* Right Column: Main Image */}
+              <div className="col-lg-6 text-center">
+                <img
+                  src="/FE/images/About-us.jpeg"
+                  alt="About Us"
+                  className="img-fluid rounded"
+                  style={{ maxHeight: '400px', objectFit: 'cover' }}
+                />
+              </div>
+            </div>
+          </div>
 
 
           {/* Stats Cards */}
@@ -155,95 +165,109 @@ Visit our store or shop online to explore collections that reflect grace, legacy
             </Accordion>
           </div>
 
+          {/* Subscribe Section */}
+
           <div className="container my-5 d-flex justify-content-center">
-            <div className="glass-card w-100 p-4 text-center">
+            <div className="glass-card w-100 p-3 p-md-4 text-center" style={{ maxWidth: "700px" }}>
               <h3
                 className="mb-3 fw-bold text-clip-gradient"
-                style={{ fontSize: "clamp(1.2rem, 4.5vw, 2.2rem)" }}
+                style={{
+                  fontSize: "clamp(1.3rem, 4vw, 2rem)",
+                  lineHeight: 1.2,
+                }}
               >
                 Stay in the Loop!
               </h3>
+
               <p
                 className="mb-4"
-                style={{ fontSize: "clamp(0.9rem, 2.5vw, 1.1rem)" }}
+                style={{ fontSize: "clamp(0.9rem, 2vw, 1.1rem)" }}
               >
                 Subscribe to get updates on our latest collections and exclusive offers.
               </p>
 
+              {subscribed ? (
+                <div className="mt-4">
+                  <h5 className="text-warning" style={{ fontSize: "clamp(1rem, 2.5vw, 1.25rem)" }}>
+                    🎉 Here's your exclusive insight!
+                  </h5>
+                  <p style={{ fontSize: "clamp(0.85rem, 2vw, 1rem)" }}>
+                    "Innovation distinguishes between a leader and a follower." – Steve Jobs
+                  </p>
+                </div>
+              ) : (
+                <form onSubmit={handleEmailSubscribe}>
+                  <form onSubmit={handleEmailSubscribe}>
+                    <form onSubmit={handleEmailSubscribe}>
+                      <div className="d-flex align-items-center gap-2 flex-nowrap w-100">
+                        {/* ICON */}
+                        <span
+                          className="d-flex align-items-center justify-content-center"
+                          style={{
+                            background: "#fff",
+                            // border: "1px solid #ccc",
+                            padding: "8px",
+                            borderRadius: "5px",
+                            fontSize: "1.3rem",
+                            flexShrink: 0,
+                          }}
+                        >
+                          <i className="fas fa-envelope text-primary"></i>
+                        </span>
 
-             <form onSubmit={handleEmailSubscribe}>
-  <div
-    className="d-flex align-items-center w-100 justify-content-between"
-    style={{
-      gap: "0.5rem",
-      flexWrap: "nowrap",
-    }}
-  >
-    {/* Icon */}
-    <span
-      className="input-group-text bg-white border-0 p-1"
-      style={{
-        flexShrink: 0,
-        padding: "0.25rem 0.5rem",
-      }}
-    >
-      <i
-        className="fas fa-envelope text-primary"
-        style={{
-          fontSize: "clamp(0.9rem, 2.5vw, 1.2rem)",
-        }}
-      ></i>
-    </span>
+                        {/* INPUT (take more space) */}
+                        <input
+                          type="email"
+                          required
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          placeholder="Enter your email"
+                          className="form-control email-input-text"
+                          style={{
+                            flex: 1
+                          }}
+                        />
 
-    {/* Input */}
-    <div className="flex-grow-1" style={{ minWidth: "100px" }}>
-      <div className={`floating-group ${email ? "filled" : ""}`}>
-        <input
-          id="email"
-          type="email"
-          value={email}
-          required
-          onChange={(e) => setEmail(e.target.value)}
-          onFocus={() => setFocused(true)}
-          onBlur={() => setFocused(false)}
-          className="form-control"
-          style={{
-            fontSize: "clamp(0.75rem, 2vw, 0.95rem)",
-            padding: "0.4rem 0.5rem 0.4rem 2rem",
-          }}
-        />
-        <label htmlFor="email">Enter email</label>
-        <span className="icon">@</span>
-      </div>
-    </div>
 
-    {/* ✅ Responsive Button */}
-    <button
-      type="submit"
-  className="btn btn-warning fw-bold subscribe-btn"
-      disabled={loading}
-      style={{
-        flexShrink: 0,
-        padding: "0.3rem 0.6rem",
-        fontSize: "clamp(0.7rem, 2vw, 0.9rem)",
-        minWidth: "80px",
-      }}
-    >
-      {loading ? "..." : "Subscribe"}
-    </button>
-  </div>
-</form>
+                        {/* BUTTON (smaller size) */}
+                        <button
+                          type="submit"
+                          disabled={loading}
+                          className="btn btn-warning fw-bold px-2 py-1"
+                          style={{
+                            fontSize: "clamp(0.75rem, 1.5vw, 1rem)",
+                            whiteSpace: "nowrap",
+                            flexShrink: 0,
+                          }}
+                        >
+                          {loading ? (
+                            "Loading..."
+                          ) : (
+                            <>
+                              <span className="d-inline d-md-none">Go</span>         {/* Mobile only */}
+                              <span className="d-none d-md-inline">Subscribe</span>  {/* Tablet/Desktop only */}
+                            </>
+                          )}
+                        </button>
 
+                      </div>
+                    </form>
+
+                  </form>
+
+
+                </form>
+              )}
             </div>
           </div>
 
 
-            <h3
-              className="text-center fw-bold my-5 text-clip-gradient"
-              style={{ fontSize: "clamp(1.5rem, 5vw, 2.5rem)" }} // 24px to 40px range
-            >
-              Featured Collections
-            </h3>
+          <h3
+            className="text-center fw-bold my-5 text-clip-gradient"
+            style={{ fontSize: "clamp(1.5rem, 5vw, 2.5rem)" }} // 24px to 40px range
+          >
+            Featured Collections
+          </h3>
 
           <div className="container mb-5">
             <div id="featuredCarousel" className="carousel slide" data-bs-ride="carousel">
@@ -261,21 +285,21 @@ Visit our store or shop online to explore collections that reflect grace, legacy
                         {pair.map((type, idx) => {
                           const imgIndex = slideIdx * 3 + idx + 6; // For images like saree-6.png, saree-7.png...
                           return (
-                          <div className="col-md-4 col-sm-6 col-12 d-flex justify-content-center mb-4" key={`${type}-${idx}`}>
-  <div className="card border-0 promise-item rounded-4 featured-card">
-    <img
-      src={`/FE/images/saree-${imgIndex}.jpg`}
-      alt={type}
-      className="featured-card-img"
-    />
-    <div className="card-body text-center">
-      <h5 className="card-title fw-bold text-clip-gradient featured-title">{type}</h5>
-      <p className="text-muted featured-desc">
-        Elegant {type} sarees crafted with love and heritage.
-      </p>
-    </div>
-  </div>
-</div>
+                            <div className="col-md-4 col-sm-6 col-12 d-flex justify-content-center mb-4" key={`${type}-${idx}`}>
+                              <div className="card border-0 promise-item rounded-4 featured-card">
+                                <img
+                                  src={`/FE/images/saree-${imgIndex}.jpg`}
+                                  alt={type}
+                                  className="featured-card-img"
+                                />
+                                <div className="card-body text-center">
+                                  <h5 className="card-title fw-bold text-clip-gradient featured-title">{type}</h5>
+                                  <p className="text-muted featured-desc">
+                                    Elegant {type} sarees crafted with love and heritage.
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
 
                           );
                         })}
@@ -309,63 +333,63 @@ Visit our store or shop online to explore collections that reflect grace, legacy
 
 
           <h3 className="text-center fw-bold my-5 text-clip-gradient "
-                        style={{ fontSize: "clamp(1.5rem, 5vw, 2.5rem)" }} // 24px to 40px range
+            style={{ fontSize: "clamp(1.5rem, 5vw, 2.5rem)" }} // 24px to 40px range
           >
             What Our Customers Say
           </h3>
-       <div className="container mb-5">
-  <div id="testimonialCarousel" className="carousel slide" data-bs-ride="carousel">
-    <div className="carousel-inner w-100">
-      {[
-        {
-          name: "Anjali S.",
-          quote: "The Banarasi saree was beyond beautiful. Perfect for my wedding!",
-        },
-        {
-          name: "Preeti R.",
-          quote: "Great customer service and lovely packaging. Felt like a gift!",
-        },
-        {
-          name: "Meena K.",
-          quote: "Authentic silk, vibrant colors. I’m in love with every purchase.",
-        },
-      ].map((item, index) => (
-        <div className={`carousel-item ${index === 0 ? "active" : ""}`} key={index}>
-          <div className="container d-flex justify-content-center">
-            <div className="testimonial-box text-center px-4 py-5">
-<blockquote className="blockquote responsive-quote">
-  “{item.quote}”
-</blockquote>
-<footer className="blockquote-footer responsive-name">
-  {item.name}
-</footer>
+          <div className="container mb-5">
+            <div id="testimonialCarousel" className="carousel slide" data-bs-ride="carousel">
+              <div className="carousel-inner w-100">
+                {[
+                  {
+                    name: "Anjali S.",
+                    quote: "The Banarasi saree was beyond beautiful. Perfect for my wedding!",
+                  },
+                  {
+                    name: "Preeti R.",
+                    quote: "Great customer service and lovely packaging. Felt like a gift!",
+                  },
+                  {
+                    name: "Meena K.",
+                    quote: "Authentic silk, vibrant colors. I’m in love with every purchase.",
+                  },
+                ].map((item, index) => (
+                  <div className={`carousel-item ${index === 0 ? "active" : ""}`} key={index}>
+                    <div className="container d-flex justify-content-center">
+                      <div className="testimonial-box text-center px-4 py-5">
+                        <blockquote className="blockquote responsive-quote">
+                          “{item.quote}”
+                        </blockquote>
+                        <footer className="blockquote-footer responsive-name">
+                          {item.name}
+                        </footer>
 
 
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Controls */}
+              <button
+                className="carousel-control-prev"
+                type="button"
+                data-bs-target="#testimonialCarousel"
+                data-bs-slide="prev"
+              >
+                <span className="carousel-control-prev-icon bg-primary rounded-circle" />
+              </button>
+              <button
+                className="carousel-control-next"
+                type="button"
+                data-bs-target="#testimonialCarousel"
+                data-bs-slide="next"
+              >
+                <span className="carousel-control-next-icon bg-primary rounded-circle" />
+              </button>
             </div>
           </div>
-        </div>
-      ))}
-    </div>
-
-    {/* Controls */}
-    <button
-      className="carousel-control-prev"
-      type="button"
-      data-bs-target="#testimonialCarousel"
-      data-bs-slide="prev"
-    >
-      <span className="carousel-control-prev-icon bg-primary rounded-circle" />
-    </button>
-    <button
-      className="carousel-control-next"
-      type="button"
-      data-bs-target="#testimonialCarousel"
-      data-bs-slide="next"
-    >
-      <span className="carousel-control-next-icon bg-primary rounded-circle" />
-    </button>
-  </div>
-</div>
 
 
 

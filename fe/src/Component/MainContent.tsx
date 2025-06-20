@@ -59,8 +59,8 @@ export const MainContent = ({ children }: any) => {
         style={{
           height: "100vh",
           overflow: "hidden",
-          marginLeft: window.innerWidth >= 768 ? "220px" : "0px", 
-          marginTop: window.innerWidth < 680 ? "50px" : "0px",     
+          marginLeft: window.innerWidth >= 768 ? "220px" : "0px",
+          marginTop: window.innerWidth < 680 ? "50px" : "0px",
           padding: "0 12px",
           boxSizing: "border-box",
         }}
@@ -96,12 +96,14 @@ export const MainContent = ({ children }: any) => {
                 style={{
                   width: "100px",
                   height: "100px",
-                  opacity: "0.6",
+                  opacity: "0.35",
                   objectFit: "contain",
                   zIndex: 0,
-                  // backgroundColor:"red",
+                  right: "100px",           // 👈 move to right
+                  position: "absolute",    // 👈 required for right to work
                   pointerEvents: "none",
                 }}
+
               />
 
 
@@ -183,8 +185,8 @@ export const MainContent = ({ children }: any) => {
                       ></i>
                     </div>
                   ) : (
-                    <div className="d-flex flex-column align-items-center" style={{ fontSize: 'clamp(20px, 5.5vw, 36px)', marginTop: '10px'  }}>
-                      <i className="bi bi-person-fill" style={{ fontSize: 'clamp(20px, 5.5vw, 36px)', marginTop: '10px'  }}></i>
+                    <div className="d-flex flex-column align-items-center" style={{ fontSize: 'clamp(20px, 5.5vw, 36px)', marginTop: '10px' }}>
+                      <i className="bi bi-person-fill" style={{ fontSize: 'clamp(20px, 5.5vw, 36px)', marginTop: '10px' }}></i>
                       <span className="small">Sign Up</span>
                     </div>
                   )}

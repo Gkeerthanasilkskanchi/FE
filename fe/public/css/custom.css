@@ -1555,3 +1555,109 @@ input.form-control.outline-input:focus {
   }
 }
 
+
+
+.email-input-text {
+  font-size: clamp(0.85rem, 2vw, 1rem); /* default for tablet/desktop */
+}
+
+@media (max-width: 576px) {
+  .email-input-text {
+    font-size: clamp(0.5rem, 1vw, 0.7rem) !important; /* smaller font on mobile */
+}
+
+}
+ @media (max-width: 576px) {
+    .form-control,
+    .btn,
+    label,
+    .form-label {
+      font-size: 0.85rem;
+    }
+
+    h5,
+    h2 {
+      font-size: 1.2rem !important;
+    }
+
+    table td,
+    table th {
+      font-size: 0.75rem;
+      padding: 0.4rem;
+    }
+
+    .btn-sm {
+      font-size: 0.7rem;
+      padding: 0.25rem 0.5rem;
+    }
+
+    .page-link {
+      font-size: 0.75rem;
+      padding: 0.3rem 0.6rem;
+    }
+  }
+@media (max-width: 576px) {
+  .action-buttons .btn {
+    font-size: 0.75rem !important;
+    padding: 0.3rem 0.6rem !important;
+  }
+}
+@media (max-width: 576px) {
+  .image-input {
+    font-size: 0.75rem !important;
+    padding: 0.25rem 0.4rem !important;
+  }
+}
+
+.custom-search-input {
+  font-size: 0.9rem;
+  padding: 0.4rem 0.6rem;
+  width: 100%;
+  max-width: 220px;
+}
+
+.custom-add-btn {
+  font-size: 0.85rem;
+  padding: 0.4rem 0.7rem;
+  white-space: nowrap;
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 576px) {
+  .custom-search-input {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.5rem;
+    max-width: 40%;
+  }
+
+  .custom-add-btn {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.5rem;
+    max-width: 40%;
+  }
+}
+.custom-add-btn {
+  font-size: 1rem; /* default for desktop */
+  padding: 0.4rem 0.75rem;
+}
+
+/* Reduce font size only for small screens */
+@media (max-width: 576px) {
+  .custom-add-btn {
+    font-size: 0.50rem !important;
+    padding: 0.35rem 0.6rem !important;
+  }
+}
+
+/* Custom widths */
+@media (min-width: 576px) {
+  .w-sm-70 { width: 70% !important; }
+  .w-sm-30 { width: 30% !important; }
+  .pe-sm-3 { padding-right: 1rem !important; }
+  .ps-sm-3 { padding-left: 1rem !important; }
+  .border-sm-start { border-left: 1px solid #dee2e6 !important; }
+}
+
+/* click */
+
+

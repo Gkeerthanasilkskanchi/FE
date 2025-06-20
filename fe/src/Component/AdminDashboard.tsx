@@ -33,9 +33,15 @@ export const AdminDashboard: React.FC = () => {
 
       {/* Add/Edit Product Form */}
       <section className="p-6 rounded-2xl">
-        <h2 className="text-clip-gradient mb-4 text-indigo-600">
+        <h2
+          className="text-clip-gradient mb-4 text-indigo-600"
+          style={{
+            fontSize: "clamp(1.1rem, 3vw, 2rem)",
+          }}
+        >
           {editingProduct ? "Edit Product" : "Add New Product"}
         </h2>
+
         <AddProduct product={editingProduct} onUpdateComplete={handleUpdateComplete} />
       </section>
 

@@ -123,9 +123,9 @@ export const AddProduct: React.FC<AddProductProps> = ({ product, onUpdateComplet
   const handleEdit = async (id: number) => {
     try {
       const res = await getProductDeatilsById(id);
-      const product = res.data; 
+      const product = res.data;
 
-     
+
       if (!product || !product.title) {
         console.error("Product data is invalid:", product);
         return;
@@ -159,41 +159,43 @@ export const AddProduct: React.FC<AddProductProps> = ({ product, onUpdateComplet
       <Loader loading={loading} />
 
       <div className="container py-5">
-        <div className="text-center mb-4" style={{ float: 'right' }}>
-          {!showForm && (
-            <button
-              className="btn btn-primary "
-              onClick={() => {
-                resetForm();
-                setShowForm(true);
-              }}
-            >
-              <i className="bi bi-plus"></i> Add Product
-            </button>
-          )}
-        </div>
-        <div className="d-flex justify-content-between align-items-center mb-3">
-          <input
-            type="text"
-            className="form-control w-25"
-            placeholder="Search..."
-            value={searchKeyword}
-            onChange={(e) => setSearchKeyword(e.target.value)}
-          />
-        </div>
+       <div className="d-flex justify-content-between align-items-center flex-wrap flex-sm-nowrap mb-3 gap-2">
+  <input
+    type="text"
+    className="form-control custom-search-input"
+    placeholder="Search..."
+    value={searchKeyword}
+    onChange={(e) => setSearchKeyword(e.target.value)}
+  />
+
+  {!showForm && (
+    <button
+      className="btn btn-primary custom-add-btn"
+      onClick={() => {
+        resetForm();
+        setShowForm(true);
+      }}
+    >
+      <i className="bi bi-plus me-1"></i> Add Product
+    </button>
+  )}
+</div>
+
+
+
 
         {showForm && (
-          <div className="product-form card border-0 rounded-4 mx-auto my-5" style={{ maxWidth: "600px" }}>
-            <div className="card-header d-flex justify-content-between align-items-center bg-gradient text-white" style={{ backgroundColor: "#0d6efd" }}>
-              <h5 className="mb-0">{isEdit ? "Edit Product" : "Add New Product"}</h5>
-              <button className="btn btn-sm " onClick={() => setShowForm(false)}>
+          <div className="product-form card border-0 rounded-4 mx-auto my-5 w-100" style={{ maxWidth: "600px" }}>
+            <div className="card-header d-flex justify-content-between align-items-center text-white flex-wrap" style={{ backgroundColor: "#0d6efd", padding: "0.75rem 1rem", gap: "0.5rem" }}>
+              <h5 className="mb-0" style={{ fontSize: "clamp(1rem, 2.5vw, 1.25rem)" }}>
+                {isEdit ? "Edit Product" : "Add New Product"}
+              </h5>
+              <button className="btn btn-sm text-white" onClick={() => setShowForm(false)} style={{ fontSize: "clamp(1rem, 2vw, 1.1rem)", padding: "0.25rem 0.5rem" }}>
                 <i className="bi bi-x cross-icon"></i>
               </button>
             </div>
-
-            <div className="card-body  p-4">
+            <div className="card-body p-4">
               {message && <div className="alert alert-info">{message}</div>}
-
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                   <label htmlFor="image" className="form-label">Choose Image</label>
@@ -201,150 +203,69 @@ export const AddProduct: React.FC<AddProductProps> = ({ product, onUpdateComplet
                     type="file"
                     name="image"
                     id="image"
-                    className="form-control"
+                    className="form-control image-input"
                     accept="image/*"
                     onChange={handleImageChange}
                     required={!isEdit}
                   />
                 </div>
-
-
-                {/* Title & Price */}
                 <div className="row">
-                  <div className="col-md-6">
+                  <div className="col-12 col-md-6">
                     <div className="form-floating mb-3">
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="title"
-                        name="title"
-                        placeholder="Title"
-                        value={formData.title}
-                        onChange={handleChange}
-                        required
-                      />
+                      <input type="text" className="form-control" id="title" name="title" placeholder="Title" value={formData.title} onChange={handleChange} required />
                       <label htmlFor="title">Title</label>
                     </div>
-
                   </div>
-                  <div className="col-md-6">
-                    <div className="form-floating mb-3" >
-                      <input
-                        id="price"
-                        name="price"
-                        type="number"
-                        value={formData.price}
-                        onChange={handleChange}
-                        className="form-control"
-                        placeholder="Price"
-                        required
-                      />
+                  <div className="col-12 col-md-6">
+                    <div className="form-floating mb-3">
+                      <input id="price" name="price" type="number" value={formData.price} onChange={handleChange} className="form-control" placeholder="Price" required />
                       <label htmlFor="price">Price</label>
                     </div>
                   </div>
                 </div>
-
-                {/* About */}
                 <div className="form-floating mb-3">
-                  <textarea
-                    className="form-control"
-                    placeholder="About this product"
-                    id="about"
-                    name="about"
-                    value={formData.about}
-                    onChange={handleChange}
-                    style={{ height: '100px' }}
-                  ></textarea>
+                  <textarea className="form-control" placeholder="About this product" id="about" name="about" value={formData.about} onChange={handleChange} style={{ height: '100px' }}></textarea>
                   <label htmlFor="about">About</label>
                 </div>
-
-
-
-                {/* Cloth & Category */}
                 <div className="row">
-                  <div className="col-md-6">
+                  <div className="col-12 col-md-6">
                     <div className="form-floating mb-3">
-                      <input
-                        id="cloth"
-                        name="cloth"
-                        placeholder="Cloth"
-                        type="text"
-                        value={formData.cloth}
-                        onChange={handleChange}
-                        className="form-control"
-                      />
+                      <input id="cloth" name="cloth" placeholder="Cloth" type="text" value={formData.cloth} onChange={handleChange} className="form-control" />
                       <label htmlFor="cloth">Cloth</label>
                     </div>
                   </div>
-                  <div className="col-md-6">
-                    <div className="form-floating mb-3" >
-                      <input
-                        id="category"
-                        name="category"
-                        type="text"
-                        value={formData.category}
-                        onChange={handleChange}
-                        className="form-control"
-                        placeholder="Category"
-                      />
+                  <div className="col-12 col-md-6">
+                    <div className="form-floating mb-3">
+                      <input id="category" name="category" type="text" value={formData.category} onChange={handleChange} className="form-control" placeholder="Category" />
                       <label htmlFor="category">Category</label>
                     </div>
                   </div>
                 </div>
-
-                {/* Bought By & Saree Type */}
                 <div className="row">
-                  <div className="col-md-6">
+                  <div className="col-12 col-md-6">
                     <div className="form-floating mb-3">
-                      <input
-                        id="bought_by"
-                        type="text"
-                        name="bought_by"
-                        value={formData.bought_by}
-                        onChange={handleChange}
-                        className="form-control"
-                        placeholder="Bought By"
-                      />
+                      <input id="bought_by" type="text" name="bought_by" value={formData.bought_by} onChange={handleChange} className="form-control" placeholder="Bought By" />
                       <label htmlFor="bought_by">Bought By</label>
                     </div>
                   </div>
-                  <div className="col-md-6">
+                  <div className="col-12 col-md-6">
                     <div className="form-floating mb-3">
-                      <input
-                        id="saree_type"
-                        name="saree_type"
-                        type="text"
-                        value={formData.saree_type}
-                        onChange={handleChange}
-                        className="form-control"
-                        placeholder="Saree Type"
-                      />
+                      <input id="saree_type" name="saree_type" type="text" value={formData.saree_type} onChange={handleChange} className="form-control" placeholder="Saree Type" />
                       <label htmlFor="saree_type">Saree Type</label>
                     </div>
                   </div>
                 </div>
-
-                {/* Buttons */}
-                <div className="d-flex justify-content-end gap-3 mt-4">
-                  <button
-                    type="button"
-                    className="btn btn-outline-secondary px-4"
-                    onClick={() => setShowForm(false)}
-                  >
-                    Cancel
-                  </button>
-
-                  <button type="submit" className="btn btn-success px-4">
-                    {isEdit ? "Update" : "Add"} Product
-                  </button>
-
+                <div className="d-flex justify-content-end gap-3 mt-4 action-buttons">
+                  <button type="button" className="btn btn-outline-secondary px-4" onClick={() => setShowForm(false)}>Cancel</button>
+                  <button type="submit" className="btn btn-success px-4">{isEdit ? "Update" : "Add"} Product</button>
                 </div>
+
+
               </form>
             </div>
           </div>
         )}
 
-        {/* Table below form */}
         <div className="table-responsive mt-5 w-100">
           <table className="table table-bordered table-hover">
             <thead className="table-dark">
@@ -357,37 +278,26 @@ export const AddProduct: React.FC<AddProductProps> = ({ product, onUpdateComplet
               </tr>
             </thead>
             <tbody>
-              {products?.map((prod, index) => {
-                console.log("Rendering Product:", prod); // 👈 Add this
-                return (
-                  <tr key={prod?.id}>
-                    <td>{index + 1}</td>
-                    <td>{prod.title}</td>
-                    <td>{prod.price}</td>
-                    <td>{prod.category}</td>
-                    <td>
-                      <button
-                        className="btn btn-sm btn-primary me-2"
-                        onClick={() => handleEdit(prod.id)}
-                      >
-                        <i className="bi bi-pencil-square"></i>
-                      </button>
-                      <button
-                        className="btn btn-sm btn-danger"
-                        onClick={() => handleDelete(prod.id)}
-                      >
-                        <i className="bi bi-trash"></i>
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
+              {products?.map((prod, index) => (
+                <tr key={prod?.id}>
+                  <td>{index + 1}</td>
+                  <td>{prod.title}</td>
+                  <td>{prod.price}</td>
+                  <td>{prod.category}</td>
+                  <td>
+                    <button className="btn btn-sm btn-primary me-2" onClick={() => handleEdit(prod.id)}>
+                      <i className="bi bi-pencil-square"></i>
+                    </button>
+                    <button className="btn btn-sm btn-danger" onClick={() => handleDelete(prod.id)}>
+                      <i className="bi bi-trash"></i>
+                    </button>
+                  </td>
+                </tr>
+              ))}
 
               {products?.length === 0 && (
                 <tr>
-                  <td colSpan={5} className="text-center">
-                    No products found.
-                  </td>
+                  <td colSpan={5} className="text-center">No products found.</td>
                 </tr>
               )}
             </tbody>
@@ -397,11 +307,7 @@ export const AddProduct: React.FC<AddProductProps> = ({ product, onUpdateComplet
               <nav>
                 <ul className="pagination">
                   {[...Array(totalPages)].map((_, i) => (
-                    <li
-                      key={i}
-                      className={`page-item ${currentPage === i + 1 ? "active" : ""}`}
-                      onClick={() => fetchProducts(i + 1, searchKeyword)}
-                    >
+                    <li key={i} className={`page-item ${currentPage === i + 1 ? "active" : ""}`} onClick={() => fetchProducts(i + 1, searchKeyword)}>
                       <button className="page-link">{i + 1}</button>
                     </li>
                   ))}
@@ -409,7 +315,6 @@ export const AddProduct: React.FC<AddProductProps> = ({ product, onUpdateComplet
               </nav>
             </div>
           )}
-
         </div>
       </div>
     </>

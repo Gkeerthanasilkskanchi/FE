@@ -21,36 +21,36 @@ export const ProductList = () => {
   const [selectedProduct, setSelectedProduct] = useState<any | null>(null);
 
   useEffect(() => {
-   
+
     if (email) fetchData();
-  }, [type,email]);
+  }, [type, email]);
 
-   const fetchData = async () => {
-      try {
-        let res: any | null = null;
-        
-        if (type === "liked") {
-          setLoading(true);
-          if (!email) { toast.error("Login to add product", { autoClose: 1000 }); }
-          if (email) {
-            res = await getLikedProducts(email);
-            
+  const fetchData = async () => {
+    try {
+      let res: any | null = null;
 
-          }
-        } else {
-          if (!email) { toast.error("Login to add product", { autoClose: 1000 }); }
-          if (email) {
-            setLoading(true);
-            res = await getCartProducts(email);
-          }
+      if (type === "liked") {
+        setLoading(true);
+        if (!email) { toast.error("Login to add product", { autoClose: 1000 }); }
+        if (email) {
+          res = await getLikedProducts(email);
+
+
         }
-        setItems(res.data);
-      } catch (error) {
-        console.error("Error fetching data", error);
-      } finally {
-        setLoading(false);
+      } else {
+        if (!email) { toast.error("Login to add product", { autoClose: 1000 }); }
+        if (email) {
+          setLoading(true);
+          res = await getCartProducts(email);
+        }
       }
-    };
+      setItems(res.data);
+    } catch (error) {
+      console.error("Error fetching data", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleBuyClick = async (product: any) => {
     try {
@@ -110,35 +110,35 @@ export const ProductList = () => {
     }
   };
 
-const likeProduct = async (productId: number) => {
-  try {
-    if (!email) {
-      toast.error("Login to like product", { autoClose: 1000 });
-      return;
+  const likeProduct = async (productId: number) => {
+    try {
+      if (!email) {
+        toast.error("Login to like product", { autoClose: 1000 });
+        return;
+      }
+
+      setLoading(true);
+
+      const payload = {
+        email,
+        productId,
+      };
+
+      const response = await addLikedProducts(payload);
+
+      if (response) {
+        toast.success(response.data.message, { autoClose: 1000 });
+      }
+    } catch (err: any) {
+      console.error(err);
+      toast.error(err.response?.data?.message || "Something went wrong", {
+        autoClose: 1000,
+      });
+    } finally {
+      setLoading(false);
+      fetchData(); // or fetchProducts()
     }
-
-    setLoading(true);
-
-    const payload = {
-      email,
-      productId,
-    };
-
-    const response = await addLikedProducts(payload);
-
-    if (response) {
-      toast.success(response.data.message, { autoClose: 1000 });
-    }
-  } catch (err: any) {
-    console.error(err);
-    toast.error(err.response?.data?.message || "Something went wrong", {
-      autoClose: 1000,
-    });
-  } finally {
-    setLoading(false);
-    fetchData(); // or fetchProducts()
-  }
-};
+  };
 
 
 
@@ -159,7 +159,7 @@ const likeProduct = async (productId: number) => {
                   <div className="d-flex justify-content-between align-items-center">
                     <span
                       className="fw-bold text-truncate"
-                      style={{ cursor: "pointer", textDecoration: "underline", maxWidth: "70%" ,color:"#270206"}}
+                      style={{ cursor: "pointer", textDecoration: "underline", maxWidth: "70%", color: "#270206" }}
                       onClick={() => handleImageClick(item)}
                       data-bs-toggle="modal"
                       data-bs-target="#productDetailModal"
@@ -175,7 +175,7 @@ const likeProduct = async (productId: number) => {
 
                   <div className="d-flex justify-content-between align-items-center gap-2 mt-auto ps-4 pe-4">
                     <button
-                      style={{ outline: 'none', border: 'none', borderRadius: '5px',background:'none' }}
+                      style={{ outline: 'none', border: 'none', borderRadius: '5px', background: 'none' }}
                       className="primary"
                       title="Buy Now"
                       onClick={() => handleBuyClick(item)}
@@ -183,12 +183,12 @@ const likeProduct = async (productId: number) => {
                       <i className="bi bi-bag " style={{ fontSize: "30px" }}></i>
                     </button>
 
-                    <button style={{ outline: 'none', border: 'none', borderRadius: '5px',background:'none' }} className="primary" title="Add to Cart" onClick={() => addToCart(item.id)}>
+                    <button style={{ outline: 'none', border: 'none', borderRadius: '5px', background: 'none' }} className="primary" title="Add to Cart" onClick={() => addToCart(item.id)}>
                       {item?.is_product_in_cart ? <i className="bi bi-cart-plus cart-style" style={{ fontSize: "30px" }}></i>
                         : <i className="bi bi-cart" style={{ fontSize: "30px" }}></i>}
 
                     </button>
-                    <button style={{ outline: 'none', border: 'none', borderRadius: '5px',background:'none' }} className="primary" title="Like Product" onClick={() => likeProduct(item.id)}>
+                    <button style={{ outline: 'none', border: 'none', borderRadius: '5px', background: 'none' }} className="primary" title="Like Product" onClick={() => likeProduct(item.id)}>
                       {!(item?.is_product_liked) ? <i className="bi bi-suit-heart heart-style" style={{ fontSize: '30px' }}></i>
                         : <i className="bi bi-heart-fill heart-style" style={{ fontSize: '30px' }}></i>}
 
@@ -204,23 +204,27 @@ const likeProduct = async (productId: number) => {
         </div>
       </div>
 
-
       <div className="modal fade" id="productDetailModal" tabIndex={-1} aria-hidden="true">
-        <div className="modal-dialog modal-dialog-centered" style={{ maxWidth: "600px" }}>
+        <div className="modal-dialog modal-dialog-centered" style={{ maxWidth: "600px", width: "95%" }}>
           <div className="modal-content position-relative">
+   <h5
+                  className="text-clip-gradient product-heading mb-2"
+                >
+                  About the Product
+                </h5>
             {/* Product Info */}
-            <div className="d-flex p-3" style={{ maxHeight: "300px" }}>
+            <div className="d-flex flex-column flex-sm-row p-3" style={{ maxHeight: "90vh", overflowY: "auto" }}>
+
               {/* Left: Description */}
-              <div className="w-70 pe-3" style={{ width: "70%" }}>
-                <h5 className="text-clip-gradient">About the Product</h5>
-                <p style={{ fontSize: "14px" }}>
-                  {selectedProduct?.about}
-                </p>
+              <div className="w-100 w-sm-70 pe-sm-3 mb-3 mb-sm-0">
+             
+                <p style={{ fontSize: "clamp(0.85rem, 2.5vw, 1rem)" }}>{selectedProduct?.about}</p>
+
                 <img
                   src={selectedProduct?.image || '/FE/images/default.jpg'}
-                  className="card-img-top"
+                  className="card-img-top mt-2"
                   style={{
-                    height: '200px',
+                    height: '180px',
                     width: '100%',
                     objectFit: 'contain',
                     objectPosition: 'center',
@@ -231,38 +235,45 @@ const likeProduct = async (productId: number) => {
                   data-bs-toggle="modal"
                   data-bs-target="#imageModal"
                 />
-
               </div>
 
-              {/* Right: Brief info */}
-              <div className="w-30 border-start ps-3" style={{ width: "30%" }}>
-                <p><strong>Name:</strong> {selectedProduct?.title}</p>
-                <p><strong>Price:</strong> ₹{selectedProduct?.price}</p>
-                <p><strong>Cloth:</strong> {selectedProduct?.cloth || "N/A"}</p>
-                <p><strong>Category:</strong> {selectedProduct?.category || "Traditional"}</p>
-                {/* <p><strong>Bought By:</strong> {selectedProduct?.bought_by || "N/A"} customers</p> */}
-                <p><strong>Saree Type:</strong> {selectedProduct?.saree_type}</p>
-
+              {/* Right: Brief Info */}
+              <div className="w-100 w-sm-30 border-top border-sm-start pt-3 pt-sm-0 ps-sm-3">
+                <p style={{ fontSize: "clamp(0.8rem, 2vw, 1rem)" }}>
+                  <strong>Name:</strong> {selectedProduct?.title}
+                </p>
+                <p style={{ fontSize: "clamp(0.8rem, 2vw, 1rem)" }}>
+                  <strong>Price:</strong> ₹{selectedProduct?.price}
+                </p>
+                <p style={{ fontSize: "clamp(0.8rem, 2vw, 1rem)" }}>
+                  <strong>Cloth:</strong> {selectedProduct?.cloth || "N/A"}
+                </p>
+                <p style={{ fontSize: "clamp(0.8rem, 2vw, 1rem)" }}>
+                  <strong>Category:</strong> {selectedProduct?.category || "Traditional"}
+                </p>
+                <p style={{ fontSize: "clamp(0.8rem, 2vw, 1rem)" }}>
+                  <strong>Saree Type:</strong> {selectedProduct?.saree_type}
+                </p>
               </div>
             </div>
 
-
+            {/* Footer */}
             <div className="border-top p-3 d-flex justify-content-center">
               <button
-                style={{ outline: 'none', border: 'none', borderRadius: '5px',background:'none' }}
-                className="primary"
-                title="Buy Now"
+                className="btn btn-light d-flex align-items-center gap-2 buy-now-btn"
                 onClick={() => handleBuyClick(selectedProduct)}
+                style={{
+                  fontSize: "clamp(0.9rem, 2vw, 1rem)",
+                  padding: "0.4rem 1rem"
+                }}
               >
-                <i className="bi bi-bag-fill me-3" style={{ fontSize: "30px" }}></i>
-                Buy Now
+                <i className="bi bi-bag-fill" style={{ fontSize: "1.4rem" }}></i> Buy Now
               </button>
-
             </div>
-
           </div>
         </div>
       </div>
+
     </>
 
   );
