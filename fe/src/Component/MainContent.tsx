@@ -70,7 +70,7 @@ export const MainContent = ({ children }: any) => {
             {/* 📍 Location */}
             <div className="d-flex justify-content-center justify-content-md-start align-items-center flex-grow-1">
               <a
-                href="https://maps.app.goo.gl/99Xv1yUs46uyQuuv5"
+                href="https://www.google.com/maps/place/Keerthana+Silks/@12.8369646,79.6818001,15z/data=!4m6!3m5!1s0x3a52c3006eb4d0e9:0xd1b12a541f63f436!8m2!3d12.8351032!4d79.6936453!16s%2Fg%2F11l_0gnv4d?entry=ttu&g_ep=EgoyMDI1MDYxNy4wIKXMDSoASAFQAw%3D%3D"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="d-inline-flex align-items-center text-decoration-none text-dark"
