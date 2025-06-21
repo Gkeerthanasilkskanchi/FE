@@ -54,14 +54,14 @@ export const Home = () => {
           {/* About Us */}
           <div className="container my-5">
             <div className="row align-items-center gy-4">
-               <h3
-                  className="text-center mb-5 fw-bold text-dark text-clip-gradient"
-                  style={{
-                    fontSize: "clamp(1.5rem, 4vw, 2rem)"
-                  }}
-                >
-                  About Us
-                </h3>
+              <h3
+                className="text-center mb-5 fw-bold text-dark text-clip-gradient"
+                style={{
+                  fontSize: "clamp(1.5rem, 4vw, 2rem)"
+                }}
+              >
+                About Us
+              </h3>
               {/* Left Column: Text */}
               <div className="col-lg-6 position-relative">
                 <img
@@ -69,18 +69,18 @@ export const Home = () => {
                   alt="background flower"
                   className="about-bg-image d-none d-md-block"
                 />
-               
+
 
 
                 {/* <h2 className="fw-bold mb-3 about-title">About Us</h2> */}
 
                 <p className="about-text">
                   We are a heritage saree brand blending timeless tradition with modern elegance. Specializing in Kanjivaram, Banarasi, and designer sarees, we bring rich colors and intricate weaves to life.<br /><br />
-
+                  Specializing in <strong>Kanchipuram Bridal Sarees, Butta Sarees, Rising Border Sarees, Turning Border Sarees</strong>.
                   At Keerthana Silks, every saree is a tribute to culture and craftsmanship. We partner with skilled weavers across India to preserve traditional artistry with a contemporary touch.<br /><br />
-
                   Visit our store or shop online to explore collections that reflect grace, legacy, and lasting memories.
                 </p>
+
               </div>
 
               {/* Right Column: Main Image */}
@@ -107,23 +107,23 @@ export const Home = () => {
             >
               Client Satisfaction
             </h3>
+<div className="row justify-content-center text-center g-4">
+  {[
+    { title: "Customer Satisfaction", count: "99.5%" },
+    { title: "Happy Customers", count: "12,000+" },
+    { title: "Total Sarees Sold", count: "25,000+" },
+    { title: "States Covered", count: "18+" },
+    { title: "Years in Business", count: "20+" },
+  ].map((item, idx) => (
+    <div className="col-lg-2 col-md-3 col-sm-4 col-6 d-flex justify-content-center" key={idx}>
+      <div className="card promise-item p-3 rounded-4 border-0 neon-hover w-100" style={{ maxWidth: "200px" }}>
+        <h4 className="fw-bold text-primary">{item.count}</h4>
+        <p className="small mb-0">{item.title}</p>
+      </div>
+    </div>
+  ))}
+</div>
 
-            <div className="row text-center g-4" style={{ marginLeft: "5px" }}>
-              {[
-                { title: "Customer Satisfaction", count: "99.5%" },
-                { title: "Happy Customers", count: "12,000+" },
-                { title: "Total Sarees Sold", count: "25,000+" },
-                { title: "States Covered", count: "18+" },
-                { title: "Years in Business", count: "20+" },
-              ].map((item, idx) => (
-                <div className="col-md-2 col-6" style={{ width: "200px" }} key={idx}>
-                  <div className="card promise-item p-3 rounded-4 border-0 neon-hover">
-                    <h4 className="fw-bold text-primary">{item.count}</h4>
-                    <p className="small">{item.title}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
 
 
           </div>
