@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom'; // 🟢 import BrowserRouter
+// import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom'; 
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -11,9 +12,13 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <BrowserRouter basename="/FE"> {/* 🟢 Fix: basename for GitHub Pages */}
+
+    <HashRouter>
       <App />
-    </BrowserRouter>
+    </HashRouter>
+    {/* <BrowserRouter basename="/FE"> 
+      <App />
+    </BrowserRouter> */}
   </React.StrictMode>
 );
 
