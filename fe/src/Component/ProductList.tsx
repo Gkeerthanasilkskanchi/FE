@@ -19,6 +19,9 @@ export const ProductList = () => {
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<any | null>(null);
+  const [selectedProducts, setSelectedProducts] = useState<any[]>([]);
+  const [selectAll, setSelectAll] = useState(false);
+
 
   useEffect(() => {
 
@@ -42,6 +45,8 @@ export const ProductList = () => {
         if (email) {
           setLoading(true);
           res = await getCartProducts(email);
+          setSelectedProducts(res.data); 
+          setSelectAll(true);
         }
       }
       setItems(res.data);
@@ -140,18 +145,88 @@ export const ProductList = () => {
     }
   };
 
+  const toggleSelectProduct = (product: any) => {
+    const exists = selectedProducts.find(p => p.id === product.id);
+    if (exists) {
+      setSelectedProducts(selectedProducts.filter(p => p.id !== product.id));
+    } else {
+      setSelectedProducts([...selectedProducts, product]);
+    }
+  };
+
+  const toggleSelectAll = () => {
+    if (selectAll) {
+      setSelectedProducts([]);
+    } else {
+      setSelectedProducts(items);
+    }
+    setSelectAll(!selectAll);
+  };
+
+  const getTotal = () =>
+    selectedProducts.reduce((sum, item: any) => sum + (item?.price || 0) * (item.quantity || 1), 0);
+
+  const handleBulkBuy = async () => {
+    if (!email) {
+      toast.error("Login to buy products", { autoClose: 1000 });
+      return;
+    }
+
+    for (const product of selectedProducts) {
+      const payload = {
+        email,
+        id: product.id,
+        quantity: product.quantity || 1,
+        price: product?.price,
+      };
+      await addOrderService(payload);
+    }
+
+    const message = encodeURIComponent(
+      selectedProducts.map(p =>
+        `🧵 *${p.name || p?.title}*\n💰 Price: ₹${p.price}\n📦 Quantity: ${p.quantity || 1}`
+      ).join("\n\n") + "\n\nPlease provide further details."
+    );
+    const whatsappNumber = "917904999697";
+    window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank");
+  };
 
 
   return (
     <>
       <Loader loading={loading}></Loader>
       <div className="container mt-4">
-        <h4>{type === "liked" ? "Liked Products" : "Your Cart"}</h4>
+        <div className="d-flex justify-content-between align-items-center flex-wrap">
+          <h4 className="mb-2">{type === "liked" ? "Liked Products" : "Your Cart"}</h4>
+          {type !== "liked" && (
+            <div className="form-check mb-2">
+              <input
+                type="checkbox"
+                className="form-check-input"
+                id="selectAll"
+                checked={selectAll}
+                onChange={toggleSelectAll}
+              />
+              <label className="form-check-label" htmlFor="selectAll">
+                Select All
+              </label>
+            </div>
+          )}
+        </div>
+
         <div className="row">
           {items.length === 0 && <p>No items found.</p>}
           {items.map((item: any) => (
             <div key={item.id} className="col-md-3 mb-4">
               <div className="card h-100">
+                <div className="position-absolute m-2">
+                  <input
+                    type="checkbox"
+                    checked={selectedProducts.some(p => p.id === item.id)}
+                    onChange={() => toggleSelectProduct(item)}
+                  />
+                </div>
+
                 <img src={item.image} className="card-img-top" alt={item.title} onClick={() => handleImageClick(item)}
                   data-bs-toggle="modal"
                   data-bs-target="#productDetailModal" />
@@ -273,6 +348,41 @@ export const ProductList = () => {
           </div>
         </div>
       </div>
+      {type !== "liked" && items.length > 0 && (
+        <div
+          className="fixed-bottom d-flex justify-content-end align-items-center p-3 gap-3"
+          style={{ zIndex: 10000 }}
+        >
+          {/* Total Price */}
+          <div className="fw-semibold text-end" style={{ minWidth: "fit-content" }}>
+            Total: ₹{getTotal().toLocaleString()}
+          </div>
+
+          {/* Buy Now Button */}
+          <button
+            className="btn d-flex align-items-center"
+            style={{
+              outline: "none",
+              border: "none",
+              borderRadius: "6px",
+              background: "linear-gradient(to right, #fd79a8, #e84393)",
+              padding: "8px 16px",
+              color: "#fff",
+              fontFamily: "'Segoe UI', sans-serif",
+              fontSize: "clamp(0.8rem, 2vw, 1rem)",
+              boxShadow: "0 3px 10px rgba(0,0,0,0.15)",
+              transition: "transform 0.2s ease-in-out"
+            }}
+            onMouseOver={(e) => (e.currentTarget.style.transform = "scale(1.03)")}
+            onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")}
+            disabled={selectedProducts.length === 0}
+            onClick={handleBulkBuy}
+          >
+            <i className="bi bi-bag-fill me-2" style={{ fontSize: "clamp(1rem, 1.7vw, 1.2rem)" }}></i>
+            Buy Now
+          </button>
+        </div>
+      )}
 
     </>
 

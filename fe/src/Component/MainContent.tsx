@@ -70,7 +70,7 @@ export const MainContent = ({ children }: any) => {
             {/* 📍 Location */}
             <div className="d-flex justify-content-center justify-content-md-start align-items-center flex-grow-1">
               <a
-                href="https://www.google.com/maps/place/Kanchipuram"
+                href="https://maps.app.goo.gl/99Xv1yUs46uyQuuv5"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="d-inline-flex align-items-center text-decoration-none text-dark"
