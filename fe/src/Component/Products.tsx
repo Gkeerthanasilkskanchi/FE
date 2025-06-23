@@ -185,13 +185,34 @@ export const Products = () => {
 
                                         <div className="d-flex justify-content-between align-items-center gap-2 mt-auto ps-4 pe-4">
                                             <button
-                                                style={{ outline: 'none', border: 'none', borderRadius: '5px', background: 'none' }}
-                                                className="primary"
+                                                className="d-flex align-items-center justify-content-center gap-1 text-white fw-semibold"
+                                                style={{
+                                                    backgroundColor: '#ff69b4',
+                                                    border: 'none',
+                                                    borderRadius: '30px',
+                                                    padding: '6px 16px',
+                                                    fontSize: 'clamp(10px, 1vw, 14px)',
+                                                    width: '80px', // Adjust width as needed
+                                                    height:"40px",
+                                                    whiteSpace: 'nowrap', // Prevent line break
+                                                }}
                                                 title="Buy Now"
                                                 onClick={() => handleBuyClick(product)}
                                             >
-                                                <i className="bi bi-bag " style={{ fontSize: "30px" }}></i>
+                                                <i
+                                                    className="bi bi-bag"
+                                                    style={{
+                                                        fontSize: 'clamp(12px, 1.5vw, 16px)',
+                                                        marginTop:"15px"
+
+                                                    }}
+                                                ></i>
+                                                <span>Buy Now</span>
                                             </button>
+
+
+
+
 
                                             <button style={{ outline: 'none', border: 'none', borderRadius: '5px', background: 'none' }} title="Add to Cart" onClick={() => addToCart(product.id)}>
                                                 {product?.is_product_in_cart ? <i className="bi bi-cart-plus" style={{ fontSize: "30px" }}></i>

@@ -16,6 +16,30 @@ export const About = () => {
     { year: 2025, customers: 70000 },
   ];
 
+const reviews = [
+  {
+    quote: "Keerthana Silks has the most stunning collection of sarees. I received so many compliments!",
+    author: "– Priya S."
+  },
+  {
+    quote: "Loved the quality and intricate designs. Truly traditional elegance at its best!",
+    author: "– Aarthi M."
+  },
+  {
+    quote: "Fast delivery, beautiful packaging, and the saree looked even better in person!",
+    author: "– Revathi G."
+  },
+  {
+    quote: "I gifted a silk saree to my mom from Keerthana Silks and she was absolutely delighted!",
+    author: "– Sneha V."
+  },
+  {
+    quote: "Affordable pricing and top-notch fabric. Will definitely shop again.",
+    author: "– Lakshmi R."
+  }
+];
+
+
   const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
       const current = payload[0]?.value;
@@ -190,7 +214,7 @@ export const About = () => {
 
         <div id="clientCarousel" className="carousel slide" data-bs-ride="carousel">
           <div className="carousel-inner">
-            {[1, 2, 3].map((review, idx) => (
+            {reviews.map((review, idx) => (
               <div className={`carousel-item ${idx === 0 ? "active" : ""}`} key={idx}>
                 <div
                   className="testimonial-box mx-auto text-center px-3 px-md-5 py-4"
@@ -198,23 +222,26 @@ export const About = () => {
                     maxWidth: "800px",
                     borderRadius: "12px",
                     backgroundColor: "#fff",
-                    boxShadow: "0 4px 16px rgba(0,0,0,0.06)",
+                    boxShadow: "0 4px 16px rgba(0,0,0,0.06)"
                   }}
                 >
-                  <h5 className="card-title fw-semibold" style={{ fontSize: "clamp(1rem, 2.5vw, 1.25rem)" }}>
-                    Client {idx + 1}
+                  <h5
+                    className="card-title fw-semibold"
+                    style={{ fontSize: "clamp(1rem, 2.5vw, 1.25rem)" }}
+                  >
+                    {/* Client {idx + 1} */}
                   </h5>
                   <p
                     className="lower-text mt-3"
                     style={{ fontSize: "clamp(0.9rem, 2vw, 1rem)", lineHeight: "1.6" }}
                   >
-                    "Amazing service and support from Madras Acoustics!"
+                    "{review.quote}"
                   </p>
                   <p
                     className="text-muted text-end"
                     style={{ fontSize: "clamp(0.8rem, 1.5vw, 0.95rem)" }}
                   >
-                    – Happy Customer
+                    {review.author}
                   </p>
                 </div>
               </div>

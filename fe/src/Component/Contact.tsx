@@ -98,6 +98,63 @@ export const Contact = () => {
     setErrors({ ...errors, [e.target.id]: "" });
   };
 
+  const reviews = [
+    {
+      name: "Divya R.",
+      quote: "Absolutely loved the soft silk saree I ordered! The color was vibrant and exactly as shown online.",
+      rating: 5,
+      imgId: 23
+    },
+    {
+      name: "Meena V.",
+      quote: "Keerthana Silks never disappoints! This is my third purchase, and the weaving quality is just unmatched.",
+      rating: 4,
+      imgId: 24
+    },
+    {
+      name: "Anitha K.",
+      quote: "I was skeptical about ordering a saree online, but Keerthana Silks exceeded my expectations. Elegant and neatly packed!",
+      rating: 5,
+      imgId: 25
+    },
+    {
+    name: "Kavitha R.",
+    quote: "Beautiful zari work and authentic Kanchipuram feel. My sister wore it for her wedding and everyone loved it!",
+    rating: 5,
+    imgId: 26
+  },
+  {
+    name: "Sowmya P.",
+    quote: "What impressed me the most was their customer support—they helped me pick the perfect saree for a family function.",
+    rating: 4,
+    imgId: 27
+  },
+  {
+    name: "Janani M.",
+    quote: "Elegant packaging and quick delivery! My saree looked so premium when I opened the box.",
+    rating: 5,
+    imgId: 28
+  },
+  {
+    name: "Deepa L.",
+    quote: "The silk quality is rich and breathable—perfect for long traditional events. Got lots of compliments!",
+    rating: 5,
+    imgId: 29
+  },
+  {
+    name: "Ramya S.",
+    quote: "I gifted one to my mom for her 60th birthday. She was touched and said it reminded her of her wedding saree.",
+    rating: 5,
+    imgId: 30
+  },
+  {
+    name: "Bhavya T.",
+    quote: "Affordable yet premium! I’ve bookmarked Keerthana Silks for all future festivals.",
+    rating: 4,
+    imgId: 31
+  }
+  ];
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setIsSubmitted(true);
@@ -286,42 +343,50 @@ export const Contact = () => {
 
         {/* Client Reviews Carousel */}
         <div className="mt-5">
-          <h3 className="text-center mb-5 fw-bold text-dark text-clip-gradient" style={{
-            fontSize: "clamp(1.5rem, 4vw, 2rem)"
-          }}
-          >What Our Clients Say</h3>
+          <h3
+            className="text-center mb-5 fw-bold text-dark text-clip-gradient"
+            style={{ fontSize: "clamp(1.5rem, 4vw, 2rem)" }}
+          >
+            What Our Clients Say
+          </h3>
+
           <div id="clientCarousel" className="carousel slide" data-bs-ride="carousel">
             <div className="carousel-inner">
-              {[1, 2, 3].map((_, idx) => (
+              {reviews.map((review, idx) => (
                 <div className={`carousel-item ${idx === 0 ? "active" : ""}`} key={idx}>
                   <div className="d-flex justify-content-center">
-                    <div className="card border-0 promise-item p-4 mx-auto" style={{ width: "80%", maxWidth: "500px", backgroundColor: "#fff", borderRadius: "1rem" }}>
+                    <div
+                      className="card border-0 promise-item p-4 mx-auto"
+                      style={{
+                        width: "80%",
+                        maxWidth: "500px",
+                        backgroundColor: "#fff",
+                        borderRadius: "1rem"
+                      }}
+                    >
                       <div className="card-body text-center px-2 px-md-4">
                         <img
-                          src={`https://i.pravatar.cc/100?img=${idx + 20}`}
-                          alt="Client"
+                          src={`https://i.pravatar.cc/100?img=${review.imgId}`}
+                          // src={`https://source.unsplash.com/100x100/?indian-girl,saree&sig=${idx}`}
+                          alt={review.name}
                           className="rounded-circle mb-2 shadow"
                           style={{
-                            width: "50px",   // much smaller for mobile
+                            width: "50px",
                             height: "50px",
-                            objectFit: "cover",
+                            objectFit: "cover"
                           }}
                         />
 
                         <h5
                           className="fw-bold mb-1"
-                          style={{
-                            fontSize: "clamp(0.65rem, 1vw, 0.9rem)", // ↓ smaller for mobile
-                          }}
+                          style={{ fontSize: "clamp(0.65rem, 1vw, 0.9rem)" }}
                         >
-                          Client {idx + 1}
+                          {review.name}
                         </h5>
 
                         <p
                           className="text-muted mb-2"
-                          style={{
-                            fontSize: "clamp(0.6rem, 0.9vw, 0.8rem)", // ↓ muted text
-                          }}
+                          style={{ fontSize: "clamp(0.6rem, 0.9vw, 0.8rem)" }}
                         >
                           – Verified Customer
                         </p>
@@ -329,41 +394,65 @@ export const Contact = () => {
                         <p
                           className="fst-italic mb-3"
                           style={{
-                            fontSize: "clamp(0.6rem, 1vw, 0.85rem)", // ↓ quote
-                            lineHeight: 1.3,
+                            fontSize: "clamp(0.6rem, 1vw, 0.85rem)",
+                            lineHeight: 1.3
                           }}
                         >
-                          “Madras Acoustics offered us outstanding quality and support. Truly exceptional experience!”
+                          “{review.quote}”
                         </p>
 
                         <div>
                           <span
                             className="text-warning"
                             style={{
-                              fontSize: "clamp(0.7rem, 1vw, 0.9rem)", // ↓ star rating
+                              fontSize: "clamp(0.7rem, 1vw, 0.9rem)"
                             }}
                           >
-                            ★ ★ ★ ★ ★
+                            {"★ ".repeat(review.rating).trim()}
                           </span>
                         </div>
                       </div>
-
                     </div>
                   </div>
                 </div>
               ))}
             </div>
-            <button className="carousel-control-prev" type="button" data-bs-target="#clientCarousel" data-bs-slide="prev">
-              <span className="carousel-control-prev-icon" style={{ backgroundColor: "#0d6efd", borderRadius: "50%", padding: "1rem" }}></span>
+
+            <button
+              className="carousel-control-prev"
+              type="button"
+              data-bs-target="#clientCarousel"
+              data-bs-slide="prev"
+            >
+              <span
+                className="carousel-control-prev-icon"
+                style={{
+                  backgroundColor: "#0d6efd",
+                  borderRadius: "50%",
+                  padding: "1rem"
+                }}
+              ></span>
               <span className="visually-hidden">Previous</span>
             </button>
-            <button className="carousel-control-next" type="button" data-bs-target="#clientCarousel" data-bs-slide="next">
-              <span className="carousel-control-next-icon" style={{ backgroundColor: "#0d6efd", borderRadius: "50%", padding: "1rem" }}></span>
+
+            <button
+              className="carousel-control-next"
+              type="button"
+              data-bs-target="#clientCarousel"
+              data-bs-slide="next"
+            >
+              <span
+                className="carousel-control-next-icon"
+                style={{
+                  backgroundColor: "#0d6efd",
+                  borderRadius: "50%",
+                  padding: "1rem"
+                }}
+              ></span>
               <span className="visually-hidden">Next</span>
             </button>
           </div>
         </div>
-
         {/* Connect With Us Grid */}
         <div className="connect-section mt-5">
           <h3 className="text-center mb-5 fw-bold text-dark text-clip-gradient" style={{

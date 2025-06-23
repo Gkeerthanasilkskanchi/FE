@@ -3,6 +3,11 @@ import { useParams } from "react-router-dom";
 import { addCartProducts, addLikedProducts, addOrderService, getCartProducts, getLikedProducts } from "../API/API";
 import { toast } from "react-toastify";
 import { Loader } from "./Loader";
+import { useNavigate } from "react-router-dom";
+const currentHash = window.location.hash.toLowerCase();
+const isLikePage = currentHash.endsWith("/products/liked");
+const isCartPage = currentHash.endsWith("/products/cart");
+
 
 interface Product {
   id: number;
@@ -45,7 +50,7 @@ export const ProductList = () => {
         if (email) {
           setLoading(true);
           res = await getCartProducts(email);
-          setSelectedProducts(res.data); 
+          setSelectedProducts(res.data);
           setSelectAll(true);
         }
       }
@@ -56,6 +61,8 @@ export const ProductList = () => {
       setLoading(false);
     }
   };
+
+  const navigate = useNavigate();
 
   const handleBuyClick = async (product: any) => {
     try {
@@ -182,6 +189,8 @@ export const ProductList = () => {
       await addOrderService(payload);
     }
 
+
+
     const message = encodeURIComponent(
       selectedProducts.map(p =>
         `🧵 *${p.name || p?.title}*\n💰 Price: ₹${p.price}\n📦 Quantity: ${p.quantity || 1}`
@@ -213,70 +222,162 @@ export const ProductList = () => {
             </div>
           )}
         </div>
-
         <div className="row">
-          {items.length === 0 && <p>No items found.</p>}
-          {items.map((item: any) => (
-            <div key={item.id} className="col-md-3 mb-4">
-              <div className="card h-100">
-                <div className="position-absolute m-2">
-                  <input
-                    type="checkbox"
-                    checked={selectedProducts.some(p => p.id === item.id)}
-                    onChange={() => toggleSelectProduct(item)}
-                  />
-                </div>
-
-                <img src={item.image} className="card-img-top" alt={item.title} onClick={() => handleImageClick(item)}
-                  data-bs-toggle="modal"
-                  data-bs-target="#productDetailModal" />
-                <div className="card-body d-flex flex-column justify-content-between">
-                  <div className="d-flex justify-content-between align-items-center">
-                    <span
-                      className="fw-bold text-truncate"
-                      style={{ cursor: "pointer", textDecoration: "underline", maxWidth: "70%", color: "#270206" }}
-                      onClick={() => handleImageClick(item)}
-                      data-bs-toggle="modal"
-                      data-bs-target="#productDetailModal"
-                      title={item.title}
-                    >
-                      {item?.title}
-                    </span>
-
-                    <span className="fw-bold">
-                      ₹{item?.price}
-                    </span>
-                  </div>
-
-                  <div className="d-flex justify-content-between align-items-center gap-2 mt-auto ps-4 pe-4">
-                    <button
-                      style={{ outline: 'none', border: 'none', borderRadius: '5px', background: 'none' }}
-                      className="primary"
-                      title="Buy Now"
-                      onClick={() => handleBuyClick(item)}
-                    >
-                      <i className="bi bi-bag " style={{ fontSize: "30px" }}></i>
-                    </button>
-
-                    <button style={{ outline: 'none', border: 'none', borderRadius: '5px', background: 'none' }} className="primary" title="Add to Cart" onClick={() => addToCart(item.id)}>
-                      {item?.is_product_in_cart ? <i className="bi bi-cart-plus cart-style" style={{ fontSize: "30px" }}></i>
-                        : <i className="bi bi-cart" style={{ fontSize: "30px" }}></i>}
-
-                    </button>
-                    <button style={{ outline: 'none', border: 'none', borderRadius: '5px', background: 'none' }} className="primary" title="Like Product" onClick={() => likeProduct(item.id)}>
-                      {!(item?.is_product_liked) ? <i className="bi bi-suit-heart heart-style" style={{ fontSize: '30px' }}></i>
-                        : <i className="bi bi-heart-fill heart-style" style={{ fontSize: '30px' }}></i>}
-
-                    </button>
-                  </div>
-                </div>
-
-
-
-              </div>
+          {items.length === 0 ? (
+            <div className="col-12 d-flex flex-column align-items-center justify-content-center text-center py-5">
+              <img
+                src={
+                  isLikePage
+                    ? "https://cdn-icons-png.flaticon.com/512/2748/2748558.png"
+                    : isCartPage
+                      ? "https://cdn-icons-png.flaticon.com/512/2748/2748558.png"
+                      : "https://cdn-icons-png.flaticon.com/512/2748/2748558.png"
+                }
+                alt="No items"
+                style={{
+                  width: "120px",
+                  height: "120px",
+                  objectFit: "contain",
+                  opacity: 0.8,
+                }}
+                className="mb-3"
+              />
+              <h5 className="fw-bold mb-2">
+                {isLikePage
+                  ? "No items yet"
+                  : isCartPage
+                    ? "No items yet"
+                    : "No Items Found"}
+              </h5>
+              <p className="text-muted mb-3">
+                {isLikePage
+                  ? "Start exploring and find something you love!"
+                  : isCartPage
+                    ? "Start exploring and find something you love!"
+                    : "Start exploring and find something you love!"}
+              </p>
+              <button
+                className={`btn ${isLikePage ? "btn-outline-danger" : "btn-outline-primary"
+                  }`}
+                onClick={() => navigate("/")}
+              >
+                <i className="bi bi-arrow-left me-2"></i> Continue Shopping
+              </button>
             </div>
-          ))}
+          ) : (
+            items.map((item: any) => (
+              <div key={item.id} className="col-md-3 mb-4">
+                <div className="card h-100 position-relative">
+                  <div className="position-absolute m-2">
+                    <input
+                      type="checkbox"
+                      checked={selectedProducts.some((p) => p.id === item.id)}
+                      onChange={() => toggleSelectProduct(item)}
+                    />
+                  </div>
+
+                  <img
+                    src={item.image}
+                    className="card-img-top"
+                    alt={item.title || "Product Image"}
+                    onClick={() => handleImageClick(item)}
+                    data-bs-toggle="modal"
+                    data-bs-target="#productDetailModal"
+                  />
+
+                  <div className="card-body d-flex flex-column justify-content-between">
+                    <div className="d-flex justify-content-between align-items-center">
+                      <span
+                        className="fw-bold text-truncate"
+                        style={{
+                          cursor: "pointer",
+                          textDecoration: "underline",
+                          maxWidth: "70%",
+                          color: "#270206",
+                        }}
+                        onClick={() => handleImageClick(item)}
+                        data-bs-toggle="modal"
+                        data-bs-target="#productDetailModal"
+                        title={item.title}
+                      >
+                        {item?.title || "Untitled Product"}
+                      </span>
+
+                      <span className="fw-bold">₹{item?.price || "0.00"}</span>
+                    </div>
+
+                    <div className="d-flex justify-content-between align-items-center gap-2 mt-auto ps-4 pe-4">
+                      <button
+                        style={{
+                          outline: "none",
+                          border: "none",
+                          borderRadius: "5px",
+                          background: "none",
+                        }}
+                        className="primary"
+                        title="Buy Now"
+                        onClick={() => handleBuyClick(item)}
+                      >
+                        <i className="bi bi-bag" style={{ fontSize: "30px" }}></i>
+                      </button>
+
+                      <button
+                        style={{
+                          outline: "none",
+                          border: "none",
+                          borderRadius: "5px",
+                          background: "none",
+                        }}
+                        className="primary"
+                        title="Add to Cart"
+                        onClick={() => addToCart(item.id)}
+                      >
+                        {item?.is_product_in_cart ? (
+                          <i
+                            className="bi bi-cart-plus cart-style"
+                            style={{ fontSize: "30px" }}
+                          ></i>
+                        ) : (
+                          <i
+                            className="bi bi-cart"
+                            style={{ fontSize: "30px" }}
+                          ></i>
+                        )}
+                      </button>
+
+                      <button
+                        style={{
+                          outline: "none",
+                          border: "none",
+                          borderRadius: "5px",
+                          background: "none",
+                        }}
+                        className="primary"
+                        title="Like Product"
+                        onClick={() => likeProduct(item.id)}
+                      >
+                        {item?.is_product_liked ? (
+                          <i
+                            className="bi bi-heart-fill heart-style"
+                            style={{ fontSize: "30px" }}
+                          ></i>
+                        ) : (
+                          <i
+                            className="bi bi-suit-heart heart-style"
+                            style={{ fontSize: "30px" }}
+                          ></i>
+                        )}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))
+          )}
         </div>
+
+
+
       </div>
 
       <div className="modal fade" id="productDetailModal" tabIndex={-1} aria-hidden="true">
