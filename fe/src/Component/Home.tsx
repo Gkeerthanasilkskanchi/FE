@@ -3,6 +3,8 @@ import { Accordion } from "react-bootstrap";
 import { sendSubscribtion } from "../API/API";
 import { toast } from "react-toastify";
 import { Loader } from "./Loader";
+import { useEffect } from 'react';
+
 
 export const Home = () => {
   const [email, setEmail] = useState('');
@@ -22,6 +24,31 @@ export const Home = () => {
       toast.success("Subscribed successfully!");
     }
   };
+  const allSarees = [
+    'Rising Border Korvai Kanjivaram', 'Double Border Butta Sarees', 'Korvai Butta',
+    'Temple Bordered', 'Double Cart Golden Tissue', 'Semi Soft Silk Butta',
+    'Pure Soft silk sarees', 'Plain Tissue Kanjivaram', 'Turning Bordered Saree',
+  ];
+
+  const [itemsPerSlide, setItemsPerSlide] = useState(3);
+
+  useEffect(() => {
+    const updateItemsPerSlide = () => {
+      const width = window.innerWidth;
+      if (width < 576) setItemsPerSlide(1);
+      else if (width < 769) setItemsPerSlide(2);
+      else setItemsPerSlide(3);
+    };
+    updateItemsPerSlide();
+    window.addEventListener('resize', updateItemsPerSlide);
+    return () => window.removeEventListener('resize', updateItemsPerSlide);
+  }, []);
+
+  const groupedItems = [];
+  for (let i = 0; i < allSarees.length; i += itemsPerSlide) {
+    groupedItems.push(allSarees.slice(i, i + itemsPerSlide));
+  }
+
   return (
     <>
       <Loader loading={loading}></Loader>
@@ -107,22 +134,22 @@ export const Home = () => {
             >
               Client Satisfaction
             </h3>
-<div className="row justify-content-center text-center g-4">
-  {[
-    { title: "Customer Satisfaction", count: "99.5%" },
-    { title: "Happy Customers", count: "12,000+" },
-    { title: "Total Sarees Sold", count: "25,000+" },
-    { title: "States Covered", count: "18+" },
-    { title: "Years in Business", count: "20+" },
-  ].map((item, idx) => (
-    <div className="col-lg-2 col-md-3 col-sm-4 col-6 d-flex justify-content-center" key={idx}>
-      <div className="card promise-item p-3 rounded-4 border-0 neon-hover w-100" style={{ maxWidth: "200px" }}>
-        <h4 className="fw-bold text-primary">{item.count}</h4>
-        <p className="small mb-0">{item.title}</p>
-      </div>
-    </div>
-  ))}
-</div>
+            <div className="row justify-content-center text-center g-4">
+              {[
+                { title: "Customer Satisfaction", count: "99.5%" },
+                { title: "Happy Customers", count: "12,000+" },
+                { title: "Total Sarees Sold", count: "25,000+" },
+                { title: "States Covered", count: "18+" },
+                { title: "Years in Business", count: "20+" },
+              ].map((item, idx) => (
+                <div className="col-lg-2 col-md-3 col-sm-4 col-6 d-flex justify-content-center" key={idx}>
+                  <div className="card promise-item p-3 rounded-4 border-0 neon-hover w-100" style={{ maxWidth: "200px" }}>
+                    <h4 className="fw-bold text-primary">{item.count}</h4>
+                    <p className="small mb-0">{item.title}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
 
 
 
@@ -271,26 +298,32 @@ export const Home = () => {
 
           <div className="container mb-5">
             <div id="featuredCarousel" className="carousel slide" data-bs-ride="carousel">
-              <div className="carousel-inner" style={{ width: '100%', overflow: 'hidden' }}>
-
-                {[
-                  ['Kanjivaram', 'Banarasi', 'Cotton'],
-                  ['Silk Cotton', 'Chiffon', 'Organza'],
-                  ['Tissue', 'Linen', 'Georgette'],
-                  ['Satin', 'Silk Cotton', 'Net']
-                ].map((pair, slideIdx) => (
+              <div className="carousel-inner">
+                {groupedItems.map((group, slideIdx) => (
                   <div className={`carousel-item ${slideIdx === 0 ? 'active' : ''}`} key={slideIdx}>
-                    <div className="container my-5">
-                      <div className="row justify-content-center">
-                        {pair.map((type, idx) => {
-                          const imgIndex = slideIdx * 3 + idx + 6; // For images like saree-6.png, saree-7.png...
-                          return (
-                            <div className="col-md-4 col-sm-6 col-12 d-flex justify-content-center mb-4" key={`${type}-${idx}`}>
-                              <div className="card border-0 promise-item rounded-4 featured-card">
+                    <div className="row justify-content-center py-4">
+                      {group.map((type, idx) => {
+                        const imgIndex = slideIdx * itemsPerSlide + idx + 6;
+                        const imgSrc = `/FE/images/saree-${imgIndex}.jpeg`;
+
+                        // ✅ Log the image URL
+                        console.log('Image src:', imgSrc);
+
+                        return (
+                          <div
+                            key={`${type}-${idx}`}
+                            className={`${itemsPerSlide === 1 ? 'col-12' :
+                                itemsPerSlide === 2 ? 'col-6' :
+                                  'col-md-4'
+                              } mb-4`}
+                          >
+                            <div className="d-flex justify-content-center h-100">
+                              <div className="card border-0 rounded-4 featured-card" style={{ width: '100%', maxWidth: '18rem' }}>
                                 <img
-                                  src={`/FE/images/saree-${imgIndex}.jpg`}
+                                  src={imgSrc}
                                   alt={type}
                                   className="featured-card-img"
+                                  style={{ width: '100%', height: '300px', objectFit: 'cover' }}
                                 />
                                 <div className="card-body text-center">
                                   <h5 className="card-title fw-bold text-clip-gradient featured-title">{type}</h5>
@@ -300,14 +333,15 @@ export const Home = () => {
                                 </div>
                               </div>
                             </div>
+                          </div>
+                        );
+                      })}
 
-                          );
-                        })}
-                      </div>
+
+
                     </div>
                   </div>
                 ))}
-
               </div>
 
               {/* Carousel Controls */}
