@@ -193,7 +193,7 @@ export const Products = () => {
                                                     padding: '6px 16px',
                                                     fontSize: 'clamp(10px, 1vw, 14px)',
                                                     width: '80px', // Adjust width as needed
-                                                    height:"40px",
+                                                    height: "40px",
                                                     whiteSpace: 'nowrap', // Prevent line break
                                                 }}
                                                 title="Buy Now"
@@ -203,7 +203,7 @@ export const Products = () => {
                                                     className="bi bi-bag"
                                                     style={{
                                                         fontSize: 'clamp(12px, 1.5vw, 16px)',
-                                                        marginTop:"15px"
+                                                        marginTop: "15px"
 
                                                     }}
                                                 ></i>
@@ -232,131 +232,159 @@ export const Products = () => {
                     </div>
                 </div>
 
-
-                {/* PRODUCT DETAIL MODAL */}
-                <div className="modal fade" id="productDetailModal" tabIndex={-1} aria-hidden="true">
-                    <div className="modal-dialog modal-dialog-centered" style={{ maxWidth: "550px", width: "92%" }}>
-                        <div
-                            className="modal-content position-relative"
-                            style={{
-                                borderRadius: '10px',
-                                boxShadow: '0 6px 12px rgba(0,0,0,0.12)'
-                            }}
-                        >
-                            {/* Product Info */}
+                {selectedProduct && (
+                    <div
+                        className="modal fade"
+                        id="productDetailModal"
+                        tabIndex={-1}
+                        aria-hidden="true"
+                    >
+                        <div className="modal-dialog modal-dialog-centered" style={{ maxWidth: "550px", width: "92%" }}>
                             <div
-                                className="d-flex flex-column flex-md-row p-3"
+                                className="modal-content position-relative"
                                 style={{
-                                    maxHeight: "80vh",
-                                    overflowY: "auto",
-                                    backgroundColor: "#fff"
+                                    borderRadius: "5px",
+                                    boxShadow: "0 6px 12px rgba(0,0,0,0.12)",
                                 }}
                             >
-                                {/* Left: Description */}
-                                <div className="w-100 w-md-70 pe-md-3 position-relative">
-                                    {/* Close Icon */}
-                                    <i
-                                        className="bi bi-x cross-icon"
-                                        title="Close"
-                                        data-bs-dismiss="modal"
-                                    />
-
-
-                                    {/* Title */}
-                                    <h5
-                                        className="text-center"
-                                        style={{
-                                            fontWeight: "700",
-                                            fontSize: "clamp(0.95rem, 2vw, 1.2rem)",
-                                            marginBottom: "8px",
-                                            color: "#6C5CE7",
-                                            textTransform: "uppercase",
-                                            fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
-                                        }}
-                                    >
-                                        About the Product
-                                    </h5>
-
-                                    {/* Description */}
-                                    <p
-                                        style={{
-                                            fontSize: "clamp(0.8rem, 1.8vw, 1rem)",
-                                            color: "#000",
-                                            lineHeight: "1.5",
-                                            textAlign: "justify",
-                                            marginBottom: "0.8rem"
-                                        }}
-                                    >
-                                        {selectedProduct?.about}
-                                    </p>
-
-                                    {/* Image */}
-                                    <img
-                                        src={selectedProduct?.image || "/FE/images/default.jpg"}
-                                        className="img-fluid rounded"
-                                        style={{
-                                            height: "150px",
-                                            width: "100%",
-                                            objectFit: "contain",
-                                            backgroundColor: "#f0f0f0",
-                                            cursor: "pointer",
-                                            transition: "transform 0.2s ease"
-                                        }}
-                                        alt={selectedProduct?.title}
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#imageModal"
-                                        onMouseOver={(e) => (e.currentTarget.style.transform = "scale(1.01)")}
-                                        onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")}
-                                    />
-                                </div>
-
-                                {/* Right: Info */}
-                                <div className="w-100 w-md-30 border-top border-md-start pt-3 pt-md-0 ps-md-3 mt-3 mt-md-0">
-                                    {[
-                                        { label: "Name", value: selectedProduct?.title },
-                                        { label: "Price", value: `₹${selectedProduct?.price}` },
-                                        { label: "Cloth", value: selectedProduct?.cloth || "N/A" },
-                                        { label: "Category", value: selectedProduct?.category || "Traditional" },
-                                        { label: "Saree Type", value: selectedProduct?.saree_type }
-                                    ].map((item, i) => (
-                                        <p key={i} style={{
-                                            fontSize: "clamp(0.75rem, 1.7vw, 0.9rem)",
-                                            marginBottom: "0.4rem",
-                                            color: "#2c3e50"
-                                        }}>
-                                            <strong>{item.label}:</strong> {item.value}
-                                        </p>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Button */}
-                            <div className="border-top p-2 d-flex justify-content-center">
-                                <button
-                                    className="btn d-flex align-items-center"
+                                {/* ❌ Close Icon */}
+                                <i
+                                    className="bi bi-x"
+                                    title="Close"
+                                    data-bs-dismiss="modal"
                                     style={{
-                                        outline: 'none',
-                                        border: 'none',
-                                        borderRadius: '6px',
-                                        background: 'linear-gradient(to right, #fd79a8, #e84393)',
-                                        padding: '8px 16px',
-                                        color: '#fff',
-                                        fontFamily: "'Segoe UI', sans-serif",
-                                        fontSize: 'clamp(0.8rem, 2vw, 1rem)',
-                                        boxShadow: '0 3px 10px rgba(0,0,0,0.15)',
-                                        transition: 'transform 0.2s ease-in-out'
+                                        position: "absolute",
+                                        top: "10px",
+                                        right: "15px",
+                                        fontSize: "1.3rem",
+                                        color: "#333",
+                                        cursor: "pointer",
+                                        borderRadius: "10px",
+                                        padding: "4px",
+                                        transition: "border 0.2s ease",
                                     }}
-                                    onClick={() => handleBuyClick(selectedProduct)}
-                                    onMouseOver={(e) => (e.currentTarget.style.transform = "scale(1.03)")}
-                                    onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")}
+                                    onMouseOver={(e) => (e.currentTarget.style.border = "2px solid black")}
+                                    onMouseOut={(e) => (e.currentTarget.style.border = "none")}
+                                />
+
+                                {/* 🟣 Title */}
+                                <h5
+                                    className="text-center"
+                                    style={{
+                                        fontWeight: "700",
+                                        fontSize: "clamp(0.85rem, 1.6vw, 1rem)",
+                                        margin: "16px 0 30px 0",
+                                        color: "#6C5CE7",
+                                        textTransform: "uppercase",
+                                        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+                                    }}
                                 >
-                                    <i className="bi bi-bag-fill me-2" style={{ fontSize: "clamp(1rem, 1.7vw, 1.2rem)" }}></i>
-                                    Buy Now
-                                </button>
+                                    About the Product
+                                </h5>
+
+                                {/* 🔵 Two Column Layout – FORCED SIDE-BY-SIDE */}
+                                <div
+                                    className="d-flex flex-row px-3 pb-3"
+                                    style={{
+                                        flexWrap: "nowrap", // 🚨 prevent stacking
+                                        maxHeight: "80vh",
+                                        overflowY: "auto",
+                                        backgroundColor: "#fff",
+                                        gap: "12px",
+                                    }}
+                                >
+                                    {/* Left Side – Image + About */}
+                                    <div style={{ flex: 1, minWidth: 0 }}>
+                                        <img
+                                            src={selectedProduct.image || "/FE/images/default.jpg"}
+                                            className="img-fluid rounded"
+                                            alt={selectedProduct.title}
+                                            style={{
+                                                height: "130px",
+                                                width: "100%",
+                                                objectFit: "contain",
+                                                backgroundColor: "#f0f0f0",
+                                                cursor: "pointer",
+                                                transition: "transform 0.2s ease",
+                                            }}
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#imageModal"
+                                            onMouseOver={(e) => (e.currentTarget.style.transform = "scale(1.01)")}
+                                            onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")}
+                                        />
+                                        <p
+                                            style={{
+                                                fontSize: "clamp(0.75rem, 1.5vw, 0.9rem)",
+                                                color: "#000",
+                                                lineHeight: "1.4",
+                                                textAlign: "justify",
+                                                marginTop: "0.8rem",
+                                                marginLeft:"43%",                                              overflowWrap: "break-word",
+                                            }}
+                                        >
+                                            {selectedProduct.about}
+                                        </p>
+                                    </div>
+
+                                    {/* Right Side – Details */}
+                                    <div style={{ flex: 1, minWidth: 0 }}>
+                                        {[
+                                            { label: "Name", value: selectedProduct.title },
+                                            { label: "Price", value: `₹${selectedProduct.price}` },
+                                            { label: "Cloth", value: selectedProduct.cloth || "N/A" },
+                                            { label: "Category", value: selectedProduct.category || "Traditional" },
+                                            { label: "Saree Type", value: selectedProduct.saree_type },
+                                        ].map((item, i) => (
+                                            <p
+                                                key={i}
+                                                style={{
+                                                    fontSize: "clamp(0.7rem, 1.4vw, 0.85rem)",
+                                                    marginBottom: "0.4rem",
+                                                    color: "#2c3e50",
+                                                    overflowWrap: "break-word",
+                                                }}
+                                            >
+                                                <strong>{item.label}:</strong> {item.value}
+                                            </p>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                {/* 🔘 Buy Button */}
+                                <div className="border-top p-2 d-flex justify-content-center">
+                                    <button
+                                        className="btn d-flex align-items-center"
+                                        style={{
+                                            outline: "none",
+                                            border: "none",
+                                            borderRadius: "6px",
+                                            background: "linear-gradient(to right, #fd79a8, #e84393)",
+                                            padding: "8px 16px",
+                                            color: "#fff",
+                                            fontFamily: "'Segoe UI', sans-serif",
+                                            fontSize: "clamp(0.7rem, 1.5vw, 0.9rem)",
+                                            boxShadow: "0 3px 10px rgba(0,0,0,0.15)",
+                                            transition: "transform 0.2s ease-in-out",
+                                        }}
+                                        onClick={() => handleBuyClick(selectedProduct)}
+                                        onMouseOver={(e) => (e.currentTarget.style.transform = "scale(1.03)")}
+                                        onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")}
+                                    >
+                                        <i
+                                            className="bi bi-bag-fill me-2"
+                                            style={{ fontSize: "clamp(0.9rem, 1.5vw, 1rem)" }}
+                                        ></i>
+                                        Buy Now
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                )}
+
+
+
+
 
 
 

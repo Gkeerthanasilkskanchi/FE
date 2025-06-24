@@ -239,7 +239,7 @@ export const Home = () => {
                             flexShrink: 0,
                           }}
                         >
-                          <i className="fas fa-envelope text-primary"></i>
+                          <i className="fas fa-envelope text-primary" style={{ fontSize: "1.8rem" }}></i>
                         </span>
 
                         {/* INPUT (take more space) */}
@@ -313,8 +313,8 @@ export const Home = () => {
                           <div
                             key={`${type}-${idx}`}
                             className={`${itemsPerSlide === 1 ? 'col-12' :
-                                itemsPerSlide === 2 ? 'col-6' :
-                                  'col-md-4'
+                              itemsPerSlide === 2 ? 'col-6' :
+                                'col-md-4'
                               } mb-4`}
                           >
                             <div className="d-flex justify-content-center h-100">
