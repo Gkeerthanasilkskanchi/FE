@@ -1686,3 +1686,14 @@ input.form-control.outline-input:focus {
     font-size: 0.5rem !important;
   }
 }
+@media (max-width: 576px) {
+  .modal-content p,
+  .modal-content h5,
+  .modal-content button {
+    font-size: 0.75rem !important;
+  }
+
+  .modal-content img {
+    height: 100px !important;
+  }
+}
