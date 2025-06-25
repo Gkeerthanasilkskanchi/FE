@@ -59,6 +59,16 @@ export const Contact = () => {
       color: "#FF0000",
     },
   ];
+
+const sareeImages = [
+  "/FE/images/logo.png",
+  // "/FE/images/logo_bg.jpg"
+  
+];
+
+
+
+
   const [formData, setFormData] = useState<any>(userData);
   const [errors, setErrors] = useState<any>({});
   const [loading, setLoading] = useState(false);
@@ -118,41 +128,41 @@ export const Contact = () => {
       imgId: 25
     },
     {
-    name: "Kavitha R.",
-    quote: "Beautiful zari work and authentic Kanchipuram feel. My sister wore it for her wedding and everyone loved it!",
-    rating: 5,
-    imgId: 26
-  },
-  {
-    name: "Sowmya P.",
-    quote: "What impressed me the most was their customer support—they helped me pick the perfect saree for a family function.",
-    rating: 4,
-    imgId: 27
-  },
-  {
-    name: "Janani M.",
-    quote: "Elegant packaging and quick delivery! My saree looked so premium when I opened the box.",
-    rating: 5,
-    imgId: 28
-  },
-  {
-    name: "Deepa L.",
-    quote: "The silk quality is rich and breathable—perfect for long traditional events. Got lots of compliments!",
-    rating: 5,
-    imgId: 29
-  },
-  {
-    name: "Ramya S.",
-    quote: "I gifted one to my mom for her 60th birthday. She was touched and said it reminded her of her wedding saree.",
-    rating: 5,
-    imgId: 30
-  },
-  {
-    name: "Bhavya T.",
-    quote: "Affordable yet premium! I’ve bookmarked Keerthana Silks for all future festivals.",
-    rating: 4,
-    imgId: 31
-  }
+      name: "Kavitha R.",
+      quote: "Beautiful zari work and authentic Kanchipuram feel. My sister wore it for her wedding and everyone loved it!",
+      rating: 5,
+      imgId: 26
+    },
+    {
+      name: "Sowmya P.",
+      quote: "What impressed me the most was their customer support—they helped me pick the perfect saree for a family function.",
+      rating: 4,
+      imgId: 27
+    },
+    {
+      name: "Janani M.",
+      quote: "Elegant packaging and quick delivery! My saree looked so premium when I opened the box.",
+      rating: 5,
+      imgId: 28
+    },
+    {
+      name: "Deepa L.",
+      quote: "The silk quality is rich and breathable—perfect for long traditional events. Got lots of compliments!",
+      rating: 5,
+      imgId: 29
+    },
+    {
+      name: "Ramya S.",
+      quote: "I gifted one to my mom for her 60th birthday. She was touched and said it reminded her of her wedding saree.",
+      rating: 5,
+      imgId: 30
+    },
+    {
+      name: "Bhavya T.",
+      quote: "Affordable yet premium! I’ve bookmarked Keerthana Silks for all future festivals.",
+      rating: 4,
+      imgId: 31
+    }
   ];
 
   const handleSubmit = async (e: any) => {
@@ -365,17 +375,17 @@ export const Contact = () => {
                       }}
                     >
                       <div className="card-body text-center px-2 px-md-4">
-                        <img
-                          src={`https://i.pravatar.cc/100?img=${review.imgId}`}
-                          // src={`https://source.unsplash.com/100x100/?indian-girl,saree&sig=${idx}`}
-                          alt={review.name}
-                          className="rounded-circle mb-2 shadow"
-                          style={{
-                            width: "50px",
-                            height: "50px",
-                            objectFit: "cover"
-                          }}
-                        />
+                    <img
+  src={sareeImages[review.imgId % sareeImages.length]}
+  alt={review.name}
+  className="rounded-circle mb-2 shadow"
+  style={{
+    width: "50px",
+    height: "50px",
+    objectFit: "cover"
+  }}
+/>
+
 
                         <h5
                           className="fw-bold mb-1"
