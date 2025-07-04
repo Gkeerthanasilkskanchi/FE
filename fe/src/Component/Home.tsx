@@ -102,7 +102,7 @@ export const Home = () => {
                 {/* <h2 className="fw-bold mb-3 about-title">About Us</h2> */}
 
                 <p className="about-text">
-                  We are a heritage saree brand blending timeless tradition with modern elegance. Specializing in Kanjivaram, Banarasi, and designer sarees, we bring rich colors and intricate weaves to life.<br /><br />
+                  We are a heritage saree brand blending timeless tradition with modern elegance.
                   Specializing in <strong>Kanchipuram Bridal Sarees, Butta Sarees, Rising Border Sarees, Turning Border Sarees</strong>.
                   At Keerthana Silks, every saree is a tribute to culture and craftsmanship. We partner with skilled weavers across India to preserve traditional artistry with a contemporary touch.<br /><br />
                   Visit our store or shop online to explore collections that reflect grace, legacy, and lasting memories.
@@ -170,8 +170,8 @@ export const Home = () => {
                   answer: "We specialize in Kanjivaram, Banarasi, Silk Cotton, and Designer sarees suited for all occasions.",
                 },
                 {
-                  question: "Do you offer shipping across India?",
-                  answer: "Yes, we offer fast and secure delivery all over India.",
+                  question: "Do you offer shipping ?",
+                  answer: "Yes, we offer fast and secure delivery all over world.",
                 },
                 {
                   question: "Can I return or exchange a saree?",
@@ -179,7 +179,7 @@ export const Home = () => {
                 },
                 {
                   question: "Do you have a physical store?",
-                  answer: "Yes, visit us at our flagship showroom in Chennai for an in-person experience.",
+                  answer: "Yes, visit us at our flagship showroom in Kanchipuram for an in-person experience.",
                 },
               ].map((item, idx) => (
                 <Accordion.Item eventKey={idx.toString()} key={idx} className="accordion custom-accordion-border">
@@ -288,81 +288,85 @@ export const Home = () => {
             </div>
           </div>
 
+          <div>
+            <h3
+              className="text-center fw-bold my-5 text-clip-gradient"
+              style={{ fontSize: "clamp(1.5rem, 5vw, 2.5rem)" }} // 24px to 40px range
+            >
+              Featured Collections
+            </h3>
 
-          <h3
-            className="text-center fw-bold my-5 text-clip-gradient"
-            style={{ fontSize: "clamp(1.5rem, 5vw, 2.5rem)" }} // 24px to 40px range
-          >
-            Featured Collections
-          </h3>
+            <div className="container mb-5">
+              <div id="featuredCarousel" className="carousel slide" data-bs-ride="carousel">
+                <div className="carousel-inner">
+                  {groupedItems.map((group, slideIdx) => (
+                    <div className={`carousel-item ${slideIdx === 0 ? 'active' : ''}`} key={slideIdx}>
+                      <div className="row justify-content-center py-4">
+                        {group.map((type, idx) => {
+                          const imgIndex = slideIdx * itemsPerSlide + idx + 6;
+                          const imgSrc = `/FE/images/saree-${imgIndex}.jpeg`;
 
-          <div className="container mb-5">
-            <div id="featuredCarousel" className="carousel slide" data-bs-ride="carousel">
-              <div className="carousel-inner">
-                {groupedItems.map((group, slideIdx) => (
-                  <div className={`carousel-item ${slideIdx === 0 ? 'active' : ''}`} key={slideIdx}>
-                    <div className="row justify-content-center py-4">
-                      {group.map((type, idx) => {
-                        const imgIndex = slideIdx * itemsPerSlide + idx + 6;
-                        const imgSrc = `/FE/images/saree-${imgIndex}.jpeg`;
+                          // ✅ Log the image URL
+                          console.log('Image src:', imgSrc);
 
-                        // ✅ Log the image URL
-                        console.log('Image src:', imgSrc);
-
-                        return (
-                          <div
-                            key={`${type}-${idx}`}
-                            className={`${itemsPerSlide === 1 ? 'col-12' :
-                              itemsPerSlide === 2 ? 'col-6' :
-                                'col-md-4'
-                              } mb-4`}
-                          >
-                            <div className="d-flex justify-content-center h-100">
-                              <div className="card border-0 rounded-4 featured-card" style={{ width: '100%', maxWidth: '18rem' }}>
-                                <img
-                                  src={imgSrc}
-                                  alt={type}
-                                  className="featured-card-img"
-                                  style={{ width: '100%', height: '300px', objectFit: 'cover' }}
-                                />
-                                <div className="card-body text-center">
-                                  <h5 className="card-title fw-bold text-clip-gradient featured-title">{type}</h5>
-                                  <p className="text-muted featured-desc">
-                                    Elegant {type} sarees crafted with love and heritage.
-                                  </p>
+                          return (
+                            <div
+                              key={`${type}-${idx}`}
+                              className={`${itemsPerSlide === 1 ? 'col-12' :
+                                itemsPerSlide === 2 ? 'col-6' :
+                                  'col-md-4'
+                                } mb-4`}
+                            >
+                              <div className="d-flex justify-content-center h-100">
+                                <div className="card border-0 rounded-4 featured-card" style={{ width: '100%', maxWidth: '18rem' }}>
+                                  <img
+                                    src={imgSrc}
+                                    alt={type}
+                                    className="featured-card-img"
+                                    style={{ width: '100%', height: '300px', objectFit: 'cover' }}
+                                  />
+                                  <div className="card-body text-center">
+                                    <h5 className="card-title fw-bold text-clip-gradient featured-title">{type}</h5>
+                                    <p className="text-muted featured-desc">
+                                      Elegant {type} sarees crafted with love and heritage.
+                                    </p>
+                                  </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                        );
-                      })}
+                          );
+                        })}
 
 
 
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
 
-              {/* Carousel Controls */}
-              <button
-                className="carousel-control-prev"
-                type="button"
-                data-bs-target="#featuredCarousel"
-                data-bs-slide="prev"
-              >
-                <span className="carousel-control-prev-icon bg-primary" aria-hidden="true"></span>
-              </button>
-              <button
-                className="carousel-control-next"
-                type="button"
-                data-bs-target="#featuredCarousel"
-                data-bs-slide="next"
-              >
-                <span className="carousel-control-next-icon bg-primary" aria-hidden="true"></span>
-              </button>
+                {/* Carousel Controls */}
+                <button
+                  className="carousel-control-prev"
+                  type="button"
+                  data-bs-target="#featuredCarousel"
+                  data-bs-slide="prev"
+                >
+                  <span className="carousel-control-prev-icon bg-primary" aria-hidden="true"></span>
+                </button>
+                <button
+                  className="carousel-control-next"
+                  type="button"
+                  data-bs-target="#featuredCarousel"
+                  data-bs-slide="next"
+                >
+                  <span className="carousel-control-next-icon bg-primary" aria-hidden="true"></span>
+                </button>
+              </div>
             </div>
+
           </div>
+
+
 
 
 
@@ -377,7 +381,7 @@ export const Home = () => {
                 {[
                   {
                     name: "Anjali S.",
-                    quote: "The Banarasi saree was beyond beautiful. Perfect for my wedding!",
+                    quote: "The Silk Saree was beyond beautiful. Perfect for my wedding!",
                   },
                   {
                     name: "Preeti R.",

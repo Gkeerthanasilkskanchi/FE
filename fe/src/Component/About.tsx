@@ -16,28 +16,28 @@ export const About = () => {
     { year: 2025, customers: 70000 },
   ];
 
-const reviews = [
-  {
-    quote: "Keerthana Silks has the most stunning collection of sarees. I received so many compliments!",
-    author: "– Priya S."
-  },
-  {
-    quote: "Loved the quality and intricate designs. Truly traditional elegance at its best!",
-    author: "– Aarthi M."
-  },
-  {
-    quote: "Fast delivery, beautiful packaging, and the saree looked even better in person!",
-    author: "– Revathi G."
-  },
-  {
-    quote: "I gifted a silk saree to my mom from Keerthana Silks and she was absolutely delighted!",
-    author: "– Sneha V."
-  },
-  {
-    quote: "Affordable pricing and top-notch fabric. Will definitely shop again.",
-    author: "– Lakshmi R."
-  }
-];
+  const reviews = [
+    {
+      quote: "Keerthana Silks has the most stunning collection of sarees. I received so many compliments!",
+      author: "– Priya S."
+    },
+    {
+      quote: "Loved the quality and intricate designs. Truly traditional elegance at its best!",
+      author: "– Aarthi M."
+    },
+    {
+      quote: "Fast delivery, beautiful packaging, and the saree looked even better in person!",
+      author: "– Revathi G."
+    },
+    {
+      quote: "I gifted a silk saree to my mom from Keerthana Silks and she was absolutely delighted!",
+      author: "– Sneha V."
+    },
+    {
+      quote: "Affordable pricing and top-notch fabric. Will definitely shop again.",
+      author: "– Lakshmi R."
+    }
+  ];
 
 
   const CustomTooltip = ({ active, payload }: any) => {
@@ -68,10 +68,12 @@ const reviews = [
         {/* Text column */}
         <div className="col-md-6">
           <p className="mb-4 responsive-para">
-            <strong>Keerthana Silks</strong> has been Kanchipuram’s pride since 1991, offering timeless silk sarees rooted in tradition and elegance.<br /><br />
+            <strong>Keerthana Silks</strong> has been Kanchipuram’s pride since 1991, offering timeless silk sarees rooted in tradition and elegance.
             We believe a saree is more than fabric — it's a story, a celebration, and a legacy.<br /><br />
-            With decades of trust, <strong>Keerthana Silks</strong> remains the choice of those who value authenticity and artistry.<br />
+            With decades of trust, <strong>Keerthana Silks</strong> remains the choice of those who value authenticity and artistry.
+            We take immense pride in preserving the heritage of Kanchipuram weaving, ensuring that every drape from Keerthana Silks carries the soul of craftsmanship and cultural richness. Join generations of customers who have chosen us for quality, purity, and a timeless sense of style.
           </p>
+
         </div>
 
         {/* Image column */}

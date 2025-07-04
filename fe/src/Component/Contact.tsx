@@ -274,9 +274,9 @@ const sareeImages = [
               alt="Submit your query"
               className="img-fluid mt-md-5 mt-3"
               style={{
-                maxHeight: '350px',
+                maxHeight: '300px',
                 objectFit: 'cover',
-                width: '100%',
+                width: '70%',
               }}
             />
 
@@ -537,19 +537,19 @@ const sareeImages = [
                   <form onSubmit={handleEmailSubscribe}>
                     <div className="d-flex align-items-center gap-2 flex-nowrap w-100">
                       {/* ICON */}
-                      <span
-                        className="d-flex align-items-center justify-content-center"
-                        style={{
-                          background: "#fff",
-                          // border: "1px solid #ccc",
-                          padding: "8px",
-                          borderRadius: "5px",
-                          fontSize: "1.3rem",
-                          flexShrink: 0,
-                        }}
-                      >
-                        <i className="fas fa-envelope text-primary"></i>
-                      </span>
+                           <span
+                          className="d-flex align-items-center justify-content-center"
+                          style={{
+                            background: "#fff",
+                            // border: "1px solid #ccc",
+                            padding: "8px",
+                            borderRadius: "5px",
+                            fontSize: "1.3rem",
+                            flexShrink: 0,
+                          }}
+                        >
+                          <i className="fas fa-envelope text-primary" style={{ fontSize: "1.8rem" }}></i>
+                        </span>
 
                       {/* INPUT (take more space) */}
                       <input
