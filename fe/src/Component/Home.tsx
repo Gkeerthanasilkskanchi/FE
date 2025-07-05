@@ -282,7 +282,6 @@ export const Home = () => {
 
                   </form>
 
-
                 </form>
               )}
             </div>
