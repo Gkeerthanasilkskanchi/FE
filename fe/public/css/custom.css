@@ -1484,7 +1484,6 @@ input.form-control.outline-input:focus {
   pointer-events: none;
   z-index: 0;
 }
-
 /* Card Image */
 .featured-card-img {
   width: 100%;
