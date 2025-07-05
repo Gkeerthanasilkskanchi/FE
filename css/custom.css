@@ -1484,7 +1484,6 @@ input.form-control.outline-input:focus {
   pointer-events: none;
   z-index: 0;
 }
-
 /* Card Image */
 .featured-card-img {
   width: 100%;
@@ -1495,9 +1494,12 @@ input.form-control.outline-input:focus {
 
 /* Card Container */
 .featured-card {
-  width: 100%;
-  max-width: 320px;
-  margin: auto;
+  background: #e0e0e0;
+  border-radius: 1rem;
+  box-shadow:
+    8px 8px 16px #bebebe,
+    -8px -8px 16px #ffffff;
+  transition: all 0.3s ease-in-out;
 }
 
 /* Title */
