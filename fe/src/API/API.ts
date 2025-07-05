@@ -1,6 +1,7 @@
 import { Client } from "../Client"
 
-export const baseURL = "https://g-be.onrender.com"
+// export const baseURL = "https://g-be.onrender.com"
+export const baseURL = "http://localhost:8081"
 export const registerUser = async (payload: any) => {
     const createUser = await Client("POST", `${baseURL}/users/register`, payload);
     return { status: createUser?.status, data: createUser?.data }
@@ -115,3 +116,12 @@ export const getProductDeatilsById = async (id: any) => {
     const cartProducts = await Client("GET", `${baseURL}/users/getProductById/${id}`);
     return { status: cartProducts?.status, data: cartProducts?.data }
 }
+export const getCategory = async () => {
+    const cartProducts = await Client("GET", `${baseURL}/users/getCategory`);
+    return { status: cartProducts?.status, data: cartProducts?.data }
+}
+
+export const getProductByCategory = async (id: any, email: any) => {
+  const cartProducts = await Client("GET", `${baseURL}/users/getCategoryProduct/${id}/${email}`);
+  return { status: cartProducts?.status, data: cartProducts?.data };
+};
