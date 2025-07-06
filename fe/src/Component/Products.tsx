@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { addCartProducts, addLikedProducts, addOrderService, getCategory, getProductByCategory, getProducts } from "../API/API";
+import { addCartProducts, addLikedProducts, addOrderService, baseURL, getCategory, getProductByCategory, getProducts } from "../API/API";
 import { toast } from "react-toastify";
 import { Loader } from "./Loader";
 
@@ -9,8 +9,8 @@ export const Products = () => {
     const [showModal, setShowModal] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState<any | null>(null);
     const [loading, setLoading] = useState(false);
-    const [isCategorySelected,setIsCategorySelected] = useState(false);
-    const [category,setCategory] = useState<any>([]);
+    const [isCategorySelected, setIsCategorySelected] = useState(false);
+    const [category, setCategory] = useState<any>([]);
 
     useEffect(() => {
         fetchProducts();
@@ -69,11 +69,11 @@ export const Products = () => {
         }
     };
 
-     const fetchProducts = async () => {
+    const fetchProducts = async () => {
         try {
             setLoading(true);
+            setIsCategorySelected(false);
             const response: any = await getCategory();
-            console.log(response,"response")
             if (Array.isArray(response?.data?.data)) {
                 setCategory(response.data?.data);
             }
@@ -126,10 +126,15 @@ export const Products = () => {
         }
     };
 
-    const categorySelected = async(product :any)=>{
+    const categorySelected = async (product: any) => {
         setLoading(true);
-        const response = await getProductByCategory(product?.category,email);
-        if(response?.data){
+        let response = null;
+        if (product == 'all') {
+            response = await getProductByCategory('all', email);
+        } else {
+            response = await getProductByCategory(product?.category, email);
+        }
+        if (response?.data) {
             setIsCategorySelected(true);
             setProducts(response?.data?.data);
         }
@@ -147,55 +152,85 @@ export const Products = () => {
         <>
             <Loader loading={loading}></Loader>
             {!isCategorySelected && <div className="container my-5">
-            <h3
-              className="text-center mb-4 fw-bold text-para"
-              style={{
-                marginTop: "70px",
-                fontSize: "clamp(1.2rem, 4vw, 2rem)" 
-              }}
-            >
-             Product Categories
-            </h3>
-            <div className="row g-3">
-             {category?.map((item:any, idx:any) => (
-                <div className="col-lg-3 col-sm-2 d-flex " key={idx}>
-                  <div className="card promise-item p-3 rounded-4 border-0 neon-hover w-100" style={{ maxWidth: "200px" }}>
-                    {/* <h4 className="fw-bold text-primary">{item?.image}</h4> */}
-                    <img
-                                        src={item?.image || '/FE/images/default.jpg'}
-                                        className="card-img-top"
-                                        onClick={() => categorySelected(item)}
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#productDetailModal"
-                                        style={{
-                                            height: '150px',
-                                            width: '100%',
-                                            objectFit: 'fill',
-                                            objectPosition: 'center',
-                                            backgroundColor: '#f8f8f8',
-                                            cursor: 'pointer',
+                <h3
+                    className="text-center mb-4 fw-bold text-para"
+                    style={{
+                        marginTop: "70px",
+                        fontSize: "clamp(1.2rem, 4vw, 2rem)"
+                    }}
+                >
+                    Product Categories
+                </h3>
+                <div className="row g-3">
+                    <div className="card promise-item p-3 rounded-4 border-0 neon-hover w-100 me-4" style={{ maxWidth: "200px" }}>
+                        {/* <h4 className="fw-bold text-primary">{item?.image}</h4> */}
+                        <img
+                            src={'/FE/images/saree-11.jpeg'}
+                            className="card-img-top"
+                            onClick={() => categorySelected('all')}
+                            data-bs-toggle="modal"
+                            data-bs-target="#productDetailModal"
+                            style={{
+                                height: '150px',
+                                width: '100%',
+                                objectFit: 'fill',
+                                objectPosition: 'center',
+                                backgroundColor: '#f8f8f8',
+                                cursor: 'pointer',
 
-                                        }}
+                            }}
 
-                                        alt={item?.category}
+                            alt={'all'}
 
 
-                                    />
-                    <h3 className="fw-bold text-primary mt-3" onClick={()=> categorySelected(item)}>{item?.category}</h3>
-                  </div>
+                        />
+                        <h3 className="fw-bold text-primary mt-3" onClick={() => categorySelected('all')}>All</h3>
+                    </div>
+                    {category?.map((item: any, idx: any) => (
+                        <div className="col-lg-3 col-sm-2 d-flex " key={idx}>
+                            <div className="card promise-item p-3 rounded-4 border-0 neon-hover w-100" style={{ maxWidth: "200px" }}>
+                                {/* <h4 className="fw-bold text-primary">{item?.image}</h4> */}
+                                <img
+                                    src={`${baseURL}/${item?.image}` || '/FE/images/default.jpg'}
+                                    className="card-img-top"
+                                    onClick={() => categorySelected(item)}
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#productDetailModal"
+                                    style={{
+                                        height: '150px',
+                                        width: '100%',
+                                        objectFit: 'fill',
+                                        objectPosition: 'center',
+                                        backgroundColor: '#f8f8f8',
+                                        cursor: 'pointer',
+
+                                    }}
+
+                                    alt={item?.category}
+
+
+                                />
+                                <h3 className="fw-bold text-primary mt-3" onClick={() => categorySelected(item)}>{item?.category}</h3>
+                            </div>
+                        </div>
+                    ))}
                 </div>
-              ))}
-            </div>
 
 
 
-          </div>}
+            </div>}
             {isCategorySelected && <div className="container">
                 {/* Header & Filter */}
                 <div className="d-flex justify-content-between align-items-center">
-                    <div className="w-100">
-                        <h4 className="text-center fw-boldj text-clip-gradient">Our Collections</h4>
+                    <div className="w-100 d-flex justify-content-between align-items-center">
+                        <h4 className="fw-bold text-clip-gradient m-0">Our Collections</h4>
+                        <button style={{ padding: '10px', color: 'white', background: 'linear-gradient(to right, #c98b8b, #aa9b83)', border: 'none', borderRadius: '5px' }}
+                            onClick={() => fetchProducts()}
+                        >
+                            View Category
+                        </button>
                     </div>
+
 
                 </div>
 
@@ -213,7 +248,7 @@ export const Products = () => {
                             >
                                 <div className="card h-100 shadow-sm border-0" >
                                     <img
-                                        src={product?.image || '/FE/images/default.jpg'}
+                                        src={`${baseURL}/${product?.image}` || '/FE/images/default.jpg'}
                                         className="card-img-top"
                                         onClick={() => handleImageClick(product)}
                                         data-bs-toggle="modal"
@@ -365,7 +400,7 @@ export const Products = () => {
                                     {/* Left Side – Image + About */}
                                     <div style={{ flex: 1, minWidth: 0 }}>
                                         <img
-                                            src={selectedProduct.image || "/FE/images/default.jpg"}
+                                            src={`${baseURL}/${selectedProduct.image}` || "/FE/images/default.jpg"}
                                             className="img-fluid rounded"
                                             alt={selectedProduct.title}
                                             style={{
@@ -388,7 +423,7 @@ export const Products = () => {
                                                 lineHeight: "1.4",
                                                 textAlign: "justify",
                                                 marginTop: "0.8rem",
-                                                marginLeft:"43%",                                              overflowWrap: "break-word",
+                                                marginLeft: "43%", overflowWrap: "break-word",
                                             }}
                                         >
                                             {selectedProduct.about}
