@@ -84,7 +84,7 @@ export const ProductList = () => {
           `🧵 *${product.title}*\n💰 Price: ₹${product.price}\n📦 Quantity: ${product.quantity || 1}\n\n` +
           `Please provide further details.`
         );
-        const whatsappNumber = "917904999697";
+        const whatsappNumber = "919600610845";
         window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
       }
     } catch (error) {
@@ -196,7 +196,7 @@ export const ProductList = () => {
         `🧵 *${p.name || p?.title}*\n💰 Price: ₹${p.price}\n📦 Quantity: ${p.quantity || 1}`
       ).join("\n\n") + "\n\nPlease provide further details."
     );
-    const whatsappNumber = "917904999697";
+    const whatsappNumber = "919600610845";
     window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank");
   };
 

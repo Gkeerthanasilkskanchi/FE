@@ -1699,3 +1699,11 @@ input.form-control.outline-input:focus {
     height: 100px !important;
   }
 }
+
+.bi-cart-plus {
+  background-color: #e7ebef; /* Light gray background */
+  color: #007bff;            /* Icon color (blue) */
+  padding: 10px;             /* Space around the icon */
+  border-radius: 50%;        /* Make it circular */
+  font-size: 24px;           /* Optional: increase icon size */
+}

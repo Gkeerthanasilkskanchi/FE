@@ -116,7 +116,7 @@ export const Products = () => {
                     `🧵 *${product.title}*\n💰 Price: ₹${product.price}\n📦 Quantity: ${product.quantity || 1}\n\n` +
                     `Please provide further details.`
                 );
-                const whatsappNumber = "917904999697";
+                const whatsappNumber = "919600610845";
                 window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
             }
         } catch (error) {
@@ -151,88 +151,113 @@ export const Products = () => {
     return (
         <>
             <Loader loading={loading}></Loader>
-            {!isCategorySelected && <div className="container my-5">
-                <h3
-                    className="text-center mb-4 fw-bold text-para"
-                    style={{
-                        marginTop: "70px",
-                        fontSize: "clamp(1.2rem, 4vw, 2rem)"
-                    }}
-                >
-                    Product Categories
-                </h3>
-                <div className="row g-3">
-                    <div className="card promise-item p-3 rounded-4 border-0 neon-hover w-100 me-4" style={{ maxWidth: "200px" }}>
-                        {/* <h4 className="fw-bold text-primary">{item?.image}</h4> */}
-                        <img
-                            src={'/FE/images/saree-11.jpeg'}
-                            className="card-img-top"
-                            onClick={() => categorySelected('all')}
-                            data-bs-toggle="modal"
-                            data-bs-target="#productDetailModal"
-                            style={{
-                                height: '150px',
-                                width: '100%',
-                                objectFit: 'fill',
-                                objectPosition: 'center',
-                                backgroundColor: '#f8f8f8',
-                                cursor: 'pointer',
+            {!isCategorySelected && (
+                <div className="container my-5">
+                    <h3
+                        className="text-center mb-4 fw-bold text-para"
+                        style={{
+                            marginTop: "70px",
+                            fontSize: "clamp(1rem, 3vw, 1.5rem)",
+                        }}
+                    >
+                        Product Categories
+                    </h3>
 
-                            }}
-
-                            alt={'all'}
-
-
-                        />
-                        <h3 className="fw-bold text-primary mt-3" onClick={() => categorySelected('all')}>All</h3>
-                    </div>
-                    {category?.map((item: any, idx: any) => (
-                        <div className="col-lg-3 col-sm-2 d-flex " key={idx}>
-                            <div className="card promise-item p-3 rounded-4 border-0 neon-hover w-100" style={{ maxWidth: "200px" }}>
-                                {/* <h4 className="fw-bold text-primary">{item?.image}</h4> */}
-                                <img
-                                    src={`${baseURL}/${item?.image}` || '/FE/images/default.jpg'}
-                                    className="card-img-top"
-                                    onClick={() => categorySelected(item)}
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#productDetailModal"
+                    {/* Use Bootstrap gap (g-4) and also padding/margin inside col */}
+                    <div className="row g-4 justify-content-center">
+                        {[
+                            { category: 'All', image: '/FE/images/saree-11.jpeg' },
+                            ...category,
+                        ]?.map((item: any, idx: number) => (
+                            <div
+                                className="col-lg-3 col-md-4 col-sm-6 px-3" // px adds horizontal space
+                                key={idx}
+                            >
+                                <div
+                                    className="card promise-item p-3 rounded-4 border-0 neon-hover d-flex flex-column align-items-center text-center"
                                     style={{
-                                        height: '150px',
-                                        width: '100%',
-                                        objectFit: 'fill',
-                                        objectPosition: 'center',
-                                        backgroundColor: '#f8f8f8',
-                                        cursor: 'pointer',
-
+                                        width: "100%",
+                                        height: "360px",
+                                        marginBottom: "20px", // ensures vertical spacing as fallback
                                     }}
+                                >
+                                    <div
+                                        className="w-100 mb-3"
+                                        style={{
+                                            height: "230px",
+                                            overflow: "hidden",
+                                            backgroundColor: "#f8f8f8",
+                                            borderRadius: "0.5rem",
+                                        }}
+                                    >
+                                        <img
+                                            src={
+                                                item?.image
+                                                    ? item.category === "All"
+                                                        ? item.image
+                                                        : `${baseURL}/${item.image}`
+                                                    : "/FE/images/default.jpg"
+                                            }
+                                            style={{
+                                                height: "100%",
+                                                width: "100%",
+                                                objectFit: "cover",
+                                                objectPosition: "center",
+                                            }}
+                                            alt={item?.category || "Category"}
+                                        />
+                                    </div>
 
-                                    alt={item?.category}
+                                    <h5 className="fw-bold" style={{ fontSize: "1rem" }}>
+                                        {item?.category}
+                                    </h5>
 
-
-                                />
-                                <h3 className="fw-bold text-primary mt-3" onClick={() => categorySelected(item)}>{item?.category}</h3>
+                                    <button
+                                        className="btn btn-outline-primary mt-2"
+                                        onClick={() =>
+                                            categorySelected(item.category === "All" ? "all" : item)
+                                        }
+                                    >
+                                        View Products
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
+            )}
 
 
 
-            </div>}
+
             {isCategorySelected && <div className="container">
                 {/* Header & Filter */}
-                <div className="d-flex justify-content-between align-items-center">
-                    <div className="w-100 d-flex justify-content-between align-items-center">
-                        <h4 className="fw-bold text-clip-gradient m-0">Our Collections</h4>
-                        <button style={{ padding: '10px', color: 'white', background: 'linear-gradient(to right, #c98b8b, #aa9b83)', border: 'none', borderRadius: '5px' }}
-                            onClick={() => fetchProducts()}
-                        >
-                            View Category
-                        </button>
-                    </div>
+<div className="d-flex flex-column flex-md-row justify-content-center align-items-center text-center gap-3 my-3">
+  <h4
+    className="fw-bold text-clip-gradient m-0"
+    style={{
+      fontSize: "clamp(1.1rem, 3vw, 1.6rem)",
+    }}
+  >
+    Our Collections
+  </h4>
 
+  <button
+    className="btn mt-2 mt-md-0"
+    style={{
+      padding: "10px 16px",
+      color: "white",
+      background: "linear-gradient(to right, #c98b8b, #aa9b83)",
+      border: "none",
+      borderRadius: "5px",
+      fontSize: "clamp(0.8rem, 2.5vw, 1rem)",
+    }}
+    onClick={() => fetchProducts()}
+  >
+    View Category
+  </button>
+</div>
 
-                </div>
 
                 {/* Product Grid */}
                 <div
@@ -247,26 +272,27 @@ export const Products = () => {
 
                             >
                                 <div className="card h-100 shadow-sm border-0" >
-                                    <img
-                                        src={`${baseURL}/${product?.image}` || '/FE/images/default.jpg'}
-                                        className="card-img-top"
-                                        onClick={() => handleImageClick(product)}
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#productDetailModal"
-                                        style={{
-                                            height: '300px',
-                                            width: '100%',
-                                            objectFit: 'fill',
-                                            objectPosition: 'center',
-                                            backgroundColor: '#f8f8f8',
-                                            cursor: 'pointer',
+                                <img
+  src={`${baseURL}/${product?.image}` || "/FE/images/default.jpg"}
+  className="card-img-top mx-auto d-block"
+  onClick={() => handleImageClick(product)}
+  data-bs-toggle="modal"
+  data-bs-target="#productDetailModal"
+  alt={product.title}
+style={{
+  height: "300px",    // Reduced height (previously 200px or 300px)
+  width: "80%",       // Reduced width (previously 90% or 100%)
+  objectFit: "cover",
+  objectPosition: "center",
+  backgroundColor: "#f8f8f8",
+  cursor: "pointer",
+  borderRadius: "8px",
+  display: "block",
+  margin: "0 auto",   // Ensures image is centered horizontally
+}}
 
-                                        }}
+/>
 
-                                        alt={product.title}
-
-
-                                    />
 
                                     <div className="card-body d-flex flex-column justify-content-between">
                                         <div className="d-flex justify-content-between align-items-center">
