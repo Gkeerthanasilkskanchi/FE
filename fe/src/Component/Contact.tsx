@@ -18,8 +18,8 @@ export const Contact = () => {
     {
       icon: "fab fa-whatsapp",
       title: "WhatsApp",
-      desc: "+917904999697",
-      link: "https://wa.me/917904999697",
+      desc: "+919600610845",
+      link: "https://wa.me/919600610845",
       color: "#25D366",
     },
     {
@@ -47,8 +47,8 @@ export const Contact = () => {
     {
       icon: "fas fa-phone",
       title: "Phone",
-      desc: "+917904999697",
-      link: "tel:+917904999697",
+      desc: "+919600610845",
+      link: "tel:+919600610845",
       color: "#4CAF50",
     },
     {
@@ -60,11 +60,11 @@ export const Contact = () => {
     },
   ];
 
-const sareeImages = [
-  "/FE/images/logo.png",
-  // "/FE/images/logo_bg.jpg"
-  
-];
+  const sareeImages = [
+    "/FE/images/logo.png",
+    // "/FE/images/logo_bg.jpg"
+
+  ];
 
 
 
@@ -375,16 +375,16 @@ const sareeImages = [
                       }}
                     >
                       <div className="card-body text-center px-2 px-md-4">
-                    <img
-  src={sareeImages[review.imgId % sareeImages.length]}
-  alt={review.name}
-  className="rounded-circle mb-2 shadow"
-  style={{
-    width: "50px",
-    height: "50px",
-    objectFit: "cover"
-  }}
-/>
+                        <img
+                          src={sareeImages[review.imgId % sareeImages.length]}
+                          alt={review.name}
+                          className="rounded-circle mb-2 shadow"
+                          style={{
+                            width: "50px",
+                            height: "50px",
+                            objectFit: "cover"
+                          }}
+                        />
 
 
                         <h5
@@ -537,19 +537,19 @@ const sareeImages = [
                   <form onSubmit={handleEmailSubscribe}>
                     <div className="d-flex align-items-center gap-2 flex-nowrap w-100">
                       {/* ICON */}
-                           <span
-                          className="d-flex align-items-center justify-content-center"
-                          style={{
-                            background: "#fff",
-                            // border: "1px solid #ccc",
-                            padding: "8px",
-                            borderRadius: "5px",
-                            fontSize: "1.3rem",
-                            flexShrink: 0,
-                          }}
-                        >
-                          <i className="fas fa-envelope text-primary" style={{ fontSize: "1.8rem" }}></i>
-                        </span>
+                      <span
+                        className="d-flex align-items-center justify-content-center"
+                        style={{
+                          background: "#fff",
+                          // border: "1px solid #ccc",
+                          padding: "8px",
+                          borderRadius: "5px",
+                          fontSize: "1.3rem",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <i className="fas fa-envelope text-primary" style={{ fontSize: "1.8rem" }}></i>
+                      </span>
 
                       {/* INPUT (take more space) */}
                       <input
