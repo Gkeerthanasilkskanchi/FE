@@ -242,7 +242,7 @@ const sareeImages = [
           {/* IMAGE FIRST ON MOBILE */}
           <div className="col-md-5 text-center">
             <img
-              src="/FE/images/wp_connect_prasanth.jpg"
+              src="/FE/images/QR.jpg"
               alt="WhatsApp QR"
               className="img-fluid qr-image neon-border"
               style={{ maxWidth: '300px', width: '100%', height: 'auto' }}
